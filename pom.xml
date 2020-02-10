@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.4.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>hu.isakots</groupId>
+    <artifactId>martos-gym</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>Martos-Gym</name>
+
+    <description>Webb application for a Gym in a student hostel</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <node.version>v8.11.0</node.version>
+        <node.home>C:\node-v8.11.0\nodejs</node.home>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-security</artifactId>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
+    <profiles>
+        <profile>
+            <id>Windows</id>
+            <activation>
+                <os>
+                    <family>Windows</family>
+                </os>
+            </activation>
+            <properties>
+                <npm.dir>${node.home}</npm.dir>
+                <npm.executable>${npm.dir}/npm.cmd</npm.executable>
+            </properties>
+        </profile>
+        <profile>
+            <id>unix</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                </os>
+            </activation>
+            <properties>
+                <npm.dir>${node.home}/bin</npm.dir>
+                <npm.executable>${npm.dir}/npm</npm.executable>
+            </properties>
+        </profile>
+    </profiles>
+
+
+    <build>
+        <finalName>Martos-Gym</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>npm config</id>
+                        <phase>process-classes</phase>
+                        <configuration>
+                            <workingDirectory>${project.basedir}/src/main/angular</workingDirectory>
+                            <executable>${npm.executable}</executable>
+                            <environmentVariables>
+                                <PATH>${npm.dir}${path.separator}${env.PATH}</PATH>
+                            </environmentVariables>
+                            <arguments>
+                                <argument>config</argument>
+                                <argument>ls</argument>
+                                <argument>-l</argument>
+                                <argument>--userconfig</argument>
+                                <argument>/dev/null</argument>
+                            </arguments>
+                        </configuration>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>npm install</id>
+                        <phase>process-classes</phase>
+                        <configuration>
+                            <workingDirectory>${project.basedir}/src/main/angular</workingDirectory>
+                            <executable>${npm.executable}</executable>
+                            <environmentVariables>
+                                <PATH>${npm.dir}${path.separator}${env.PATH}</PATH>
+                            </environmentVariables>
+                            <arguments>
+                                <argument>install</argument>
+                                <argument>--userconfig</argument>
+                                <argument>/dev/null</argument>
+                            </arguments>
+                        </configuration>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>npm build</id>
+                        <phase>process-classes</phase>
+                        <configuration>
+                            <workingDirectory>${project.basedir}/src/main/angular</workingDirectory>
+                            <executable>${npm.executable}</executable>
+                            <environmentVariables>
+                                <PATH>${npm.dir}${path.separator}${env.PATH}</PATH>
+                            </environmentVariables>
+                            <arguments>
+                                <argument>run</argument>
+                                <argument>build</argument>
+                                <argument>--userconfig</argument>
+                                <argument>/dev/null</argument>
+                            </arguments>
+                        </configuration>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/angular/dist</directory>
+                            <targetPath>WEB-INF/classes/static</targetPath>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
