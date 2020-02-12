@@ -17,8 +17,8 @@ public class User implements Serializable {
 
     @Id
     @Column(name = "USER_ID")
-    @GeneratedValue(generator = "SEQ_GYM_USER")
-    @SequenceGenerator(name = "SEQ_GYM_USER", sequenceName = "SEQ_GYM_USER", allocationSize = 1)
+    // FYI: Sequence cannot be created in MySQL..
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
