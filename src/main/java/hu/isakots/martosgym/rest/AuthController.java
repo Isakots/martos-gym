@@ -25,16 +25,16 @@ public class AuthController {
     }
 
     @PostMapping("/auth")
-    public ResponseEntity authorize(@Valid @RequestBody LoginVM loginVM) {
+    public ResponseEntity<Object> authorize(@Valid @RequestBody LoginVM loginVM) {
         String jwt = authService.authorize(loginVM);
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
+        httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, jwt);
         return new ResponseEntity<>(null, httpHeaders, HttpStatus.OK);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody SignUpForm form) {
+    public ResponseEntity<Object> registerUser(@RequestBody SignUpForm form) {
         authService.registerUser(form);
-        return new ResponseEntity<>("success", HttpStatus.CREATED);
+        return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
 }
