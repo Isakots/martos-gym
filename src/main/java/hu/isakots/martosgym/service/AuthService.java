@@ -25,16 +25,18 @@ public class AuthService {
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final ModelMapper modelMapper;
+    private final MailService mailService;
 
     public AuthService(UserRepository userRepository, AuthorityRepository authorityRepository,
                        PasswordEncoder passwordEncoder, TokenProvider tokenProvider,
-                       AuthenticationManagerBuilder authenticationManagerBuilder, ModelMapper modelMapper) {
+                       AuthenticationManagerBuilder authenticationManagerBuilder, ModelMapper modelMapper, MailService mailService) {
         this.userRepository = userRepository;
         this.authorityRepository = authorityRepository;
         this.passwordEncoder = passwordEncoder;
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.modelMapper = modelMapper;
+        this.mailService = mailService;
     }
 
     public String authorize(LoginVM loginVM) {
@@ -50,5 +52,6 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(form.getPassword()));
         user.getAuthorities().add(authorityRepository.findById(ROLE_USER).get());
         userRepository.save(user);
+        mailService.sendRegistrationEmail(user);
     }
 }
