@@ -2,7 +2,7 @@ package hu.isakots.martosgym.service;
 
 import hu.isakots.martosgym.configuration.security.TokenProvider;
 import hu.isakots.martosgym.domain.User;
-import hu.isakots.martosgym.exception.EmailAlreadyExistsException;
+import hu.isakots.martosgym.exception.DatabaseException;
 import hu.isakots.martosgym.repository.AuthorityRepository;
 import hu.isakots.martosgym.repository.UserRepository;
 import hu.isakots.martosgym.rest.dto.LoginVM;
@@ -21,8 +21,6 @@ import static hu.isakots.martosgym.configuration.util.AuthoritiesConstants.ROLE_
 
 @Service
 public class AuthService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AuthService.class);
-
     private final UserRepository userRepository;
     private final AuthorityRepository authorityRepository;
     private final PasswordEncoder passwordEncoder;
@@ -51,15 +49,14 @@ public class AuthService {
         return tokenProvider.createToken(authentication);
     }
 
-    public void registerUser(SignUpForm form) throws EmailAlreadyExistsException {
+    public void registerUser(SignUpForm form) throws DatabaseException {
         User user = modelMapper.map(form, User.class);
         user.setPassword(passwordEncoder.encode(form.getPassword()));
         user.getAuthorities().add(authorityRepository.findById(ROLE_USER).get());
         try {
             userRepository.save(user);
         } catch (Exception e) {
-            LOGGER.error("Error occured during creating user in database. Exception: {0}", e);
-            throw new EmailAlreadyExistsException("The provided e-mail address is already exists.");
+            throw new DatabaseException("Exception occured while persisting User during registration", e);
         }
         mailService.sendRegistrationEmail(user);
     }

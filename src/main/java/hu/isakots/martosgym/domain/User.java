@@ -39,6 +39,21 @@ public class User implements Serializable {
     @Column(name = "LASTNAME")
     private String lastName;
 
+    @Column(name = "STUDENT_STATUS")
+    private boolean studentStatus;
+
+    @Column(name = "INSTITUTION", length = 5)
+    private String institution;
+
+    @Column(name = "FACULTY", length = 5)
+    private String faculty;
+
+    @Column(name = "IS_COLLEGIAN")
+    private boolean isCollegian;
+
+    @Column(name = "ROOM_NUMBER", length = 5)
+    private int roomNumber;
+
     @ManyToMany
     @JoinTable(name = "USER_AUTHORITY",
             joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")},
@@ -85,6 +100,46 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
+    public boolean isStudentStatus() {
+        return studentStatus;
+    }
+
+    public void setStudentStatus(boolean studentStatus) {
+        this.studentStatus = studentStatus;
+    }
+
+    public String getInstitution() {
+        return institution;
+    }
+
+    public void setInstitution(String institution) {
+        this.institution = institution;
+    }
+
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
+    }
+
+    public boolean isCollegian() {
+        return isCollegian;
+    }
+
+    public void setCollegian(boolean collegian) {
+        isCollegian = collegian;
+    }
+
+    public int getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
     public Set<Authority> getAuthorities() {
         return authorities;
     }
@@ -101,6 +156,11 @@ public class User implements Serializable {
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", studentStatus=" + studentStatus +
+                ", institution='" + institution + '\'' +
+                ", faculty='" + faculty + '\'' +
+                ", isCollegian=" + isCollegian +
+                ", roomNumber=" + roomNumber +
                 ", authorities=" + authorities +
                 '}';
     }

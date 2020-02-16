@@ -1,6 +1,6 @@
 package hu.isakots.martosgym.rest;
 
-import hu.isakots.martosgym.exception.EmailAlreadyExistsException;
+import hu.isakots.martosgym.exception.DatabaseException;
 import hu.isakots.martosgym.rest.dto.JwtResponse;
 import hu.isakots.martosgym.rest.dto.LoginVM;
 import hu.isakots.martosgym.rest.dto.SignUpForm;
@@ -31,7 +31,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Object> registerUser(@RequestBody SignUpForm form) throws EmailAlreadyExistsException {
+    public ResponseEntity<Object> registerUser(@RequestBody SignUpForm form) throws DatabaseException {
         authService.registerUser(form);
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
