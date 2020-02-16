@@ -1,0 +1,261 @@
+<div>
+  <div class="row justify-content-center mt-3">
+
+    <div class="col-lg-10">
+      <div>
+        <h1>Registration</h1>
+        <hr>
+        <div class="alert alert-success" *ngIf="success">
+          <strong>Registration saved!</strong> Please check your email for confirmation.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <div [formGroup]="registerForm">
+      <div class="row justify-content-md-center">
+        <div class="col-lg-5">
+          <div class="form-group">
+            <label class="form-control-label" for="lastName">              Lastname</label>
+            <input type="text" class="form-control" id="lastName" name="lastName"
+                   formControlName="lastName">
+            <div
+              *ngIf="showValidationMessage(registerForm.get('lastName'))">
+              <small class="form-text text-danger" *ngIf="registerForm.get('lastName').errors.required">
+                Lastname is required.
+              </small>
+              <small class="form-text text-danger" *ngIf="registerForm.get('lastName').errors.minlength">
+                Lastname is required to be at least 5 characters.
+              </small>
+              <small class="form-text text-danger" *ngIf="registerForm.get('lastName').errors.maxlength">
+                Lastname cannot be longer than 100 characters.
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="form-group">
+            <label class="form-control-label" for="firstName">              Firstname</label>
+            <input type="text" class="form-control" id="firstName" name="firstName"
+                   formControlName="firstName">
+            <div
+              *ngIf="showValidationMessage(registerForm.get('firstName'))">
+              <small class="form-text text-danger" *ngIf="registerForm.get('firstName').errors.required">
+                Firstname is required.
+              </small>
+              <small class="form-text text-danger" *ngIf="registerForm.get('firstName').errors.minlength">
+                Firstname is required to be at least 4 characters.
+              </small>
+              <small class="form-text text-danger" *ngIf="registerForm.get('firstName').errors.maxlength">
+                Firstname cannot be longer than 50 characters.
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col-lg-5">
+          <div class="form-group">
+            <label class="form-control-label" for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email"
+                   formControlName="email">
+            <div
+              *ngIf="showValidationMessage(registerForm.get('email'))">
+              <small class="form-text text-danger" *ngIf="registerForm.get('email').errors.required">
+                Email is required.
+              </small>
+              <small class="form-text text-danger" *ngIf="registerForm.get('email').errors.invalid">
+                Email is invalid.
+              </small>
+              <small class="form-text text-danger" *ngIf="registerForm.get('email').errors.minlength">
+                Email is required to be at least 5 characters.
+              </small>
+              <small class="form-text text-danger" *ngIf="registerForm.get('email').errors.maxlength">
+                Email cannot be longer than 100 characters.
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="form-group">
+            <label class="form-control-label" for="confirmEmail">Email confirmation</label>
+            <input type="email" class="form-control" id="confirmEmail" name="confirmEmail"
+                   formControlName="confirmEmail">
+            <div
+              *ngIf="showValidationMessage(registerForm.get('confirmEmail'))">
+              <small class="form-text text-danger"
+                     *ngIf="registerForm.get('confirmEmail').errors.required">
+                Confirmation email is required.
+              </small>
+              <small class="form-text text-danger" *ngIf="registerForm.get('confirmEmail').errors.mustMatch">
+                Emails are not matching.
+              </small>
+              <small class="form-text text-danger"
+                     *ngIf="registerForm.get('confirmEmail').errors.minlength">
+                Confirmation email is required to be at least 4 characters.
+              </small>
+              <small class="form-text text-danger"
+                     *ngIf="registerForm.get('confirmEmail').errors.maxlength">
+                Confirmation email cannot be longer than 50 characters.
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col-lg-5">
+          <div class="form-group">
+            <label class="form-control-label" for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password"
+                   formControlName="password">
+            <div
+              *ngIf="showValidationMessage(registerForm.get('password'))">
+              <small class="form-text text-danger"
+                     *ngIf="registerForm.get('password').errors.required">
+                Password is required.
+              </small>
+              <small class="form-text text-danger" *ngIf="registerForm.get('password').errors.minlength">
+                Password is required to be at least 4 characters.
+              </small>
+              <small class="form-text text-danger" *ngIf="registerForm.get('password').errors.maxlength">
+                Password cannot be longer than 50 characters.
+              </small>
+            </div>
+            <jhi-password-strength-bar
+              [passwordToCheck]="registerForm.get('password').value"></jhi-password-strength-bar>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="form-group">
+            <label class="form-control-label" for="confirmPassword">New password confirmation</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                   formControlName="confirmPassword">
+            <div
+              *ngIf="showValidationMessage(registerForm.get('confirmPassword'))">
+              <small class="form-text text-danger" *ngIf="registerForm.get('confirmPassword').errors.mustMatch">
+                Passwords are not matching.
+              </small>
+              <small class="form-text text-danger"
+                     *ngIf="registerForm.get('confirmPassword').errors.required">
+                Confirmation password is required.
+              </small>
+              <small class="form-text text-danger"
+                     *ngIf="registerForm.get('confirmPassword').errors.minlength">
+                Confirmation password is required to be at least 4 characters.
+              </small>
+              <small class="form-text text-danger"
+                     *ngIf="registerForm.get('confirmPassword').errors.maxlength">
+                Confirmation password cannot be longer than 50 characters.
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col-lg-5">
+          <div class="form-group">
+            <label class="container form-control-label" for="studentStatus">Van hallgatói jogviszonyom
+              <input type="checkbox" formControlName="studentStatus" id="studentStatus" name="studentStatus">
+              <span class="checkmark"></span>
+            </label>
+          </div>
+        </div>
+        <div class="col-lg-5"></div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col-lg-5">
+          <div class="form-group">
+            <label class="form-control-label" for="institution">Institution</label>
+            <input type="text" class="form-control" id="institution" name="institution"
+                   formControlName="institution">
+            <div
+              *ngIf="showValidationMessage(registerForm.get('institution'))">
+              <small class="form-text text-danger" *ngIf="registerForm.get('institution').errors.required">
+                Institution is required.
+              </small>
+              <small class="form-text text-danger"
+                     *ngIf="registerForm.get('institution').errors.maxlength">
+                Institution cannot be longer than 50 characters.
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="form-group">
+            <label class="form-control-label" for="faculty">Faculty</label>
+            <input type="text" class="form-control" id="faculty" name="faculty"
+                   formControlName="faculty">
+            <div
+              *ngIf="showValidationMessage(registerForm.get('faculty'))">
+              <small class="form-text text-danger"
+                     *ngIf="registerForm.get('faculty').errors.required">
+                Faculty is required.
+              </small>
+              <small class="form-text text-danger"
+                     *ngIf="registerForm.get('faculty').errors.maxlength">
+                Faculty be longer than 5 characters.
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-md-center">
+          <div class="col-lg-5">
+            <div class="form-group">
+              <label class="container form-control-label" for="collegian">Kollégista vagyok
+                <input type="checkbox" formControlName="collegian" id="collegian" name="collegian">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        <div class="col-lg-5">
+          <div class="form-group">
+            <label class="form-control-label" for="roomNumber">Room Number</label>
+            <input type="number" class="form-control" id="roomNumber" name="roomNumber"
+                   formControlName="roomNumber">
+            <div
+              *ngIf="showValidationMessage(registerForm.get('roomNumber'))">
+              <small class="form-text text-danger"
+                     *ngIf="registerForm.get('roomNumber').errors.required">
+                Your room number is required.
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col-lg-10">
+          <label class="container">Értesítő e-mail küldése edzésekről, melyekre feliratkoztam
+            <input type="checkbox" checked="checked">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col-lg-10">
+          <label class="container">Értesítő e-mail küldése frissen kiírt edzésekről
+            <input type="checkbox" checked="checked">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col-lg-10">
+          <label class="container">Értesítő e-mail küldése új hírfolyam cikkről
+            <input type="checkbox" checked="checked">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="row justify-content-md-center">
+        <div class="col-lg-10">
+          <button type="submit" class="btn btn-primary btn-block" (click)="register()"
+          >Sign Up
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

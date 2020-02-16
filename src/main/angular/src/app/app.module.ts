@@ -28,6 +28,9 @@ import {AboutUsComponent} from './layout/about-us/about-us.component';
 import {NutritionComponent} from './layout/nutrition/nutrition.component';
 import {GymInfoComponent} from './layout/gym-info/gym-info.component';
 import {AccountModule} from "./account/account.module";
+import { SignUpComponent } from './sign-up/sign-up.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {PasswordStrengthBarComponent} from "./shared/component/password-strength-bar/password-strength-bar.component";
 
 // FaIcon imports
 library.add(faBars);
@@ -50,7 +53,9 @@ library.add(faSignOutAlt);
     HomeComponent,
     AboutUsComponent,
     NutritionComponent,
-    GymInfoComponent
+    GymInfoComponent,
+    SignUpComponent,
+    PasswordStrengthBarComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +63,8 @@ library.add(faSignOutAlt);
     HttpClientModule,
     NgbModule,
     FontAwesomeModule,
-    AccountModule
+    AccountModule,
+    ReactiveFormsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

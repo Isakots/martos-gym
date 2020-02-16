@@ -1,8 +1,8 @@
 databaseChangeLog:
   - changeSet:
-      id: MRTSGYM-2
+      id: MRTSGYM-3
       author: csokasi.marcell
       changes:
         - sqlFile:
             encofing: utf8
-            path: db/changelog/v0.0.2_addAuthorities.sql
+            path: db/changelog/v0.0.3_updateUser.sql

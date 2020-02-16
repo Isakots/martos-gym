@@ -1,6 +1,6 @@
 package hu.isakots.martosgym;
 
-import hu.isakots.martosgym.exception.EmailAlreadyExistsException;
+import hu.isakots.martosgym.exception.DatabaseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(EmailAlreadyExistsException.class)
-    public ResponseEntity handleEmailAlreadyExistsException(EmailAlreadyExistsException exception) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+    @ExceptionHandler(DatabaseException.class)
+    public ResponseEntity handleDatabaseException(DatabaseException exception) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 
     @ExceptionHandler(UsernameNotFoundException.class)

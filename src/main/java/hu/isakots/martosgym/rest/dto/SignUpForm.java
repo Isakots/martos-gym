@@ -5,9 +5,13 @@ import java.io.Serializable;
 public class SignUpForm implements Serializable {
     private String email;
     private String password;
-    private String firstname;
-    private String lastname;
-
+    private String firstName;
+    private String lastName;
+    private boolean studentStatus;
+    private String institution;
+    private String faculty;
+    private boolean isCollegian;
+    private int roomNumber;
 
     public String getEmail() {
         return email;
@@ -25,19 +29,59 @@ public class SignUpForm implements Serializable {
         this.password = password;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public boolean isStudentStatus() {
+        return studentStatus;
+    }
+
+    public void setStudentStatus(boolean studentStatus) {
+        this.studentStatus = studentStatus;
+    }
+
+    public String getInstitution() {
+        return institution;
+    }
+
+    public void setInstitution(String institution) {
+        this.institution = institution;
+    }
+
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
+    }
+
+    public boolean isCollegian() {
+        return isCollegian;
+    }
+
+    public void setCollegian(boolean collegian) {
+        isCollegian = collegian;
+    }
+
+    public int getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
     }
 }
