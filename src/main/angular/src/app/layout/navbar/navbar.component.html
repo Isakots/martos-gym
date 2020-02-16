@@ -1,0 +1,74 @@
+<nav class="navbar navbar-dark navbar-expand-md">
+  <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
+    <span class="logo-img"></span>
+    <span class="navbar-title">Martos Kondi Kör</span>
+  </a>
+  <a class="navbar-toggler d-lg-none" href="javascript:void(0);" data-toggle="collapse" data-target="#navbarResponsive"
+     aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
+    <fa-icon icon="bars"></fa-icon>
+  </a>
+  <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a class="nav-link" routerLink="about-us" (click)="collapseNavbar()">
+          <fa-icon icon="users"></fa-icon>
+          <span>About Us</span>
+        </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a class="nav-link" routerLink="gym-info" (click)="collapseNavbar()">
+          <fa-icon icon="dumbbell"></fa-icon>
+          <span>Gym Info</span>
+        </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a class="nav-link" routerLink="nutrition" (click)="collapseNavbar()">
+          <fa-icon icon="drumstick-bite"></fa-icon>
+          <span>Nutrition</span>
+        </a>
+      </li>
+
+      <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}">
+        <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
+          <fa-icon icon="user"></fa-icon>
+          <span>Account</span>
+
+        </a>
+        <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">
+          <li>
+            <a class="dropdown-item" routerLink="user/profile" routerLinkActive="active" (click)="collapseNavbar()">
+              <fa-icon icon="wrench" fixedWidth="true"></fa-icon>
+              <span>Profile</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" routerLink="user/change-password" routerLinkActive="active" (click)="collapseNavbar()">
+              <fa-icon icon="lock" fixedWidth="true"></fa-icon>
+              <span>Password</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" (click)="logout()" id="logout">
+              <fa-icon icon="sign-out-alt" fixedWidth="true"></fa-icon>
+              <span>Sign out</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" routerLink="login" (click)="login()" id="login">
+              <fa-icon icon="sign-in-alt" fixedWidth="true"></fa-icon>
+              <span>Sign in</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" routerLink="register" routerLinkActive="active" (click)="collapseNavbar()">
+              <fa-icon icon="user-plus" fixedWidth="true"></fa-icon>
+              <span>Register</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+

@@ -1,6 +1,9 @@
 ### IMPLEMENTING NAVBAR ###
 https://blog.angular-university.io/angular-2-router-nested-routes-and-nested-auxiliary-routes-build-a-menu-navigation-system/
 
+### FRONTEND DESIGN ###
+https://getbootstrap.com/docs/4.0/getting-started/theming/
+
 ### JWT AUTHENTICATION ANGULAR+SPRING ###
 https://dzone.com/articles/angular-7-spring-boot-jwt-authentication-example
 https://www.javainuse.com/spring/ang7-jwt
@@ -9,7 +12,7 @@ https://bezkoder.com/angular-spring-boot-jwt-auth/
 ### ANGULAR AUTHORIZATION ###
 https://jasonwatmore.com/post/2018/11/22/angular-7-role-based-authorization-tutorial-with-example
 
-### INTERNATIOLIZATION ###
+### INTERNATIONALIZATION ###
 https://angular.io/guide/i18n
 https://github.com/ngx-translate/core
 
