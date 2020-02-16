@@ -36,12 +36,14 @@ export class LoginService {
 
 
   isUserLoggedIn() {
-    let user = sessionStorage.getItem('username');
+    // TODO
+    let user = sessionStorage.getItem(JWT_TOKEN_KEY);
     return !(user === null)
   }
 
   logOut() {
-    sessionStorage.removeItem('username')
+    // TODO
+    sessionStorage.removeItem(JWT_TOKEN_KEY)
   }
 
   update(param: any) {

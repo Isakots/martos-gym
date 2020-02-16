@@ -1,0 +1,37 @@
+
+.navbar {
+  padding: 0.2rem 1rem;
+  z-index: 100;
+  background-color: black;
+
+  .navbar-title {
+    color: #fd7e14;
+  }
+  a.dropdown-item {
+    color: #fd7e14;
+  }
+  ul.dropdown-menu {
+    background-color: black;
+  }
+  ul.navbar-nav {
+    .nav-item {
+      margin-left: 0.5em;
+    }
+  }
+  a.nav-link {
+    font-weight: 400;
+    color: #fd7e14;
+  }
+  a.nav-link:hover {
+    color: #fdae14;
+  }
+
+  a>span {
+    margin-left: 5px;
+  }
+  .navbar-toggler {
+    &:hover {
+      color: #fd7e14;
+    }
+  }
+}

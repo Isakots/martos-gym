@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* import the necessary Bootstrap files */
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+
+//$orange: #fd7e14;
+$light-orange: #fdae14;
+$theme-colors: (
+  //primary: $orange,
+  light-orange: #fdae14
+);
+
+/* finally, import Bootstrap */
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
