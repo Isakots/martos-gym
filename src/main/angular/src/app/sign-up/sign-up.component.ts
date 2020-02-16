@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AccountService} from "../shared/service/account.service";
 import {Router} from "@angular/router";
+import {matchValidation} from "../core/validator/match-validator";
 
 @Component({
   selector: 'app-sign-up',
@@ -39,7 +40,13 @@ export class SignUpComponent implements OnInit {
       roomNumber: ['']
     };
 
-    this.registerForm = this._formBuilder.group(formGroupControlsConfig);
+    this.registerForm = this._formBuilder.group(formGroupControlsConfig,
+      {
+        validators: [
+          matchValidation('password', 'confirmPassword'),
+          matchValidation('email', 'confirmEmail')
+        ]
+      });
   }
 
   register() {
@@ -51,7 +58,7 @@ export class SignUpComponent implements OnInit {
     let userData = this.registerForm.getRawValue();
     this.accountService.registration(userData).subscribe(
       () => {
-        // TODO notify User about registration
+        // TODO notify User about registration ( with a snackbar or something )
         setTimeout(() => {
           this._router.navigate(['/']);
         }, 1000)
@@ -63,3 +70,4 @@ export class SignUpComponent implements OnInit {
     return (formControl.invalid && (formControl.dirty || formControl.touched)) || (formControl.invalid && this.triedToRegister);
   }
 }
+

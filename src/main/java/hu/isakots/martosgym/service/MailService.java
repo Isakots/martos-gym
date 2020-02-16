@@ -5,6 +5,7 @@ import hu.isakots.martosgym.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -14,6 +15,7 @@ import org.thymeleaf.context.Context;
 
 import javax.mail.internet.MimeMessage;
 import java.nio.charset.StandardCharsets;
+import java.util.Set;
 
 @Service
 public class MailService {
@@ -22,6 +24,9 @@ public class MailService {
     private final MailProperties mailProperties;
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
+
+    @Value("${spring.profiles.active}")
+    private Set<String> activeProfiles;
 
     public MailService(MailProperties mailProperties, JavaMailSender javaMailSender,
                        @Qualifier("emailTemplateEngine") TemplateEngine templateEngine) {
@@ -32,6 +37,9 @@ public class MailService {
 
     @Async
     public void sendEmail(String to, String subject, String content) {
+        if(!activeProfiles.contains("no-mail")) {
+           return;
+        }
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, false, StandardCharsets.UTF_8.name());

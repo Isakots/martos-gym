@@ -88,7 +88,7 @@
                      *ngIf="registerForm.get('confirmEmail').errors.required">
                 Confirmation email is required.
               </small>
-              <small class="form-text text-danger" *ngIf="registerForm.get('confirmEmail').errors.invalid">
+              <small class="form-text text-danger" *ngIf="registerForm.get('confirmEmail').errors.mustMatch">
                 Emails are not matching.
               </small>
               <small class="form-text text-danger"
@@ -111,7 +111,8 @@
                    formControlName="password">
             <div
               *ngIf="showValidationMessage(registerForm.get('password'))">
-              <small class="form-text text-danger" *ngIf="registerForm.get('password').errors.required">
+              <small class="form-text text-danger"
+                     *ngIf="registerForm.get('password').errors.required">
                 Password is required.
               </small>
               <small class="form-text text-danger" *ngIf="registerForm.get('password').errors.minlength">
@@ -132,6 +133,9 @@
                    formControlName="confirmPassword">
             <div
               *ngIf="showValidationMessage(registerForm.get('confirmPassword'))">
+              <small class="form-text text-danger" *ngIf="registerForm.get('confirmPassword').errors.mustMatch">
+                Passwords are not matching.
+              </small>
               <small class="form-text text-danger"
                      *ngIf="registerForm.get('confirmPassword').errors.required">
                 Confirmation password is required.
