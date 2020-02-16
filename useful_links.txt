@@ -1,0 +1,32 @@
+### IMPLEMENTING NAVBAR ###
+https://blog.angular-university.io/angular-2-router-nested-routes-and-nested-auxiliary-routes-build-a-menu-navigation-system/
+
+### JWT AUTHENTICATION ANGULAR+SPRING ###
+https://dzone.com/articles/angular-7-spring-boot-jwt-authentication-example
+https://www.javainuse.com/spring/ang7-jwt
+https://bezkoder.com/angular-spring-boot-jwt-auth/
+
+### ANGULAR AUTHORIZATION ###
+https://jasonwatmore.com/post/2018/11/22/angular-7-role-based-authorization-tutorial-with-example
+
+### INTERNATIOLIZATION ###
+https://angular.io/guide/i18n
+https://github.com/ngx-translate/core
+
+### SETTING UP LIQUIBASE ###
+https://medium.com/@l.micheli/configuring-dedicated-liquibase-datasource-on-spring-boot-2-a8edba57689f
+https://www.baeldung.com/liquibase-refactor-schema-of-java-app
+https://javadeveloperzone.com/spring-boot/spring-boot-liquibase-example/
+https://medium.com/@harittweets/evolving-your-database-using-spring-boot-and-liquibase-844fcd7931da
+
+### SENDING EMAILS ###
+https://www.baeldung.com/spring-email
+https://www.thymeleaf.org/doc/articles/springmail.html
+https://medium.com/@raviswapna1/send-email-using-spring-boot-and-thymeleaf-b0f62786bd8e
+
+### ASYNC CONFIGURATION ###
+https://www.baeldung.com/spring-async
+https://spring.io/guides/gs/async-method/
+
+### REST API DESGIN ###
+https://blog.restcase.com/4-maturity-levels-of-rest-api-design/

@@ -3,6 +3,7 @@ package hu.isakots.martosgym.configuration.util;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Optional;
 
@@ -19,7 +20,7 @@ public final class SecurityUtils {
      *
      * @return the login of the current user
      */
-    public static Optional<String> getCurrentUserLogin() {
+    public static String getCurrentUserLogin() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         return Optional.ofNullable(securityContext.getAuthentication())
             .map(authentication -> {
@@ -30,7 +31,7 @@ public final class SecurityUtils {
                     return (String) authentication.getPrincipal();
                 }
                 return null;
-            });
+            }).orElseThrow(() -> new UsernameNotFoundException("Not authenticated"));
     }
 
 }

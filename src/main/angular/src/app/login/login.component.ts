@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {EnvironmentService} from "../shared/service/environment.service";
+import {LoginService} from "../shared/service/login.service";
 
 @Component({
   selector: 'app-login',
@@ -8,10 +8,25 @@ import {EnvironmentService} from "../shared/service/environment.service";
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private environmentService: EnvironmentService) {
+  constructor(private loginService: LoginService) {
   }
 
   ngOnInit() {
   }
 
+  login() {
+    this.loginService.authenticate('csokasi.marcell@gmail.com', '123');
+  }
+
+  profile() {
+    this.loginService.getProfile();
+  }
+
+  update() {
+    this.loginService.update({
+        firstName: 'Cook',
+        lastName: 'Pu'
+      }
+    )
+  }
 }
