@@ -39,7 +39,6 @@ public class User implements Serializable {
     @Column(name = "LASTNAME")
     private String lastName;
 
-    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "USER_AUTHORITY",
             joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")},

@@ -1,10 +1,10 @@
 package hu.isakots.martosgym.rest;
 
-import hu.isakots.martosgym.configuration.security.JWTFilter;
+import hu.isakots.martosgym.exception.EmailAlreadyExistsException;
+import hu.isakots.martosgym.rest.dto.JwtResponse;
 import hu.isakots.martosgym.rest.dto.LoginVM;
 import hu.isakots.martosgym.rest.dto.SignUpForm;
 import hu.isakots.martosgym.service.AuthService;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,15 +25,13 @@ public class AuthController {
     }
 
     @PostMapping("/auth")
-    public ResponseEntity<Object> authorize(@Valid @RequestBody LoginVM loginVM) {
-        String jwt = authService.authorize(loginVM);
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, jwt);
-        return new ResponseEntity<>(null, httpHeaders, HttpStatus.OK);
+    public ResponseEntity<JwtResponse> authorize(@Valid @RequestBody LoginVM loginVM) {
+        String token = authService.authorize(loginVM);
+        return new ResponseEntity<>(new JwtResponse(token), HttpStatus.OK);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Object> registerUser(@RequestBody SignUpForm form) {
+    public ResponseEntity<Object> registerUser(@RequestBody SignUpForm form) throws EmailAlreadyExistsException {
         authService.registerUser(form);
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }

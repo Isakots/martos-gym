@@ -10,6 +10,8 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
+import java.nio.charset.StandardCharsets;
+
 @Configuration
 public class ThymeleafConfiguration {
     private static final Logger LOGGER = LoggerFactory.getLogger(AsyncTaskExecutorConfiguration.class);
@@ -27,7 +29,7 @@ public class ThymeleafConfiguration {
         templateResolver.setPrefix("/templates/mail/");
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode(TemplateMode.HTML);
-        templateResolver.setCharacterEncoding("UTF-8");
+        templateResolver.setCharacterEncoding(StandardCharsets.UTF_8.name());
         templateResolver.setCheckExistence(true);
         templateResolver.setCacheable(false);
         return templateResolver;
