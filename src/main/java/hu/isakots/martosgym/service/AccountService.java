@@ -18,7 +18,7 @@ public class AccountService {
         this.modelMapper = modelMapper;
     }
 
-    public User getUserInformation() {
+    public User getAuthenticatedUserWithData() {
         return userRepository.findOneWithAuthoritiesByEmailIgnoreCase(SecurityUtils.getCurrentUserLogin())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found."));
     }
@@ -28,5 +28,9 @@ public class AccountService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found."));
         modelMapper.map(accountModel, storedUser);
         return userRepository.save(storedUser);
+    }
+
+    public void saveAccount(User user) {
+        userRepository.save(user);
     }
 }

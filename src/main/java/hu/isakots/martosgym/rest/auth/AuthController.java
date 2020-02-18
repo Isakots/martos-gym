@@ -1,9 +1,9 @@
-package hu.isakots.martosgym.rest;
+package hu.isakots.martosgym.rest.auth;
 
 import hu.isakots.martosgym.exception.DatabaseException;
-import hu.isakots.martosgym.rest.dto.JwtResponse;
-import hu.isakots.martosgym.rest.dto.LoginVM;
-import hu.isakots.martosgym.rest.dto.SignUpForm;
+import hu.isakots.martosgym.rest.auth.model.LoginResponse;
+import hu.isakots.martosgym.rest.auth.model.LoginVM;
+import hu.isakots.martosgym.rest.auth.model.SignUpForm;
 import hu.isakots.martosgym.service.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +25,9 @@ public class AuthController {
     }
 
     @PostMapping("/auth")
-    public ResponseEntity<JwtResponse> authorize(@Valid @RequestBody LoginVM loginVM) {
-        String token = authService.authorize(loginVM);
-        return new ResponseEntity<>(new JwtResponse(token), HttpStatus.OK);
+    public ResponseEntity<LoginResponse> authorize(@Valid @RequestBody LoginVM loginVM) {
+        LoginResponse loginResponse = authService.authorize(loginVM);
+        return new ResponseEntity<>(loginResponse, HttpStatus.OK);
     }
 
     @PostMapping("/register")

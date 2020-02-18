@@ -5,11 +5,14 @@
 @import "../node_modules/bootstrap/scss/variables";
 @import "../node_modules/bootstrap/scss/mixins";
 
-//$orange: #fd7e14;
+$orange: #fd7e14;
 $light-orange: #fdae14;
 $dropdown-link-active-bg: $white;
 $dropdown-link-active-color: $orange;
 $dropdown-link-color: $orange;
+.btn-primary:hover{
+  color: $orange;
+}
 //$black: #000000;
 $theme-colors: (
   primary: $black,

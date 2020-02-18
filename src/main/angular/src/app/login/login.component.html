@@ -1,7 +1,34 @@
-<p>
-  login works!
-</p>
+<div>
+  <div class="row justify-content-center m-4">
+    <div class="col-xl-9">
+      <h2>Bejelentkezés</h2>
+      <hr>
+      <form [formGroup]="loginForm">
+        <div class="col-xl-6">
 
-<button class="btn btn-primary" (click)="login()">LOGIN</button>
-<button class="btn btn-primary" (click)="profile()">TEST INTERCEPTOR</button>
-<button class="btn btn-primary" (click)="update()">UPDATE</button>
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <fa-icon icon="users" fixedWidth="true"></fa-icon>
+              </span>
+            </div>
+            <input formControlName="username" type="text" class="form-control" id="email" name="email"
+                   placeholder="example@martoskondi.hu">
+          </div>
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <fa-icon icon="lock" fixedWidth="true"></fa-icon>
+              </span>
+            </div>
+            <input formControlName="password" type="password" class="form-control" id="password" name="password"
+                   placeholder="••••••••">
+          </div>
+
+          <button (click)="login()" class="btn btn-primary btn-block">Bejelentkezés</button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
