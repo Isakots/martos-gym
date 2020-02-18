@@ -25,11 +25,15 @@ export class NavbarComonent implements OnInit {
   }
 
   logout() {
-    this.collapseNavbar();
+    this.loginService.logOut();
   }
 
-  isUserLoggedIn() {
+  showUserNavItem() {
     return this.loginService.isUserLoggedIn();
+  }
+
+  showAdminNavItem() {
+
   }
 
   login() {

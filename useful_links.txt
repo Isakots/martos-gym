@@ -12,6 +12,10 @@ https://bezkoder.com/angular-spring-boot-jwt-auth/
 ### ANGULAR AUTHORIZATION ###
 https://jasonwatmore.com/post/2018/11/22/angular-7-role-based-authorization-tutorial-with-example
 
+### CONTROL VALUE ACCESSOR ###
+https://medium.com/@majdasab/implementing-control-value-accessor-in-angular-1b89f2f84ebf
+https://indepth.dev/never-again-be-confused-when-implementing-controlvalueaccessor-in-angular-forms/
+
 ### INTERNATIONALIZATION ###
 https://angular.io/guide/i18n
 https://github.com/ngx-translate/core

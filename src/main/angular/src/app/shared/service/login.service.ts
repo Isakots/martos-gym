@@ -1,9 +1,10 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {EnvironmentService} from "./environment.service";
-import {JwtResponse} from "../domain/jwt.response";
 import {User} from "../domain/user";
-import {JWT_TOKEN_KEY} from "../constants";
+import {JWT_TOKEN_KEY, USER_DATA_KEY} from "../constants";
+import {LoginResponse} from "../domain/interfaces";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -13,17 +14,19 @@ export class LoginService {
   readonly AUTH = '/auth';
 
   constructor(
-    private httpClient: HttpClient, private environmentService: EnvironmentService) {
+    private httpClient: HttpClient,
+    private environmentService: EnvironmentService,
+    private router: Router) {
   }
 
-  authenticate(username, password) {
-    return this.httpClient.post<JwtResponse>(this.environmentService.apiUrl + this.AUTH, {
-      username,
-      password
-    }).subscribe(
+  authenticate(loginDTO: any) {
+    return this.httpClient.post<LoginResponse>(this.environmentService.apiUrl + this.AUTH, loginDTO).subscribe(
       response => {
         let tokenStr = response.token;
+        let user = response.userWithRoles;
         sessionStorage.setItem(JWT_TOKEN_KEY, tokenStr);
+        sessionStorage.setItem(USER_DATA_KEY, JSON.stringify(user))
+        this.router.navigate(['/'])
       })
   }
 
@@ -34,22 +37,14 @@ export class LoginService {
       })
   }
 
-
   isUserLoggedIn() {
-    // TODO
-    let user = sessionStorage.getItem(JWT_TOKEN_KEY);
-    return !(user === null)
+    return sessionStorage.getItem(JWT_TOKEN_KEY) !== null && sessionStorage.getItem(USER_DATA_KEY) !== null;
   }
 
   logOut() {
-    // TODO
-    sessionStorage.removeItem(JWT_TOKEN_KEY)
+    sessionStorage.removeItem(JWT_TOKEN_KEY);
+    sessionStorage.removeItem(USER_DATA_KEY);
+    this.router.navigate(['/'])
   }
 
-  update(param: any) {
-    return this.httpClient.put<User>(this.environmentService.apiUrl + '/profile', param).subscribe(
-      response => {
-        console.log('Updated user: ', response);
-      })
-  }
 }

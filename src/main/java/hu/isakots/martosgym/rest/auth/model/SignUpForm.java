@@ -1,4 +1,4 @@
-package hu.isakots.martosgym.rest.dto;
+package hu.isakots.martosgym.rest.auth.model;
 
 import java.io.Serializable;
 

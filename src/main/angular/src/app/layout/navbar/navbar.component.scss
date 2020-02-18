@@ -1,4 +1,3 @@
-
 .navbar {
   padding: 0.2rem 1rem;
   z-index: 100;
@@ -7,7 +6,9 @@
   .navbar-title {
     color: #fd7e14;
   }
-
+  .navbar-title:hover {
+    color: #fdae14;
+  }
   ul.dropdown-menu {
     background-color: black;
   }
@@ -20,7 +21,7 @@
     font-weight: 400;
     color: #fd7e14;
   }
-  a.nav-link:hover {
+  a.nav-link:hover{
     color: #fdae14;
   }
 
