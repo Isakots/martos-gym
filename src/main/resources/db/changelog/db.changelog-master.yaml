@@ -5,3 +5,5 @@ databaseChangeLog:
       file: db/changelog/v0.0.2_addAuthorities.yaml
   - include:
       file: db/changelog/v0.0.3_updateUser.yaml
+  - include:
+      file: db/changelog/v0.0.4_addArticles.yaml

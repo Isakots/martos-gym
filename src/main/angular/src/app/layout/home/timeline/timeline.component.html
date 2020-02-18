@@ -1,0 +1,21 @@
+<div>
+    <div class="alert alert-warning" *ngIf="articles?.length === 0">
+        <span>No articles found</span>
+    </div>
+    <div *ngIf="articles?.length > 0">
+        <section class="timeline">
+            <ul>
+                <li *ngFor="let article of articles ;trackBy: trackId">
+                    <a [routerLink]="['/articles', article.id, 'view']">
+                        <div class="content">
+                            <h2>
+                                {{article.title}}
+                            </h2>
+                            <p>{{article.introduction}}</p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </div>
+</div>

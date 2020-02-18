@@ -11,13 +11,14 @@ import {NavbarComonent} from "./layout/navbar/navbar.component";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {
+  faArrowLeft,
   faBars,
   faDrumstickBite,
   faDumbbell,
   faFutbol,
-  faLock,
+  faLock, faPencilAlt, faPlus,
   faSignInAlt,
-  faSignOutAlt,
+  faSignOutAlt, faTimes,
   faUser,
   faUserPlus,
   faUsers,
@@ -34,6 +35,8 @@ import {PasswordStrengthBarComponent} from "./shared/component/password-strength
 import {UserAccessGuard} from "./core/guard/user-access.guard";
 import {AdminAccessGuard} from "./core/guard/admin-access.guard";
 import {ErrorComponent} from './error/error.component';
+import {ArticleModule} from "./article/article.module";
+import {TimelineComponent} from "./layout/home/timeline/timeline.component";
 
 // FaIcon imports
 library.add(faBars);
@@ -47,6 +50,10 @@ library.add(faUserPlus);
 library.add(faDrumstickBite);
 library.add(faSignInAlt);
 library.add(faSignOutAlt);
+library.add(faArrowLeft);
+library.add(faPlus);
+library.add(faPencilAlt);
+library.add(faTimes);
 
 @NgModule({
   declarations: [
@@ -59,7 +66,8 @@ library.add(faSignOutAlt);
     GymInfoComponent,
     SignUpComponent,
     PasswordStrengthBarComponent,
-    ErrorComponent
+    ErrorComponent,
+    TimelineComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +76,8 @@ library.add(faSignOutAlt);
     NgbModule,
     FontAwesomeModule,
     AccountModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ArticleModule
   ],
   providers: [
     UserAccessGuard,
