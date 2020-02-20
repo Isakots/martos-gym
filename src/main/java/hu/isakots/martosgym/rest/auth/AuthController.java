@@ -33,6 +33,6 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<Object> registerUser(@RequestBody SignUpForm form) throws DatabaseException {
         authService.registerUser(form);
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
+        return ResponseEntity.ok().build();
     }
 }

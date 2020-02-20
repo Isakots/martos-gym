@@ -4,7 +4,6 @@ import hu.isakots.martosgym.configuration.security.TokenProvider;
 import hu.isakots.martosgym.domain.User;
 import hu.isakots.martosgym.exception.DatabaseException;
 import hu.isakots.martosgym.repository.AuthorityRepository;
-import hu.isakots.martosgym.repository.UserRepository;
 import hu.isakots.martosgym.rest.auth.model.LoginResponse;
 import hu.isakots.martosgym.rest.auth.model.LoginVM;
 import hu.isakots.martosgym.rest.auth.model.SignUpForm;

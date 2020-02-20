@@ -37,12 +37,13 @@ public class ArticleResource {
     public ResponseEntity<List<ArticleModel>> getAllArticlesByType(@RequestParam ArticleType type) {
         LOGGER.debug("Requesting all articles with type: {}", type);
 
-        // TODO make minusMonths parameter configurable
-        List<ArticleModel> articles = articleRepository.findAllByTypeIsAndCreatedDateIsAfter(type, LocalDateTime.now().minusMonths(12L))
-                .orElse(Collections.emptyList())
-                .stream()
-                .map(article -> modelMapper.map(article, ArticleModel.class))
-                .collect(Collectors.toList());
+        // minusMonths constant will not be necessary if frontend will have paging or dynamic content loading (on scrolling)
+        List<ArticleModel> articles =
+                articleRepository.findAllByTypeIsAndCreatedDateIsAfter(type, LocalDateTime.now().minusMonths(12L))
+                        .orElse(Collections.emptyList())
+                        .stream()
+                        .map(article -> modelMapper.map(article, ArticleModel.class))
+                        .collect(Collectors.toList());
         return ResponseEntity.ok(articles);
     }
 
@@ -58,7 +59,7 @@ public class ArticleResource {
     public ResponseEntity<ArticleModel> createArticle(@RequestBody ArticleModel article) {
         LOGGER.debug("REST request to save Article : {}", article);
         if (article.getId() != null) {
-            throw new IllegalArgumentException(); // TODO
+            throw new IllegalArgumentException("The provided resource must not have ID");
         }
         ArticleModel result = modelMapper.map(articleRepository.save(modelMapper.map(article, Article.class)), ArticleModel.class);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
@@ -69,7 +70,7 @@ public class ArticleResource {
     public ResponseEntity<ArticleModel> updateArticle(@RequestBody ArticleModel article) {
         LOGGER.debug("REST request to update Article : {}", article);
         if (article.getId() == null) {
-            throw new IllegalArgumentException(); // TODO
+            throw new IllegalArgumentException("The provided resource must have an id.");
         }
         ArticleModel result = modelMapper.map(articleRepository.save(modelMapper.map(article, Article.class)), ArticleModel.class);
         return ResponseEntity.ok().body(result);
@@ -80,6 +81,6 @@ public class ArticleResource {
     public ResponseEntity<Void> deleteArticle(@PathVariable Long id) {
         LOGGER.debug("REST request to delete Article : {}", id);
         articleRepository.deleteById(id);
-        return ResponseEntity.noContent().build(); // TODO
+        return ResponseEntity.ok().build();
     }
 }
