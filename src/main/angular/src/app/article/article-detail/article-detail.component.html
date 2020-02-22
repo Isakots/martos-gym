@@ -6,30 +6,27 @@
           <span>{{article.title}}</span>
           <button
             class="btn btn-danger float-right btn-sm"
-            [routerLink]="['/article', { outlets: { popup: article.id + '/delete'} }]"
+            [routerLink]="['/articles', { outlets: { popup: article.id + '/delete'} }]"
             replaceUrl="true"
             queryParamsHandling="merge">
             <fa-icon icon="times"></fa-icon>
             <span class="d-none d-md-inline"> Delete</span>
           </button>
           <button type="button"
-                  [routerLink]="['/article', article.id, 'edit']"
+                  [routerLink]="['/articles', article.id, 'edit']"
                   class="btn btn-light float-right btn-sm">
             <fa-icon icon="pencil-alt"></fa-icon>
             <span class="d-none d-md-inline"> Edit</span>
           </button>
           <button class="btn btn-primary float-right btn-sm"
-                  [routerLink]="['/article/new']">
+                  [routerLink]="['/articles/new']">
             <fa-icon icon="plus"></fa-icon>
-            <span> Create</span>
+            <span class="d-none d-md-inline"> Create</span>
           </button>
         </h2>
         <hr>
 
-        <div class="ql-container ql-snow" style="border-width: 0;">
-          <div class="ql-editor" [innerHTML]="article.content">
-          </div>
-        </div>
+        <div [innerHTML]="article.content"></div>
 
         <button type="submit"
                 [routerLink]="['/']"

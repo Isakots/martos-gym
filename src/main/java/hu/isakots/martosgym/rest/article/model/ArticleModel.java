@@ -59,4 +59,16 @@ public class ArticleModel {
     public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
+
+    @Override
+    public String toString() {
+        return "ArticleModel{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", type=" + type +
+                ", introduction='" + introduction + '\'' +
+                ", content='" + content + '\'' +
+                ", createdDate=" + createdDate +
+                '}';
+    }
 }

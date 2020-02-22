@@ -4,6 +4,7 @@ import hu.isakots.martosgym.exception.DatabaseException;
 import hu.isakots.martosgym.rest.auth.model.LoginResponse;
 import hu.isakots.martosgym.rest.auth.model.LoginVM;
 import hu.isakots.martosgym.rest.auth.model.SignUpForm;
+import hu.isakots.martosgym.rest.auth.model.UserWithRoles;
 import hu.isakots.martosgym.service.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,11 @@ public class AuthController {
         this.authService = authService;
     }
 
+    @GetMapping("/identity")
+    public ResponseEntity<UserWithRoles> getIdentity() {
+        UserWithRoles userWithRoles = authService.getIdentity();
+        return new ResponseEntity<>(userWithRoles, HttpStatus.OK);
+    }
     @PostMapping("/auth")
     public ResponseEntity<LoginResponse> authorize(@Valid @RequestBody LoginVM loginVM) {
         LoginResponse loginResponse = authService.authorize(loginVM);

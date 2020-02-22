@@ -25,6 +25,7 @@ public class AccountResource {
         this.modelMapper = modelMapper;
     }
 
+
     @GetMapping("/profile")
     public ResponseEntity<AccountModel> getUserInformation() {
         User user = accountService.getAuthenticatedUserWithData();

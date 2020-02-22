@@ -24,7 +24,7 @@ export class AccountService {
   }
 
   fetch(): Observable<HttpResponse<User>> {
-    return this.http.get<User>(this.environmentService.apiUrl + '/profile', { observe: 'response' });
+    return this.http.get<User>(this.environmentService.apiUrl + '/identity', { observe: 'response' });
   }
 
   updateProfile(param: any) {

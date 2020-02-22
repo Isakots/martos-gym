@@ -1,86 +1,53 @@
 package hu.isakots.martosgym.rest.article;
 
-import hu.isakots.martosgym.domain.Article;
 import hu.isakots.martosgym.domain.ArticleType;
-import hu.isakots.martosgym.repository.ArticleRepository;
+import hu.isakots.martosgym.exception.ResourceNotFoundException;
 import hu.isakots.martosgym.rest.article.model.ArticleModel;
-import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import hu.isakots.martosgym.service.ArticleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static hu.isakots.martosgym.rest.util.EndpointConstants.API_CONTEXT;
 
 @RestController
 @RequestMapping(value = API_CONTEXT)
 public class ArticleResource {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ArticleResource.class);
+    private final ArticleService articleService;
 
-    private final ArticleRepository articleRepository;
-    private final ModelMapper modelMapper;
-
-    public ArticleResource(ArticleRepository articleRepository, ModelMapper modelMapper) {
-        this.articleRepository = articleRepository;
-        this.modelMapper = modelMapper;
+    public ArticleResource(ArticleService articleService) {
+        this.articleService = articleService;
     }
 
     @GetMapping("/articles")
     public ResponseEntity<List<ArticleModel>> getAllArticlesByType(@RequestParam ArticleType type) {
-        LOGGER.debug("Requesting all articles with type: {}", type);
-
-        // minusMonths constant will not be necessary if frontend will have paging or dynamic content loading (on scrolling)
-        List<ArticleModel> articles =
-                articleRepository.findAllByTypeIsAndCreatedDateIsAfter(type, LocalDateTime.now().minusMonths(12L))
-                        .orElse(Collections.emptyList())
-                        .stream()
-                        .map(article -> modelMapper.map(article, ArticleModel.class))
-                        .collect(Collectors.toList());
-        return ResponseEntity.ok(articles);
+        return ResponseEntity.ok(articleService.getAllArticlesByType(type));
     }
 
     @GetMapping("/articles/{id}")
-    public ResponseEntity<ArticleModel> getArticle(@PathVariable Long id) {
-        LOGGER.debug("REST request to get Article : {}", id);
-        Optional<Article> article = articleRepository.findById(id);
-        return ResponseEntity.ok(modelMapper.map(article.orElse(new Article()), ArticleModel.class));
+    public ResponseEntity<ArticleModel> getArticle(@PathVariable Long id) throws ResourceNotFoundException {
+        return ResponseEntity.ok(articleService.getArticle(id));
     }
 
     @PostMapping("/articles")
-    @PreAuthorize("hasAuthority('ROLE_MEMBER')")
+    //@PreAuthorize("hasAuthority('ROLE_MEMBER')")
     public ResponseEntity<ArticleModel> createArticle(@RequestBody ArticleModel article) {
-        LOGGER.debug("REST request to save Article : {}", article);
-        if (article.getId() != null) {
-            throw new IllegalArgumentException("The provided resource must not have ID");
-        }
-        ArticleModel result = modelMapper.map(articleRepository.save(modelMapper.map(article, Article.class)), ArticleModel.class);
-        return new ResponseEntity<>(result, HttpStatus.CREATED);
+        return new ResponseEntity<>(articleService.createArticle(article), HttpStatus.CREATED);
     }
 
     @PutMapping("/articles")
-    @PreAuthorize("hasAuthority('ROLE_MEMBER')")
+    //@PreAuthorize("hasAuthority('ROLE_MEMBER')")
     public ResponseEntity<ArticleModel> updateArticle(@RequestBody ArticleModel article) {
-        LOGGER.debug("REST request to update Article : {}", article);
-        if (article.getId() == null) {
-            throw new IllegalArgumentException("The provided resource must have an id.");
-        }
-        ArticleModel result = modelMapper.map(articleRepository.save(modelMapper.map(article, Article.class)), ArticleModel.class);
-        return ResponseEntity.ok().body(result);
+        return ResponseEntity.ok().body(articleService.updateArticle(article));
     }
 
     @DeleteMapping("/articles/{id}")
     @PreAuthorize("hasAuthority('ROLE_MEMBER')")
     public ResponseEntity<Void> deleteArticle(@PathVariable Long id) {
-        LOGGER.debug("REST request to delete Article : {}", id);
-        articleRepository.deleteById(id);
+        articleService.deleteArticle(id);
         return ResponseEntity.ok().build();
     }
 }

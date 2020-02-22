@@ -11,12 +11,12 @@ import {NavbarComonent} from "./layout/navbar/navbar.component";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {
-  faArrowLeft,
+  faArrowLeft, faBan,
   faBars,
   faDrumstickBite,
   faDumbbell,
   faFutbol,
-  faLock, faPencilAlt, faPlus,
+  faLock, faPencilAlt, faPlus, faSave,
   faSignInAlt,
   faSignOutAlt, faTimes,
   faUser,
@@ -37,6 +37,7 @@ import {AdminAccessGuard} from "./core/guard/admin-access.guard";
 import {ErrorComponent} from './error/error.component';
 import {ArticleModule} from "./article/article.module";
 import {TimelineComponent} from "./layout/home/timeline/timeline.component";
+import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
 
 // FaIcon imports
 library.add(faBars);
@@ -54,6 +55,8 @@ library.add(faArrowLeft);
 library.add(faPlus);
 library.add(faPencilAlt);
 library.add(faTimes);
+library.add(faBan);
+library.add(faSave);
 
 @NgModule({
   declarations: [
@@ -77,7 +80,8 @@ library.add(faTimes);
     FontAwesomeModule,
     AccountModule,
     ReactiveFormsModule,
-    ArticleModule
+    ArticleModule,
+    CKEditorModule
   ],
   providers: [
     UserAccessGuard,

@@ -27,6 +27,9 @@ const articleRoutes: Routes = [
       {
         path: ':id/edit',
         component: ArticleUpdateComponent,
+        resolve: {
+          article: ArticleResolve
+        },
         canActivate: [AdminAccessGuard]
       }
     ]

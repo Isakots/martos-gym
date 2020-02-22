@@ -1,12 +1,16 @@
 package hu.isakots.martosgym.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.annotation.CreatedDate;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
 @Table(name = "ARTICLE")
-public class Article extends AbstractEntity {
+public class Article {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +34,11 @@ public class Article extends AbstractEntity {
     @NotNull
     @Column(name = "CONTENT", columnDefinition = "CLOB", nullable = false, length = 4095)
     private String content;
+
+    @CreatedDate
+    @Column(name = "CREATED_DATE", updatable = false)
+    @JsonIgnore
+    private LocalDateTime createdDate = LocalDateTime.now();
 
     public Long getId() {
         return id;
@@ -71,6 +80,14 @@ public class Article extends AbstractEntity {
         this.content = content;
     }
 
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -91,11 +108,12 @@ public class Article extends AbstractEntity {
     @Override
     public String toString() {
         return "Article{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", title='" + title + '\'' +
                 ", type=" + type +
                 ", introduction='" + introduction + '\'' +
                 ", content='" + content + '\'' +
+                ", createdDate=" + createdDate +
                 '}';
     }
 }
