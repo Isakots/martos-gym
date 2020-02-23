@@ -1,7 +1,6 @@
 package hu.isakots.martosgym.service;
 
 import hu.isakots.martosgym.configuration.security.TokenProvider;
-import hu.isakots.martosgym.configuration.util.SecurityUtils;
 import hu.isakots.martosgym.domain.User;
 import hu.isakots.martosgym.exception.DatabaseException;
 import hu.isakots.martosgym.repository.AuthorityRepository;

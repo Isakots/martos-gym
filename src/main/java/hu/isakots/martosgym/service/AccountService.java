@@ -7,6 +7,7 @@ import hu.isakots.martosgym.rest.account.model.AccountModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AccountService {
@@ -23,6 +24,7 @@ public class AccountService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found."));
     }
 
+    @Transactional
     public User updateUser(AccountModel accountModel) {
         User storedUser = userRepository.findOneWithAuthoritiesByEmailIgnoreCase(SecurityUtils.getCurrentUserLogin())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found."));
@@ -32,5 +34,12 @@ public class AccountService {
 
     public void saveAccount(User user) {
         userRepository.save(user);
+    }
+
+    @Transactional
+    public void saveUserImage(String fileNameToSave) {
+        User authenticatedUser = this.getAuthenticatedUserWithData();
+        authenticatedUser.setImagePath(fileNameToSave);
+        userRepository.save(authenticatedUser);
     }
 }

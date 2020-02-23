@@ -7,3 +7,5 @@ databaseChangeLog:
       file: db/changelog/v0.0.3_updateUser.yaml
   - include:
       file: db/changelog/v0.0.4_addArticles.yaml
+  - include:
+      file: db/changelog/v0.0.5_updateUserWithImagePath.yaml

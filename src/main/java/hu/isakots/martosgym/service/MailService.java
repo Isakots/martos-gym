@@ -37,7 +37,7 @@ public class MailService {
 
     @Async
     public void sendEmail(String to, String subject, String content) {
-        if(!activeProfiles.contains("no-mail")) {
+        if(activeProfiles.contains("no-mail")) {
            return;
         }
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();

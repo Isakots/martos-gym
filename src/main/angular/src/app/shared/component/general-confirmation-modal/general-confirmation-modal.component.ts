@@ -3,8 +3,7 @@ import {ModalDismissReasons, NgbModal, NgbModalRef} from "@ng-bootstrap/ng-boots
 
 @Component({
   selector: 'app-general-confirmation-modal',
-  templateUrl: './general-confirmation-modal.component.html',
-  styleUrls: ['./general-confirmation-modal.component.scss']
+  templateUrl: './general-confirmation-modal.component.html'
 })
 export class GeneralConfirmationModalComponent implements OnInit {
   @ViewChild('confirmationView') private confirmationView;
