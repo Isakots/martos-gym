@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {ArticleService} from "../../shared/service/article.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -10,8 +10,7 @@ import {ChangeEvent} from "@ckeditor/ckeditor5-angular";
 
 @Component({
   selector: 'app-article-update',
-  templateUrl: './article-update.component.html',
-  styleUrls: ['./article-update.component.scss']
+  templateUrl: './article-update.component.html'
 })
 export class ArticleUpdateComponent implements OnInit {
   isSaving: boolean;
@@ -22,19 +21,20 @@ export class ArticleUpdateComponent implements OnInit {
   constructor(
     protected articleService: ArticleService,
     protected activatedRoute: ActivatedRoute,
-    private _router: Router) {}
+    private _router: Router) {
+  }
 
 
   ngOnInit() {
     this._initFormGroup();
     this.isSaving = false;
-    this.activatedRoute.data.subscribe(({ article }) => {
+    this.activatedRoute.data.subscribe(({article}) => {
       this.editorData = article.content;
       this.updateForm(article);
     });
   }
 
-  public onChange( { editor }: ChangeEvent ) {
+  public onChange({editor}: ChangeEvent) {
     this.editorData = editor.getData();
   }
 

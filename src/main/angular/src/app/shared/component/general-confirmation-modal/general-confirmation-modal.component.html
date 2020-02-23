@@ -1,0 +1,19 @@
+<ng-template #confirmationView let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Megerősítés</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            (click)="confirmEvent(false)">&times;
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Biztos, hogy törölni szeretné?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-dark" data-dismiss="modal" (click)="confirmEvent(false)">
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span>Mégse</span>
+    </button>
+    <button class="btn btn-danger" (click)="confirmEvent(true)">
+      <fa-icon icon="times"></fa-icon>&nbsp;<span>Megerősít</span>
+    </button>
+  </div>
+</ng-template>

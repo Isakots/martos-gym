@@ -7,6 +7,14 @@
       "introduction": "Egy rövid bevezetés",
       "content": "<h2>Első cikk</h2><p>Legyen már valami normális amit meg tudok jeleníteni.</p><p>Egy felsorolás is legyen mondjuk:</p><ul><li>első</li><li>második</li><li>illetve harmadik elemmel</li></ul><blockquote><p>Legyen egy idézet is mert az kurvajó.</p><p>Petőfi Sándor</p></blockquote><figure class=\"table\"><table><tbody><tr><td>Mata</td><td>Hari</td><td>&nbsp;</td></tr><tr><td>Ha</td><td>Kunama</td><td>Tata</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></tbody></table></figure><p><a href=\"google.com\">Google</a></p><p><i>És egy kis stílus</i></p><p><strong>És egy kis stílus</strong></p><p><i><strong>És egy kis stílus</strong></i></p><p>&nbsp;</p>",
       "createdDate": "2020-02-22T16:56:51"
+    },
+    {
+      "title": "Második cikk",
+      "type": "NEWS",
+      "introduction": "asdasdasdsaasd",
+      "content": "<p>undefinedasas</p>",
+      "createdAt": 1582412468300,
+      "id": "tSaYlnY"
     }
   ]
 }

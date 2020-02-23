@@ -11,14 +11,19 @@ import {NavbarComonent} from "./layout/navbar/navbar.component";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {
-  faArrowLeft, faBan,
+  faArrowLeft,
+  faBan,
   faBars,
   faDrumstickBite,
   faDumbbell,
   faFutbol,
-  faLock, faPencilAlt, faPlus, faSave,
+  faLock,
+  faPencilAlt,
+  faPlus,
+  faSave,
   faSignInAlt,
-  faSignOutAlt, faTimes,
+  faSignOutAlt,
+  faTimes,
   faUser,
   faUserPlus,
   faUsers,

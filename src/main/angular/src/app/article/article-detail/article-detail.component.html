@@ -6,9 +6,7 @@
           <span>{{article.title}}</span>
           <button
             class="btn btn-danger float-right btn-sm"
-            [routerLink]="['/articles', { outlets: { popup: article.id + '/delete'} }]"
-            replaceUrl="true"
-            queryParamsHandling="merge">
+            (click)="openConfirmationModal()" >
             <fa-icon icon="times"></fa-icon>
             <span class="d-none d-md-inline"> Delete</span>
           </button>
@@ -38,3 +36,7 @@
     </div>
   </div>
 </div>
+
+<app-general-confirmation-modal
+  (eventConfirmed)="onEventConfirmation($event)"
+></app-general-confirmation-modal>

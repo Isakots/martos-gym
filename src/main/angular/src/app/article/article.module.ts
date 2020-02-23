@@ -6,6 +6,7 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {CommonModule} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
+import {SharedModule} from "../shared/shared.module";
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    CKEditorModule
+    CKEditorModule,
+    SharedModule
   ],
   declarations: [ArticleDetailComponent, ArticleUpdateComponent]
 })
