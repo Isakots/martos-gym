@@ -1,10 +1,10 @@
 package hu.isakots.martosgym.service;
 
 import hu.isakots.martosgym.configuration.security.TokenProvider;
+import hu.isakots.martosgym.configuration.util.SecurityUtils;
 import hu.isakots.martosgym.domain.User;
 import hu.isakots.martosgym.exception.DatabaseException;
 import hu.isakots.martosgym.repository.AuthorityRepository;
-import hu.isakots.martosgym.repository.UserRepository;
 import hu.isakots.martosgym.rest.auth.model.LoginResponse;
 import hu.isakots.martosgym.rest.auth.model.LoginVM;
 import hu.isakots.martosgym.rest.auth.model.SignUpForm;
@@ -60,5 +60,13 @@ public class AuthService {
             throw new DatabaseException("Exception occured while persisting User during registration", e);
         }
         mailService.sendRegistrationEmail(user);
+    }
+
+    public UserWithRoles getIdentity() {
+        User user = accountService.getAuthenticatedUserWithData();
+        UserWithRoles userWithRoles = new UserWithRoles();
+        userWithRoles.setUsername(user.getEmail());
+        userWithRoles.setAuthorities(user.getAuthorities());
+        return userWithRoles;
     }
 }

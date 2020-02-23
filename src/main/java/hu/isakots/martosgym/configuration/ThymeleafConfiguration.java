@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 
 @Configuration
 public class ThymeleafConfiguration {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AsyncTaskExecutorConfiguration.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ThymeleafConfiguration.class);
 
     @Bean(name = "emailTemplateEngine")
     public TemplateEngine emailTemplateEngine() {

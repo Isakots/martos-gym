@@ -23,3 +23,17 @@ An application to manage a gym in a student hostel.
 - Rich text editor integration (QuillJS) for Articles
 - Tool CRUD, reservation logic
 - Email templating
+
+### Building & Running
+#### Without backend 
+1. Start JSON server: Run command  'npm run mock-server'
+2. Start the application: Run command 'npm start'     
+Application can be accessed on http://localhost:4200/
+
+#### With backend 
+1. Create new Tomcat configuration in IDEA
+2. Configure Run Maven Goal 'clean install'
+3. Configure Build exploded artifact
+4. Set context-path to '/Martos-Gym'
+5. Set 'appconf.dir' environment variable in CATALINA_OPTS to set configuration directory
+6. Run Tomcat

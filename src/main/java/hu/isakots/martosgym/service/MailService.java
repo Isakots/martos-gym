@@ -19,7 +19,7 @@ import java.util.Set;
 
 @Service
 public class MailService {
-    private final Logger LOGGER = LoggerFactory.getLogger(MailService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MailService.class);
 
     private final MailProperties mailProperties;
     private final JavaMailSender javaMailSender;

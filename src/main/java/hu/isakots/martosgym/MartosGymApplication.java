@@ -7,7 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
 @EnableConfigurationProperties
-@PropertySource("file:${global.appconf.dir}/jwt.properties")
+@PropertySource("file:${appconf.dir}/jwt.properties")
 public class MartosGymApplication {
 
     public static void main(String[] args) {

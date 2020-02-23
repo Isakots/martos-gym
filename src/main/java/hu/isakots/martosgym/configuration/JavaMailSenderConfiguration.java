@@ -13,7 +13,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableConfigurationProperties(MailProperties.class)
-@PropertySource("file:${global.appconf.dir}/mail.properties")
+@PropertySource("file:${appconf.dir}/mail.properties")
 public class JavaMailSenderConfiguration {
 
     private final MailProperties mailProperties;
