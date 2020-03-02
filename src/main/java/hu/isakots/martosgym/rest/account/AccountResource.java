@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import static hu.isakots.martosgym.rest.util.EndpointConstants.API_CONTEXT;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping(value = API_CONTEXT)
 @PreAuthorize("hasRole('ROLE_USER')")

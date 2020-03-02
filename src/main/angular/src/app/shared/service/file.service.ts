@@ -9,7 +9,7 @@ import {Injectable} from "@angular/core";
 })
 export class FileService {
   apiUrl: string;
-  uploadUrl: string
+  uploadUrl: string;
   downloadUrl: string;
 
   constructor(
@@ -22,9 +22,9 @@ export class FileService {
   }
 
   uploadImage(file: File): Observable<HttpEvent<{}>> {
-    const formdata: FormData = new FormData();
-    formdata.append('file', file);
-    const req = new HttpRequest('POST', this.uploadUrl, formdata, {
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+    const req = new HttpRequest('POST', this.uploadUrl, formData, {
       reportProgress: true,
       responseType: 'text'
     });

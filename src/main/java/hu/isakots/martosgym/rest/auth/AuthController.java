@@ -1,6 +1,7 @@
 package hu.isakots.martosgym.rest.auth;
 
 import hu.isakots.martosgym.exception.DatabaseException;
+import hu.isakots.martosgym.exception.ResourceNotFoundException;
 import hu.isakots.martosgym.rest.auth.model.LoginResponse;
 import hu.isakots.martosgym.rest.auth.model.LoginVM;
 import hu.isakots.martosgym.rest.auth.model.SignUpForm;
@@ -14,7 +15,6 @@ import javax.validation.Valid;
 
 import static hu.isakots.martosgym.rest.util.EndpointConstants.API_CONTEXT;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping(value = API_CONTEXT)
 public class AuthController {
@@ -37,7 +37,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Object> registerUser(@RequestBody SignUpForm form) throws DatabaseException {
+    public ResponseEntity<Object> registerUser(@RequestBody SignUpForm form) throws DatabaseException, ResourceNotFoundException {
         authService.registerUser(form);
         return ResponseEntity.ok().build();
     }

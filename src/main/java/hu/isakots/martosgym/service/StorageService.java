@@ -65,8 +65,8 @@ public class StorageService {
         User user = accountService.getAuthenticatedUserWithData();
         Optional<String> fileName = Optional.ofNullable(user.getImagePath());
         try {
-            Path file = rootLocation.resolve(fileName.orElseThrow(
-                    () -> new ResourceNotFoundException(MessageFormat.format("User does not have uploaded image: {0}", fileName)))
+            Path file = rootLocation.resolve(fileName
+                    .orElseThrow(() -> new ResourceNotFoundException("User does not have uploaded image."))
             );
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {
@@ -91,8 +91,7 @@ public class StorageService {
                     LOGGER.error("File deletion cannot be performed");
                 }
             } catch (IOException e) {
-                // TODO Image uploading process should not be interrupted because of this..
-                //  Create errorLog and a scheduler for unused image cleanup???
+                // Image uploading process should not be interrupted because of this..
                 LOGGER.error("Error occured during deleting previous imageFile with path: {}", imagePath);
             }
         }
@@ -135,9 +134,17 @@ public class StorageService {
     }
 
     private String encodeImage(Path path) throws IOException {
-        return Base64.getEncoder()
-                .withoutPadding()
-                .encodeToString(Files.readAllBytes(path));
+        String extension = FilenameUtils.getExtension(path.toString());
+        LOGGER.debug("File extension is: {}", extension);
+        StringBuilder stringBuilder = new StringBuilder();
+        return stringBuilder
+                .append("data:image/")
+                .append(extension)
+                .append(";base64,")
+                .append(Base64.getEncoder()
+                        .withoutPadding()
+                        .encodeToString(Files.readAllBytes(path)))
+                .toString();
     }
 
 }

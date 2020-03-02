@@ -1,8 +1,10 @@
 package hu.isakots.martosgym.service;
 
 import hu.isakots.martosgym.configuration.security.TokenProvider;
+import hu.isakots.martosgym.domain.Authority;
 import hu.isakots.martosgym.domain.User;
 import hu.isakots.martosgym.exception.DatabaseException;
+import hu.isakots.martosgym.exception.ResourceNotFoundException;
 import hu.isakots.martosgym.repository.AuthorityRepository;
 import hu.isakots.martosgym.rest.auth.model.LoginResponse;
 import hu.isakots.martosgym.rest.auth.model.LoginVM;
@@ -15,6 +17,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.text.MessageFormat;
 
 import static hu.isakots.martosgym.configuration.util.AuthoritiesConstants.ROLE_USER;
 
@@ -49,10 +53,12 @@ public class AuthService {
         return new LoginResponse(tokenProvider.createToken(authentication), userWithRoles);
     }
 
-    public void registerUser(SignUpForm form) throws DatabaseException {
+    public void registerUser(SignUpForm form) throws DatabaseException, ResourceNotFoundException {
         User user = modelMapper.map(form, User.class);
         user.setPassword(passwordEncoder.encode(form.getPassword()));
-        user.getAuthorities().add(authorityRepository.findById(ROLE_USER).get());
+        Authority authority = authorityRepository.findById(ROLE_USER)
+                .orElseThrow(() -> new ResourceNotFoundException(MessageFormat.format("Authority [{0}] is not found in database!", ROLE_USER)));
+        user.getAuthorities().add(authority);
         try {
             accountService.saveAccount(user);
         } catch (Exception e) {
