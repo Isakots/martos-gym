@@ -33,13 +33,13 @@ public class ArticleResource {
     }
 
     @PostMapping("/articles")
-    //@PreAuthorize("hasAuthority('ROLE_MEMBER')")
+    @PreAuthorize("hasAuthority('ROLE_MEMBER')")
     public ResponseEntity<ArticleModel> createArticle(@RequestBody ArticleModel article) {
         return new ResponseEntity<>(articleService.createArticle(article), HttpStatus.CREATED);
     }
 
     @PutMapping("/articles")
-    //@PreAuthorize("hasAuthority('ROLE_MEMBER')")
+    @PreAuthorize("hasAuthority('ROLE_MEMBER')")
     public ResponseEntity<ArticleModel> updateArticle(@RequestBody ArticleModel article) {
         return ResponseEntity.ok().body(articleService.updateArticle(article));
     }

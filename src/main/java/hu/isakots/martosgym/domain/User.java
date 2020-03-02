@@ -60,6 +60,9 @@ public class User implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "AUTHORITY_NAME", referencedColumnName = "NAME")})
     private Set<Authority> authorities = new HashSet<>();
 
+    @Column(name = "IMAGE_PATH", length = 127)
+    private String imagePath;
+
     public Long getId() {
         return id;
     }
@@ -148,6 +151,14 @@ public class User implements Serializable {
         this.authorities = authorities;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -162,6 +173,7 @@ public class User implements Serializable {
                 ", isCollegian=" + isCollegian +
                 ", roomNumber=" + roomNumber +
                 ", authorities=" + authorities +
+                ", imagePath='" + imagePath + '\'' +
                 '}';
     }
 

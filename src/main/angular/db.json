@@ -9,12 +9,12 @@
       "createdDate": "2020-02-22T16:56:51"
     },
     {
+      "id": "2",
       "title": "Második cikk",
       "type": "NEWS",
       "introduction": "asdasdasdsaasd",
       "content": "<p>undefinedasas</p>",
-      "createdAt": 1582412468300,
-      "id": "tSaYlnY"
+      "createdDate": "2020-02-23T17:23:51"
     }
   ]
 }
