@@ -16,5 +16,14 @@
       "content": "<p>undefinedasas</p>",
       "createdDate": "2020-02-23T17:23:51"
     }
-  ]
+  ],
+  "profile":{
+    "firstName": "Pu",
+    "lastName": "Cook",
+    "email": "example@martoskondi.hu",
+    "studentStatus": true,
+    "institution": "BME",
+    "faculty": "VBK",
+    "collegian": false
+  }
 }

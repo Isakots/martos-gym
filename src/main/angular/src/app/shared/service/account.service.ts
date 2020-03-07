@@ -3,7 +3,8 @@ import {HttpClient, HttpResponse} from "@angular/common/http";
 import {EnvironmentService} from "./environment.service";
 import {Observable, Subject} from "rxjs";
 import {User} from "../domain/user";
-import {Authority} from "../domain/interfaces";
+import {UserWithRoles} from "../domain/interfaces";
+import {AccountModel} from "../domain/account-model";
 
 @Injectable({
   providedIn: 'root'
@@ -23,18 +24,23 @@ export class AccountService {
     return this.http.post<HttpResponse<any>>(this.environmentService.apiUrl + this.REGISTER, userData);
   }
 
-  fetch(): Observable<HttpResponse<User>> {
-    return this.http.get<User>(this.environmentService.apiUrl + '/identity', { observe: 'response' });
+  fetch(): Observable<HttpResponse<UserWithRoles>> {
+    return this.http.get<UserWithRoles>(this.environmentService.apiUrl + '/identity', {observe: 'response'});
   }
 
-  updateProfile(param: any) {
-    return this.http.put<User>(this.environmentService.apiUrl + '/profile', param).subscribe(
-      response => {
-        console.log('Updated user: ', response);
-      })
+  get(): Observable<HttpResponse<AccountModel>> {
+    return this.http.get<AccountModel>(this.environmentService.apiUrl + '/profile', {observe: 'response'});
   }
 
-  identity(force?: boolean): Promise<User> {
+  updateProfile(param: any): Observable<HttpResponse<User>> {
+    return this.http.put<User>(this.environmentService.apiUrl + '/profile', param, {observe: 'response'});
+  }
+
+  changePassword(param: any): Observable<any> {
+    return this.http.post(this.environmentService.apiUrl + '/profile/change-password', param, {observe: 'response'});
+  }
+
+  identity(force?: boolean): Promise<UserWithRoles> {
     if (force) {
       this.userIdentity = undefined;
     }
@@ -49,7 +55,7 @@ export class AccountService {
     return this.fetch()
       .toPromise()
       .then(response => {
-        const account: User = response.body;
+        const account: UserWithRoles = response.body;
         if (account) {
           this.userIdentity = account;
           this.authenticated = true;
@@ -75,11 +81,22 @@ export class AccountService {
 
     return this.identity().then(
       identity => {
-        return Promise.resolve(identity.authorities && identity.authorities.includes(new Authority(authority)));
+        return Promise.resolve(identity.authorities && identity.authorities.includes(authority));
       },
       () => {
         return Promise.resolve(false);
       }
     );
   }
+
+  isAuthenticated(): boolean {
+    return this.authenticated;
+  }
+
+  logOut() {
+    this.userIdentity = null;
+    this.authenticated = false;
+    this.authenticationState.next(this.userIdentity);
+  }
+
 }

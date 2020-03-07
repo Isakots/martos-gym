@@ -2,10 +2,13 @@ package hu.isakots.martosgym.service;
 
 import hu.isakots.martosgym.configuration.util.SecurityUtils;
 import hu.isakots.martosgym.domain.User;
+import hu.isakots.martosgym.exception.InvalidPasswordException;
 import hu.isakots.martosgym.repository.UserRepository;
 import hu.isakots.martosgym.rest.account.model.AccountModel;
+import hu.isakots.martosgym.rest.account.model.PasswordChangeDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,10 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class AccountService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public AccountService(UserRepository userRepository, ModelMapper modelMapper) {
+    public AccountService(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public User getAuthenticatedUserWithData() {
@@ -32,6 +37,7 @@ public class AccountService {
         return userRepository.save(storedUser);
     }
 
+    @Transactional
     public void saveAccount(User user) {
         userRepository.save(user);
     }
@@ -41,5 +47,14 @@ public class AccountService {
         User authenticatedUser = this.getAuthenticatedUserWithData();
         authenticatedUser.setImagePath(fileNameToSave);
         userRepository.save(authenticatedUser);
+    }
+
+    public void changePassword(PasswordChangeDTO passwordChangeDto) throws InvalidPasswordException {
+        User user = getAuthenticatedUserWithData();
+        if(!passwordEncoder.matches(passwordChangeDto.getCurrentPassword(), user.getPassword())) {
+            throw new InvalidPasswordException("Hibás jelszó.");
+        }
+        user.setPassword(passwordEncoder.encode(passwordChangeDto.getNewPassword()));
+        userRepository.save(user);
     }
 }

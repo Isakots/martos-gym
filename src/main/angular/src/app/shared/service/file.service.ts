@@ -17,8 +17,8 @@ export class FileService {
     private http: HttpClient
   ) {
     this.apiUrl = this.environmentService.apiUrl;
-    this.uploadUrl = this.apiUrl + '/upload';
-    this.downloadUrl = this.apiUrl + '/download';
+    this.uploadUrl = this.apiUrl + '/profile/image/upload';
+    this.downloadUrl = this.apiUrl + '/profile/image/download';
   }
 
   uploadImage(file: File): Observable<HttpEvent<{}>> {
@@ -31,7 +31,7 @@ export class FileService {
     return this.http.request(req);
   }
 
-  getImage(): Observable<HttpEvent<any>> {
+  getImage(): Observable<any> {
     const req = new HttpRequest('GET', this.downloadUrl);
     return this.http.request(req);
   }

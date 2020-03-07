@@ -2,16 +2,29 @@ import {RouterModule, Routes} from "@angular/router";
 import {NgModule} from "@angular/core";
 import {ProfileComponent} from "./profile/profile.component";
 import {ChangePasswordComponent} from "./change-password/change-password.component";
-import {UserAccessGuard} from "../core/guard/user-access.guard";
+import {AuthorizationGuard} from "../core/guard/authorization-guard.service";
+import {ProfileResolver} from "./profile/profile.resolver";
 
 const accountRoutes: Routes = [
   {
-    path: 'user',
+    path: '',
     children: [
-      {path: 'profile', component: ProfileComponent},
-      {path: 'change-password', component: ChangePasswordComponent}
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        resolve: {
+          account: ProfileResolver
+        }
+      },
+      {
+        path: 'change-password',
+        component: ChangePasswordComponent
+      }
     ],
-    canActivate: [UserAccessGuard]
+    data : {
+      authority: "ROLE_USER"
+    },
+    canActivate: [AuthorizationGuard]
   }
 ];
 

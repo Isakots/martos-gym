@@ -2,8 +2,8 @@ import {RouterModule, Routes} from "@angular/router";
 import {NgModule} from "@angular/core";
 import {ArticleUpdateComponent} from "./article-update/article-update.component";
 import {ArticleDetailComponent} from "./article-detail/article-detail.component";
-import {AdminAccessGuard} from "../core/guard/admin-access.guard";
 import {ArticleResolve} from "./article.resolver";
+import {AuthorizationGuard} from "../core/guard/authorization-guard.service";
 
 const articleRoutes: Routes = [
   {
@@ -22,7 +22,10 @@ const articleRoutes: Routes = [
         resolve: {
           article: ArticleResolve
         },
-        canActivate: [AdminAccessGuard]
+        data : {
+          authority: "ROLE_ADMIN"
+        },
+        canActivate: [AuthorizationGuard]
       },
       {
         path: ':id/edit',
@@ -30,7 +33,10 @@ const articleRoutes: Routes = [
         resolve: {
           article: ArticleResolve
         },
-        canActivate: [AdminAccessGuard]
+        data : {
+          authority: "ROLE_ADMIN"
+        },
+        canActivate: [AuthorizationGuard]
       }
     ]
   }
