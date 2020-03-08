@@ -19,20 +19,20 @@ import static hu.isakots.martosgym.rest.util.EndpointConstants.API_CONTEXT;
 
 @Controller
 @RequestMapping(value = API_CONTEXT)
-public class UploadController {
+public class FileController {
     private final StorageService storageService;
 
-    public UploadController(StorageService storageService) {
+    public FileController(StorageService storageService) {
         this.storageService = storageService;
     }
 
-    @PostMapping("/upload")
+    @PostMapping("/profile/image/upload")
     public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) throws FileUploadException {
         storageService.store(file);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @GetMapping(value = "/download")
+    @GetMapping(value = "/profile/image/download")
     public ResponseEntity<Map<String, String>> downloadFile() throws ResourceNotFoundException {
         String encodedImage = storageService.loadFile();
         Map<String, String> jsonMap = new HashMap<>();

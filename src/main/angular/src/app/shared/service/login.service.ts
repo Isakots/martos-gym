@@ -5,6 +5,8 @@ import {User} from "../domain/user";
 import {JWT_TOKEN_KEY, USER_DATA_KEY} from "../constants";
 import {LoginResponse} from "../domain/interfaces";
 import {Router} from "@angular/router";
+import {AccountService} from "./account.service";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -16,34 +18,21 @@ export class LoginService {
   constructor(
     private httpClient: HttpClient,
     private environmentService: EnvironmentService,
-    private router: Router) {
+    private router: Router,
+    private accountService: AccountService) {
   }
 
-  authenticate(loginDTO: any) {
-    return this.httpClient.post<LoginResponse>(this.environmentService.apiUrl + this.AUTH, loginDTO).subscribe(
-      response => {
-        let tokenStr = response.token;
-        let user = response.userWithRoles;
-        sessionStorage.setItem(JWT_TOKEN_KEY, tokenStr);
-        sessionStorage.setItem(USER_DATA_KEY, JSON.stringify(user))
-        this.router.navigate(['/'])
-      })
-  }
-
-  getProfile() {
-    return this.httpClient.get<User>(this.environmentService.apiUrl + '/profile').subscribe(
-      response => {
-        console.log('User: ', response);
-      })
+  authenticate(loginDTO: any) : Observable<any> {
+    return this.httpClient.post<LoginResponse>(this.environmentService.apiUrl + this.AUTH, loginDTO);
   }
 
   isUserLoggedIn() {
-    return sessionStorage.getItem(JWT_TOKEN_KEY) !== null && sessionStorage.getItem(USER_DATA_KEY) !== null;
+    return sessionStorage.getItem(JWT_TOKEN_KEY) !== null;
   }
 
   logOut() {
+    this.accountService.logOut();
     sessionStorage.removeItem(JWT_TOKEN_KEY);
-    sessionStorage.removeItem(USER_DATA_KEY);
     this.router.navigate(['/'])
   }
 

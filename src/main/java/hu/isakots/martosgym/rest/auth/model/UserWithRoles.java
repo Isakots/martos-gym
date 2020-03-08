@@ -1,26 +1,24 @@
 package hu.isakots.martosgym.rest.auth.model;
 
-import hu.isakots.martosgym.domain.Authority;
-
 import java.util.Set;
 
 public class UserWithRoles {
     private String username;
-    private Set<Authority> authorities;
+    private Set<String> authorities;
 
     public String getUsername() {
         return username;
-    }
-
-    public Set<Authority> getAuthorities() {
-        return authorities;
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
 
-    public void setAuthorities(Set<Authority> authorities) {
+    public Set<String> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<String> authorities) {
         this.authorities = authorities;
     }
 }

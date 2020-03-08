@@ -36,13 +36,12 @@ import {GymInfoComponent} from './layout/gym-info/gym-info.component';
 import {AccountModule} from "./account/account.module";
 import {SignUpComponent} from './sign-up/sign-up.component';
 import {ReactiveFormsModule} from "@angular/forms";
-import {PasswordStrengthBarComponent} from "./shared/component/password-strength-bar/password-strength-bar.component";
-import {UserAccessGuard} from "./core/guard/user-access.guard";
-import {AdminAccessGuard} from "./core/guard/admin-access.guard";
+import {AuthorizationGuard} from "./core/guard/authorization-guard.service";
 import {ErrorComponent} from './error/error.component';
 import {ArticleModule} from "./article/article.module";
 import {TimelineComponent} from "./layout/home/timeline/timeline.component";
 import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
+import {SharedModule} from "./shared/shared.module";
 
 // FaIcon imports
 library.add(faBars);
@@ -64,19 +63,18 @@ library.add(faBan);
 library.add(faSave);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    NavbarComonent,
-    HomeComponent,
-    AboutUsComponent,
-    NutritionComponent,
-    GymInfoComponent,
-    SignUpComponent,
-    PasswordStrengthBarComponent,
-    ErrorComponent,
-    TimelineComponent
-  ],
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        NavbarComonent,
+        HomeComponent,
+        AboutUsComponent,
+        NutritionComponent,
+        GymInfoComponent,
+        SignUpComponent,
+        ErrorComponent,
+        TimelineComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -86,14 +84,14 @@ library.add(faSave);
     AccountModule,
     ReactiveFormsModule,
     ArticleModule,
-    CKEditorModule
+    CKEditorModule,
+    SharedModule
   ],
-  providers: [
-    UserAccessGuard,
-    AdminAccessGuard,
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
-  ],
-  bootstrap: [AppComponent]
+    providers: [
+        AuthorizationGuard,
+        {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }

@@ -49,8 +49,7 @@ public class AuthService {
                 new UsernamePasswordAuthenticationToken(loginVM.getUsername(), loginVM.getPassword());
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        UserWithRoles userWithRoles = modelMapper.map(accountService.getAuthenticatedUserWithData(), UserWithRoles.class);
-        return new LoginResponse(tokenProvider.createToken(authentication), userWithRoles);
+        return new LoginResponse(tokenProvider.createToken(authentication));
     }
 
     public void registerUser(SignUpForm form) throws DatabaseException, ResourceNotFoundException {
@@ -69,9 +68,6 @@ public class AuthService {
 
     public UserWithRoles getIdentity() {
         User user = accountService.getAuthenticatedUserWithData();
-        UserWithRoles userWithRoles = new UserWithRoles();
-        userWithRoles.setUsername(user.getEmail());
-        userWithRoles.setAuthorities(user.getAuthorities());
-        return userWithRoles;
+        return modelMapper.map(user, UserWithRoles.class);
     }
 }

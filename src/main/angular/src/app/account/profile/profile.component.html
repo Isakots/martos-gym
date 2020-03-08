@@ -1,76 +1,162 @@
-<div class="row justify-content-center mt-4">
+<div class="row justify-content-center m-4">
   <div class="col-lg-10">
 
     <div class="alert alert-success" *ngIf="success">
-      <strong>Settings saved!</strong>
+      <strong>Mentés sikeres!</strong>
     </div>
 
     <div class="row">
       <div class="col-lg-7">
-        <form name="form" role="form" (ngSubmit)="save()" [formGroup]="settingsForm" novalidate>
-          <div class="form-group">
-            <label class="form-control-label" for="firstName">First
-              Name</label>
-            <input type="text" class="form-control" id="firstName" name="firstName"
-                   formControlName="firstName">
+        <div [formGroup]="profileForm">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="form-control-label" for="lastName">Családnév</label>
+                <input type="text" class="form-control" id="lastName" name="lastName"
+                       formControlName="lastName">
+                <div
+                  *ngIf="showValidationMessage(profileForm.get('lastName'))">
+                  <small class="form-text text-danger" *ngIf="profileForm.get('lastName').errors.required">
+                    Lastname is required.
+                  </small>
+                  <small class="form-text text-danger" *ngIf="profileForm.get('lastName').errors.minlength">
+                    Lastname is required to be at least 5 characters.
+                  </small>
+                  <small class="form-text text-danger" *ngIf="profileForm.get('lastName').errors.maxlength">
+                    Lastname cannot be longer than 100 characters.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="form-control-label" for="firstName">Keresztnév</label>
+                <input type="text" class="form-control" id="firstName" name="firstName"
+                       formControlName="firstName">
+                <div
+                  *ngIf="showValidationMessage(profileForm.get('firstName'))">
+                  <small class="form-text text-danger" *ngIf="profileForm.get('firstName').errors.required">
+                    Firstname is required.
+                  </small>
+                  <small class="form-text text-danger" *ngIf="profileForm.get('firstName').errors.minlength">
+                    Firstname is required to be at least 4 characters.
+                  </small>
+                  <small class="form-text text-danger" *ngIf="profileForm.get('firstName').errors.maxlength">
+                    Firstname cannot be longer than 50 characters.
+                  </small>
+                </div>
 
-            <small class="form-text text-danger"
-                   *ngIf="settingsForm.get('firstName').errors.required">
-              Your first name is required.
-            </small>
-            <small class="form-text text-danger"
-                   *ngIf="settingsForm.get('firstName').errors.minlength">
-              Your first name is required to be at least 1 character.
-            </small>
-            <small class="form-text text-danger"
-                   *ngIf="settingsForm.get('firstName').errors.maxlength">
-              Your first name cannot be longer than 50 characters.
-            </small>
+              </div>
+            </div>
           </div>
-
-          <div class="form-group">
-            <label class="form-control-label" for="lastName">Last Name</label>
-            <input type="text" class="form-control" id="lastName" name="lastName">
-
-            <small class="form-text text-danger"
-                   *ngIf="settingsForm.get('lastName').errors.required">
-              Your last name is required.
-            </small>
-            <small class="form-text text-danger"
-                   *ngIf="settingsForm.get('lastName').errors.minlength">
-              Your last name is required to be at least 1 character.
-            </small>
-            <small class="form-text text-danger"
-                   *ngIf="settingsForm.get('lastName').errors.maxlength">
-              Your last name cannot be longer than 50 characters.
-            </small>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="form-control-label" for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email"
+                       formControlName="email">
+              </div>
+            </div>
           </div>
-
-          <div class="form-group">
-            <label class="form-control-label" for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email"
-                   formControlName="email">
-
-            <small class="form-text text-danger"
-                   *ngIf="settingsForm.get('email').errors.required">
-              Your email is required.
-            </small>
-            <small class="form-text text-danger"
-                   *ngIf="settingsForm.get('email').errors.email">
-              Your email is invalid.
-            </small>
-            <small class="form-text text-danger"
-                   *ngIf="settingsForm.get('email').errors.minlength">
-              Your email is required to be at least 5 characters.
-            </small>
-            <small class="form-text text-danger"
-                   *ngIf="settingsForm.get('email').errors.maxlength">
-              Your email cannot be longer than 100 characters.
-            </small>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="checkbox-container form-control-label" for="studentStatus">Van hallgatói jogviszonyom
+                  <input type="checkbox" formControlName="studentStatus" id="studentStatus" name="studentStatus">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+            </div>
           </div>
-
-          <button type="submit" [disabled]="settingsForm.invalid" class="btn btn-primary">Save</button>
-        </form>
+          <div *ngIf="isStudentStateChecked()" class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="form-control-label" for="institution">Oktatási Intézmény</label>
+                <input type="text" class="form-control" id="institution" name="institution"
+                       formControlName="institution">
+                <div
+                  *ngIf="showValidationMessage(profileForm.get('institution'))">
+                  <small class="form-text text-danger" *ngIf="profileForm.get('institution').errors.required">
+                    Institution is required.
+                  </small>
+                  <small class="form-text text-danger"
+                         *ngIf="profileForm.get('institution').errors.maxlength">
+                    Institution cannot be longer than 50 characters.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="form-control-label" for="faculty">Kar</label>
+                <input type="text" class="form-control" id="faculty" name="faculty"
+                       formControlName="faculty">
+                <div
+                  *ngIf="showValidationMessage(profileForm.get('faculty'))">
+                  <small class="form-text text-danger"
+                         *ngIf="profileForm.get('faculty').errors.required">
+                    Faculty is required.
+                  </small>
+                  <small class="form-text text-danger"
+                         *ngIf="profileForm.get('faculty').errors.maxlength">
+                    Faculty be longer than 5 characters.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="checkbox-container form-control-label" for="collegian">Kollégista vagyok
+                  <input type="checkbox" formControlName="collegian" id="collegian" name="collegian">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+            </div>
+            <div *ngIf="isCollegianChecked()" class="col-lg-6">
+              <div class="form-group">
+                <label class="form-control-label" for="roomNumber">Szobaszám</label>
+                <input type="number" class="form-control" id="roomNumber" name="roomNumber"
+                       formControlName="roomNumber">
+                <div
+                  *ngIf="showValidationMessage(profileForm.get('roomNumber'))">
+                  <small class="form-text text-danger"
+                         *ngIf="profileForm.get('roomNumber').errors.required">
+                    Your room number is required.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-10">
+              <label class="checkbox-container">Értesítő e-mail küldése edzésekről, melyekre feliratkoztam
+                <input type="checkbox" checked="checked">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-10">
+              <label class="checkbox-container">Értesítő e-mail küldése frissen kiírt edzésekről
+                <input type="checkbox" checked="checked">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-10">
+              <label class="checkbox-container">Értesítő e-mail küldése új hírfolyam cikkről
+                <input type="checkbox" checked="checked">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+            <button type="submit" class="btn btn-primary" (click)="save ()">Mentés</button>
+        </div>
       </div>
       <div class="col-lg-3">
         <image-view></image-view>

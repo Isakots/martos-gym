@@ -10,7 +10,8 @@
   <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" routerLink="about-us"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="collapseNavbar()">
+        <a class="nav-link" routerLink="about-us" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+           (click)="collapseNavbar()">
           <fa-icon icon="users"></fa-icon>
           <span>About Us</span>
         </a>
@@ -35,21 +36,20 @@
           <span>Account</span>
         </a>
         <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">
-          <li
-          >
-            <a class="dropdown-item" routerLink="user/profile" (click)="collapseNavbar()">
+          <li *ngIf="showUserNavItem()">
+            <a class="dropdown-item" routerLink="profile" (click)="collapseNavbar()">
               <fa-icon icon="wrench" fixedWidth="true"></fa-icon>
               <span>Profile</span>
             </a>
           </li>
           <li *ngIf="showUserNavItem()">
-            <a class="dropdown-item" routerLink="user/change-password" (click)="collapseNavbar()">
+            <a class="dropdown-item" routerLink="change-password" (click)="collapseNavbar()">
               <fa-icon icon="lock" fixedWidth="true"></fa-icon>
               <span>Password</span>
             </a>
           </li>
           <li *ngIf="showUserNavItem()">
-            <a class="dropdown-item" routerLink="#" (click)="logout()"  id="logout">
+            <a class="dropdown-item" routerLink="#" (click)="logout()" id="logout">
               <fa-icon icon="sign-out-alt" fixedWidth="true"></fa-icon>
               <span>Sign out</span>
             </a>

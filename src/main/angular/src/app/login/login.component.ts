@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {LoginService} from "../shared/service/login.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {JWT_TOKEN_KEY} from "../shared/constants";
+import {StateStorageService} from "../shared/service/state-storage.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -12,7 +15,10 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private stateStorageService: StateStorageService,
+    private router: Router
+    ) {
   }
 
   ngOnInit() {
@@ -24,6 +30,15 @@ export class LoginComponent implements OnInit {
 
   login() {
     let loginDTO = this.loginForm.getRawValue();
-    this.loginService.authenticate(loginDTO)
+    this.loginService.authenticate(loginDTO).subscribe(
+      response => {
+        let tokenStr = response.token;
+        sessionStorage.setItem(JWT_TOKEN_KEY, tokenStr);
+        const redirect = this.stateStorageService.getUrl();
+        if (redirect) {
+          this.stateStorageService.storeUrl(null);
+          this.router.navigateByUrl(redirect);
+        }
+      })
   }
 }

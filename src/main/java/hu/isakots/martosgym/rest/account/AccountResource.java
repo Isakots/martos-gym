@@ -1,7 +1,9 @@
 package hu.isakots.martosgym.rest.account;
 
 import hu.isakots.martosgym.domain.User;
+import hu.isakots.martosgym.exception.InvalidPasswordException;
 import hu.isakots.martosgym.rest.account.model.AccountModel;
+import hu.isakots.martosgym.rest.account.model.PasswordChangeDTO;
 import hu.isakots.martosgym.service.AccountService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -24,7 +26,6 @@ public class AccountResource {
         this.modelMapper = modelMapper;
     }
 
-
     @GetMapping("/profile")
     public ResponseEntity<AccountModel> getUserInformation() {
         User user = accountService.getAuthenticatedUserWithData();
@@ -32,9 +33,15 @@ public class AccountResource {
     }
 
     @PutMapping("/profile")
-    public ResponseEntity<AccountModel> getUserInformation(@RequestBody AccountModel accountModel) {
+    public ResponseEntity<AccountModel> updateProfile(@RequestBody AccountModel accountModel) {
         User user = accountService.updateUser(accountModel);
         return new ResponseEntity<>(modelMapper.map(user, AccountModel.class), HttpStatus.OK);
+    }
+
+    @PostMapping("/profile/change-password")
+    public ResponseEntity changePassword(@RequestBody PasswordChangeDTO passwordChangeDto) throws InvalidPasswordException {
+        accountService.changePassword(passwordChangeDto);
+        return ResponseEntity.ok().build();
     }
 
 }

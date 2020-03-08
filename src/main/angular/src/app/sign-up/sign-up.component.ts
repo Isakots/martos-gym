@@ -6,8 +6,7 @@ import {matchValidation} from "../core/validator/match-validator";
 
 @Component({
   selector: 'app-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  templateUrl: './sign-up.component.html'
 })
 export class SignUpComponent implements OnInit {
   triedToRegister: boolean = false;

@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {DomSanitizer} from "@angular/platform-browser";
+import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 import {FileService} from "../../service/file.service";
 import {HttpResponse} from "@angular/common/http";
-import {error} from "@angular/compiler/src/util";
 
 @Component({
   selector: 'image-view',
@@ -10,13 +9,13 @@ import {error} from "@angular/compiler/src/util";
   styleUrls: ['./image-view.component.scss']
 })
 export class ImageViewComponent implements OnInit {
-  private image: any;
+  private image: SafeUrl;
 
-  constructor(private uploadService: FileService, private sanitizer: DomSanitizer) {
+  constructor(private fileService: FileService, private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
-    this.uploadService.getImage()
+    this.fileService.getImage()
       .subscribe(response => {
         if (response instanceof HttpResponse) {
           if (response.status == 200) {

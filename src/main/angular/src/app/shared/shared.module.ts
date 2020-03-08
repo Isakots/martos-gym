@@ -4,12 +4,14 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {ImageViewComponent} from './component/image-view/image-view.component';
 import {FileUploadComponent} from './component/file-upload/file-upload.component';
 import {CommonModule} from "@angular/common";
+import {PasswordStrengthBarComponent} from "./component/password-strength-bar/password-strength-bar.component";
 
 @NgModule({
   declarations: [
     GeneralConfirmationModalComponent,
     ImageViewComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    PasswordStrengthBarComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -18,7 +20,8 @@ import {CommonModule} from "@angular/common";
   exports: [
     GeneralConfirmationModalComponent,
     ImageViewComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    PasswordStrengthBarComponent
   ]
 })
 export class SharedModule {

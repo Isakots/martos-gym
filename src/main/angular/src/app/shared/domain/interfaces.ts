@@ -1,11 +1,6 @@
-export class Authority {
-  name: string
-  constructor(name: string) {this.name = name}
-}
-
 export interface UserWithRoles {
   username: string,
-  authorities: Authority[]
+  authorities: string[]
 }
 
 export interface LoginResponse {

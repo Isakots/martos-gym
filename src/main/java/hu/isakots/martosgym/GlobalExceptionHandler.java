@@ -2,6 +2,7 @@ package hu.isakots.martosgym;
 
 import hu.isakots.martosgym.exception.DatabaseException;
 import hu.isakots.martosgym.exception.FileUploadException;
+import hu.isakots.martosgym.exception.InvalidPasswordException;
 import hu.isakots.martosgym.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +41,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(FileUploadException.class)
     public ResponseEntity handleFileUploadException(FileUploadException exception) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
+    }
+
+    @ExceptionHandler(InvalidPasswordException.class)
+    public ResponseEntity handleInvalidPasswordException(InvalidPasswordException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
 }
