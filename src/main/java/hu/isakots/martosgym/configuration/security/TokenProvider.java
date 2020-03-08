@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Component
 public class TokenProvider {
 
-    private static final Logger log = LoggerFactory.getLogger(TokenProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TokenProvider.class);
     private static final String AUTHORITIES_KEY = "auth";
     private final String secretKey;
     private final String jwtType;
@@ -71,17 +71,13 @@ public class TokenProvider {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(authToken);
             return true;
         } catch (SecurityException | MalformedJwtException e) {
-            log.info("Invalid JWT signature.");
-            log.trace("Invalid JWT signature trace: {0}", e);
+            LOGGER.info("Invalid JWT signature.");
         } catch (ExpiredJwtException e) {
-            log.info("Expired JWT token.");
-            log.trace("Expired JWT token trace: {0}", e);
+            LOGGER.info("Expired JWT token.");
         } catch (UnsupportedJwtException e) {
-            log.info("Unsupported JWT token.");
-            log.trace("Unsupported JWT token trace: {0}", e);
+            LOGGER.info("Unsupported JWT token.");
         } catch (IllegalArgumentException e) {
-            log.info("JWT token compact of handler are invalid.");
-            log.trace("JWT token compact of handler are invalid trace: {0}", e);
+            LOGGER.info("JWT token compact of handler are invalid.");
         }
         return false;
     }

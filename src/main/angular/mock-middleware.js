@@ -15,25 +15,19 @@ server.get('/echo', (req, res) => {
 // You can use the one used by JSON Server
 server.use(jsonServer.bodyParser);
 
+
+// login and authorization mechanism will not working with mock backend
 server.get('/identity', (req, res) => {
-  res.status(200).json({
-    username: "user",
-    authorities: ["ROLE_USER"]
-  });
+    res.status(200).json({
+      username: "user",
+      authorities: ["ROLE_USER"]
+    });
 });
 
 server.post('/auth', (req, res) => {
-  res.status(200).json({
-    token: "asd",
-    userWithRoles: {
-      username: "user",
-      authorities: [
-        {
-          name: "ROLE_USER"
-        }
-      ]
-    }
-  });
+    res.status(200).json({
+      token: "jwt-token"
+    });
 });
 
 server.post('/profile/change-password', (req, res) => {
