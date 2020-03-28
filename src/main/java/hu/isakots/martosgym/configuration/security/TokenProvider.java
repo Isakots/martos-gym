@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Component
 public class TokenProvider {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TokenProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TokenProvider.class.getName());
     private static final String AUTHORITIES_KEY = "auth";
     private final String secretKey;
     private final String jwtType;

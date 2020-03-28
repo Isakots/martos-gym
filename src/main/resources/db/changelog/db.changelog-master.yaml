@@ -9,3 +9,5 @@ databaseChangeLog:
       file: db/changelog/v0.0.4_addArticles.yaml
   - include:
       file: db/changelog/v0.0.5_updateUserWithImagePath.yaml
+  - include:
+      file: db/changelog/v0.0.6_addToolAndReservationTables.yaml

@@ -42,6 +42,7 @@ import {ArticleModule} from "./article/article.module";
 import {TimelineComponent} from "./layout/home/timeline/timeline.component";
 import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
 import {SharedModule} from "./shared/shared.module";
+import {ToolModule} from "./tool/tool.module";
 
 // FaIcon imports
 library.add(faBars);
@@ -85,7 +86,8 @@ library.add(faSave);
     ReactiveFormsModule,
     ArticleModule,
     CKEditorModule,
-    SharedModule
+    SharedModule,
+    ToolModule
   ],
     providers: [
         AuthorizationGuard,

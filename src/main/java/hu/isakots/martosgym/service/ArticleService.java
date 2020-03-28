@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class ArticleService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ArticleService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ArticleService.class.getName());
 
     private final ArticleRepository articleRepository;
     private final ModelMapper modelMapper;

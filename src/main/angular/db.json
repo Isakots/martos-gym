@@ -25,5 +25,17 @@
     "institution": "BME",
     "faculty": "VBK",
     "collegian": false
-  }
+  },
+  "tools": [
+    {
+      "id": "1",
+      "name": "Röplabda",
+      "quantity": 3
+    },
+    {
+      "id": "2",
+      "name": "Focilabda",
+      "quantity": 6
+    }
+  ]
 }

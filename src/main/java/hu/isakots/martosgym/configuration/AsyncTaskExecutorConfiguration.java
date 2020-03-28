@@ -22,7 +22,7 @@ import java.util.concurrent.Executor;
 @EnableConfigurationProperties(AsyncTaskExecutorProperties.class)
 @PropertySource("file:${appconf.dir}/async.properties")
 public class AsyncTaskExecutorConfiguration implements AsyncConfigurer {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AsyncTaskExecutorConfiguration.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AsyncTaskExecutorConfiguration.class.getName());
 
     private final AsyncTaskExecutorProperties taskExecutorProperties;
 

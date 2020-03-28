@@ -29,7 +29,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service
 public class StorageService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(StorageService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(StorageService.class.getName());
 
     private final AccountService accountService;
     private final ImageProperties imageProperties;
