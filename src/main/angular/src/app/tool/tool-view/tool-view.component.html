@@ -1,3 +1,10 @@
-<div *ngFor="let tool of tools">
-  <app-tool-item [data]="tool"></app-tool-item>
+<div class="row justify-content-center mt-4">
+
+  <div class="col-lg-8">
+    <h2 id="tool-heading">Eszközfoglalás</h2>
+    <hr>
+    <div *ngFor="let tool of tools">
+      <app-tool-item [data]="tool"></app-tool-item>
+    </div>
+  </div>
 </div>

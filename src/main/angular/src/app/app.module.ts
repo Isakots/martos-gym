@@ -16,7 +16,9 @@ import {
   faBars,
   faDrumstickBite,
   faDumbbell,
+  faEdit,
   faFutbol,
+  faHandPointUp,
   faLock,
   faPencilAlt,
   faPlus,
@@ -62,6 +64,8 @@ library.add(faPencilAlt);
 library.add(faTimes);
 library.add(faBan);
 library.add(faSave);
+library.add(faHandPointUp);
+library.add(faEdit);
 
 @NgModule({
     declarations: [

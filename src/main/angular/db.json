@@ -30,12 +30,44 @@
     {
       "id": "1",
       "name": "Röplabda",
-      "quantity": 3
+      "quantity": 3,
+      "reachable": true
     },
     {
       "id": "2",
       "name": "Focilabda",
-      "quantity": 6
+      "quantity": 6,
+      "reachable": true
+    },
+    {
+      "id": "3",
+      "name": "Polifoam",
+      "quantity": 4,
+      "reachable": false
+    },
+    {
+      "id": "4",
+      "name": "Resistance band",
+      "quantity": 3,
+      "reachable": true
+    },
+    {
+      "id": "5",
+      "name": "Ugrálókötél",
+      "quantity": 4,
+      "reachable": true
+    },
+    {
+      "id": "6",
+      "name": "Haskerék",
+      "quantity": 1,
+      "reachable": false
+    },
+    {
+      "id": "7",
+      "name": "TRX",
+      "quantity": 1,
+      "reachable": false
     }
   ]
 }
