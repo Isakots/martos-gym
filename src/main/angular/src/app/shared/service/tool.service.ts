@@ -36,7 +36,7 @@ export class ToolService {
     return this.http.get<Tool[]>(this.resourceUrl, {params: options, observe: 'response'});
   }
 
-  delete(id: string): Observable<HttpResponse<any>> {
+  delete(id: number): Observable<HttpResponse<any>> {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, {observe: 'response'});
   }
 }

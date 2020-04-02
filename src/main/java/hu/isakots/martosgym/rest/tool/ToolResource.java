@@ -3,6 +3,7 @@ package hu.isakots.martosgym.rest.tool;
 import hu.isakots.martosgym.domain.Tool;
 import hu.isakots.martosgym.exception.ResourceNotFoundException;
 import hu.isakots.martosgym.service.ToolService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,14 +42,15 @@ public class ToolResource {
 
     @PutMapping("/tools")
     @PreAuthorize("hasAuthority('ROLE_MEMBER')")
-    public Tool updateArticle(@Valid @RequestBody Tool tool) {
+    public Tool updateTool(@Valid @RequestBody Tool tool) {
         return toolService.updateTool(tool);
     }
 
     @DeleteMapping("/tools/{id}")
     @PreAuthorize("hasAuthority('ROLE_MEMBER')")
-    public void deleteArticle(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteTool(@PathVariable Long id) {
         toolService.deleteTool(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

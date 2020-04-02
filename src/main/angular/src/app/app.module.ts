@@ -26,6 +26,7 @@ import {
   faSignInAlt,
   faSignOutAlt,
   faTimes,
+  faTrashAlt,
   faUser,
   faUserPlus,
   faUsers,
@@ -66,20 +67,21 @@ library.add(faBan);
 library.add(faSave);
 library.add(faHandPointUp);
 library.add(faEdit);
+library.add(faTrashAlt);
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        LoginComponent,
-        NavbarComonent,
-        HomeComponent,
-        AboutUsComponent,
-        NutritionComponent,
-        GymInfoComponent,
-        SignUpComponent,
-        ErrorComponent,
-        TimelineComponent
-    ],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    NavbarComonent,
+    HomeComponent,
+    AboutUsComponent,
+    NutritionComponent,
+    GymInfoComponent,
+    SignUpComponent,
+    ErrorComponent,
+    TimelineComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -93,11 +95,11 @@ library.add(faEdit);
     SharedModule,
     ToolModule
   ],
-    providers: [
-        AuthorizationGuard,
-        {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
-    ],
-    bootstrap: [AppComponent]
+  providers: [
+    AuthorizationGuard,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

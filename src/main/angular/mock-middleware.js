@@ -20,7 +20,7 @@ server.use(jsonServer.bodyParser);
 server.get('/identity', (req, res) => {
     res.status(200).json({
       username: "user",
-      authorities: ["ROLE_USER", "ROLE_ADMIN"]
+      authorities: ["ROLE_USER", "ROLE_MEMBER"]
     });
 });
 

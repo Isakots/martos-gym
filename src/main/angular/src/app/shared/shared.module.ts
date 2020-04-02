@@ -5,13 +5,15 @@ import {ImageViewComponent} from './component/image-view/image-view.component';
 import {FileUploadComponent} from './component/file-upload/file-upload.component';
 import {CommonModule} from "@angular/common";
 import {PasswordStrengthBarComponent} from "./component/password-strength-bar/password-strength-bar.component";
+import {HasAnyAuthorityDirective} from "./directive/has-any-authority.directive";
 
 @NgModule({
   declarations: [
     GeneralConfirmationModalComponent,
     ImageViewComponent,
     FileUploadComponent,
-    PasswordStrengthBarComponent
+    PasswordStrengthBarComponent,
+    HasAnyAuthorityDirective
   ],
   imports: [
     FontAwesomeModule,
@@ -21,7 +23,8 @@ import {PasswordStrengthBarComponent} from "./component/password-strength-bar/pa
     GeneralConfirmationModalComponent,
     ImageViewComponent,
     FileUploadComponent,
-    PasswordStrengthBarComponent
+    PasswordStrengthBarComponent,
+    HasAnyAuthorityDirective
   ]
 })
 export class SharedModule {

@@ -89,8 +89,26 @@ export class AccountService {
     );
   }
 
+  hasAnyAuthority(authorities: string[]): boolean {
+    if (!this.authenticated || !this.userIdentity || !this.userIdentity.authorities) {
+      return false;
+    }
+
+    for (let i = 0; i < authorities.length; i++) {
+      if (this.userIdentity.authorities.includes(authorities[i])) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   isAuthenticated(): boolean {
     return this.authenticated;
+  }
+
+  getAuthenticationState(): Observable<any> {
+    return this.authenticationState.asObservable();
   }
 
   logOut() {
