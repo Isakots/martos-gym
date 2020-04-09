@@ -3,7 +3,6 @@ import {Tool} from "../../shared/domain/tool";
 import {GeneralConfirmationModalComponent} from "../../shared/component/general-confirmation-modal/general-confirmation-modal.component";
 import {ToolService} from "../../shared/service/tool.service";
 import {ToolUpdateModalComponent} from "../tool-update/tool-update-modal.component";
-import {HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-tool-item',
@@ -34,13 +33,13 @@ export class ToolItemComponent implements OnInit {
 
   onEventConfirmation(confirmed: boolean) {
     if (confirmed) {
-      this.toolService.delete(this.data.id).subscribe(response => {
-        if(response instanceof HttpResponse) {
+      this.toolService.delete(this.data.id).subscribe(
+        () => {
           this.toolDeleted.emit(true);
-        } else {
+        },
+        () => {
           this.toolDeleted.emit(false);
-        }
-      });
+        });
     }
   }
 

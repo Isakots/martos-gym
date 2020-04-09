@@ -10,18 +10,9 @@
         <span class="d-none d-md-inline"> Eszköz hozzáadása</span>
       </button>
     </h2>
-    <div class="alert alert-success" *ngIf="creationSuccess">
-      <strong>Eszköz rögzítése sikeres!</strong>
-    </div>
-    <div class="alert alert-danger" *ngIf="creationFailure">
-      <strong>Eszköz rögzítése sikertelen!</strong>
-    </div>
-    <div class="alert alert-success" *ngIf="deletionSuccess">
-      <strong>Eszköz törlése sikeres!</strong>
-    </div>
-    <div class="alert alert-danger" *ngIf="deletionFailure">
-      <strong>Eszköz törlése sikertelen!</strong>
-    </div>
+
+    <app-notification-displayer></app-notification-displayer>
+
     <hr>
     <div *ngIf="reservableTools.length === 0">
       <p>Nincs foglalható eszköz.</p>

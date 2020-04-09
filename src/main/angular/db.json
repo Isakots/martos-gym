@@ -17,7 +17,7 @@
       "createdDate": "2020-02-23T17:23:51"
     }
   ],
-  "profile":{
+  "profile": {
     "firstName": "Pu",
     "lastName": "Cook",
     "email": "example@martoskondi.hu",
@@ -52,12 +52,6 @@
       "reachable": true
     },
     {
-      "id": "5",
-      "name": "Ugrálókötél",
-      "quantity": 4,
-      "reachable": true
-    },
-    {
       "id": "6",
       "name": "Haskerék",
       "quantity": 1,
@@ -68,6 +62,20 @@
       "name": "TRX",
       "quantity": 1,
       "reachable": false
+    }
+  ],
+  "reservations": [
+    {
+      "id": 2,
+      "subjectName": "Röplabda",
+      "startDate": "2020-03-25T14:30:00",
+      "endDate": "2020-03-25T15:30:00"
+    },
+    {
+      "id": 4,
+      "subjectName": "Focilabda",
+      "startDate": "2020-03-24T12:00:00",
+      "endDate": "2020-03-26T12:00:00"
     }
   ]
 }

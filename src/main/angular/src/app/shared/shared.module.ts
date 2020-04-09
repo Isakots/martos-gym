@@ -6,6 +6,7 @@ import {FileUploadComponent} from './component/file-upload/file-upload.component
 import {CommonModule} from "@angular/common";
 import {PasswordStrengthBarComponent} from "./component/password-strength-bar/password-strength-bar.component";
 import {HasAnyAuthorityDirective} from "./directive/has-any-authority.directive";
+import {NotificationDisplayerComponent} from "./component/error-message/notification-displayer.component";
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import {HasAnyAuthorityDirective} from "./directive/has-any-authority.directive"
     ImageViewComponent,
     FileUploadComponent,
     PasswordStrengthBarComponent,
-    HasAnyAuthorityDirective
+    HasAnyAuthorityDirective,
+    NotificationDisplayerComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -24,7 +26,8 @@ import {HasAnyAuthorityDirective} from "./directive/has-any-authority.directive"
     ImageViewComponent,
     FileUploadComponent,
     PasswordStrengthBarComponent,
-    HasAnyAuthorityDirective
+    HasAnyAuthorityDirective,
+    NotificationDisplayerComponent
   ]
 })
 export class SharedModule {

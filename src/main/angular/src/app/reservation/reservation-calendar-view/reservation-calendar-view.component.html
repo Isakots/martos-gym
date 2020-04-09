@@ -1,0 +1,13 @@
+<h3> Jelenlegi foglalások </h3>
+<div class="container gym-reservation-calendar">
+  <full-calendar
+    #calendar
+    defaultView="timeGridWeek"
+    maxTime="21:00:00"
+    minTime="07:00:00"
+    [plugins]="calendarPlugins"
+    [themeSystem]="themeSystem"
+    [events]="getEvents()">
+  </full-calendar>
+</div>
+

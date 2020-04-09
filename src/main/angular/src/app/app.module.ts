@@ -13,7 +13,7 @@ import {library} from '@fortawesome/fontawesome-svg-core'
 import {
   faArrowLeft,
   faBan,
-  faBars,
+  faBars, faCalendar,
   faDrumstickBite,
   faDumbbell,
   faEdit,
@@ -46,6 +46,8 @@ import {TimelineComponent} from "./layout/home/timeline/timeline.component";
 import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
 import {SharedModule} from "./shared/shared.module";
 import {ToolModule} from "./tool/tool.module";
+import {ReservationModule} from "./reservation/reservation.module";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // FaIcon imports
 library.add(faBars);
@@ -68,6 +70,7 @@ library.add(faSave);
 library.add(faHandPointUp);
 library.add(faEdit);
 library.add(faTrashAlt);
+library.add(faCalendar);
 
 @NgModule({
   declarations: [
@@ -93,7 +96,9 @@ library.add(faTrashAlt);
     ArticleModule,
     CKEditorModule,
     SharedModule,
-    ToolModule
+    ToolModule,
+    ReservationModule,
+    BrowserAnimationsModule
   ],
   providers: [
     AuthorizationGuard,

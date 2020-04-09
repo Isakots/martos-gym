@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from "@angula
 import {Tool} from "../../shared/domain/tool";
 import {ModalDismissReasons, NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {ToolService} from "../../shared/service/tool.service";
-import {HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-tool-update-modal',
@@ -44,21 +43,21 @@ export class ToolUpdateModalComponent implements OnInit {
 
   save() {
     if (this.tool.id == null) {
-      this.toolService.create(this.tool).subscribe(response => {
-        if (response instanceof HttpResponse) {
+      this.toolService.create(this.tool).subscribe(
+        () => {
           this.eventConfirmed.emit(true);
-        } else {
+        },
+        () => {
           this.eventConfirmed.emit(false);
-        }
-      });
+        });
     } else {
-      this.toolService.update(this.tool).subscribe(response => {
-        if (response instanceof HttpResponse) {
+      this.toolService.update(this.tool).subscribe(
+        () => {
           this.eventConfirmed.emit(true);
-        } else {
+        },
+        () => {
           this.eventConfirmed.emit(false);
-        }
-      });
+        });
     }
     this.tool = null;
     this.modalReference.close();

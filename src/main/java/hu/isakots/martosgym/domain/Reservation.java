@@ -26,6 +26,8 @@ public class Reservation {
     @Column(name = "END_DATE", updatable = false, nullable = false)
     private LocalDateTime endDate;
 
+    @Column(name = "IS_RETURNED")
+    private boolean isReturned;
 
     public Long getId() {
         return id;
@@ -57,5 +59,13 @@ public class Reservation {
 
     public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
+    }
+
+    public boolean isReturned() {
+        return isReturned;
+    }
+
+    public void setReturned(boolean returned) {
+        isReturned = returned;
     }
 }

@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from "@angular/core";
 import {ToolService} from "../../shared/service/tool.service";
 import {Tool} from "../../shared/domain/tool";
 import {ToolUpdateModalComponent} from "../tool-update/tool-update-modal.component";
+import {UserNotificationService} from "../../shared/service/user-notification.service";
 
 @Component({
   selector: 'app-tool-view',
@@ -12,19 +13,13 @@ export class ToolViewComponent implements OnInit {
 
   tools: Tool[] = [];
 
-  creationSuccess: boolean;
-  creationFailure: boolean;
-  deletionSuccess: boolean;
-  deletionFailure: boolean;
-
-  constructor(private toolService: ToolService) {
+  constructor(
+    private toolService: ToolService,
+    private userNotificationService: UserNotificationService
+  ) {
   }
 
   ngOnInit(): void {
-    this.creationSuccess = false;
-    this.creationFailure = false;
-    this.deletionSuccess = false;
-    this.deletionFailure = false;
     this._findAllTools();
   }
 
@@ -48,33 +43,19 @@ export class ToolViewComponent implements OnInit {
 
   onToolCreatedEvent(success: boolean) {
     if (success) {
-      this.creationSuccess = true;
-      setTimeout(() => {
-        this.creationSuccess = false;
-      }, 3000);
-      this._findAllTools();
+      this.userNotificationService.notifyUser('Eszköz rögzítése sikeres!', false);
     } else {
-      this.creationFailure = true;
-      setTimeout(() => {
-        this.creationFailure = false;
-      }, 3000);
-      this._findAllTools();
+      this.userNotificationService.notifyUser('Eszköz rögzítése sikertelen!', true);
     }
+    this._findAllTools();
   }
 
   onToolDeletedEvent(success: boolean) {
     if (success) {
-      this.deletionSuccess = true;
-      setTimeout(() => {
-        this.deletionSuccess = false;
-      }, 3000);
-      this._findAllTools();
+      this.userNotificationService.notifyUser('Eszköz törlése sikeres!', false);
     } else {
-      this.deletionFailure = true;
-      setTimeout(() => {
-        this.deletionFailure = false;
-      }, 3000);
-      this._findAllTools();
+      this.userNotificationService.notifyUser('Eszköz törlése sikertelen!', true);
     }
+    this._findAllTools();
   }
 }
