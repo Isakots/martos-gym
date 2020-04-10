@@ -7,10 +7,15 @@ import {ToolResolve} from "../tool/tool.resolver";
 
 const toolRoutes: Routes = [
   {
-    path: 'reservation',
+    path: 'reservations',
     children: [
       {
-        path: ':id/view',
+        path: '',
+        redirectTo: 'view',
+        pathMatch: 'full'
+      },
+      {
+        path: 'view',
         component: ReservationViewComponent,
         resolve: {
           reservations: ReservationResolve,

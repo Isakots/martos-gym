@@ -17,7 +17,7 @@
     <div class="btn-container text-right">
       <div class="btn-group">
         <button *jhiHasAnyAuthority="'ROLE_USER'"
-                [routerLink]="['/reservation', data.id, 'view']"
+                [routerLink]="['/tools', data.id, 'reserve']"
                 class="btn btn-secondary"
                 [disabled]="!data.reachable">
           <fa-icon icon="hand-point-up"></fa-icon>
