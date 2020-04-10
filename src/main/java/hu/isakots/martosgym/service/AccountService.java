@@ -3,6 +3,7 @@ package hu.isakots.martosgym.service;
 import hu.isakots.martosgym.configuration.util.SecurityUtils;
 import hu.isakots.martosgym.domain.User;
 import hu.isakots.martosgym.exception.InvalidPasswordException;
+import hu.isakots.martosgym.exception.ResourceNotFoundException;
 import hu.isakots.martosgym.repository.UserRepository;
 import hu.isakots.martosgym.rest.account.model.AccountModel;
 import hu.isakots.martosgym.rest.account.model.PasswordChangeDTO;
@@ -11,6 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.text.MessageFormat;
 
 @Service
 public class AccountService {
@@ -27,6 +30,13 @@ public class AccountService {
     public User getAuthenticatedUserWithData() {
         return userRepository.findOneWithAuthoritiesByEmailIgnoreCase(SecurityUtils.getCurrentUserLogin())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found."));
+    }
+
+    public User findById(Long id) throws ResourceNotFoundException {
+        return userRepository.findById(id)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException(MessageFormat.format("User not found with id: {}", id))
+                );
     }
 
     @Transactional
@@ -51,7 +61,7 @@ public class AccountService {
 
     public void changePassword(PasswordChangeDTO passwordChangeDto) throws InvalidPasswordException {
         User user = getAuthenticatedUserWithData();
-        if(!passwordEncoder.matches(passwordChangeDto.getCurrentPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(passwordChangeDto.getCurrentPassword(), user.getPassword())) {
             throw new InvalidPasswordException("Hibás jelszó.");
         }
         user.setPassword(passwordEncoder.encode(passwordChangeDto.getNewPassword()));

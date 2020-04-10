@@ -3,16 +3,18 @@
   <div class="col-lg-8 m-2">
 
     <h2>Eszközfoglalás</h2>
+
+    <app-notification-displayer></app-notification-displayer>
     <hr>
 
-    <div *ngIf="reservation">
-      <p>Ezt választottad: <span><strong>{{reservation.subjectName}}</strong></span></p>
+    <div *ngIf="toolToReserve.name">
+      <p>Ezt választottad: <span><strong>{{toolToReserve.name}}</strong></span></p>
     </div>
 
-    <div class="col-lg-4">
+    <div class="col-lg-4" >
       <div class="form-group">
         <label class="form-control-label" for="quantity">Mennyit szeretnél foglalni?</label>
-        <input type="number" class="form-control" id="quantity" name="quantity">
+        <input type="number" class="form-control" [formControl]="reservationForm.controls.quantity" id="quantity" name="quantity">
       </div>
     </div>
 

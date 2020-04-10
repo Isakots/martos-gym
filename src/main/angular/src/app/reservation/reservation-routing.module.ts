@@ -13,7 +13,7 @@ const toolRoutes: Routes = [
         path: ':id/view',
         component: ReservationViewComponent,
         resolve: {
-          reservation: ReservationResolve,
+          reservations: ReservationResolve,
           toolToReserve: ToolResolve
         },
         data: {

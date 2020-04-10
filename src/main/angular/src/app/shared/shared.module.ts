@@ -6,7 +6,7 @@ import {FileUploadComponent} from './component/file-upload/file-upload.component
 import {CommonModule} from "@angular/common";
 import {PasswordStrengthBarComponent} from "./component/password-strength-bar/password-strength-bar.component";
 import {HasAnyAuthorityDirective} from "./directive/has-any-authority.directive";
-import {NotificationDisplayerComponent} from "./component/error-message/notification-displayer.component";
+import {NotificationDisplayerComponent} from "./component/notification-displayer/notification-displayer.component";
 
 @NgModule({
   declarations: [

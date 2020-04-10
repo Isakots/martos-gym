@@ -5,7 +5,7 @@ import {ReservationCalendarViewComponent} from "./reservation-calendar-view/rese
 import {ReservationItemComponent} from "./reservation-item/reservation-item.component";
 import {ReservationViewComponent} from "./reservation-view/reservation-view.component";
 import {FullCalendarModule} from "@fullcalendar/angular";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgbDatepickerModule, NgbTimepickerModule} from "@ng-bootstrap/ng-bootstrap";
 import {SharedModule} from "../shared/shared.module";
 import {CommonModule} from "@angular/common";
@@ -19,7 +19,8 @@ import {CommonModule} from "@angular/common";
     NgbTimepickerModule,
     NgbDatepickerModule,
     SharedModule,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   declarations: [ReservationItemComponent, ReservationCalendarViewComponent, ReservationViewComponent]
 })

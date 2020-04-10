@@ -16,7 +16,7 @@ export class ReservationCalendarViewComponent implements OnInit {
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
 
   @Input()
-  reservations: Reservation[] = [];
+  reservations: Reservation[];
 
   calendarPlugins = [dayGridPlugin, timeGridPlugin, interactions, listPlugin, bootstrapPlugin];
   themeSystem: 'bootstrap';
@@ -28,34 +28,17 @@ export class ReservationCalendarViewComponent implements OnInit {
   }
 
   getEvents() {
-    return {
-      events: [
-        { // this object will be "parsed" into an Event Object
-          title: 'TRX edzés', // a property!
-          start: '2020-04-04T12:30:00', // a property!
-          end: '2020-04-04T14:30:00', // a property! ** see important note below about 'end' **
-          allDay: false
-        },
-        { // this object will be "parsed" into an Event Object
-          title: 'TRX edzés', // a property!
-          start: '2020-04-04T13:30:00', // a property!
-          end: '2020-04-04T15:30:00', // a property! ** see important note below about 'end' **
-          allDay: false
-        },
-        { // this object will be "parsed" into an Event Object
-          title: 'TRX edzés', // a property!
-          start: '2020-04-04T13:30:00', // a property!
-          end: '2020-04-04T14:0:00', // a property! ** see important note below about 'end' **
-          allDay: false
-        },
-        { // this object will be "parsed" into an Event Object
-          title: 'TRX edzés', // a property!
-          start: '2020-04-04T11:30:00', // a property!
-          end: '2020-04-04T15:30:00', // a property! ** see important note below about 'end' **
-          allDay: false
-        }
-      ]
-    };
+    let events = [];
+    this.reservations.forEach((reservation) => {
+      let isAllDay: boolean = reservation.startDate.substring(0,10) < reservation.endDate.substring(0,10);
+      events.push({
+        title: reservation.subjectName + ' ' + reservation.quantity +' db',
+        start: reservation.startDate,
+        end: reservation.endDate,
+        allDay: isAllDay
+      })
+    });
+    return events;
   }
 
   getHeaders() {

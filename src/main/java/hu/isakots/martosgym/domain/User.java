@@ -6,9 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 
 @Entity
@@ -17,7 +15,7 @@ public class User implements Serializable {
 
     @Id
     @Column(name = "USER_ID")
-    // FYI: Sequence cannot be created in MySQL..
+    // FYI: Sequence cannot be created in MySQL.. TODO add UUID generator using Hibernate
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -54,14 +52,18 @@ public class User implements Serializable {
     @Column(name = "ROOM_NUMBER", length = 5)
     private int roomNumber;
 
+    @Column(name = "IMAGE_PATH", length = 127)
+    private String imagePath;
+
     @ManyToMany
     @JoinTable(name = "USER_AUTHORITY",
             joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")},
             inverseJoinColumns = {@JoinColumn(name = "AUTHORITY_NAME", referencedColumnName = "NAME")})
     private Set<Authority> authorities = new HashSet<>();
 
-    @Column(name = "IMAGE_PATH", length = 127)
-    private String imagePath;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Reservation> reservations = new ArrayList<>();
+
 
     public Long getId() {
         return id;
@@ -157,6 +159,14 @@ public class User implements Serializable {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 
     @Override

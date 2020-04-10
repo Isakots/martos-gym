@@ -1,9 +1,13 @@
 package hu.isakots.martosgym.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "RESERVATION")
@@ -19,6 +23,11 @@ public class Reservation {
     private String subjectName;
 
     @NotNull
+    @Min(value = 1)
+    @Column(name = "QUANTITY", nullable = false)
+    private int quantity;
+
+    @NotNull
     @Column(name = "START_DATE", updatable = false, nullable = false)
     private LocalDateTime startDate;
 
@@ -28,6 +37,12 @@ public class Reservation {
 
     @Column(name = "IS_RETURNED")
     private boolean isReturned;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID")
+    @JsonIgnore
+    private User user;
+
 
     public Long getId() {
         return id;
@@ -43,6 +58,14 @@ public class Reservation {
 
     public void setSubjectName(String subjectName) {
         this.subjectName = subjectName;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public LocalDateTime getStartDate() {
@@ -67,5 +90,30 @@ public class Reservation {
 
     public void setReturned(boolean returned) {
         isReturned = returned;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Reservation that = (Reservation) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

@@ -7,18 +7,18 @@ import {Reservation} from "../shared/domain/reservation";
 import {ReservationService} from "../shared/service/reservation.service";
 
 @Injectable({providedIn: 'root'})
-export class ReservationResolve implements Resolve<Reservation> {
+export class ReservationResolve implements Resolve<Reservation[]> {
   constructor(private service: ReservationService) {
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Reservation> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Reservation[]> {
     const id = route.params['id'];
     if (id) {
-      return this.service.find(id).pipe(
-        filter((response: HttpResponse<Reservation>) => response.ok),
-        map((reservation: HttpResponse<Reservation>) => reservation.body)
+      return this.service.findAllByToolId(id).pipe(
+        filter((response: HttpResponse<Reservation[]>) => response.ok),
+        map((reservation: HttpResponse<Reservation[]>) => reservation.body)
       );
     }
-    return of(new Reservation());
+    return of([]);
   }
 }

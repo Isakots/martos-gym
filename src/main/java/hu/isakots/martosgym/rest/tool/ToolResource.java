@@ -15,6 +15,7 @@ import static hu.isakots.martosgym.rest.util.EndpointConstants.API_CONTEXT;
 @RestController
 @RequestMapping(value = API_CONTEXT)
 public class ToolResource {
+    private static final String TOOL_ENDPOINT = "/tools";
 
     private final ToolService toolService;
 
@@ -22,31 +23,31 @@ public class ToolResource {
         this.toolService = toolService;
     }
 
-    @GetMapping("tools")
+    @GetMapping(TOOL_ENDPOINT)
     @PreAuthorize("hasAuthority('ROLE_USER')")
     public List<Tool> getAllTools() {
         return toolService.findAll();
     }
 
-    @GetMapping("/tools/{id}")
+    @GetMapping(TOOL_ENDPOINT+"/{id}")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     public Tool getTool(@PathVariable Long id) throws ResourceNotFoundException {
         return toolService.getTool(id);
     }
 
-    @PostMapping("/tools")
+    @PostMapping(TOOL_ENDPOINT)
     @PreAuthorize("hasAuthority('ROLE_MEMBER')")
     public Tool createTool(@Valid @RequestBody Tool tool) {
         return toolService.createTool(tool);
     }
 
-    @PutMapping("/tools")
+    @PutMapping(TOOL_ENDPOINT)
     @PreAuthorize("hasAuthority('ROLE_MEMBER')")
     public Tool updateTool(@Valid @RequestBody Tool tool) {
         return toolService.updateTool(tool);
     }
 
-    @DeleteMapping("/tools/{id}")
+    @DeleteMapping(TOOL_ENDPOINT+"/{id}")
     @PreAuthorize("hasAuthority('ROLE_MEMBER')")
     public ResponseEntity<Void> deleteTool(@PathVariable Long id) {
         toolService.deleteTool(id);

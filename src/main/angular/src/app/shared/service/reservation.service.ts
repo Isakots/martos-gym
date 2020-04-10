@@ -8,11 +8,12 @@ import {Reservation} from "../domain/reservation";
 @Injectable({providedIn: 'root'})
 export class ReservationService {
   public resourceUrl;
+  readonly RESOURCE_ENDPOINT = '/reservations';
 
   constructor(
     protected http: HttpClient,
     private environmentService: EnvironmentService) {
-    this.resourceUrl = environmentService.apiUrl + '/reservations';
+    this.resourceUrl = environmentService.apiUrl + this.RESOURCE_ENDPOINT;
   }
 
   create(reservation: Reservation): Observable<HttpResponse<Reservation>> {
@@ -25,6 +26,14 @@ export class ReservationService {
 
   find(id: number): Observable<HttpResponse<Reservation>> {
     return this.http.get<Reservation>(`${this.resourceUrl}/${id}`, {observe: 'response'});
+  }
+
+  findAllByUser(userId: number): Observable<HttpResponse<Reservation[]>> {
+    return this.http.get<Reservation[]>(`${this.environmentService.apiUrl}/user/${userId}${this.RESOURCE_ENDPOINT}`, {observe: 'response'});
+  }
+
+  findAllByToolId(toolId: number): Observable<HttpResponse<Reservation[]>> {
+    return this.http.get<Reservation[]>(`${this.environmentService.apiUrl}/tools/${toolId}${this.RESOURCE_ENDPOINT}`, {observe: 'response'});
   }
 
   findAll(): Observable<HttpResponse<Reservation[]>> {
