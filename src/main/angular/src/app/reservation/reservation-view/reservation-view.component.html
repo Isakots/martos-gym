@@ -1,0 +1,79 @@
+<div class="row justify-content-center mt-2">
+
+  <div class="col-lg-8 m-2">
+
+    <h2>Eszközfoglalás</h2>
+
+    <app-notification-displayer></app-notification-displayer>
+    <hr>
+
+    <div *ngIf="toolToReserve.name">
+      <p>Ezt választottad: <span><strong>{{toolToReserve.name}}</strong></span></p>
+    </div>
+
+    <div class="col-lg-4" >
+      <div class="form-group">
+        <label class="form-control-label" for="quantity">Mennyit szeretnél foglalni?</label>
+        <input type="number" class="form-control" [formControl]="reservationForm.controls.quantity" id="quantity" name="quantity">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <label class="form-control-label" for="date-time-for-reservation-end-date">Mikortól van rá szükséged?</label>
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd"
+                 name="startDatePicker" [(ngModel)]="startDate" ngbDatepicker #dStart="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-secondary" (click)="dStart.toggle()" type="button">
+              <fa-icon icon="calendar"></fa-icon>
+              <span class="d-none d-md-inline"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <ngb-timepicker id="date-time-for-reservation-end-date" [(ngModel)]="startTime" [seconds]="false"
+                        [minuteStep]="minuteStep"></ngb-timepicker>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <label class="form-control-label" for="date-time-for-reservation">Mikorra tervezed visszahozni?</label>
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd"
+                 name="endDatePicker" [(ngModel)]="endDate" ngbDatepicker #dEnd="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-secondary" (click)="dEnd.toggle()" type="button">
+              <fa-icon icon="calendar"></fa-icon>
+              <span class="d-none d-md-inline"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <ngb-timepicker id="date-time-for-reservation" [(ngModel)]="endTime" [seconds]="false"
+                        [minuteStep]="minuteStep"></ngb-timepicker>
+      </div>
+    </div>
+
+    <button *jhiHasAnyAuthority="'ROLE_USER'"
+            (click)="sendReservation()"
+            class="btn btn-secondary"
+            [disabled]="isReservationDisabled()">
+      <fa-icon icon="hand-point-up"></fa-icon>
+      <span> Foglalás</span>
+    </button>
+
+    <hr>
+
+    <app-reservation-calendar-view
+      [reservations]="getReservations()"
+    >
+    </app-reservation-calendar-view>
+
+  </div>
+</div>

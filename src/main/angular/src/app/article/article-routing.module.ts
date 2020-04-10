@@ -23,7 +23,7 @@ const articleRoutes: Routes = [
           article: ArticleResolve
         },
         data : {
-          authority: "ROLE_ADMIN"
+          authority: "ROLE_MEMBER"
         },
         canActivate: [AuthorizationGuard]
       },
@@ -34,7 +34,7 @@ const articleRoutes: Routes = [
           article: ArticleResolve
         },
         data : {
-          authority: "ROLE_ADMIN"
+          authority: "ROLE_MEMBER"
         },
         canActivate: [AuthorizationGuard]
       }

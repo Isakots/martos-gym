@@ -1,0 +1,7 @@
+<div
+  *ngIf="notificationText.text"
+  class="alert"
+  [class.alert-danger]="notificationText.error"
+  [class.alert-info]="!notificationText.error">
+  <strong>{{notificationText.text}}</strong>
+</div>

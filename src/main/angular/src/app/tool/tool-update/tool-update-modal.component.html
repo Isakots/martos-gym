@@ -1,0 +1,44 @@
+<ng-template #toolFormView let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Eszköz módosítása</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            (click)="close()">&times;
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <div class="col-lg-12">
+        <div class="form-group">
+          <label class="form-control-label" for="toolName">Eszköz megnevezése:</label>
+          <input type="text" class="form-control" id="toolName" name="toolName" [(ngModel)]="tool.name">
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="form-group">
+          <label class="form-control-label" for="quantity">Mennyiség:</label>
+          <input type="number" class="form-control" id="quantity" name="quantity" [(ngModel)]="tool.quantity">
+        </div>
+      </div>
+    </div>
+    <div *ngIf="tool.id !== null" class="row">
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="checkbox-container form-control-label" for="isReachable">Elérhető az eszköz?
+            <input type="checkbox" id="isReachable" name="isReachable" [(ngModel)]="tool.reachable">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-dark" data-dismiss="modal" (click)="close()">
+      <fa-icon icon="ban"></fa-icon>
+      <span> Mégse</span>
+    </button>
+    <button class="btn btn-secondary" (click)="save()">
+      <fa-icon icon="save"></fa-icon>
+      <span> Mentés</span>
+    </button>
+  </div>
+</ng-template>

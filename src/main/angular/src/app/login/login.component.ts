@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {JWT_TOKEN_KEY} from "../shared/constants";
 import {StateStorageService} from "../shared/service/state-storage.service";
 import {Router} from "@angular/router";
+import {AccountService} from "../shared/service/account.service";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService,
     private formBuilder: FormBuilder,
     private stateStorageService: StateStorageService,
-    private router: Router
+    private router: Router,
+    private accountService: AccountService
     ) {
   }
 
@@ -34,10 +36,14 @@ export class LoginComponent implements OnInit {
       response => {
         let tokenStr = response.token;
         sessionStorage.setItem(JWT_TOKEN_KEY, tokenStr);
+        // this call is necessary to update userIdentity.. TODO refactor
+        this.accountService.identity();
         const redirect = this.stateStorageService.getUrl();
         if (redirect) {
           this.stateStorageService.storeUrl(null);
           this.router.navigateByUrl(redirect);
+        } else {
+          this.router.navigateByUrl('/');
         }
       })
   }

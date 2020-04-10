@@ -1,0 +1,52 @@
+<div class="container-fluid">
+  <div class="tool-item" [class.unreachable]="!data.reachable">
+    <div class="data-container">
+      <div class="data-item">
+        <div>
+          <p>{{data.name}}</p>
+        </div>
+      </div>
+      <div class="data-item">
+        <div>
+          <p>{{data.quantity}}
+            <span> db</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="btn-container text-right">
+      <div class="btn-group">
+        <button *jhiHasAnyAuthority="'ROLE_USER'"
+                [routerLink]="['/tools', data.id, 'reserve']"
+                class="btn btn-secondary"
+                [disabled]="!data.reachable">
+          <fa-icon icon="hand-point-up"></fa-icon>
+          <span class="d-none d-md-inline"> Foglalás</span>
+        </button>
+        <button *jhiHasAnyAuthority="'ROLE_MEMBER'"
+                (click)="openModificationModal()"
+                class="btn btn-secondary">
+          <fa-icon icon="edit"></fa-icon>
+          <span class="d-none d-md-inline"> Módosítás</span>
+        </button>
+        <button
+          *jhiHasAnyAuthority="'ROLE_MEMBER'"
+          class="btn btn-danger"
+          (click)="openConfirmationModal()">
+          <fa-icon icon="trash-alt"></fa-icon>
+          <span class="d-none d-md-inline"> Törlés</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<app-general-confirmation-modal
+  (eventConfirmed)="onEventConfirmation($event)"
+></app-general-confirmation-modal>
+
+<app-tool-update-modal
+  [tool]="data"
+  (eventConfirmed)="onToolModifiedEvent($event)"
+></app-tool-update-modal>

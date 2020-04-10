@@ -13,10 +13,12 @@ import {library} from '@fortawesome/fontawesome-svg-core'
 import {
   faArrowLeft,
   faBan,
-  faBars,
+  faBars, faCalendar,
   faDrumstickBite,
   faDumbbell,
+  faEdit,
   faFutbol,
+  faHandPointUp,
   faLock,
   faPencilAlt,
   faPlus,
@@ -24,6 +26,7 @@ import {
   faSignInAlt,
   faSignOutAlt,
   faTimes,
+  faTrashAlt,
   faUser,
   faUserPlus,
   faUsers,
@@ -42,6 +45,9 @@ import {ArticleModule} from "./article/article.module";
 import {TimelineComponent} from "./layout/home/timeline/timeline.component";
 import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
 import {SharedModule} from "./shared/shared.module";
+import {ToolModule} from "./tool/tool.module";
+import {ReservationModule} from "./reservation/reservation.module";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // FaIcon imports
 library.add(faBars);
@@ -61,20 +67,24 @@ library.add(faPencilAlt);
 library.add(faTimes);
 library.add(faBan);
 library.add(faSave);
+library.add(faHandPointUp);
+library.add(faEdit);
+library.add(faTrashAlt);
+library.add(faCalendar);
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        LoginComponent,
-        NavbarComonent,
-        HomeComponent,
-        AboutUsComponent,
-        NutritionComponent,
-        GymInfoComponent,
-        SignUpComponent,
-        ErrorComponent,
-        TimelineComponent
-    ],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    NavbarComonent,
+    HomeComponent,
+    AboutUsComponent,
+    NutritionComponent,
+    GymInfoComponent,
+    SignUpComponent,
+    ErrorComponent,
+    TimelineComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -85,13 +95,16 @@ library.add(faSave);
     ReactiveFormsModule,
     ArticleModule,
     CKEditorModule,
-    SharedModule
+    SharedModule,
+    ToolModule,
+    ReservationModule,
+    BrowserAnimationsModule
   ],
-    providers: [
-        AuthorizationGuard,
-        {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
-    ],
-    bootstrap: [AppComponent]
+  providers: [
+    AuthorizationGuard,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

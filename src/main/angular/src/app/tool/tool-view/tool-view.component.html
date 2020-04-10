@@ -1,0 +1,46 @@
+<div class="row justify-content-center mt-2">
+
+  <div class="col-lg-8 m-2">
+    <h2 id="tool-heading">
+      <span>Eszközfoglalás</span>
+      <button *jhiHasAnyAuthority="'ROLE_MEMBER'"
+              class="btn btn-secondary float-right"
+              (click)="open()">
+        <fa-icon icon="plus"></fa-icon>
+        <span class="d-none d-md-inline"> Eszköz hozzáadása</span>
+      </button>
+    </h2>
+
+    <app-notification-displayer></app-notification-displayer>
+
+    <hr>
+    <div *ngIf="reservableTools.length === 0">
+      <p>Nincs foglalható eszköz.</p>
+    </div>
+    <div *ngIf="reservableTools.length !== 0">
+      <h3>Foglalható eszközök</h3>
+      <div *ngFor="let tool of reservableTools">
+        <app-tool-item
+          [data]="tool"
+          (toolModified)="this.onToolCreatedEvent($event)"
+          (toolDeleted)="this.onToolDeletedEvent($event)"
+        ></app-tool-item>
+      </div>
+    </div>
+    <div *ngIf="notReservableTools.length !== 0">
+      <hr>
+      <h3>Nem foglalható eszközök</h3>
+      <div *ngFor="let tool of notReservableTools">
+        <app-tool-item
+          [data]="tool"
+          (toolModified)="this.onToolCreatedEvent($event)"
+          (toolDeleted)="this.onToolDeletedEvent($event)"
+        ></app-tool-item>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-tool-update-modal
+  (eventConfirmed)="onToolCreatedEvent($event)"
+></app-tool-update-modal>
