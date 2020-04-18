@@ -1,8 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {EnvironmentService} from "./environment.service";
-import {User} from "../domain/user";
-import {JWT_TOKEN_KEY, USER_DATA_KEY} from "../constants";
+import {JWT_TOKEN_KEY} from "../constants";
 import {LoginResponse} from "../domain/interfaces";
 import {Router} from "@angular/router";
 import {AccountService} from "./account.service";
@@ -22,7 +21,7 @@ export class LoginService {
     private accountService: AccountService) {
   }
 
-  authenticate(loginDTO: any) : Observable<any> {
+  authenticate(loginDTO: any): Observable<any> {
     return this.httpClient.post<LoginResponse>(this.environmentService.apiUrl + this.AUTH, loginDTO);
   }
 
@@ -30,7 +29,7 @@ export class LoginService {
     return sessionStorage.getItem(JWT_TOKEN_KEY) !== null;
   }
 
-  logOut() {
+  logout() {
     this.accountService.logOut();
     sessionStorage.removeItem(JWT_TOKEN_KEY);
     this.router.navigate(['/'])

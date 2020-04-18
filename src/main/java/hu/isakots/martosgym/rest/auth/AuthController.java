@@ -1,7 +1,5 @@
 package hu.isakots.martosgym.rest.auth;
 
-import hu.isakots.martosgym.exception.DatabaseException;
-import hu.isakots.martosgym.exception.ResourceNotFoundException;
 import hu.isakots.martosgym.rest.auth.model.LoginResponse;
 import hu.isakots.martosgym.rest.auth.model.LoginVM;
 import hu.isakots.martosgym.rest.auth.model.SignUpForm;
@@ -30,6 +28,7 @@ public class AuthController {
         UserWithRoles userWithRoles = authService.getIdentity();
         return new ResponseEntity<>(userWithRoles, HttpStatus.OK);
     }
+
     @PostMapping("/auth")
     public ResponseEntity<LoginResponse> authorize(@Valid @RequestBody LoginVM loginVM) {
         LoginResponse loginResponse = authService.authorize(loginVM);
@@ -37,7 +36,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Object> registerUser(@RequestBody SignUpForm form) throws DatabaseException, ResourceNotFoundException {
+    public ResponseEntity<Object> registerUser(@RequestBody SignUpForm form) {
         authService.registerUser(form);
         return ResponseEntity.ok().build();
     }

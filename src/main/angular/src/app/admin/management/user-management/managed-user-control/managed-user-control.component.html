@@ -1,0 +1,35 @@
+<div class="container-fluid">
+
+  <div class="managed-user-container">
+    <div class="data-container">
+      <div class="data-item extra-padding-top clickable" [routerLink]="['user', model.id, 'profile']">
+        <p>{{model.lastName}} {{model.firstName}}</p>
+      </div>
+      <div class="data-item extra-padding-top">
+        <p>
+          {{model.email}}
+        </p>
+      </div>
+    </div>
+
+    <div class="data-container">
+      <div class="data-item">
+        <div>
+          <select class="form-control" [formControl]="roleControl">
+            <option>Felhasználó</option>
+            <option>Körtag</option>
+          </select>
+        </div>
+      </div>
+      <div class="data-item text-center extra-padding-top">
+        <label class="checkbox bounce">
+          <input type="checkbox" [formControl]="ticketControl">
+          <svg viewBox="0 0 21 21">
+            <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
+          </svg>
+        </label>
+      </div>
+    </div>
+
+  </div>
+</div>

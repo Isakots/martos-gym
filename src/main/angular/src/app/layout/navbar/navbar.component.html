@@ -9,6 +9,21 @@
   </a>
   <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed">
     <ul class="navbar-nav ml-auto">
+      <li *jhiHasAnyAuthority="'ROLE_MEMBER'" ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}">
+        <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="administration">
+          <fa-icon icon="clipboard-list"></fa-icon>
+          <span>Adminisztráció</span>
+        </a>
+        <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="user-management">
+          <li *jhiHasAnyAuthority="'ROLE_MEMBER'">
+            <a class="dropdown-item" routerLink="admin/management" (click)="collapseNavbar()">
+              <fa-icon icon="users" fixedWidth="true"></fa-icon>
+              <span>Felhasználók menedzselése</span>
+            </a>
+          </li>
+        </ul>
+      </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="about-us" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
            (click)="collapseNavbar()">

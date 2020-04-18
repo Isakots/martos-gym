@@ -64,6 +64,12 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Reservation> reservations = new ArrayList<>();
 
+    @ManyToMany
+    @JoinTable(name = "TICKETS",
+            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "PERIOD_ID", referencedColumnName = "PERIOD_ID")})
+    private List<GymPeriod> tickets = new ArrayList<>();
+
 
     public Long getId() {
         return id;
@@ -169,6 +175,14 @@ public class User implements Serializable {
         this.reservations = reservations;
     }
 
+    public List<GymPeriod> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<GymPeriod> tickets) {
+        this.tickets = tickets;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -182,8 +196,10 @@ public class User implements Serializable {
                 ", faculty='" + faculty + '\'' +
                 ", isCollegian=" + isCollegian +
                 ", roomNumber=" + roomNumber +
-                ", authorities=" + authorities +
                 ", imagePath='" + imagePath + '\'' +
+                ", authorities=" + authorities +
+                ", reservations=" + reservations +
+                ", tickets=" + tickets +
                 '}';
     }
 

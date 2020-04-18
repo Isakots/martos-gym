@@ -7,6 +7,7 @@ import {CommonModule} from "@angular/common";
 import {PasswordStrengthBarComponent} from "./component/password-strength-bar/password-strength-bar.component";
 import {HasAnyAuthorityDirective} from "./directive/has-any-authority.directive";
 import {NotificationDisplayerComponent} from "./component/notification-displayer/notification-displayer.component";
+import {NgbdSortableHeader} from "./directive/sortable.directive";
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {NotificationDisplayerComponent} from "./component/notification-displayer
     FileUploadComponent,
     PasswordStrengthBarComponent,
     HasAnyAuthorityDirective,
-    NotificationDisplayerComponent
+    NotificationDisplayerComponent,
+    NgbdSortableHeader
   ],
   imports: [
     FontAwesomeModule,
@@ -27,7 +29,8 @@ import {NotificationDisplayerComponent} from "./component/notification-displayer
     FileUploadComponent,
     PasswordStrengthBarComponent,
     HasAnyAuthorityDirective,
-    NotificationDisplayerComponent
+    NotificationDisplayerComponent,
+    NgbdSortableHeader
   ]
 })
 export class SharedModule {
