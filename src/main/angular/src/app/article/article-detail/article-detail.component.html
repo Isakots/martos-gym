@@ -5,19 +5,24 @@
         <h2 id="page-heading">
           <span>{{article.title}}</span>
           <button
+            *jhiHasAnyAuthority="'ROLE_MEMBER'"
             class="btn btn-danger float-right btn-sm"
-            (click)="openConfirmationModal()" >
+            (click)="openConfirmationModal()">
             <fa-icon icon="times"></fa-icon>
             <span class="d-none d-md-inline"> Delete</span>
           </button>
-          <button type="button"
-                  [routerLink]="['/articles', article.id, 'edit']"
-                  class="btn btn-light float-right btn-sm">
+          <button
+            *jhiHasAnyAuthority="'ROLE_MEMBER'"
+            type="button"
+            [routerLink]="['/articles', article.id, 'edit']"
+            class="btn btn-light float-right btn-sm">
             <fa-icon icon="pencil-alt"></fa-icon>
             <span class="d-none d-md-inline"> Edit</span>
           </button>
-          <button class="btn btn-primary float-right btn-sm"
-                  [routerLink]="['/articles/new']">
+          <button
+            *jhiHasAnyAuthority="'ROLE_MEMBER'"
+            class="btn btn-primary float-right btn-sm"
+            [routerLink]="['/articles/new']">
             <fa-icon icon="plus"></fa-icon>
             <span class="d-none d-md-inline"> Create</span>
           </button>

@@ -3,9 +3,6 @@ package hu.isakots.martosgym.service;
 import hu.isakots.martosgym.configuration.security.TokenProvider;
 import hu.isakots.martosgym.domain.Authority;
 import hu.isakots.martosgym.domain.User;
-import hu.isakots.martosgym.exception.DatabaseException;
-import hu.isakots.martosgym.exception.ResourceNotFoundException;
-import hu.isakots.martosgym.repository.AuthorityRepository;
 import hu.isakots.martosgym.rest.auth.model.LoginResponse;
 import hu.isakots.martosgym.rest.auth.model.LoginVM;
 import hu.isakots.martosgym.rest.auth.model.SignUpForm;
@@ -18,25 +15,20 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.text.MessageFormat;
-
 import static hu.isakots.martosgym.configuration.util.AuthoritiesConstants.ROLE_USER;
 
 @Service
 public class AuthService {
     private final AccountService accountService;
-    private final AuthorityRepository authorityRepository;
     private final PasswordEncoder passwordEncoder;
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final ModelMapper modelMapper;
     private final MailService mailService;
 
-    public AuthService(AccountService accountService, AuthorityRepository authorityRepository,
-                       PasswordEncoder passwordEncoder, TokenProvider tokenProvider,
+    public AuthService(AccountService accountService, PasswordEncoder passwordEncoder, TokenProvider tokenProvider,
                        AuthenticationManagerBuilder authenticationManagerBuilder, ModelMapper modelMapper, MailService mailService) {
         this.accountService = accountService;
-        this.authorityRepository = authorityRepository;
         this.passwordEncoder = passwordEncoder;
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
@@ -52,17 +44,15 @@ public class AuthService {
         return new LoginResponse(tokenProvider.createToken(authentication));
     }
 
-    public void registerUser(SignUpForm form) throws DatabaseException, ResourceNotFoundException {
+    public void registerUser(SignUpForm form) {
         User user = modelMapper.map(form, User.class);
         user.setPassword(passwordEncoder.encode(form.getPassword()));
-        Authority authority = authorityRepository.findById(ROLE_USER)
-                .orElseThrow(() -> new ResourceNotFoundException(MessageFormat.format("Authority [{0}] is not found in database!", ROLE_USER)));
+
+        Authority authority = new Authority();
+        authority.setName(ROLE_USER);
         user.getAuthorities().add(authority);
-        try {
-            accountService.saveAccount(user);
-        } catch (Exception e) {
-            throw new DatabaseException("Exception occured while persisting User during registration", e);
-        }
+
+        accountService.saveAccount(user);
         mailService.sendRegistrationEmail(user);
     }
 

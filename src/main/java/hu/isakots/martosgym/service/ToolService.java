@@ -27,7 +27,7 @@ public class ToolService {
 
     public Tool getTool(Long id) throws ResourceNotFoundException {
         return toolRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException(MessageFormat.format("Tool not found with id: {}", id))
+                () -> new ResourceNotFoundException(MessageFormat.format("Tool not found with id: {0}", id))
         );
     }
 

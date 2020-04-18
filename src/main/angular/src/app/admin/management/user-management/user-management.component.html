@@ -1,0 +1,23 @@
+<h3>Felhasználók</h3>
+<hr>
+<div class="container-fluid">
+  <div class="row col-lg-12">
+    <div class="col-lg-3"><p>Teljes név</p></div>
+    <div class="col-lg-3"><p>E-mail cím</p></div>
+    <div class="col-lg-3"><p class="text-center">Szerepkör</p></div>
+    <div class="col-lg-3"><p class="text-center">Bérlet</p></div>
+  </div>
+</div>
+<hr>
+<app-managed-user-control
+  *ngFor="let formControl of managedUserFormArray.controls; let i = index"
+  [formControl]="formControl"
+  (change)="addUserToModifiedList(formControl.value)"
+></app-managed-user-control>
+
+<button *jhiHasAnyAuthority="'ROLE_MEMBER'"
+        class="btn btn-secondary float-right"
+        (click)="saveManagedUsers()">
+  <fa-icon icon="save"></fa-icon>
+  <span class="d-none d-md-inline"> Mentés</span>
+</button><br>

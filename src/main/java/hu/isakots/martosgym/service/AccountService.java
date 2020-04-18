@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.MessageFormat;
+import java.util.List;
 
 @Service
 public class AccountService {
@@ -27,6 +28,10 @@ public class AccountService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
     public User getAuthenticatedUserWithData() {
         return userRepository.findOneWithAuthoritiesByEmailIgnoreCase(SecurityUtils.getCurrentUserLogin())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found."));
@@ -35,7 +40,7 @@ public class AccountService {
     public User findById(Long id) throws ResourceNotFoundException {
         return userRepository.findById(id)
                 .orElseThrow(
-                        () -> new ResourceNotFoundException(MessageFormat.format("User not found with id: {}", id))
+                        () -> new ResourceNotFoundException(MessageFormat.format("User not found with id: {0}", id))
                 );
     }
 

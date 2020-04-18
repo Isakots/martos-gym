@@ -25,7 +25,7 @@ export class NavbarComonent implements OnInit {
   }
 
   logout() {
-    this.loginService.logOut();
+    this.loginService.logout();
   }
 
   showUserNavItem() {

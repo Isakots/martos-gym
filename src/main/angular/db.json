@@ -119,5 +119,165 @@
       "endDate": "2020-04-10T10:30:00",
       "returned": null
     }
+  ],
+  "managed-users": [
+    {
+      "id": 1,
+      "firstName": "pista",
+      "lastName": "kis",
+      "email": "kis.pista@martoskondi.hu",
+      "hasTicketForActivePeriod": false,
+      "authorities": [
+        "ROLE_USER",
+        "ROLE_MEMBER"
+      ]
+    },
+    {
+      "id": 2,
+      "firstName": "jancsi",
+      "lastName": "nagy",
+      "email": "nagy.jancsi@martoskondi.hu",
+      "hasTicketForActivePeriod": true,
+      "authorities": [
+        "ROLE_USER"
+      ]
+    },
+    {
+      "id": 3,
+      "firstName": "jancsi",
+      "lastName": "nagy",
+      "email": "nagy.jancsi@martoskondi.hu",
+      "hasTicketForActivePeriod": true,
+      "authorities": [
+        "ROLE_USER"
+      ]
+    },
+    {
+      "id": 4,
+      "firstName": "jancsi",
+      "lastName": "nagy",
+      "email": "nagy.jancsi@martoskondi.hu",
+      "hasTicketForActivePeriod": true,
+      "authorities": [
+        "ROLE_USER"
+      ]
+    },
+    {
+      "id": 5,
+      "firstName": "jancsi",
+      "lastName": "nagy",
+      "email": "nagy.jancsi@martoskondi.hu",
+      "hasTicketForActivePeriod": true,
+      "authorities": [
+        "ROLE_USER"
+      ]
+    },
+    {
+      "id": 6,
+      "firstName": "jancsi",
+      "lastName": "nagy",
+      "email": "nagy.jancsi@martoskondi.hu",
+      "hasTicketForActivePeriod": true,
+      "authorities": [
+        "ROLE_USER"
+      ]
+    },
+    {
+      "id": 7,
+      "firstName": "jancsi",
+      "lastName": "nagy",
+      "email": "nagy.jancsi@martoskondi.hu",
+      "hasTicketForActivePeriod": true,
+      "authorities": [
+        "ROLE_USER"
+      ]
+    },
+    {
+      "id": 8,
+      "firstName": "jancsi",
+      "lastName": "nagy",
+      "email": "nagy.jancsi@martoskondi.hu",
+      "hasTicketForActivePeriod": true,
+      "authorities": [
+        "ROLE_USER"
+      ]
+    },
+    {
+      "id": 9,
+      "firstName": "jancsi",
+      "lastName": "nagy",
+      "email": "nagy.jancsi@martoskondi.hu",
+      "hasTicketForActivePeriod": true,
+      "authorities": [
+        "ROLE_USER"
+      ]
+    },
+    {
+      "id": 10,
+      "firstName": "jancsi",
+      "lastName": "nagy",
+      "email": "nagy.jancsi@martoskondi.hu",
+      "hasTicketForActivePeriod": true,
+      "authorities": [
+        "ROLE_USER"
+      ]
+    },
+    {
+      "id": 11,
+      "firstName": "jancsi",
+      "lastName": "nagy",
+      "email": "nagy.jancsi@martoskondi.hu",
+      "hasTicketForActivePeriod": true,
+      "authorities": [
+        "ROLE_USER"
+      ]
+    },
+    {
+      "id": 12,
+      "firstName": "jancsi",
+      "lastName": "nagy",
+      "email": "nagy.jancsi@martoskondi.hu",
+      "hasTicketForActivePeriod": true,
+      "authorities": [
+        "ROLE_USER"
+      ]
+    }
+  ],
+  "gym-periods": [
+    {
+      "id": 1,
+      "name": "2018-19/1 ősz",
+      "active": false,
+      "startDate": "",
+      "endDate": ""
+    },
+    {
+      "id": 2,
+      "name": "2018-19/2 tavasz",
+      "active": false,
+      "startDate": "",
+      "endDate": ""
+    },
+    {
+      "id": 3,
+      "name": "2019-20/1 ősz",
+      "active": false,
+      "startDate": "",
+      "endDate": ""
+    },
+    {
+      "id": 4,
+      "name": "2019-20/2 tavasz",
+      "active": false,
+      "startDate": "",
+      "endDate": ""
+    },
+    {
+      "id": 5,
+      "name": "2020-21/1 ősz",
+      "active": false,
+      "startDate": "",
+      "endDate": ""
+    }
   ]
 }

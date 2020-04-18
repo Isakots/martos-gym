@@ -1,0 +1,85 @@
+<h3>Időszakok</h3>
+<hr>
+<div>
+  <button *jhiHasAnyAuthority="'ROLE_MEMBER'"
+          class="btn btn-secondary"
+          [disabled]="!isActivePeriodExist()"
+          (click)="closeActivePeriod()">
+    <fa-icon icon="trash-alt"></fa-icon>
+    <span class="d-none d-md-inline"> Időszak lezárása</span>
+  </button>
+  <button *jhiHasAnyAuthority="'ROLE_MEMBER'"
+          class="btn btn-secondary"
+          [disabled]="isActivePeriodExist()"
+          (click)="setFormVisible()">
+    <fa-icon icon="plus"></fa-icon>
+    <span class="d-none d-md-inline"> Új időszak nyitása</span>
+  </button>
+  <br>
+  <small *ngIf="isActivePeriodExist()">Le kell zárnod az aktív időszakot, hogy újat nyithass!</small>
+
+
+  <div *ngIf="isNewPeriodFormVisible" class="gym-period-form">
+    <h4>Új időszak hozzáadása</h4>
+    <br>
+    <div class="col-lg-4">
+      <div class="form-group">
+        <label class="form-control-label" for="periodName">Időszak neve</label>
+        <input type="text" class="form-control" id="periodName" name="periodName"
+               [formControl]="periodNameFormControl">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <label class="form-control-label" for="startDatePicker">Időszak kezdete</label>
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" id="startDatePicker"
+                 name="startDatePicker" [(ngModel)]="startDate" ngbDatepicker #dStart="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-secondary" (click)="dStart.toggle()" type="button">
+              <fa-icon icon="calendar"></fa-icon>
+              <span class="d-none d-md-inline"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <label class="form-control-label" for="endDatePicker">Időszak vége</label>
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" id="endDatePicker"
+                 name="endDatePicker" [(ngModel)]="endDate" ngbDatepicker #dEnd="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-secondary" (click)="dEnd.toggle()" type="button">
+              <fa-icon icon="calendar"></fa-icon>
+              <span class="d-none d-md-inline"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button *jhiHasAnyAuthority="'ROLE_MEMBER'"
+            class="btn btn-secondary"
+            (click)="saveNewPeriod()">
+      <fa-icon icon="plus"></fa-icon>
+      <span class="d-none d-md-inline"> Mentés</span>
+    </button>
+
+  </div>
+
+  <p>Jelenlegi aktív időszak:
+    <span *ngIf="isActivePeriodExist()"> <strong>{{activePeriod.name}}</strong></span>
+    <span *ngIf="!isActivePeriodExist()"> <strong>Jelenleg nincs aktív időszak!</strong></span>
+  </p>
+  <p>Előző, lezárt időszakok: </p>
+  <ul>
+    <li *ngFor="let period of notActivePeriods">
+      <span>{{period.name}}</span>
+    </li>
+  </ul>
+
+</div>

@@ -1,0 +1,20 @@
+<div class="row justify-content-center m-1">
+
+  <div class="col-lg-8">
+    <h2 id="tool-heading">
+      <span>Adminisztráció</span>
+    </h2>
+    <hr>
+    <app-notification-displayer></app-notification-displayer>
+    <app-gym-period
+      [periods]="periods">
+    </app-gym-period>
+
+    <div class="mt-4">
+      <app-user-management
+        [managedUsers]="managedUsers">
+      </app-user-management>
+    </div>
+
+  </div>
+</div>
