@@ -5,6 +5,7 @@
 @import "../node_modules/bootstrap/scss/variables";
 @import "../node_modules/bootstrap/scss/mixins";
 
+$theme-light-orange-color: #ffddb0;
 $orange: #fd7e14;
 $light-orange: #fdae14;
 $dropdown-link-active-bg: $white;
@@ -17,7 +18,8 @@ $dropdown-link-color: $orange;
 $theme-colors: (
   primary: $black,
   secondary: $orange,
-  light-orange: #fdae14
+  light-orange: #fdae14,
+  warning: $theme-light-orange-color
 );
 
 /* Customize the label (the container) */

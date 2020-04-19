@@ -8,6 +8,8 @@ import {TrainingModel} from "../../shared/domain/training-model";
 })
 export class TrainingItemComponent implements OnInit {
 
+  detailsViewOpenState = false;
+
   @Input()
   training: TrainingModel;
 
@@ -18,5 +20,16 @@ export class TrainingItemComponent implements OnInit {
 
   }
 
+  toggleDetailsView() {
+    this.detailsViewOpenState = !this.detailsViewOpenState;
+  }
 
+  subscribe(subscription: boolean) {
+
+  }
+
+  hasImage() {
+    // TODO new feature: add img to training
+    return false;
+  }
 }

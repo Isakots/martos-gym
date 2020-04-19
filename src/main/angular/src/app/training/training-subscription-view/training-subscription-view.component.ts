@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
 import {TrainingModel} from "../../shared/domain/training-model";
 import {UserNotificationService} from "../../shared/service/user-notification.service";
+import {TrainingService} from "../../shared/service/training.service";
 
 @Component({
   selector: 'app-training-subscription-view',
@@ -12,14 +12,14 @@ export class TrainingSubscriptionViewComponent implements OnInit {
   trainings: TrainingModel[];
 
   constructor(
-    protected activatedRoute: ActivatedRoute,
+    protected _trainingService: TrainingService,
     private _userNotificationService: UserNotificationService
   ) {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({trainings}) => {
-        this.trainings = trainings;
+    this._trainingService.findAll().subscribe(response => {
+        this.trainings = response.body;
       },
       () => {
         // TODO notify user about error (notificationservice), then route back to tools

@@ -1,0 +1,21 @@
+<div class="row justify-content-center m-1 mt-4">
+
+  <div class="col-lg-8">
+    <h2 id="tool-heading">
+      <span>Edzések</span>
+    </h2>
+    <hr>
+    <app-notification-displayer></app-notification-displayer>
+
+    <div *ngFor="let training of trainings">
+      <app-training-item
+        [training]="training">
+      </app-training-item>
+    </div>
+
+
+  </div>
+</div>
+
+
+

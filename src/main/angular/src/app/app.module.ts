@@ -16,15 +16,18 @@ import {
   faBars,
   faCalendar,
   faChevronDown,
+  faChevronUp,
   faClipboardList,
   faDrumstickBite,
   faDumbbell,
   faEdit,
   faFutbol,
+  faHandPointDown,
   faHandPointUp,
   faLock,
   faPencilAlt,
-  faPlus, faRunning,
+  faPlus,
+  faRunning,
   faSave,
   faSignInAlt,
   faSignOutAlt,
@@ -74,11 +77,13 @@ library.add(faTimes);
 library.add(faBan);
 library.add(faSave);
 library.add(faHandPointUp);
+library.add(faHandPointDown);
 library.add(faEdit);
 library.add(faTrashAlt);
 library.add(faCalendar);
 library.add(faClipboardList);
 library.add(faChevronDown);
+library.add(faChevronUp);
 library.add(faRunning);
 
 @NgModule({
