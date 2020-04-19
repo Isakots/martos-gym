@@ -70,6 +70,14 @@ public class User implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "PERIOD_ID", referencedColumnName = "PERIOD_ID")})
     private List<GymPeriod> tickets = new ArrayList<>();
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "TRAINING_PARTICIPANTS",
+            joinColumns = {@JoinColumn(name = "PARTICIPANT_ID", referencedColumnName = "USER_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "TRAINING_ID", referencedColumnName = "TRAINING_ID")})
+    @JsonIgnore
+    private Set<Training> trainings = new HashSet<>();
+
 
     public Long getId() {
         return id;
@@ -183,6 +191,14 @@ public class User implements Serializable {
         this.tickets = tickets;
     }
 
+    public Set<Training> getTrainings() {
+        return trainings;
+    }
+
+    public void setTrainings(Set<Training> trainings) {
+        this.trainings = trainings;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -200,6 +216,7 @@ public class User implements Serializable {
                 ", authorities=" + authorities +
                 ", reservations=" + reservations +
                 ", tickets=" + tickets +
+                ", trainings=" + trainings +
                 '}';
     }
 
