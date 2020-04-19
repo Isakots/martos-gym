@@ -279,5 +279,47 @@
       "startDate": "",
       "endDate": ""
     }
+  ],
+  "trainings": [
+    {
+      "id": 1,
+      "name": "TRX edzés",
+      "maxParticipants": 20,
+      "actualParticipants": 15,
+      "description": "Edzés leírás",
+      "startDate": "",
+      "endDate": "",
+      "subscribed": false
+    },
+    {
+      "id": 2,
+      "name": "Jóga",
+      "maxParticipants": 8,
+      "actualParticipants": 7,
+      "description": "Edzés leírás",
+      "startDate": "",
+      "endDate": "",
+      "subscribed": false
+    },
+    {
+      "id": 3,
+      "name": "Hot Iron",
+      "maxParticipants": 15,
+      "actualParticipants": 15,
+      "description": "Edzés leírás",
+      "startDate": "",
+      "endDate": "",
+      "subscribed": true
+    },
+    {
+      "id": 4,
+      "name": "CrossFit",
+      "maxParticipants": 10,
+      "actualParticipants": 10,
+      "description": "Edzés leírás",
+      "startDate": "",
+      "endDate": "",
+      "subscribed": false
+    }
   ]
 }

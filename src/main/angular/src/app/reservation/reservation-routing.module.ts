@@ -5,7 +5,7 @@ import {ReservationViewComponent} from "./reservation-view/reservation-view.comp
 import {ReservationResolve} from "./reservation.resolver";
 import {ToolResolve} from "../tool/tool.resolver";
 
-const toolRoutes: Routes = [
+const reservationRoutes: Routes = [
   {
     path: 'reservations',
     children: [
@@ -32,7 +32,7 @@ const toolRoutes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forChild(toolRoutes)
+    RouterModule.forChild(reservationRoutes)
   ],
   exports: [
     RouterModule

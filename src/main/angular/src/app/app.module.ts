@@ -24,7 +24,7 @@ import {
   faHandPointUp,
   faLock,
   faPencilAlt,
-  faPlus,
+  faPlus, faRunning,
   faSave,
   faSignInAlt,
   faSignOutAlt,
@@ -52,6 +52,8 @@ import {ToolModule} from "./tool/tool.module";
 import {ReservationModule} from "./reservation/reservation.module";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AdminModule} from "./admin/admin.module";
+import {TrainingModule} from "./training/training.module";
+import {AuthExpiredInterceptor} from "./core/interceptor/auth-expired.interceptor";
 
 // FaIcon imports
 library.add(faBars);
@@ -77,6 +79,7 @@ library.add(faTrashAlt);
 library.add(faCalendar);
 library.add(faClipboardList);
 library.add(faChevronDown);
+library.add(faRunning);
 
 @NgModule({
   declarations: [
@@ -105,11 +108,13 @@ library.add(faChevronDown);
     ToolModule,
     ReservationModule,
     BrowserAnimationsModule,
-    AdminModule
+    AdminModule,
+    TrainingModule
   ],
   providers: [
     AuthorizationGuard,
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: AuthExpiredInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

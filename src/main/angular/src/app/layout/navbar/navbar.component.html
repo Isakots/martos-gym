@@ -22,6 +22,12 @@
               <span>Felhasználók menedzselése</span>
             </a>
           </li>
+          <li *jhiHasAnyAuthority="'ROLE_MEMBER'">
+            <a class="dropdown-item" routerLink="trainings/new" (click)="collapseNavbar()">
+              <fa-icon icon="running" fixedWidth="true"></fa-icon>
+              <span>Új edzés kiírása</span>
+            </a>
+          </li>
         </ul>
       </li>
       <li class="nav-item">
@@ -41,6 +47,12 @@
         <a class="nav-link" routerLink="nutrition" (click)="collapseNavbar()">
           <fa-icon icon="drumstick-bite"></fa-icon>
           <span>Táplálkozás</span>
+        </a>
+      </li>
+      <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a class="nav-link" routerLink="trainings" (click)="collapseNavbar()">
+          <fa-icon icon="running"></fa-icon>
+          <span>Edzések</span>
         </a>
       </li>
       <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
