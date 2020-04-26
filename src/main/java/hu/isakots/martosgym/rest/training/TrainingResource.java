@@ -29,6 +29,12 @@ public class TrainingResource {
         return trainingService.findAll();
     }
 
+    @GetMapping(TRAINING_ENDPOINT + "/{trainingId}")
+    @PreAuthorize("hasAuthority('ROLE_MEMBER')")
+    public TrainingModel findById(@PathVariable Long trainingId) throws ResourceNotFoundException {
+        return trainingService.findById(trainingId);
+    }
+
     @GetMapping("/user" + TRAINING_ENDPOINT)
     @PreAuthorize("hasAuthority('ROLE_USER')")
     public List<TrainingModel> getUserTrainings() {
@@ -47,12 +53,11 @@ public class TrainingResource {
         return trainingService.modifyTraining(trainingModel);
     }
 
-    @DeleteMapping(TRAINING_ENDPOINT + "{trainingId}")
+    @DeleteMapping(TRAINING_ENDPOINT + "/{trainingId}")
     @PreAuthorize("hasAuthority('ROLE_MEMBER')")
     public ResponseEntity<Void> unsubscribeTraining(@PathVariable Long trainingId) throws ResourceNotFoundException {
         trainingService.deleteTraining(trainingId);
         return ResponseEntity.ok().build();
     }
-
 
 }

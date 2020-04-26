@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -24,7 +24,7 @@ import {
   faFutbol,
   faHandPointDown,
   faHandPointUp,
-  faLock,
+  faLock, faNewspaper,
   faPencilAlt,
   faPlus,
   faRunning,
@@ -46,7 +46,6 @@ import {AccountModule} from "./account/account.module";
 import {SignUpComponent} from './sign-up/sign-up.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {AuthorizationGuard} from "./core/guard/authorization-guard.service";
-import {ErrorComponent} from './error/error.component';
 import {ArticleModule} from "./article/article.module";
 import {TimelineComponent} from "./layout/home/timeline/timeline.component";
 import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
@@ -57,6 +56,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AdminModule} from "./admin/admin.module";
 import {TrainingModule} from "./training/training.module";
 import {AuthExpiredInterceptor} from "./core/interceptor/auth-expired.interceptor";
+import localeHu from '@angular/common/locales/hu';
+import {registerLocaleData} from "@angular/common";
+registerLocaleData(localeHu);
 
 // FaIcon imports
 library.add(faBars);
@@ -85,6 +87,7 @@ library.add(faClipboardList);
 library.add(faChevronDown);
 library.add(faChevronUp);
 library.add(faRunning);
+library.add(faNewspaper);
 
 @NgModule({
   declarations: [
@@ -96,7 +99,6 @@ library.add(faRunning);
     NutritionComponent,
     GymInfoComponent,
     SignUpComponent,
-    ErrorComponent,
     TimelineComponent
   ],
   imports: [
@@ -119,7 +121,8 @@ library.add(faRunning);
   providers: [
     AuthorizationGuard,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: AuthExpiredInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthExpiredInterceptor, multi: true},
+    { provide: LOCALE_ID, useValue: 'hu-HU'},
   ],
   bootstrap: [AppComponent]
 })

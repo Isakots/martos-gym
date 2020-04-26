@@ -43,7 +43,6 @@ $light-orange: #fdae14;
       width: 16%;
       font-size: 26px;
       color: $gym-black;
-      float: left;
       position: relative;
 
       .arrow-wrap {
@@ -75,11 +74,37 @@ $light-orange: #fdae14;
   }
 
   .details-view-container {
-    height: auto;
     width: 100%;
     background-color: $item-background-lighter;
     padding: 0.5rem;
+
+    .participants-container {
+      width: 50%
+    }
+
+    .button-container {
+      width: 50%;
+      position: relative;
+
+      .button-wrapper {
+        position: absolute;
+        right: 0;
+        bottom: 0.5rem;
+        padding-right: 0.8rem;
+
+        display: flex;
+        flex-direction: row;
+
+        .button-item {
+          margin: 0.25rem;
+        }
+
+      }
+    }
+
+
   }
+
 
   @media screen and (max-width: 640px) {
     .data-container {
@@ -120,4 +145,3 @@ $light-orange: #fdae14;
   }
 
 }
-

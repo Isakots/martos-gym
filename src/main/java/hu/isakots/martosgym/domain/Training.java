@@ -20,22 +20,22 @@ public class Training implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "NAME", length = 63, updatable = false, nullable = false)
+    @Column(name = "NAME", length = 63, nullable = false)
     private String name;
 
     @NotNull
     @Column(name = "MAX_PARTICIPANTS", length = 4, nullable = false)
     private int maxParticipants;
 
-    @Column(name = "DESCRIPTION", length = 256)
+    @Column(name = "DESCRIPTION", length = 512)
     private String description;
 
     @NotNull
-    @Column(name = "START_DATE", updatable = false, nullable = false)
+    @Column(name = "START_DATE", nullable = false)
     private LocalDateTime startDate;
 
     @NotNull
-    @Column(name = "END_DATE", updatable = false, nullable = false)
+    @Column(name = "END_DATE", nullable = false)
     private LocalDateTime endDate;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

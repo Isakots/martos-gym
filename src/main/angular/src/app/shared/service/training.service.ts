@@ -17,12 +17,20 @@ export class TrainingService {
     this.resourceUrl = environmentService.apiUrl + this.RESOURCE_ENDPOINT;
   }
 
-  create(reservation: TrainingModel): Observable<HttpResponse<TrainingModel>> {
-    return this.http.post<TrainingModel>(this.resourceUrl, reservation, {observe: 'response'});
+  subscribe(trainingId: number): Observable<HttpResponse<TrainingModel>> {
+    return this.http.post<TrainingModel>(`${this.resourceUrl}/${trainingId}/subscribe`, null, {observe: 'response'});
   }
 
-  update(reservation: TrainingModel): Observable<HttpResponse<TrainingModel>> {
-    return this.http.put<TrainingModel>(this.resourceUrl, reservation, {observe: 'response'});
+  unsubscribe(trainingId: number): Observable<HttpResponse<TrainingModel>> {
+    return this.http.post<TrainingModel>(`${this.resourceUrl}/${trainingId}/unsubscribe`, null, {observe: 'response'});
+  }
+
+  create(trainingModel: TrainingModel): Observable<HttpResponse<TrainingModel>> {
+    return this.http.post<TrainingModel>(this.resourceUrl, trainingModel, {observe: 'response'});
+  }
+
+  update(trainingModel: TrainingModel): Observable<HttpResponse<TrainingModel>> {
+    return this.http.put<TrainingModel>(this.resourceUrl, trainingModel, {observe: 'response'});
   }
 
   find(id: number): Observable<HttpResponse<TrainingModel>> {

@@ -6,25 +6,25 @@
           <span>{{article.title}}</span>
           <button
             *jhiHasAnyAuthority="'ROLE_MEMBER'"
-            class="btn btn-danger float-right btn-sm"
+            class="btn btn-danger float-right"
             (click)="openConfirmationModal()">
             <fa-icon icon="times"></fa-icon>
-            <span class="d-none d-md-inline"> Delete</span>
+            <span class="d-none d-md-inline"> Törlés</span>
           </button>
           <button
             *jhiHasAnyAuthority="'ROLE_MEMBER'"
             type="button"
             [routerLink]="['/articles', article.id, 'edit']"
-            class="btn btn-light float-right btn-sm">
+            class="btn btn-secondary float-right">
             <fa-icon icon="pencil-alt"></fa-icon>
-            <span class="d-none d-md-inline"> Edit</span>
+            <span class="d-none d-md-inline"> Módosítás</span>
           </button>
           <button
             *jhiHasAnyAuthority="'ROLE_MEMBER'"
-            class="btn btn-primary float-right btn-sm"
+            class="btn btn-secondary float-right"
             [routerLink]="['/articles/new']">
             <fa-icon icon="plus"></fa-icon>
-            <span class="d-none d-md-inline"> Create</span>
+            <span class="d-none d-md-inline"> Létrehozás</span>
           </button>
         </h2>
         <hr>
@@ -33,8 +33,8 @@
 
         <button type="submit"
                 [routerLink]="['/']"
-                class="btn btn-info">
-          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span> Back</span>
+                class="btn btn-dark">
+          <fa-icon icon="arrow-left"></fa-icon><span> Vissza</span>
         </button>
 
       </div>

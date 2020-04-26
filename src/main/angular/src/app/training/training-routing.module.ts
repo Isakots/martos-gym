@@ -34,7 +34,7 @@ const trainingRoutes: Routes = [
         canActivate: [AuthorizationGuard]
       },
       {
-        path: 'update',
+        path: ':id/edit',
         component: TrainingUpdateComponent,
         resolve: {
           training: TrainingResolver

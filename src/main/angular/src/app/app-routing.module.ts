@@ -6,7 +6,6 @@ import {AboutUsComponent} from "./layout/about-us/about-us.component";
 import {NutritionComponent} from "./layout/nutrition/nutrition.component";
 import {GymInfoComponent} from "./layout/gym-info/gym-info.component";
 import {SignUpComponent} from "./sign-up/sign-up.component";
-import {ErrorComponent} from "./error/error.component";
 
 const routes: Routes = [
   {
@@ -33,15 +32,7 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
-  },
-  {
-    path: 'error',
-    component: ErrorComponent
   }
-  // {
-  //   path: '**',
-  //   component: ErrorComponent
-  // }
 ];
 
 @NgModule({

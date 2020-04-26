@@ -23,6 +23,12 @@
             </a>
           </li>
           <li *jhiHasAnyAuthority="'ROLE_MEMBER'">
+            <a class="dropdown-item" routerLink="articles/new" (click)="collapseNavbar()">
+              <fa-icon icon="newspaper" fixedWidth="true"></fa-icon>
+              <span>Új cikk írása</span>
+            </a>
+          </li>
+          <li *jhiHasAnyAuthority="'ROLE_MEMBER'">
             <a class="dropdown-item" routerLink="trainings/new" (click)="collapseNavbar()">
               <fa-icon icon="running" fixedWidth="true"></fa-icon>
               <span>Új edzés kiírása</span>

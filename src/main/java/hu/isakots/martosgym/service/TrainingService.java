@@ -41,6 +41,14 @@ public class TrainingService {
                 .collect(Collectors.toList());
     }
 
+    public TrainingModel findById(Long trainingId) throws ResourceNotFoundException {
+        return modelMapper.map(
+                repository.findById(trainingId)
+                        .orElseThrow(() -> new ResourceNotFoundException(MessageFormat.format("Traning not found with id: {0}", trainingId))),
+                TrainingModel.class
+        );
+    }
+
     public List<TrainingModel> findAllUserTrainings() {
         return accountService.getAuthenticatedUserWithData().getTrainings().stream()
                 .map(training -> modelMapper.map(training, TrainingModel.class))
@@ -90,7 +98,6 @@ public class TrainingService {
             throw new TrainingValidationException("Count of actual participants is more than max participants.");
         }
     }
-
 
     public void deleteTraining(Long trainingId) throws ResourceNotFoundException {
         LOGGER.debug("REST request to delete Training : {}", trainingId);

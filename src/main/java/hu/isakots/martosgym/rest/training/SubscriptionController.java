@@ -1,6 +1,5 @@
 package hu.isakots.martosgym.rest.training;
 
-
 import hu.isakots.martosgym.exception.ResourceNotFoundException;
 import hu.isakots.martosgym.service.TrainingService;
 import org.springframework.http.ResponseEntity;
@@ -23,14 +22,14 @@ public class SubscriptionController {
         this.trainingService = trainingService;
     }
 
-    @PostMapping(TRAINING_ENDPOINT + "{trainingId}" + "/subscribe")
+    @PostMapping(TRAINING_ENDPOINT + "/{trainingId}" + "/subscribe")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     public ResponseEntity<Void> subscribeTraining(@PathVariable Long trainingId) throws ResourceNotFoundException {
         trainingService.subscribeToTraining(trainingId, true);
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping(TRAINING_ENDPOINT + "{trainingId}" + "/unsubscribe")
+    @PostMapping(TRAINING_ENDPOINT + "/{trainingId}" + "/unsubscribe")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     public ResponseEntity<Void> unsubscribeTraining(@PathVariable Long trainingId) throws ResourceNotFoundException {
         trainingService.subscribeToTraining(trainingId, false);

@@ -13,6 +13,8 @@ import {UserNotificationService} from "../../shared/service/user-notification.se
   styleUrls: ['./reservation-view.component.scss']
 })
 export class ReservationViewComponent implements OnInit {
+  readonly minuteStep = 30;
+
   startTime: NgbTimeStruct = {hour: 8, minute: 0, second: 0};
   endTime: NgbTimeStruct = {hour: 16, minute: 0, second: 0};
   startDate: NgbDateStruct;
@@ -23,7 +25,7 @@ export class ReservationViewComponent implements OnInit {
   toolToReserve: Tool;
 
   reservationForm: FormGroup;
-  minuteStep = 30;
+
 
   constructor(
     protected activatedRoute: ActivatedRoute,
@@ -66,7 +68,7 @@ export class ReservationViewComponent implements OnInit {
       endDate: new Date(this.endDate.year, this.endDate.month - 1, this.endDate.day, this.endTime.hour, this.endTime.minute, this.endTime.second)
         .toISOString().substring(0, 19),
       returned: null
-    }).subscribe((response) => {
+    }).subscribe(() => {
         this.router.navigate(['/profile/reservations']);
       },
       (error) => {

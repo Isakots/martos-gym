@@ -7,12 +7,18 @@
     <hr>
     <app-notification-displayer></app-notification-displayer>
 
-    <div *ngFor="let training of trainings">
-      <app-training-item
-        [training]="training">
-      </app-training-item>
+    <div *ngIf="trainings.length === 0">
+      <p>Jelenleg nincs új edzés a láthatáron.. :( Nézz vissza később, vagy iratkozz fel a hírlevélre a <a [routerLink]="['/profile']">profilodon</a>!</p>
     </div>
 
+    <div *ngIf="trainings.length !== 0">
+      <div *ngFor="let training of trainings">
+        <app-training-item
+          [training]="training"
+          (trainingDeleted)="onTrainingDelete($event)">
+        </app-training-item>
+      </div>
+    </div>
 
   </div>
 </div>

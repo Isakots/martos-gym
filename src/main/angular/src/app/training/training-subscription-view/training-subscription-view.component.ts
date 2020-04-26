@@ -9,7 +9,7 @@ import {TrainingService} from "../../shared/service/training.service";
 })
 export class TrainingSubscriptionViewComponent implements OnInit {
 
-  trainings: TrainingModel[];
+  trainings: TrainingModel[] = [];
 
   constructor(
     protected _trainingService: TrainingService,
@@ -22,9 +22,23 @@ export class TrainingSubscriptionViewComponent implements OnInit {
         this.trainings = response.body;
       },
       () => {
-        // TODO notify user about error (notificationservice), then route back to tools
+        this._userNotificationService.notifyUser("Edzések betöltése sikertelen!", true);
       });
   }
+
+  onTrainingDelete(deleted: boolean) {
+    if(deleted) {
+      this._userNotificationService.notifyUser("Edzés sikeresen törölve!", false);
+      this._trainingService.findAll().subscribe(
+        response => {
+          this.trainings = response.body;
+        }
+      )
+    } else {
+      this._userNotificationService.notifyUser("Edzés törlése sikertelen", true);
+    }
+  }
+
 
 
 }
