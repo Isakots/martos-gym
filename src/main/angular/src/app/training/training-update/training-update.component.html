@@ -1,0 +1,105 @@
+<div class="row justify-content-center mt-2">
+
+  <div class="col-lg-8 m-2">
+    <h2 id="tool-heading">
+      <span>{{title}}</span>
+    </h2>
+    <hr>
+    <app-notification-displayer></app-notification-displayer>
+
+    <div [formGroup]="trainingForm">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label class="form-control-label" for="name">Adj nevet az edzésnek:</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              class="form-control"
+              [formControl]="trainingForm.controls.name">
+            <div
+              *ngIf="showValidationMessage(trainingForm.controls.name)">
+              <small class="form-text text-danger"
+                     *ngIf="trainingForm.controls.name.errors.required">
+                Név megadása kötelező!
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label class="form-control-label" for="max-participants">Max létszám:</label>
+            <input
+              id="max-participants"
+              name="max-participants"
+              type="number"
+              class="form-control"
+              [formControl]="trainingForm.controls.maxParticipants">
+            <div
+              *ngIf="showValidationMessage(trainingForm.controls.name)">
+              <small class="form-text text-danger"
+                     *ngIf="trainingForm.controls.name.errors.required">
+                Max létszám megadása kötelező!
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="form-group">
+            <label class="form-control-label" for="description">Rövid leírás:</label>
+            <textarea
+              id="description"
+              name="description"
+              class="form-control"
+              rows="5"
+              maxlength="511"
+              [formControl]="trainingForm.controls.description">
+            </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <label class="form-control-label" for="training-start-date">Mikor?</label>
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd"
+                 name="startDatePicker" [(ngModel)]="date" ngbDatepicker #dStart="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-secondary" (click)="dStart.toggle()" type="button">
+              <fa-icon icon="calendar"></fa-icon>
+              <span class="d-none d-md-inline"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-2">
+        <ngb-timepicker id="training-start-date" [(ngModel)]="startTime" [seconds]="false"
+                        [minuteStep]="minuteStep"></ngb-timepicker>
+      </div>
+
+      <div class="col-lg-2">
+        <ngb-timepicker id="training-end-date" [(ngModel)]="endTime" [seconds]="false"
+                        [minuteStep]="minuteStep"></ngb-timepicker>
+      </div>
+    </div>
+
+    <button *jhiHasAnyAuthority="'ROLE_MEMBER'"
+            (click)="save()"
+            class="btn btn-secondary">
+      <fa-icon icon="save"></fa-icon>
+      <span> Mentés</span>
+    </button>
+
+  </div>
+</div>
+
+
+

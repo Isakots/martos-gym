@@ -17,6 +17,7 @@ export class ArticleUpdateComponent implements OnInit {
   editorForm: FormGroup;
   public ck5editor = ClassicEditor;
   editorData: any;
+  title: string;
 
   constructor(
     protected articleService: ArticleService,
@@ -24,14 +25,22 @@ export class ArticleUpdateComponent implements OnInit {
     private _router: Router) {
   }
 
-
   ngOnInit() {
     this._initFormGroup();
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({article}) => {
-      this.editorData = article.content;
+      if(article.content !== undefined) {
+        this.editorData = article.content;
+      } else {
+        this.editorData = '<p></p>';
+      }
       this.updateForm(article);
     });
+    if (this.editorForm.controls.id.value === undefined) {
+      this.title = "Új cikk írása";
+    } else {
+      this.title = "Cikk módosítása";
+    }
   }
 
   public onChange({editor}: ChangeEvent) {
@@ -88,10 +97,6 @@ export class ArticleUpdateComponent implements OnInit {
 
   protected onSaveError() {
     this.isSaving = false;
-  }
-
-  previousState() {
-    window.history.back();
   }
 
 }

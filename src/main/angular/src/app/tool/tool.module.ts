@@ -6,7 +6,7 @@ import {ToolViewComponent} from "./tool-view/tool-view.component";
 import {ToolItemComponent} from "./tool-item/tool-item.component";
 import {CommonModule} from "@angular/common";
 import {SharedModule} from "../shared/shared.module";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   imports: [
@@ -14,7 +14,8 @@ import {FormsModule} from "@angular/forms";
     FontAwesomeModule,
     CommonModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [ToolViewComponent, ToolUpdateModalComponent, ToolItemComponent]
 })

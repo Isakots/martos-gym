@@ -17,6 +17,7 @@ export class ToolUpdateModalComponent implements OnInit {
 
   @Output()
   public eventConfirmed: EventEmitter<boolean> = new EventEmitter();
+  title: string;
 
   constructor(
     protected modalService: NgbModal,
@@ -25,10 +26,12 @@ export class ToolUpdateModalComponent implements OnInit {
 
   ngOnInit(): void {
     this._initTool();
+    this._initTitle();
   }
 
   public open() {
     this._initTool();
+    this._initTitle();
     this.modalReference = this.modalService.open(this.toolFormView, {centered: true});
     this.modalReference.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -71,6 +74,14 @@ export class ToolUpdateModalComponent implements OnInit {
         quantity: null,
         reachable: true
       }
+    }
+  }
+
+  private _initTitle() {
+    if(this.tool.id === undefined || this.tool.id === null) {
+      this.title = 'Eszköz hozzáadása';
+    } else {
+      this.title = 'Eszköz módosítása';
     }
   }
 

@@ -21,15 +21,19 @@ public class ModelMapperConfiguration {
         modelMapper.addConverter(new UserToUserWithRolesConverter());
         modelMapper.addConverter(new UserToManagedUserConverter());
 
-        modelMapper.addMappings(
-                new PropertyMap<AccountModel, User>() {
-                    @Override
-                    protected void configure() {
-                        skip(destination.getId());
-                        skip(destination.getEmail());
-                    }
-                });
+        modelMapper.addMappings(getAccountModelToUserPropertyMap());
 
         return modelMapper;
     }
+
+    private PropertyMap<AccountModel, User> getAccountModelToUserPropertyMap() {
+        return new PropertyMap<AccountModel, User>() {
+            @Override
+            protected void configure() {
+                skip(destination.getId());
+                skip(destination.getEmail());
+            }
+        };
+    }
+
 }

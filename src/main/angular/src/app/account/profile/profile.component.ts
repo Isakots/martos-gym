@@ -37,8 +37,8 @@ export class ProfileComponent implements OnInit {
       email: [{value: '', disabled: true},
         [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
       studentStatus: [false],
-      institution: ['', [Validators.required, Validators.maxLength(4)]],
-      faculty: ['', [Validators.required, Validators.maxLength(4)]],
+      institution: ['', [this._customRequiredValidator]],
+      faculty: [''],
       collegian: [false],
       roomNumber: ['']
     };
@@ -74,6 +74,11 @@ export class ProfileComponent implements OnInit {
         }
       }
     );
+  }
+
+  private _customRequiredValidator() {
+    // TODO
+    return "";
   }
 
   showValidationMessage(formControl: AbstractControl) {

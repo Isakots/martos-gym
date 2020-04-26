@@ -1,5 +1,5 @@
 
-$background-color: #ff8500;
+$background-color: #ffddb0;
 $text-color: #000;
 
 .checkbox {
@@ -115,5 +115,9 @@ $text-color: #000;
     }
 
   }
+
+}
+
+@media screen and (max-width: 640px) {
 
 }

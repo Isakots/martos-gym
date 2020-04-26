@@ -1,29 +1,25 @@
 <div class="row justify-content-center m-4">
   <div class="col-lg-10">
 
-    <div class="alert alert-success" *ngIf="success">
-      <strong>Mentés sikeres!</strong>
-    </div>
 
     <div class="row">
       <div class="col-lg-7">
+
+        <div class="alert alert-success" *ngIf="success">
+          <strong>Mentés sikeres!</strong>
+        </div>
+
         <div [formGroup]="profileForm">
           <div class="row">
             <div class="col-lg-6">
               <div class="form-group">
                 <label class="form-control-label" for="lastName">Családnév</label>
                 <input type="text" class="form-control" id="lastName" name="lastName"
-                       formControlName="lastName">
+                       formControlName="lastName" maxlength="30">
                 <div
                   *ngIf="showValidationMessage(profileForm.get('lastName'))">
                   <small class="form-text text-danger" *ngIf="profileForm.get('lastName').errors.required">
-                    Lastname is required.
-                  </small>
-                  <small class="form-text text-danger" *ngIf="profileForm.get('lastName').errors.minlength">
-                    Lastname is required to be at least 5 characters.
-                  </small>
-                  <small class="form-text text-danger" *ngIf="profileForm.get('lastName').errors.maxlength">
-                    Lastname cannot be longer than 100 characters.
+                    Családnév kitöltése kötelező!
                   </small>
                 </div>
               </div>
@@ -32,17 +28,11 @@
               <div class="form-group">
                 <label class="form-control-label" for="firstName">Keresztnév</label>
                 <input type="text" class="form-control" id="firstName" name="firstName"
-                       formControlName="firstName">
+                       formControlName="firstName" maxlength="30">
                 <div
                   *ngIf="showValidationMessage(profileForm.get('firstName'))">
                   <small class="form-text text-danger" *ngIf="profileForm.get('firstName').errors.required">
-                    Firstname is required.
-                  </small>
-                  <small class="form-text text-danger" *ngIf="profileForm.get('firstName').errors.minlength">
-                    Firstname is required to be at least 4 characters.
-                  </small>
-                  <small class="form-text text-danger" *ngIf="profileForm.get('firstName').errors.maxlength">
-                    Firstname cannot be longer than 50 characters.
+                    Keresztnév kitöltése kötelező!
                   </small>
                 </div>
 
@@ -73,15 +63,11 @@
               <div class="form-group">
                 <label class="form-control-label" for="institution">Oktatási Intézmény</label>
                 <input type="text" class="form-control" id="institution" name="institution"
-                       formControlName="institution">
+                       formControlName="institution" maxlength="5">
                 <div
                   *ngIf="showValidationMessage(profileForm.get('institution'))">
                   <small class="form-text text-danger" *ngIf="profileForm.get('institution').errors.required">
-                    Institution is required.
-                  </small>
-                  <small class="form-text text-danger"
-                         *ngIf="profileForm.get('institution').errors.maxlength">
-                    Institution cannot be longer than 50 characters.
+                    Intézmény kitöltése kötelező!
                   </small>
                 </div>
               </div>
@@ -90,16 +76,12 @@
               <div class="form-group">
                 <label class="form-control-label" for="faculty">Kar</label>
                 <input type="text" class="form-control" id="faculty" name="faculty"
-                       formControlName="faculty">
+                       formControlName="faculty" maxlength="5">
                 <div
                   *ngIf="showValidationMessage(profileForm.get('faculty'))">
                   <small class="form-text text-danger"
                          *ngIf="profileForm.get('faculty').errors.required">
-                    Faculty is required.
-                  </small>
-                  <small class="form-text text-danger"
-                         *ngIf="profileForm.get('faculty').errors.maxlength">
-                    Faculty be longer than 5 characters.
+                    Kar kitöltése kötelező!
                   </small>
                 </div>
               </div>
@@ -123,7 +105,7 @@
                   *ngIf="showValidationMessage(profileForm.get('roomNumber'))">
                   <small class="form-text text-danger"
                          *ngIf="profileForm.get('roomNumber').errors.required">
-                    Your room number is required.
+                    Szobaszám kitöltése kötelező!
                   </small>
                 </div>
               </div>
