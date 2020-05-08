@@ -29,7 +29,8 @@
     "institution": "BME",
     "faculty": "VBK",
     "collegian": true,
-    "roomNumber": 5
+    "roomNumber": 5,
+    "subscriptions": ["ON_NEW_ARTICLES"]
   },
   "tools": [
     {

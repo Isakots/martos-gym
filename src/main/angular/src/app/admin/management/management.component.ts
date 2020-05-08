@@ -13,15 +13,14 @@ export class ManagementComponent implements OnInit {
   managedUsers: ManagedUser[];
 
   constructor(protected activatedRoute: ActivatedRoute) {
+  }
+
+  ngOnInit(): void {
     this.activatedRoute.data.subscribe(({gymPeriods, managedUsers}) => {
         this.periods = gymPeriods;
         this.managedUsers = managedUsers;
       }
     );
-  }
-
-  ngOnInit(): void {
-
   }
 
 }

@@ -40,7 +40,10 @@ export class ProfileComponent implements OnInit {
       institution: ['', [this._customRequiredValidator]],
       faculty: [''],
       collegian: [false],
-      roomNumber: ['']
+      roomNumber: [''],
+      subOnNewArticles: [false],
+      subOnNewTrainings: [false],
+      subOnSubscribedTrainings: [false]
     };
 
     this.profileForm = this._formBuilder.group(formGroupControlsConfig);
@@ -56,7 +59,10 @@ export class ProfileComponent implements OnInit {
       institution: account.institution,
       faculty: account.faculty,
       collegian: account.collegian,
-      roomNumber: account.roomNumber
+      roomNumber: account.roomNumber,
+      subOnNewArticles: account.subscriptions.includes('ON_NEW_ARTICLES'),
+      subOnNewTrainings: account.subscriptions.includes('ON_NEW_TRAININGS'),
+      subOnSubscribedTrainings: account.subscriptions.includes('ON_SUBSCRIBED_TRAININGS')
     });
   }
 
@@ -66,7 +72,27 @@ export class ProfileComponent implements OnInit {
     if (this.profileForm.invalid) {
       return;
     }
-    let userData = this.profileForm.getRawValue();
+    let subscriptions = [];
+    if( this.profileForm.controls.subOnNewArticles.value) {
+      subscriptions.push('ON_NEW_ARTICLES');
+    }
+    if( this.profileForm.controls.subOnNewTrainings.value) {
+      subscriptions.push('ON_NEW_TRAININGS');
+    }
+    if( this.profileForm.controls.subOnSubscribedTrainings.value) {
+      subscriptions.push('ON_SUBSCRIBED_TRAININGS');
+    }
+    let userData = {
+      firstName: this.profileForm.controls.firstName.value,
+      lastName: this.profileForm.controls.lastName.value,
+      studentStatus: this.profileForm.controls.studentStatus.value,
+      institution: this.profileForm.controls.institution.value,
+      faculty: this.profileForm.controls.faculty.value,
+      collegian: this.profileForm.controls.collegian.value,
+      roomNumber: this.profileForm.controls.roomNumber.value,
+      subscriptions: subscriptions
+    };
+
     this.accountService.updateProfile(userData).subscribe(
       response => {
         if (response.status == 200) {

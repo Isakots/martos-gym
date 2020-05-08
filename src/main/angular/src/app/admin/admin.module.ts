@@ -9,6 +9,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {ManagedUserControlComponent} from "./management/user-management/managed-user-control/managed-user-control.component";
 import {NgbDatepickerModule} from "@ng-bootstrap/ng-bootstrap";
+import {MailSendingComponent} from "./mail-sending/mail-sending.component";
+import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
 
 @NgModule({
   imports: [
@@ -18,9 +20,10 @@ import {NgbDatepickerModule} from "@ng-bootstrap/ng-bootstrap";
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
-    NgbDatepickerModule
+    NgbDatepickerModule,
+    CKEditorModule
   ],
-  declarations: [ManagementComponent, UserManagementComponent, GymPeriodComponent, ManagedUserControlComponent]
+  declarations: [ManagementComponent, UserManagementComponent, GymPeriodComponent, ManagedUserControlComponent, MailSendingComponent]
 })
 export class AdminModule {
 }

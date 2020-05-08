@@ -3,7 +3,7 @@
     <div class="col-lg-8">
       <h2 id="article-heading">{{title}}</h2>
       <hr>
-      <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editorForm">
+      <form name="editForm" role="form" (ngSubmit)="save()" [formGroup]="editorForm">
 
         <div>
           <div class="form-group">

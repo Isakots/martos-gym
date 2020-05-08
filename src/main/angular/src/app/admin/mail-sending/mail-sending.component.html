@@ -1,0 +1,56 @@
+<div class="row justify-content-center m-2">
+
+  <div class="col-lg-8 mt-2">
+    <h2>
+      <span>Köremail küldése</span>
+    </h2>
+    <hr>
+    <app-notification-displayer></app-notification-displayer>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="mailTo">Címzett:</label>
+          <div>
+            <select id="mailTo" class="form-control" [formControl]="mailForm.controls.mailTo">
+              <option [selected]="true">Mindenki</option>
+              <option>Körtagok</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="form-control-label" for="topic">Email tárgya:</label>
+          <input type="text" class="form-control" id="topic" name="topic"
+                 [formControl]="mailForm.controls.topic" maxlength="30">
+          <div
+            *ngIf="showValidationMessage(mailForm.controls.topic)">
+            <small class="form-text text-danger" *ngIf="mailForm.controls.topic.errors.required">
+              Tárgy kitöltése kötelező!
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-control-label">Tartalom</label>
+      <ckeditor [(ngModel)]="editorData"
+                [ngModelOptions]="{standalone: true}"
+                [editor]="ck5editor"
+                (change)="onChange($event)">
+      </ckeditor>
+    </div>
+
+    <button (click)="sendEmail()"
+      class="btn btn-secondary">
+      <fa-icon icon="save"></fa-icon>
+      <span> Küldés</span>
+    </button>
+
+  </div>
+</div>

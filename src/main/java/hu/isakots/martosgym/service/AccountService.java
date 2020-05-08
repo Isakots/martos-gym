@@ -1,12 +1,14 @@
 package hu.isakots.martosgym.service;
 
 import hu.isakots.martosgym.configuration.util.SecurityUtils;
+import hu.isakots.martosgym.domain.Subscription;
 import hu.isakots.martosgym.domain.User;
 import hu.isakots.martosgym.exception.InvalidPasswordException;
 import hu.isakots.martosgym.exception.ResourceNotFoundException;
 import hu.isakots.martosgym.repository.UserRepository;
 import hu.isakots.martosgym.rest.account.model.AccountModel;
 import hu.isakots.martosgym.rest.account.model.PasswordChangeDTO;
+import hu.isakots.martosgym.service.model.SubscriptionType;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,9 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.MessageFormat;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AccountService {
+
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
@@ -46,9 +50,9 @@ public class AccountService {
 
     @Transactional
     public User updateUser(AccountModel accountModel) {
-        User storedUser = userRepository.findOneWithAuthoritiesByEmailIgnoreCase(SecurityUtils.getCurrentUserLogin())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found."));
+        User storedUser = getAuthenticatedUserWithData();
         modelMapper.map(accountModel, storedUser);
+        mapSubscriptions(accountModel, storedUser);
         return userRepository.save(storedUser);
     }
 
@@ -67,9 +71,26 @@ public class AccountService {
     public void changePassword(PasswordChangeDTO passwordChangeDto) throws InvalidPasswordException {
         User user = getAuthenticatedUserWithData();
         if (!passwordEncoder.matches(passwordChangeDto.getCurrentPassword(), user.getPassword())) {
-            throw new InvalidPasswordException("Hibás jelszó.");
+            throw new InvalidPasswordException("Invalid password");
         }
         user.setPassword(passwordEncoder.encode(passwordChangeDto.getNewPassword()));
         userRepository.save(user);
     }
+
+    private void mapSubscriptions(AccountModel accountModel, User storedUser) {
+        storedUser.setSubscriptions(
+                accountModel.getSubscriptions().stream()
+                        .map(subscriptionName -> {
+                            Subscription subscription = new Subscription();
+                            try {
+                                subscription.setName(SubscriptionType.valueOf(subscriptionName));
+                            } catch (IllegalArgumentException | NullPointerException exception) {
+                                throw new UnsupportedOperationException("Invalid subscriptionType");
+                            }
+                            return subscription;
+                        })
+                        .collect(Collectors.toSet())
+        );
+    }
+
 }
