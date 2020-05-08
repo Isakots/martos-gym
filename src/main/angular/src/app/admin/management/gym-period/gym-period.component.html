@@ -6,14 +6,14 @@
           [disabled]="!isActivePeriodExist()"
           (click)="closeActivePeriod()">
     <fa-icon icon="trash-alt"></fa-icon>
-    <span class="d-none d-md-inline"> Időszak lezárása</span>
+    <span class="d-md-inline"> Időszak lezárása</span>
   </button>
   <button *jhiHasAnyAuthority="'ROLE_MEMBER'"
           class="btn btn-secondary"
           [disabled]="isActivePeriodExist()"
           (click)="setFormVisible()">
     <fa-icon icon="plus"></fa-icon>
-    <span class="d-none d-md-inline"> Új időszak nyitása</span>
+    <span class="d-md-inline"> Új időszak nyitása</span>
   </button>
   <br>
   <small *ngIf="isActivePeriodExist()">Le kell zárnod az aktív időszakot, hogy újat nyithass!</small>

@@ -1,6 +1,8 @@
 package hu.isakots.martosgym.rest.account.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 public class AccountModel implements Serializable {
     private Long id;
@@ -12,6 +14,7 @@ public class AccountModel implements Serializable {
     private String faculty;
     private boolean isCollegian;
     private int roomNumber;
+    private Set<String> subscriptions = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -85,6 +88,14 @@ public class AccountModel implements Serializable {
         this.roomNumber = roomNumber;
     }
 
+    public Set<String> getSubscriptions() {
+        return subscriptions;
+    }
+
+    public void setSubscriptions(Set<String> subscriptions) {
+        this.subscriptions = subscriptions;
+    }
+
     @Override
     public String toString() {
         return "AccountModel{" +
@@ -97,6 +108,7 @@ public class AccountModel implements Serializable {
                 ", faculty='" + faculty + '\'' +
                 ", isCollegian=" + isCollegian +
                 ", roomNumber=" + roomNumber +
+                ", subscriptions=" + subscriptions +
                 '}';
     }
 }

@@ -1,5 +1,6 @@
 package hu.isakots.martosgym.configuration;
 
+import hu.isakots.martosgym.configuration.converter.UserToAccountModelConverter;
 import hu.isakots.martosgym.configuration.converter.UserToManagedUserConverter;
 import hu.isakots.martosgym.configuration.converter.UserToUserWithRolesConverter;
 import hu.isakots.martosgym.domain.User;
@@ -20,6 +21,7 @@ public class ModelMapperConfiguration {
         modelMapper.getConfiguration().setAmbiguityIgnored(true);
         modelMapper.addConverter(new UserToUserWithRolesConverter());
         modelMapper.addConverter(new UserToManagedUserConverter());
+        modelMapper.addConverter(new UserToAccountModelConverter());
 
         modelMapper.addMappings(getAccountModelToUserPropertyMap());
 

@@ -49,6 +49,12 @@ public class TrainingService {
         );
     }
 
+    Training findTrainingById(Long trainingId) throws ResourceNotFoundException {
+        return repository.findById(trainingId)
+                    .orElseThrow(() -> new ResourceNotFoundException(MessageFormat.format("Traning not found with id: {0}", trainingId))
+                );
+    }
+
     public List<TrainingModel> findAllUserTrainings() {
         return accountService.getAuthenticatedUserWithData().getTrainings().stream()
                 .map(training -> modelMapper.map(training, TrainingModel.class))

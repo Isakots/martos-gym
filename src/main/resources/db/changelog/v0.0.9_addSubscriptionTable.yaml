@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: MRTSGYM-9
+      author: csokasi.marcell
+      changes:
+        - sqlFile:
+            encofing: utf8
+            path: db/changelog/v0.0.9_addSubscriptionTable.sql

@@ -8,5 +8,6 @@ export class AccountModel {
   faculty: string;
   collegian: boolean;
   roomNumber: number;
+  subscriptions: string[];
   constructor() {}
 }

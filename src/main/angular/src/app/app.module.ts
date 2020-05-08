@@ -20,7 +20,7 @@ import {
   faClipboardList,
   faDrumstickBite,
   faDumbbell,
-  faEdit,
+  faEdit, faEnvelope,
   faFutbol,
   faHandPointDown,
   faHandPointUp,
@@ -88,6 +88,7 @@ library.add(faChevronDown);
 library.add(faChevronUp);
 library.add(faRunning);
 library.add(faNewspaper);
+library.add(faEnvelope);
 
 @NgModule({
   declarations: [

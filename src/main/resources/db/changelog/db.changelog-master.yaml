@@ -15,3 +15,5 @@ databaseChangeLog:
       file: db/changelog/v0.0.7_addGymPeriodAndTicketTables.yaml
   - include:
       file: db/changelog/v0.0.8_addTrainingTable.yaml
+  - include:
+      file: db/changelog/v0.0.9_addSubscriptionTable.yaml

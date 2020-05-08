@@ -10,7 +10,7 @@
     </parent>
     <groupId>hu.isakots</groupId>
     <artifactId>martos-gym</artifactId>
-    <version>0.6.0-SNAPSHOT</version>
+    <version>0.7.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Martos-Gym</name>
 

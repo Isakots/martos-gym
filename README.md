@@ -20,7 +20,7 @@ An application to manage a gym in a student hostel.
 - Liquibase and database configuration (MySQL)
 - Internationalization
 - Automatic notification email-sending
-- Rich text editor integration (QuillJS) for Articles
+- Rich text editor integration (CKEditor5) for Articles
 - Tool CRUD, reservation logic
 - Email templating
 
@@ -31,9 +31,18 @@ An application to manage a gym in a student hostel.
 Application can be accessed on http://localhost:4200/
 
 #### With backend 
-1. Create new Tomcat configuration in IDEA
-2. Configure Run Maven Goal 'clean install'
-3. Configure Build exploded artifact
-4. Set context-path to '/Martos-Gym'
-5. Set 'appconf.dir' environment variable in CATALINA_OPTS to set configuration directory
-6. Run Tomcat
+1. Set 'node.home' property in pom.xml to the folder where your NodeJS is installed.
+2. Set database connection properties in application.properties:
+    - database.url
+    - database.username
+    - database.password
+3. Provide valid configuration properties in **configuration folder**
+    - SMTP configuration
+    - Setting upload directories
+    
+4. Create new Tomcat configuration in IDEA
+    1. Configure Run Maven Goal 'clean install'
+    2. Configure Build exploded artifact
+    3. Set context-path to '/Martos-Gym'
+    4. Set 'appconf.dir' environment variable in CATALINA_OPTS to set **configuration folder**
+    5. Run Tomcat

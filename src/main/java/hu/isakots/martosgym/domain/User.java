@@ -78,6 +78,13 @@ public class User implements Serializable {
     @JsonIgnore
     private Set<Training> trainings = new HashSet<>();
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "USER_SUBSCRIPTIONS",
+            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "SUBSCRIPTION_NAME", referencedColumnName = "NAME")})
+    private Set<Subscription> subscriptions = new HashSet<>();
+
 
     public Long getId() {
         return id;
@@ -197,6 +204,14 @@ public class User implements Serializable {
 
     public void setTrainings(Set<Training> trainings) {
         this.trainings = trainings;
+    }
+
+    public Set<Subscription> getSubscriptions() {
+        return subscriptions;
+    }
+
+    public void setSubscriptions(Set<Subscription> subscriptions) {
+        this.subscriptions = subscriptions;
     }
 
     @Override
