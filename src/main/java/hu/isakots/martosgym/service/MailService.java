@@ -1,8 +1,8 @@
 package hu.isakots.martosgym.service;
 
 import hu.isakots.martosgym.configuration.properties.MailProperties;
+import hu.isakots.martosgym.domain.Training;
 import hu.isakots.martosgym.domain.User;
-import hu.isakots.martosgym.exception.ResourceNotFoundException;
 import hu.isakots.martosgym.rest.mail.model.EmailRequestModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,24 +27,23 @@ public class MailService {
     private final MailProperties mailProperties;
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
-    private final EmailAddressExtractorService emailAddressExtractorService;
+    private final AccountService accountService;
 
     @Value("${spring.profiles.active}")
     private Set<String> activeProfiles;
 
     public MailService(MailProperties mailProperties, JavaMailSender javaMailSender,
-                       @Qualifier("emailTemplateEngine") TemplateEngine templateEngine,
-                       EmailAddressExtractorService emailAddressExtractorService) {
+                       @Qualifier("emailTemplateEngine") TemplateEngine templateEngine, AccountService accountService) {
         this.mailProperties = mailProperties;
         this.javaMailSender = javaMailSender;
         this.templateEngine = templateEngine;
-        this.emailAddressExtractorService = emailAddressExtractorService;
+        this.accountService = accountService;
     }
 
     @Async
     void sendEmail(String to, String subject, String content) {
-        if(activeProfiles.contains("no-mail")) {
-           return;
+        if (activeProfiles.contains("no-mail")) {
+            return;
         }
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
@@ -65,30 +64,66 @@ public class MailService {
         LOGGER.debug("Sending activation email to '{}'", user.getEmail());
         Context context = new Context();
         context.setVariable("user", user);
-        String content = templateEngine.process("firstTemplate", context);
-        String subject = "Registration success";
+        String content = templateEngine.process("registration", context);
+        String subject = "Sikeres regisztráció";
         sendEmail(user.getEmail(), subject, content);
     }
 
-    void sendCustomEmailOneByOne(String email, String subject, String content) {
+    void sendNotificationEmailOnNewArticle(User user) {
+        LOGGER.debug("Sending notification email about new article to '{}'", user.getEmail());
+        Context context = new Context();
+        context.setVariable("user", user);
+        context.setVariable("articleUrl", "localhost:8080/Martos-Gym/home");
+        context.setVariable("profileUrl", "localhost:8080/Martos-Gym/profile");
+        String content = templateEngine.process("notificationOnNewArticle", context);
+        String subject = "Értesítés új hír megjelenéséről";
+        sendEmail(user.getEmail(), subject, content);
+    }
+
+    void sendNotificationEmailOnNewTraining(User user) {
+        LOGGER.debug("Sending notification email about new training to '{}'", user.getEmail());
+        Context context = new Context();
+        context.setVariable("user", user);
+        context.setVariable("trainingsUrl", "localhost:8080/Martos-Gym/trainings");
+        context.setVariable("profileUrl", "localhost:8080/Martos-Gym/profile");
+        String content = templateEngine.process("notificationOnNewTraining", context);
+        String subject = "Értesítés új edzésről";
+        sendEmail(user.getEmail(), subject, content);
+    }
+
+    public void sendNotificationEmailOnSubscribedTraining(User user, Training training) {
+        LOGGER.debug("Sending notification email about subscribed training to '{}'", user.getEmail());
+        Context context = new Context();
+        context.setVariable("user", user);
+        context.setVariable("trainingName", training.getName());
+        context.setVariable("trainingTime", "localhost:8080/Martos-Gym/trainings");
+        context.setVariable("profileUrl", "localhost:8080/Martos-Gym/profile");
+        String content = templateEngine.process("notificationOnSubscribedTraining", context);
+        String subject = "Értesítés esedékes edzésről";
+        sendEmail(user.getEmail(), subject, content);
+    }
+
+    @Async
+    public void sendCustomEmail(EmailRequestModel model) {
+        List<String> emailAddresses = accountService.extractUserEmails(model.getMailTo());
+        emailAddresses.forEach(email -> sendCustomEmailOneByOne(email, model.getTopic(), model.getContent()));
+    }
+
+    @Async
+    public void startEmailNotificationAsyncTaskOnNewArticle() {
+        List<User> subscribers = accountService.extractUsersWithNewArticleSubscription();
+        subscribers.forEach(this::sendNotificationEmailOnNewArticle);
+    }
+
+    @Async
+    public void startEmailNotificationAsyncTaskOnNewTraining() {
+        List<User> subscribers = accountService.extractUsersWithNewTrainingSubscription();
+        subscribers.forEach(this::sendNotificationEmailOnNewTraining);
+    }
+
+    private void sendCustomEmailOneByOne(String email, String subject, String content) {
         LOGGER.debug("Sending customized email to '{}'", email);
         sendEmail(email, subject, content);
     }
-
-    public void sendCustomEmail(EmailRequestModel model) {
-       List<String> emailAddresses = emailAddressExtractorService.extractUserEmails(model.getMailTo());
-       emailAddresses.forEach(email -> {
-           sendCustomEmailOneByOne(email, model.getTopic(), model.getContent());
-       });
-    }
-
-    public void sendCustomEmailToTrainingParticipants(Long trainingId, EmailRequestModel model) throws ResourceNotFoundException {
-        List<String> emailAddresses = emailAddressExtractorService.extractTrainingParticipantEmails(trainingId);
-        emailAddresses.forEach(email -> {
-            sendCustomEmailOneByOne(email, model.getTopic(), model.getContent());
-        });
-    }
-
-
 
 }

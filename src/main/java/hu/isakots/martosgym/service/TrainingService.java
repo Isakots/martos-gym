@@ -13,21 +13,26 @@ import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class TrainingService {
     private static final Logger LOGGER = LoggerFactory.getLogger(TrainingService.class.getName());
+    private static final String TRAINING_NOT_FOUND_WITH_ID = "Traning not found with id: {0}";
 
     private final TrainingRepository repository;
     private final AccountService accountService;
     private final ModelMapper modelMapper;
+    private final MailService mailService;
 
-    public TrainingService(TrainingRepository repository, AccountService accountService, ModelMapper modelMapper) {
+    public TrainingService(TrainingRepository repository, AccountService accountService,
+                           ModelMapper modelMapper, MailService mailService) {
         this.repository = repository;
         this.accountService = accountService;
         this.modelMapper = modelMapper;
+        this.mailService = mailService;
     }
 
     public List<TrainingModel> findAll() {
@@ -44,14 +49,14 @@ public class TrainingService {
     public TrainingModel findById(Long trainingId) throws ResourceNotFoundException {
         return modelMapper.map(
                 repository.findById(trainingId)
-                        .orElseThrow(() -> new ResourceNotFoundException(MessageFormat.format("Traning not found with id: {0}", trainingId))),
+                        .orElseThrow(() -> new ResourceNotFoundException(MessageFormat.format(TRAINING_NOT_FOUND_WITH_ID, trainingId))),
                 TrainingModel.class
         );
     }
 
     Training findTrainingById(Long trainingId) throws ResourceNotFoundException {
         return repository.findById(trainingId)
-                    .orElseThrow(() -> new ResourceNotFoundException(MessageFormat.format("Traning not found with id: {0}", trainingId))
+                .orElseThrow(() -> new ResourceNotFoundException(MessageFormat.format(TRAINING_NOT_FOUND_WITH_ID, trainingId))
                 );
     }
 
@@ -70,8 +75,9 @@ public class TrainingService {
         Training training = modelMapper.map(trainingModel, Training.class);
         training.getParticipants().add(accountService.getAuthenticatedUserWithData());
 
-        // TODO send email notification to all subscribed user
-        return modelMapper.map(repository.save(training), TrainingModel.class);
+        Training persistedTraining = repository.save(training);
+        mailService.startEmailNotificationAsyncTaskOnNewTraining();
+        return modelMapper.map(persistedTraining, TrainingModel.class);
     }
 
     public TrainingModel modifyTraining(TrainingModel trainingModel) throws TrainingValidationException, ResourceNotFoundException {
@@ -81,12 +87,11 @@ public class TrainingService {
         }
         validateTrainingModel(trainingModel);
         Training training = repository.findById(trainingModel.getId()).orElseThrow(
-                () -> new ResourceNotFoundException(MessageFormat.format("Training not found with id: {0}", trainingModel.getId()))
+                () -> new ResourceNotFoundException(MessageFormat.format(TRAINING_NOT_FOUND_WITH_ID, trainingModel.getId()))
         );
         validateParticipantCount(training, trainingModel);
         training = modelMapper.map(trainingModel, Training.class);
 
-        // TODO send email notification to all subscribed user if date is changed
         return modelMapper.map(repository.save(training), TrainingModel.class);
     }
 
@@ -108,7 +113,7 @@ public class TrainingService {
     public void deleteTraining(Long trainingId) throws ResourceNotFoundException {
         LOGGER.debug("REST request to delete Training : {}", trainingId);
         Training training = repository.findById(trainingId).orElseThrow(
-                () -> new ResourceNotFoundException(MessageFormat.format("Training not found with id: {0}", trainingId))
+                () -> new ResourceNotFoundException(MessageFormat.format(TRAINING_NOT_FOUND_WITH_ID, trainingId))
         );
         training.getParticipants().clear();
         repository.save(training);
@@ -118,7 +123,7 @@ public class TrainingService {
     public void subscribeToTraining(Long trainingId, boolean subscription) throws ResourceNotFoundException {
         User authenticatedUser = accountService.getAuthenticatedUserWithData();
         Training training = repository.findById(trainingId).orElseThrow(
-                () -> new ResourceNotFoundException(MessageFormat.format("Training not found with id: {0}", trainingId))
+                () -> new ResourceNotFoundException(MessageFormat.format(TRAINING_NOT_FOUND_WITH_ID, trainingId))
         );
         if (subscription) {
             authenticatedUser.getTrainings().add(training);
@@ -126,6 +131,10 @@ public class TrainingService {
             authenticatedUser.getTrainings().remove(training);
         }
         accountService.saveAccount(authenticatedUser);
+    }
+
+    public List<Training> findAllByStartDateIsBefore(LocalDateTime startDateTimeout) {
+        return repository.findAllByStartDateIsBefore(startDateTimeout).orElse(Collections.emptyList());
     }
 
 }

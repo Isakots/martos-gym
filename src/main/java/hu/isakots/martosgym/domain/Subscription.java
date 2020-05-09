@@ -3,16 +3,23 @@ package hu.isakots.martosgym.domain;
 import hu.isakots.martosgym.service.model.SubscriptionType;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "SUBSCRIPTION")
-public class Subscription {
+public class Subscription implements Serializable {
 
     @Id
     @Column(name = "NAME", length = 63)
     @Enumerated(EnumType.STRING)
     private SubscriptionType name;
+
+    public Subscription() {
+    }
+    public Subscription(SubscriptionType name) {
+        this.name = name;
+    }
 
     public SubscriptionType getName() {
         return name;

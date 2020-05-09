@@ -21,10 +21,12 @@ public class ArticleService {
 
     private final ArticleRepository articleRepository;
     private final ModelMapper modelMapper;
+    private final MailService mailService;
 
-    public ArticleService(ArticleRepository articleRepository, ModelMapper modelMapper) {
+    public ArticleService(ArticleRepository articleRepository, ModelMapper modelMapper, MailService mailService) {
         this.articleRepository = articleRepository;
         this.modelMapper = modelMapper;
+        this.mailService = mailService;
     }
 
     public List<ArticleModel> getAllArticlesByType(ArticleType type) {
@@ -38,23 +40,22 @@ public class ArticleService {
     }
 
     public ArticleModel getArticle(Long id) throws ResourceNotFoundException {
-        LOGGER.debug("REST request to get Article : {}", id);
         Article article = articleRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("A keresett cikk nem található.")
+                () -> new ResourceNotFoundException("Article not found")
         );
         return modelMapper.map(article, ArticleModel.class);
     }
 
     public ArticleModel createArticle(ArticleModel article) {
-        LOGGER.debug("REST request to save Article : {}", article);
         if (article.getId() != null) {
             throw new IllegalArgumentException("The provided resource must not have ID");
         }
-        return modelMapper.map(articleRepository.save(modelMapper.map(article, Article.class)), ArticleModel.class);
+        Article persistedArticle = articleRepository.save(modelMapper.map(article, Article.class));
+        mailService.startEmailNotificationAsyncTaskOnNewArticle();
+        return modelMapper.map(persistedArticle, ArticleModel.class);
     }
 
     public ArticleModel updateArticle(ArticleModel article) {
-        LOGGER.debug("REST request to update Article : {}", article);
         if (article.getId() == null) {
             throw new IllegalArgumentException("The provided resource must have an id.");
         }
@@ -62,7 +63,6 @@ public class ArticleService {
     }
 
     public void deleteArticle(Long id) {
-        LOGGER.debug("REST request to delete Article : {}", id);
         articleRepository.deleteById(id);
     }
 }

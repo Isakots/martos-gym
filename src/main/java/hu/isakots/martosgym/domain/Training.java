@@ -38,7 +38,7 @@ public class Training implements Serializable {
     @Column(name = "END_DATE", nullable = false)
     private LocalDateTime endDate;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "TRAINING_PARTICIPANTS",
             joinColumns = {@JoinColumn(name = "TRAINING_ID", referencedColumnName = "TRAINING_ID")},
