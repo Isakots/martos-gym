@@ -3,8 +3,10 @@ package hu.isakots.martosgym.configuration;
 import hu.isakots.martosgym.configuration.converter.UserToAccountModelConverter;
 import hu.isakots.martosgym.configuration.converter.UserToManagedUserConverter;
 import hu.isakots.martosgym.configuration.converter.UserToUserWithRolesConverter;
+import hu.isakots.martosgym.domain.Article;
 import hu.isakots.martosgym.domain.User;
 import hu.isakots.martosgym.rest.account.model.AccountModel;
+import hu.isakots.martosgym.rest.article.model.ArticleModel;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.convention.MatchingStrategies;
@@ -24,6 +26,7 @@ public class ModelMapperConfiguration {
         modelMapper.addConverter(new UserToAccountModelConverter());
 
         modelMapper.addMappings(getAccountModelToUserPropertyMap());
+        modelMapper.addMappings(getArticleModelToArticlePropertyMap());
 
         return modelMapper;
     }
@@ -34,6 +37,15 @@ public class ModelMapperConfiguration {
             protected void configure() {
                 skip(destination.getId());
                 skip(destination.getEmail());
+            }
+        };
+    }
+
+    private PropertyMap<ArticleModel, Article> getArticleModelToArticlePropertyMap() {
+        return new PropertyMap<ArticleModel, Article>() {
+            @Override
+            protected void configure() {
+                skip(destination.getCreatedDate());
             }
         };
     }

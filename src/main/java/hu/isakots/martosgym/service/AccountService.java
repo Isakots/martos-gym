@@ -1,6 +1,7 @@
 package hu.isakots.martosgym.service;
 
 import hu.isakots.martosgym.configuration.util.SecurityUtils;
+import hu.isakots.martosgym.domain.Authority;
 import hu.isakots.martosgym.domain.Subscription;
 import hu.isakots.martosgym.domain.User;
 import hu.isakots.martosgym.exception.InvalidPasswordException;
@@ -16,11 +17,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.MessageFormat;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static hu.isakots.martosgym.configuration.util.AuthoritiesConstants.ROLE_MEMBER;
+
 @Service
 public class AccountService {
+    private static final String ALL = "ALL";
+    private static final String MEMBERS_ONLY = "MEMBERS_ONLY";
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
@@ -91,6 +97,40 @@ public class AccountService {
                         })
                         .collect(Collectors.toSet())
         );
+    }
+
+    public List<String> extractUserEmails(String mailToCode) {
+        if (ALL.equals(mailToCode)) {
+            return userRepository.findAll()
+                    .stream()
+                    .map(User::getEmail)
+                    .collect(Collectors.toList());
+        } else if (MEMBERS_ONLY.equals(mailToCode)) {
+            return userRepository.findAll()
+                    .stream()
+                    .filter(user -> {
+                        Authority memberAuthority = new Authority();
+                        memberAuthority.setName(ROLE_MEMBER);
+                        return user.getAuthorities().contains(memberAuthority);
+                    })
+                    .map(User::getEmail)
+                    .collect(Collectors.toList());
+        }
+        return Collections.emptyList();
+    }
+
+    public List<User> extractUsersWithNewTrainingSubscription() {
+        return userRepository.findAll()
+                .stream()
+                .filter(user -> user.getSubscriptions().contains(new Subscription(SubscriptionType.ON_NEW_TRAININGS)))
+                .collect(Collectors.toList());
+    }
+
+    public List<User> extractUsersWithNewArticleSubscription() {
+        return userRepository.findAll()
+                .stream()
+                .filter(user -> user.getSubscriptions().contains(new Subscription(SubscriptionType.ON_NEW_ARTICLES)))
+                .collect(Collectors.toList());
     }
 
 }
