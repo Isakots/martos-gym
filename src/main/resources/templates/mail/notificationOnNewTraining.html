@@ -5,10 +5,10 @@
 </head>
 <body>
 <p>Kedves <span th:text="${user.firstName}"></span>!</p>
-<p>Új edzés írtunk ki a honlapunkon, melyet <a th:href="${trainingsUrl}">itt</a> érhetsz el</p>
+<p>Új edzés írtunk ki a honlapunkon, melyet <a th:href="@{${trainingsUrl}}">itt</a> érhetsz el</p>
 <p>Jelentkezz, amíg még van hely! :)</p>
 
-<p>Amennyiben nem szeretnél több értesítő e-mailt kapni, <a th:href="${profileUrl}">itt</a> leiratkozhatsz.</p>
+<p>Amennyiben nem szeretnél több értesítő e-mailt kapni, <a th:href="@{${profileUrl}}">itt</a> leiratkozhatsz.</p>
 <p>
     <span>Üdvözlettel, </span>
     <br/>

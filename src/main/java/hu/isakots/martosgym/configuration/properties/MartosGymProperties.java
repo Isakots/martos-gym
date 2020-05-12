@@ -6,6 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class MartosGymProperties {
     private long maxReservationDays;
     private long emailNotificationBeforeTrainingInDays;
+    private String contextUrl;
 
     public long getMaxReservationDays() {
         return maxReservationDays;
@@ -22,4 +23,14 @@ public class MartosGymProperties {
     public void setEmailNotificationBeforeTrainingInDays(long emailNotificationBeforeTrainingInDays) {
         this.emailNotificationBeforeTrainingInDays = emailNotificationBeforeTrainingInDays;
     }
+
+    public String getContextUrl() {
+        return contextUrl;
+    }
+
+    public void setContextUrl(String contextUrl) {
+        this.contextUrl = contextUrl;
+    }
+
 }
+
