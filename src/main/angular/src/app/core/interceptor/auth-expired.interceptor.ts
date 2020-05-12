@@ -18,6 +18,7 @@ export class AuthExpiredInterceptor implements HttpInterceptor {
         (err: any) => {
           if (err instanceof HttpErrorResponse) {
             if (err.status === 401) {
+              // TODO get info if token is expired
               this.loginService.logout();
             }
           }

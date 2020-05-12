@@ -32,7 +32,7 @@ export class LoginService {
   logout() {
     this.accountService.logOut();
     sessionStorage.removeItem(JWT_TOKEN_KEY);
-    this.router.navigate(['/'])
+    //this.router.navigate(['/'])
   }
 
 }
