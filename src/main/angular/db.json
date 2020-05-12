@@ -2,23 +2,43 @@
   "articles": [
     {
       "id": "1",
-      "title": "Első cikk",
+      "title": "Megújultunk!",
       "type": "NEWS",
-      "introduction": "Egy rövid bevezetés",
+      "introduction": "Elmeséljük az edzőterem történetét..",
       "content": "<h2>Első cikk</h2><p>Legyen már valami normális amit meg tudok jeleníteni.</p><p>Egy felsorolás is legyen mondjuk:</p><ul><li>első</li><li>második</li><li>illetve harmadik elemmel</li></ul><blockquote><p>Legyen egy idézet is mert az kurvajó.</p><p>Petőfi Sándor</p></blockquote><figure class=\"table\"><table><tbody><tr><td>Mata</td><td>Hari</td><td>&nbsp;</td></tr><tr><td>Ha</td><td>Kunama</td><td>Tata</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></tbody></table></figure><p><a href=\"google.com\">Google</a></p><p><i>És egy kis stílus</i></p><p><strong>És egy kis stílus</strong></p><p><i><strong>És egy kis stílus</strong></i></p><p>&nbsp;</p>",
       "createdDate": "2020-02-22T16:56:51"
     },
     {
       "id": "2",
-      "title": "Második cikk",
+      "title": "Fekvenyomó verseny",
       "type": "NEWS",
-      "introduction": "asdasdasdsaasd",
+      "introduction": "Kattints a részletekért!",
       "content": "<p>undefinedasas</p>",
       "createdDate": "2020-02-23T17:23:51"
     },
     {
-      "content": "<p>nagyon hossz szöveg nagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz sz</p><p>&nbsp;</p><figure class=\"media\"><oembed url=\"https://www.youtube.com/watch?v=HGPoGtSBhu0\"></oembed></figure><p>övegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon</p><p>&nbsp;hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szövegnagyon hossz szöveg</p>",
-      "id": "39IgJdH"
+      "id": "3",
+      "title": "Jelentkezz induló edzéssorozatainkra!",
+      "type": "NEWS",
+      "introduction": "TRX, Jóga, CrossFit és még sok más ami érdekelhet, kattints bátran és ismerd meg a részleteket!",
+      "content": "<p>undefinedasas</p>",
+      "createdDate": "2020-02-23T18:23:51"
+    },
+    {
+      "id": "4",
+      "title": "Sportnapok",
+      "type": "NEWS",
+      "introduction": "Csapatos móka a hajógyári szigeten!",
+      "content": "<p>undefinedasas</p>",
+      "createdDate": "2020-02-23T19:23:51"
+    },
+    {
+      "id": "5",
+      "title": "Kötélhúzó verseny",
+      "type": "NEWS",
+      "introduction": "Egy kis móka az utolsó ZH roham előtt!",
+      "content": "<p>undefinedasas</p>",
+      "createdDate": "2020-02-23T20:23:51"
     }
   ],
   "profile": {

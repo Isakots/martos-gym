@@ -36,7 +36,6 @@ server.post('/profile/change-password', (req, res) => {
   } else {
     res.status(200).end();
   }
-
 });
 
 server.get('/profile/image/download', (req, res) => {

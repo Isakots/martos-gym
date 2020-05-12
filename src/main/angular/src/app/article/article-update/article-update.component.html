@@ -6,39 +6,53 @@
       <form name="editForm" role="form" (ngSubmit)="save()" [formGroup]="editorForm">
 
         <div>
-          <div class="form-group">
-            <label class="form-control-label" for="field_title">Cím</label>
-            <input type="text" class="form-control" name="title" id="field_title"
-                   formControlName="title"/>
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" for="field_type">Típus</label>
-            <input type="text" class="form-control" name="type" id="field_type"
-                   formControlName="type"/>
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" for="field_introduction">Bevezető</label>
-            <textarea class="form-control" name="type" id="field_introduction"
-                      formControlName="introduction" rows="3"></textarea>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="field_title">Cím</label>
+              <input type="text" class="form-control" name="title" id="field_title"
+                     formControlName="title"/>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label class="form-control-label">Tartalom</label>
-            <ckeditor [(ngModel)]="editorData"
-                      [ngModelOptions]="{standalone: true}"
-                      [editor]="ck5editor"
-                      (change)="onChange($event)">
-            </ckeditor>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="field_type">Típus</label>
+              <select id="field_type" class="form-control" formControlName="type">
+                <option *ngFor="let entry of articleTypesMap | keyvalue" [value]="entry.key">{{entry.value}}</option>
+              </select>
+            </div>
           </div>
+
+          <div class="col-lg-12">
+
+            <div class="form-group">
+              <label class="form-control-label" for="field_introduction">Bevezető</label>
+              <textarea class="form-control" name="type" id="field_introduction"
+                        formControlName="introduction" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-control-label">Tartalom</label>
+              <ckeditor [(ngModel)]="editorData"
+                        [ngModelOptions]="{standalone: true}"
+                        [editor]="ck5editor"
+                        (change)="onChange($event)">
+              </ckeditor>
+            </div>
+
+            <div>
+              <button type="submit" id="save-entity" [disabled]="editorForm.invalid || isSaving"
+                      class="btn btn-secondary">
+                <fa-icon icon="save"></fa-icon>
+                <span> Mentés</span>
+              </button>
+            </div>
+
+          </div>
+
         </div>
 
-        <div>
-          <button type="submit" id="save-entity" [disabled]="editorForm.invalid || isSaving"
-                  class="btn btn-secondary">
-            <fa-icon icon="save"></fa-icon>
-            <span> Mentés</span>
-          </button>
-        </div>
+
       </form>
     </div>
   </div>
