@@ -5,6 +5,7 @@ import {JWT_TOKEN_KEY} from "../shared/constants";
 import {StateStorageService} from "../shared/service/state-storage.service";
 import {Router} from "@angular/router";
 import {AccountService} from "../shared/service/account.service";
+import {UserNotificationService} from "../shared/service/user-notification.service";
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private stateStorageService: StateStorageService,
     private router: Router,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private userNotificationService: UserNotificationService
     ) {
   }
 
@@ -45,6 +47,9 @@ export class LoginComponent implements OnInit {
         } else {
           this.router.navigateByUrl('/');
         }
+      },
+      () => {
+        this.userNotificationService.notifyUser('Bejelentkezés sikertelen!', true);
       })
   }
 }

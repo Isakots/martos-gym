@@ -25,6 +25,9 @@ server.get('/identity', (req, res) => {
 });
 
 server.post('/auth', (req, res) => {
+    if(req.body.password === '123') {
+      return res.status(401).end();
+    }
     res.status(200).json({
       token: "jwt-token"
     });

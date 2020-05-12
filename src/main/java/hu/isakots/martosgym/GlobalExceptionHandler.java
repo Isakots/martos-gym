@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -60,6 +61,13 @@ public class GlobalExceptionHandler {
         logException(exception);
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
     }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity handleBadCredentialsExceptionException(BadCredentialsException exception) {
+        logException(exception);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity handleUnexpectedException(Exception exception) {
