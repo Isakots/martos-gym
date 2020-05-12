@@ -7,7 +7,7 @@
 <p>Kedves <span th:text="${user.firstName}"></span>!</p>
 <p>Emlékeztetünk, hogy jelentkeztél a következő edzésre: </p>
 <p><span th:text="${trainingName}"></span>: <span th:text="${trainingTime}"></span></p>
-<p>Amennyiben nem szeretnél több értesítő e-mailt kapni, <a th:href="${profileUrl}">itt</a> leiratkozhatsz.</p>
+<p>Amennyiben nem szeretnél több értesítő e-mailt kapni, <a th:href="@{${profileUrl}}">itt</a> leiratkozhatsz.</p>
 <p>
     <span>Üdvözlettel, </span>
     <br/>

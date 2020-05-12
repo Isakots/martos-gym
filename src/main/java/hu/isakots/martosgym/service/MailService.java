@@ -20,24 +20,35 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Set;
 
+import static hu.isakots.martosgym.service.util.Constants.*;
+
 @Service
 public class MailService {
     private static final Logger LOGGER = LoggerFactory.getLogger(MailService.class.getName());
+    private static final String USER_KEY = "user";
+    private static final String PROFILE_URL_KEY = "profileUrl";
+    private static final String ARTICLE_URL_KEY = "articleUrl";
+    private static final String TRAININGS_URL_KEY = "trainingsUrl";
+    private static final String TRAININGS_TIME_KEY = "trainingTime";
+    private static final String TRAININGS_NAME_KEY = "trainingName";
 
     private final MailProperties mailProperties;
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
     private final AccountService accountService;
+    private final LinkBuilderService linkBuilderService;
 
     @Value("${spring.profiles.active}")
     private Set<String> activeProfiles;
 
     public MailService(MailProperties mailProperties, JavaMailSender javaMailSender,
-                       @Qualifier("emailTemplateEngine") TemplateEngine templateEngine, AccountService accountService) {
+                       @Qualifier("emailTemplateEngine") TemplateEngine templateEngine, AccountService accountService,
+                       LinkBuilderService linkBuilderService) {
         this.mailProperties = mailProperties;
         this.javaMailSender = javaMailSender;
         this.templateEngine = templateEngine;
         this.accountService = accountService;
+        this.linkBuilderService = linkBuilderService;
     }
 
     @Async
@@ -63,43 +74,43 @@ public class MailService {
     public void sendRegistrationEmail(User user) {
         LOGGER.debug("Sending activation email to '{}'", user.getEmail());
         Context context = new Context();
-        context.setVariable("user", user);
+        context.setVariable(USER_KEY, user);
         String content = templateEngine.process("registration", context);
-        String subject = "Sikeres regisztráció";
+        String subject = TITLE_OF_REGISTRATION_EMAIL_NOTIFICATION;
         sendEmail(user.getEmail(), subject, content);
     }
 
     void sendNotificationEmailOnNewArticle(User user) {
         LOGGER.debug("Sending notification email about new article to '{}'", user.getEmail());
         Context context = new Context();
-        context.setVariable("user", user);
-        context.setVariable("articleUrl", "localhost:8080/Martos-Gym/home");
-        context.setVariable("profileUrl", "localhost:8080/Martos-Gym/profile");
+        context.setVariable(USER_KEY, user);
+        context.setVariable(ARTICLE_URL_KEY, linkBuilderService.createHomePageUrl());
+        context.setVariable(PROFILE_URL_KEY, linkBuilderService.createProfilePageUrl());
         String content = templateEngine.process("notificationOnNewArticle", context);
-        String subject = "Értesítés új hír megjelenéséről";
+        String subject = TITLE_OF_NEW_ARTICLE_EMAIL_NOTIFICATION;
         sendEmail(user.getEmail(), subject, content);
     }
 
     void sendNotificationEmailOnNewTraining(User user) {
         LOGGER.debug("Sending notification email about new training to '{}'", user.getEmail());
         Context context = new Context();
-        context.setVariable("user", user);
-        context.setVariable("trainingsUrl", "localhost:8080/Martos-Gym/trainings");
-        context.setVariable("profileUrl", "localhost:8080/Martos-Gym/profile");
+        context.setVariable(USER_KEY, user);
+        context.setVariable(TRAININGS_URL_KEY, linkBuilderService.createTrainingsPageUrl());
+        context.setVariable(PROFILE_URL_KEY, linkBuilderService.createProfilePageUrl());
         String content = templateEngine.process("notificationOnNewTraining", context);
-        String subject = "Értesítés új edzésről";
+        String subject = TITLE_OF_NEW_TRAINING_EMAIL_NOTIFICATION;
         sendEmail(user.getEmail(), subject, content);
     }
 
     public void sendNotificationEmailOnSubscribedTraining(User user, Training training) {
         LOGGER.debug("Sending notification email about subscribed training to '{}'", user.getEmail());
         Context context = new Context();
-        context.setVariable("user", user);
-        context.setVariable("trainingName", training.getName());
-        context.setVariable("trainingTime", "localhost:8080/Martos-Gym/trainings");
-        context.setVariable("profileUrl", "localhost:8080/Martos-Gym/profile");
+        context.setVariable(USER_KEY, user);
+        context.setVariable(TRAININGS_NAME_KEY, training.getName());
+        context.setVariable(TRAININGS_TIME_KEY, linkBuilderService.createTrainingsPageUrl());
+        context.setVariable(PROFILE_URL_KEY, linkBuilderService.createProfilePageUrl());
         String content = templateEngine.process("notificationOnSubscribedTraining", context);
-        String subject = "Értesítés esedékes edzésről";
+        String subject = TITLE_OF_SUBSCRIBED_TRAINING_EMAIL_NOTIFICATION;
         sendEmail(user.getEmail(), subject, content);
     }
 
