@@ -3,6 +3,13 @@
   <div class="col-lg-8">
     <h2>
       <span>Edzések</span>
+      <button
+        *jhiHasAnyAuthority="'ROLE_MEMBER'"
+        class="btn btn-secondary float-right"
+        [routerLink]="['/trainings/new']">
+        <fa-icon icon="running"></fa-icon>
+        <span class="d-none d-md-inline"> Új edzés kiírása</span>
+      </button>
     </h2>
     <hr>
     <app-notification-displayer></app-notification-displayer>
