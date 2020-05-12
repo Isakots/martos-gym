@@ -1,5 +1,6 @@
 package hu.isakots.martosgym.service;
 
+import hu.isakots.martosgym.configuration.properties.MartosGymProperties;
 import hu.isakots.martosgym.domain.Reservation;
 import hu.isakots.martosgym.domain.Tool;
 import hu.isakots.martosgym.domain.User;
@@ -19,16 +20,18 @@ import java.util.List;
 @Service
 public class ReservationService {
     private static final Logger LOGGER = LoggerFactory.getLogger(ReservationService.class.getName());
-    private static final long MAX_RESERVATION_DAYS = 7L; // TODO add to config property
 
     private final ToolService toolService;
     private final ReservationRepository reservationRepository;
     private final AccountService accountService;
+    private final MartosGymProperties martosGymProperties;
 
-    public ReservationService(ToolService toolService, ReservationRepository reservationRepository, AccountService accountService) {
+    public ReservationService(ToolService toolService, ReservationRepository reservationRepository,
+                              AccountService accountService, MartosGymProperties martosGymProperties) {
         this.toolService = toolService;
         this.reservationRepository = reservationRepository;
         this.accountService = accountService;
+        this.martosGymProperties = martosGymProperties;
     }
 
     public List<Reservation> findAllForAuthenticatedUser() {
@@ -79,9 +82,9 @@ public class ReservationService {
         if (reservation.getStartDate().isAfter(reservation.getEndDate())) {
             throw new ReservationValidationException("End date of reservation must be after start date.");
         }
-        if (reservation.getStartDate().plus(MAX_RESERVATION_DAYS, ChronoUnit.DAYS).isBefore(reservation.getEndDate())) {
+        if (reservation.getStartDate().plus(martosGymProperties.getMaxReservationDays(), ChronoUnit.DAYS).isBefore(reservation.getEndDate())) {
             throw new ReservationValidationException(
-                    MessageFormat.format("Tool cannot be reserved for more than {0} days.", MAX_RESERVATION_DAYS)
+                    MessageFormat.format("Tool cannot be reserved for more than {0} days.", martosGymProperties.getMaxReservationDays())
             );
         }
     }

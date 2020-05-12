@@ -1,5 +1,6 @@
 package hu.isakots.martosgym.service;
 
+import hu.isakots.martosgym.configuration.properties.MartosGymProperties;
 import hu.isakots.martosgym.domain.Subscription;
 import hu.isakots.martosgym.domain.Training;
 import hu.isakots.martosgym.service.model.SubscriptionType;
@@ -18,17 +19,20 @@ public class EmailNotificationSchedulerService {
 
     private final TrainingService trainingService;
     private final MailService mailService;
+    private final MartosGymProperties martosGymProperties;
 
-    public EmailNotificationSchedulerService(TrainingService trainingService, MailService mailService) {
+    public EmailNotificationSchedulerService(TrainingService trainingService, MailService mailService, MartosGymProperties martosGymProperties) {
         this.trainingService = trainingService;
         this.mailService = mailService;
+        this.martosGymProperties = martosGymProperties;
     }
 
     @Scheduled(cron = "${scheduler.cron}")
     public void scheduledEmailNotificationsForTrainings() {
         LOGGER.debug("Starting scheduled email notification sending for trainings..");
 
-        List<Training> trainingList = trainingService.findAllByStartDateIsBefore(LocalDateTime.now().plus(2L, ChronoUnit.DAYS));
+        List<Training> trainingList = trainingService.findAllByStartDateIsBefore(LocalDateTime.now()
+                .plus(martosGymProperties.getEmailNotificationBeforeTrainingInDays(), ChronoUnit.DAYS));
         LOGGER.debug("Count of found trainings before due date: {}", trainingList.size());
 
         trainingList.forEach(training -> {
