@@ -7,12 +7,14 @@ import {Observable} from "rxjs";
 import {HttpResponse} from "@angular/common/http";
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {ChangeEvent} from "@ckeditor/ckeditor5-angular";
+import {ArticleType} from "../../shared/enums/article-type.enum";
 
 @Component({
   selector: 'app-article-update',
   templateUrl: './article-update.component.html'
 })
 export class ArticleUpdateComponent implements OnInit {
+  articleTypesMap = new Map();
   isSaving: boolean;
   editorForm: FormGroup;
   public ck5editor = ClassicEditor;
@@ -27,6 +29,7 @@ export class ArticleUpdateComponent implements OnInit {
 
   ngOnInit() {
     this._initFormGroup();
+    this.createArticleTypeMap();
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({article}) => {
       if(article.content !== undefined) {
@@ -41,6 +44,16 @@ export class ArticleUpdateComponent implements OnInit {
     } else {
       this.title = "Cikk módosítása";
     }
+  }
+
+  // TODO it has to be refactored, when translation is introduced
+  private createArticleTypeMap() {
+    this.articleTypesMap.set(ArticleType.ABOUT_US, 'Rólunk');
+    this.articleTypesMap.set(ArticleType.RULES, 'Házirend');
+    this.articleTypesMap.set(ArticleType.GYM, 'Edzőterem');
+    this.articleTypesMap.set(ArticleType.NEWS, 'Hírfolyam');
+    this.articleTypesMap.set(ArticleType.NUTRITION, 'Táplálkozás');
+    this.articleTypesMap.set(ArticleType.TRAININGS, 'Edzés');
   }
 
   public onChange({editor}: ChangeEvent) {
@@ -86,16 +99,16 @@ export class ArticleUpdateComponent implements OnInit {
     };
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<Article>>) {
+  private subscribeToSaveResponse(result: Observable<HttpResponse<Article>>) {
     result.subscribe(answer => this.onSaveSuccess(answer.body.id), () => this.onSaveError());
   }
 
-  protected onSaveSuccess(id: string) {
+  private onSaveSuccess(id: string) {
     this.isSaving = false;
     this._router.navigate(['/articles', id, 'view']);
   }
 
-  protected onSaveError() {
+  private onSaveError() {
     this.isSaving = false;
   }
 
