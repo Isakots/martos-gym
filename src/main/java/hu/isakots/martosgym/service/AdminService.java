@@ -37,6 +37,11 @@ public class AdminService {
     }
 
     public GymPeriod createGymPeriod(GymPeriod period) {
+        gymPeriodRepository.findByIsActiveTrue().ifPresent(
+                gymPeriod -> {
+                    throw new UnsupportedOperationException("Active period already exists!");
+                }
+        );
         period.setActive(true);
         return gymPeriodRepository.save(period);
     }

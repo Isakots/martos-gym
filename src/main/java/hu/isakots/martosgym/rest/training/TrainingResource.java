@@ -35,11 +35,12 @@ public class TrainingResource {
         return trainingService.findById(trainingId);
     }
 
-    @GetMapping("/user" + TRAINING_ENDPOINT)
-    @PreAuthorize("hasAuthority('ROLE_USER')")
-    public List<TrainingModel> getUserTrainings() {
-        return trainingService.findAllUserTrainings();
-    }
+    // TODO new feature: list participated-in trainings for user
+//    @GetMapping("/user" + TRAINING_ENDPOINT)
+//    @PreAuthorize("hasAuthority('ROLE_USER')")
+//    public List<TrainingModel> getUserTrainings() {
+//        return trainingService.findAllUserTrainings();
+//    }
 
     @PostMapping(TRAINING_ENDPOINT)
     @PreAuthorize("hasAuthority('ROLE_MEMBER')")
