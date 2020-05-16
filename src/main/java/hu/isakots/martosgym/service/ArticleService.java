@@ -1,5 +1,6 @@
 package hu.isakots.martosgym.service;
 
+import hu.isakots.martosgym.configuration.properties.MartosGymProperties;
 import hu.isakots.martosgym.domain.Article;
 import hu.isakots.martosgym.domain.ArticleType;
 import hu.isakots.martosgym.exception.ResourceNotFoundException;
@@ -22,17 +23,20 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
     private final ModelMapper modelMapper;
     private final MailService mailService;
+    private final MartosGymProperties martosGymProperties;
 
-    public ArticleService(ArticleRepository articleRepository, ModelMapper modelMapper, MailService mailService) {
+    public ArticleService(ArticleRepository articleRepository, ModelMapper modelMapper, MailService mailService,
+                          MartosGymProperties martosGymProperties) {
         this.articleRepository = articleRepository;
         this.modelMapper = modelMapper;
         this.mailService = mailService;
+        this.martosGymProperties = martosGymProperties;
     }
 
     public List<ArticleModel> getAllArticlesByType(ArticleType type) {
         LOGGER.debug("Requesting all articles with type: {}", type);
-        // minusMonths constant will not be necessary if frontend will have paging or dynamic content loading (on scrolling)
-        return articleRepository.findAllByTypeIsAndCreatedDateIsAfter(type, LocalDateTime.now().minusMonths(12L))
+        return articleRepository.findAllByTypeIsAndCreatedDateIsAfter(type, LocalDateTime.now()
+                .minusMonths(martosGymProperties.getShowArticlesThresholdInMonths()))
                 .orElse(Collections.emptyList())
                 .stream()
                 .map(article -> modelMapper.map(article, ArticleModel.class))

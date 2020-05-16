@@ -7,6 +7,7 @@ public class MartosGymProperties {
     private long maxReservationDays;
     private long emailNotificationBeforeTrainingInDays;
     private String contextUrl;
+    private Long showArticlesThresholdInMonths;
 
     public long getMaxReservationDays() {
         return maxReservationDays;
@@ -32,5 +33,12 @@ public class MartosGymProperties {
         this.contextUrl = contextUrl;
     }
 
+    public Long getShowArticlesThresholdInMonths() {
+        return showArticlesThresholdInMonths;
+    }
+
+    public void setShowArticlesThresholdInMonths(Long showArticlesThresholdInMonths) {
+        this.showArticlesThresholdInMonths = showArticlesThresholdInMonths;
+    }
 }
 

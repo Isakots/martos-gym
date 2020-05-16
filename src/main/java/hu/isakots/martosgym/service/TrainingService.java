@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@SuppressWarnings("squid:CommentedOutCodeLine")
 public class TrainingService {
     private static final Logger LOGGER = LoggerFactory.getLogger(TrainingService.class.getName());
     private static final String TRAINING_NOT_FOUND_WITH_ID = "Traning not found with id: {0}";
@@ -60,11 +61,12 @@ public class TrainingService {
                 );
     }
 
-    public List<TrainingModel> findAllUserTrainings() {
-        return accountService.getAuthenticatedUserWithData().getTrainings().stream()
-                .map(training -> modelMapper.map(training, TrainingModel.class))
-                .collect(Collectors.toList());
-    }
+    // TODO new feature: list participated-in trainings for user
+//    public List<TrainingModel> findAllUserTrainings() {
+//        return accountService.getAuthenticatedUserWithData().getTrainings().stream()
+//                .map(training -> modelMapper.map(training, TrainingModel.class))
+//                .collect(Collectors.toList());
+//    }
 
     public TrainingModel createTraining(TrainingModel trainingModel) throws TrainingValidationException {
         LOGGER.debug("REST request to create Training : {}", trainingModel);
@@ -86,9 +88,7 @@ public class TrainingService {
             throw new IllegalArgumentException("The provided resource must have an id.");
         }
         validateTrainingModel(trainingModel);
-        Training training = repository.findById(trainingModel.getId()).orElseThrow(
-                () -> new ResourceNotFoundException(MessageFormat.format(TRAINING_NOT_FOUND_WITH_ID, trainingModel.getId()))
-        );
+        Training training = findTrainingById(trainingModel.getId());
         validateParticipantCount(training, trainingModel);
         training = modelMapper.map(trainingModel, Training.class);
 
@@ -112,9 +112,7 @@ public class TrainingService {
 
     public void deleteTraining(Long trainingId) throws ResourceNotFoundException {
         LOGGER.debug("REST request to delete Training : {}", trainingId);
-        Training training = repository.findById(trainingId).orElseThrow(
-                () -> new ResourceNotFoundException(MessageFormat.format(TRAINING_NOT_FOUND_WITH_ID, trainingId))
-        );
+        Training training = findTrainingById(trainingId);
         training.getParticipants().clear();
         repository.save(training);
         repository.deleteById(trainingId);
@@ -122,9 +120,7 @@ public class TrainingService {
 
     public void subscribeToTraining(Long trainingId, boolean subscription) throws ResourceNotFoundException {
         User authenticatedUser = accountService.getAuthenticatedUserWithData();
-        Training training = repository.findById(trainingId).orElseThrow(
-                () -> new ResourceNotFoundException(MessageFormat.format(TRAINING_NOT_FOUND_WITH_ID, trainingId))
-        );
+        Training training = findTrainingById(trainingId);
         if (subscription) {
             authenticatedUser.getTrainings().add(training);
         } else {

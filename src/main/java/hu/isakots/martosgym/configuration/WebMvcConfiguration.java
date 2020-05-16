@@ -16,7 +16,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     }
 
     /**
-     * Ensure client-side paths are redirected to index.html because client handles routing. NOTE: Do NOT use @EnableWebMvc or it will break this.
+     * Ensure client-side paths are redirected to index.html because client handles routing.
+     * NOTE: Do NOT use @EnableWebMvc or it will break this.
      */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {

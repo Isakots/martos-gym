@@ -22,12 +22,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static hu.isakots.martosgym.configuration.util.AuthoritiesConstants.ROLE_MEMBER;
+import static hu.isakots.martosgym.service.util.Constants.ALL;
+import static hu.isakots.martosgym.service.util.Constants.MEMBERS_ONLY;
 
 @Service
 public class AccountService {
-    private static final String ALL = "ALL";
-    private static final String MEMBERS_ONLY = "MEMBERS_ONLY";
-
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
