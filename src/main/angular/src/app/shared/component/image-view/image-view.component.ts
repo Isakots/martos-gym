@@ -10,6 +10,7 @@ import {HttpResponse} from "@angular/common/http";
 })
 export class ImageViewComponent implements OnInit {
   private image: SafeUrl;
+  private userHasImage = false;
 
   constructor(private fileService: FileService, private sanitizer: DomSanitizer) {
   }
@@ -17,12 +18,18 @@ export class ImageViewComponent implements OnInit {
   ngOnInit() {
     this.fileService.getImage()
       .subscribe(response => {
-        if (response instanceof HttpResponse) {
-          if (response.status == 200) {
-            this.image = this.sanitizer.bypassSecurityTrustUrl(response.body.content);
+          if (response instanceof HttpResponse) {
+            if (response.status == 200) {
+              this.userHasImage = true;
+              this.image = this.sanitizer.bypassSecurityTrustUrl(response.body.content);
+            }
           }
-        }
-      });
+        },
+        error => {
+          if (error.status == 404) {
+            this.userHasImage = false;
+          }
+        });
   }
 
 }
