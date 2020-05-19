@@ -26,23 +26,43 @@ An application to manage a gym in a student hostel.
 
 ### Building & Running
 #### Without backend 
-1. Start JSON server: Run command  'npm run mock-server'
-2. Start the application: Run command 'npm start'     
+1. Download and install NodeJS and set **node.home** property in pom.xml to the folder where your NodeJS is installed.
+2. Navigate to **/src/main/angular** folder inside the project
+3. To start JSON server, run command the following command:
+
+        npm run mock-server
+        
+4. To start the application, run command the following command:
+
+        npm start
+    
 Application can be accessed on http://localhost:4200/
 
 #### With backend 
-1. Set 'node.home' property in pom.xml to the folder where your NodeJS is installed.
-2. Set database connection properties in application.properties:
+1. Download and install NodeJS and set **node.home** property in pom.xml to the folder where your NodeJS is installed.
+2.  Download and install MySQL Server 8.0 
+    
+    Run MySQL 8.0 Command Line Client, enter password, then run command:
+    
+        create database gym;
+    
+    Set database connection properties in resources/application.properties:
     - database.url
     - database.username
     - database.password
-3. Provide valid configuration properties in **configuration folder**
+    
+3. Provide valid configuration properties in **configuration/public** folder
     - SMTP configuration
     - Setting upload directories
     
-4. Create new Tomcat configuration in IDEA
-    1. Configure Run Maven Goal 'clean install'
+4.  Download and install Tomcat Server 8
+
+    Create new Tomcat configuration in IDEA
+    1. Configure Run Maven Goal **clean install**
     2. Configure Build exploded artifact
-    3. Set context-path to '/Martos-Gym'
-    4. Set 'appconf.dir' environment variable in CATALINA_OPTS to set **configuration folder**
-    5. Run Tomcat
+    3. Set context-path to **/Martos-Gym**
+    4. Set **appconf.dir** environment variable in **CATALINA_OPTS** to set **configuration/public** folder
+    
+            -Dappconf.dir=/absolute/path/to/configuration/folder
+            
+5. Run Tomcat
