@@ -1,8 +1,8 @@
 databaseChangeLog:
   - changeSet:
-      id: MRTSGYM-6
+      id: MRTSGYM-10
       author: csokasi.marcell
       changes:
         - sqlFile:
             encoding: utf8
-            path: db/changelog/v0.0.6_addToolAndReservationTables.sql
+            path: db/changelog/v0.0.10_fillDatabaseWithTestUsers.sql

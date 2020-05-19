@@ -4,5 +4,5 @@ databaseChangeLog:
       author: csokasi.marcell
       changes:
         - sqlFile:
-            encofing: utf8
+            encoding: utf8
             path: db/changelog/v0.0.4_addArticles.sql
