@@ -44,7 +44,7 @@ export class GymPeriodComponent implements OnInit {
     if (this.periods !== null && this.periods.length !== 0) {
       return this.activePeriod !== undefined && this.activePeriod !== null;
     } else {
-      return [];
+      return false;
     }
   }
 

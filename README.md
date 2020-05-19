@@ -53,6 +53,7 @@ Application can be accessed on http://localhost:4200/
     
 3. Provide valid configuration properties in **configuration/public** folder
     - SMTP configuration
+    (if you configure your Gmail account as I did, turn ON this switch: https://myaccount.google.com/lesssecureapps)
     - Setting upload directories
     
 4.  Download and install Tomcat Server 8
