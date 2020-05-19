@@ -1,13 +1,17 @@
 <h3>Felhasználók</h3>
+
+<div class="not-visible-on-mobile">
 <hr>
-<div class="container-fluid">
-  <div class="row col-lg-12">
-    <div class="col-lg-3"><p>Teljes név</p></div>
-    <div class="col-lg-3"><p>E-mail cím</p></div>
-    <div class="col-lg-3"><p class="text-center">Szerepkör</p></div>
-    <div class="col-lg-3"><p class="text-center">Bérlet</p></div>
+  <div class="container-fluid">
+    <div class="row col-lg-12">
+      <div class="col-lg-3"><p>Teljes név</p></div>
+      <div class="col-lg-3"><p>E-mail cím</p></div>
+      <div class="col-lg-3"><p class="text-center">Szerepkör</p></div>
+      <div class="col-lg-3"><p class="text-center">Bérlet</p></div>
+    </div>
   </div>
 </div>
+
 <hr>
 <app-managed-user-control
   *ngFor="let formControl of managedUserFormArray.controls; let i = index"

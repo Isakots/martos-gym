@@ -124,7 +124,7 @@
             </div>
             <div class="col-lg-6"></div>
           </div>
-          <div class="row justify-content-md-center">
+          <div *ngIf="isStudentStateChecked()" class=" row justify-content-md-center">
             <div class="col-lg-6">
               <div class="form-group">
                 <label class="form-control-label" for="institution">Oktatási intézmény</label>
@@ -153,7 +153,7 @@
               </div>
             </div>
           </div>
-          <div class="row justify-content-md-center">
+          <div class="row">
             <div class="col-lg-6">
               <div class="form-group">
                 <label class="checkbox-container form-control-label" for="collegian">Kollégista vagyok
@@ -162,7 +162,7 @@
                 </label>
               </div>
             </div>
-            <div class="col-lg-6">
+            <div *ngIf="isCollegianChecked()" class="col-lg-6">
               <div class="form-group">
                 <label class="form-control-label" for="roomNumber">Szobaszám</label>
                 <input type="number" class="form-control" id="roomNumber" name="roomNumber"
@@ -177,34 +177,10 @@
               </div>
             </div>
           </div>
-
-            <div class="col-lg-10">
-              <label class="checkbox-container">Értesítő e-mail küldése edzésekről, melyekre feliratkoztam
-                <input type="checkbox" checked="checked">
-                <span class="checkmark"></span>
-              </label>
-            </div>
-
-
-            <div class="col-lg-10">
-              <label class="checkbox-container">Értesítő e-mail küldése frissen kiírt edzésekről
-                <input type="checkbox" checked="checked">
-                <span class="checkmark"></span>
-              </label>
-            </div>
-
-
-            <div class="col-lg-10">
-              <label class="checkbox-container">Értesítő e-mail küldése új hírfolyam cikkről
-                <input type="checkbox" checked="checked">
-                <span class="checkmark"></span>
-              </label>
-            </div>
-
-
+          <app-notification-displayer></app-notification-displayer>
           <div class="row justify-content-md-center">
-            <div class="col-lg-10">
-              <button type="submit" class="btn btn-primary btn-block" (click)="register()"
+            <div class="col-lg-12">
+              <button type="submit" class="btn btn-primary" (click)="register()"
               >Regisztráció
               </button>
             </div>

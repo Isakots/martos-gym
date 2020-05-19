@@ -89,6 +89,17 @@ $theme-colors: (
   transform: rotate(45deg);
 }
 
+.not-visible-on-mobile {
+  visibility: visible;
+}
+
+@media screen and (max-width: 768px) {
+  .not-visible-on-mobile {
+    display: none;
+    visibility: hidden;
+  }
+}
+
 @import '~@fullcalendar/core/main.css';
 @import '~@fullcalendar/daygrid/main.css';
 @import '~@fullcalendar/timegrid/main.css';

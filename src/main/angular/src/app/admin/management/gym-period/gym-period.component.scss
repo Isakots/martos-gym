@@ -1,3 +1,13 @@
 .gym-period-form {
   margin: 1.5rem;
 }
+
+@media screen and (max-width: 768px) {
+
+  .btn-secondary {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+  }
+
+}

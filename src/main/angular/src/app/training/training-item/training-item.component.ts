@@ -35,6 +35,10 @@ export class TrainingItemComponent implements OnInit {
   }
 
   subscribe(trainingId: number, subscription: boolean) {
+    if(this.isSubscribeDisabled()) {
+      this._userNotificationService.notifyUser("Az edzés már sajnos betelt!", true);
+      return;
+    }
     if (subscription) {
       this._trainingService.subscribe(trainingId).subscribe(() => {
           this._userNotificationService.notifyUser("Sikeresen feliratkoztál az edzésre!", false);
@@ -77,4 +81,11 @@ export class TrainingItemComponent implements OnInit {
     getTrainingDateTime() {
         return this.training.startDate.substring(0,16).replace(/T/g, ' ')+ ' - ' + this.training.endDate.substring(11,16);
     }
+
+  isSubscribeDisabled(): boolean {
+    if(this.training.actualParticipants == this.training.maxParticipants) {
+      return true;
+    }
+    return false;
+  }
 }
