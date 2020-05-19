@@ -122,8 +122,7 @@ library.add(faEnvelope);
   providers: [
     AuthorizationGuard,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: AuthExpiredInterceptor, multi: true},
-    { provide: LOCALE_ID, useValue: 'hu-HU'},
+    {provide: LOCALE_ID, useValue: 'hu-HU'},
   ],
   bootstrap: [AppComponent]
 })

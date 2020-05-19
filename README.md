@@ -66,3 +66,15 @@ Application can be accessed on http://localhost:4200/
             -Dappconf.dir=/absolute/path/to/configuration/folder
             
 5. Run Tomcat
+
+6. Test the application with users:
+```
+    Admin account credentials:
+        Email: admin@test.hu
+        Password: 12345
+```
+```
+    User account credentials:
+        Email: user@test.hu
+        Password: 12345
+```
