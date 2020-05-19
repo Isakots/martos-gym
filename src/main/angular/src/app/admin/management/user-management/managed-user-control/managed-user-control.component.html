@@ -2,7 +2,7 @@
 
   <div class="managed-user-container">
     <div class="data-container">
-      <div class="data-item extra-padding-top clickable" [routerLink]="['user', model.id, 'profile']">
+      <div class="data-item extra-padding-top clickable not-visible-on-mobile" [routerLink]="['user', model.id, 'profile']">
         <p>{{model.lastName}} {{model.firstName}}</p>
       </div>
       <div class="data-item extra-padding-top">
@@ -13,7 +13,7 @@
     </div>
 
     <div class="data-container">
-      <div class="data-item">
+      <div class="data-item not-visible-on-mobile">
         <div>
           <select class="form-control" [formControl]="roleControl">
             <option>Felhasználó</option>
@@ -21,7 +21,7 @@
           </select>
         </div>
       </div>
-      <div class="data-item text-center extra-padding-top">
+      <div class="data-item text-lg-center extra-padding-top">
         <label class="checkbox bounce">
           <input type="checkbox" [formControl]="ticketControl">
           <svg viewBox="0 0 21 21">

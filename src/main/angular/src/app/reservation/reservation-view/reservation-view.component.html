@@ -11,10 +11,11 @@
       <p>Ezt választottad: <span><strong>{{toolToReserve.name}}</strong></span></p>
     </div>
 
-    <div class="col-lg-4" >
+    <div class="col-lg-4">
       <div class="form-group">
         <label class="form-control-label" for="quantity">Mennyit szeretnél foglalni?</label>
-        <input type="number" class="form-control" [formControl]="reservationForm.controls.quantity" id="quantity" name="quantity">
+        <input type="number" class="form-control" [formControl]="reservationForm.controls.quantity" id="quantity"
+               name="quantity">
       </div>
     </div>
 
@@ -68,12 +69,14 @@
       <span> Foglalás</span>
     </button>
 
+
+    <div class="not-visible-on-mobile">
     <hr>
 
-    <app-reservation-calendar-view
-      [reservations]="getReservations()"
-    >
-    </app-reservation-calendar-view>
+      <app-reservation-calendar-view
+        [reservations]="getReservations()">
+      </app-reservation-calendar-view>
+    </div>
 
   </div>
 </div>

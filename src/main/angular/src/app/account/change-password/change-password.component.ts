@@ -5,8 +5,7 @@ import {AccountService} from "../../shared/service/account.service";
 
 @Component({
   selector: 'app-change-password',
-  templateUrl: './change-password.component.html',
-  styleUrls: ['./change-password.component.scss']
+  templateUrl: './change-password.component.html'
 })
 export class ChangePasswordComponent implements OnInit {
   private triedToSave: boolean;
@@ -27,8 +26,8 @@ export class ChangePasswordComponent implements OnInit {
   private _initFormGroup() {
     const formGroupControlsConfig = {
       currentPassword: ['', [Validators.required]],
-      newPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]]
+      newPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(50)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(50)]]
     };
 
     this.passwordForm = this.formBuilder.group(formGroupControlsConfig,

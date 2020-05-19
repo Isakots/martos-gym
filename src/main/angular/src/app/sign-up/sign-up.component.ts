@@ -3,6 +3,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/form
 import {AccountService} from "../shared/service/account.service";
 import {Router} from "@angular/router";
 import {matchValidation} from "../core/validator/match-validator";
+import {UserNotificationService} from "../shared/service/user-notification.service";
 
 @Component({
   selector: 'app-sign-up',
@@ -16,7 +17,8 @@ export class SignUpComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private accountService: AccountService,
-    private _router: Router) {
+    private _router: Router,
+    private _userNotificationService: UserNotificationService) {
   }
 
   ngOnInit() {
@@ -36,7 +38,10 @@ export class SignUpComponent implements OnInit {
       institution: ['', [Validators.required, Validators.maxLength(4)]],
       faculty: ['', [Validators.required, Validators.maxLength(4)]],
       collegian: [false],
-      roomNumber: ['']
+      roomNumber: [''],
+      subOnNewArticles: [false],
+      subOnNewTrainings: [false],
+      subOnSubscribedTrainings: [false]
     };
 
     this.registerForm = this._formBuilder.group(formGroupControlsConfig,
@@ -54,13 +59,35 @@ export class SignUpComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    let userData = this.registerForm.getRawValue();
+    let subscriptions = [];
+    if( this.registerForm.controls.subOnNewArticles.value) {
+      subscriptions.push('ON_NEW_ARTICLES');
+    }
+    if( this.registerForm.controls.subOnNewTrainings.value) {
+      subscriptions.push('ON_NEW_TRAININGS');
+    }
+    if( this.registerForm.controls.subOnSubscribedTrainings.value) {
+      subscriptions.push('ON_SUBSCRIBED_TRAININGS');
+    }
+    let userData = {
+      firstName: this.registerForm.controls.firstName.value,
+      lastName: this.registerForm.controls.lastName.value,
+      studentStatus: this.registerForm.controls.studentStatus.value,
+      institution: this.registerForm.controls.institution.value,
+      faculty: this.registerForm.controls.faculty.value,
+      collegian: this.registerForm.controls.collegian.value,
+      roomNumber: this.registerForm.controls.roomNumber.value,
+      subscriptions: subscriptions
+    };
     this.accountService.registration(userData).subscribe(
       () => {
-        // TODO notify User about registration ( with a snackbar or something )
+        this._userNotificationService.notifyUser("Sikeres regisztráció!", false);
         setTimeout(() => {
           this._router.navigate(['/']);
-        }, 1000)
+        }, 1500)
+      },
+      () => {
+        this._userNotificationService.notifyUser("Sikertelen regisztráció!", true);
       }
     );
   }
@@ -68,5 +95,14 @@ export class SignUpComponent implements OnInit {
   showValidationMessage(formControl: AbstractControl) {
     return (formControl.invalid && (formControl.dirty || formControl.touched)) || (formControl.invalid && this.triedToRegister);
   }
+
+  isStudentStateChecked() {
+    return this.registerForm.controls.studentStatus.value;
+  }
+
+  isCollegianChecked() {
+    return this.registerForm.controls.collegian.value;
+  }
+
 }
 

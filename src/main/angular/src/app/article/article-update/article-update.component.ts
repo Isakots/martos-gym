@@ -11,7 +11,8 @@ import {ArticleType} from "../../shared/enums/article-type.enum";
 
 @Component({
   selector: 'app-article-update',
-  templateUrl: './article-update.component.html'
+  templateUrl: './article-update.component.html',
+  styleUrls: ['./article-update.component.scss']
 })
 export class ArticleUpdateComponent implements OnInit {
   articleTypesMap = new Map();

@@ -335,7 +335,7 @@
       "description": "Edzés leírás",
       "startDate": "2020-05-12T18:30:00",
       "endDate": "2020-05-12T19:30:00",
-      "subscribed": true
+      "subscribed": false
     },
     {
       "id": 4,

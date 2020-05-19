@@ -14,12 +14,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class.getName());
 
-    @ExceptionHandler(DatabaseException.class)
-    public ResponseEntity handleDatabaseException(DatabaseException exception) {
-        logException(exception);
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-    }
-
     @ExceptionHandler(UsernameNotFoundException.class)
     public ResponseEntity handleUserNameNotFoundException(UsernameNotFoundException exception) {
         logException(exception);

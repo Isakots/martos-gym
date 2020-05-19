@@ -118,6 +118,23 @@ $text-color: #000;
 
 }
 
-@media screen and (max-width: 640px) {
+
+@media screen and (max-width: 768px) {
+  .managed-user-container {
+    .data-container {
+      .data-item {
+        width: 100%;
+        float: right;
+      }
+      .extra-padding-top {
+        padding-top: 0;
+      }
+    }
+  }
+
+  .checkbox {
+    float:right;
+    padding-right: 1rem;
+  }
 
 }

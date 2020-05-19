@@ -13,7 +13,10 @@ public class UserToUserWithRolesConverter extends AbstractConverter<User, UserWi
     protected UserWithRoles convert(User user) {
         UserWithRoles userWithRoles = new UserWithRoles();
         userWithRoles.setUsername(user.getEmail());
-        userWithRoles.setAuthorities(user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()));
+        userWithRoles.setAuthorities(user.getAuthorities().stream()
+                .map(Authority::getName)
+                .collect(Collectors.toSet())
+        );
         return userWithRoles;
     }
 
