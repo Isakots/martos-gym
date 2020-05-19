@@ -1,3 +1,8 @@
-<div class="image-container">
+
+<div *ngIf=userHasImage class="image-container">
   <img [src]='image' alt="Profile picture">
+</div>
+
+<div *ngIf=!userHasImage class="image-container">
+  <img src="assets/notfound.png" alt="Profile picture not found">
 </div>

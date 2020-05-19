@@ -47,6 +47,10 @@ server.get('/profile/image/download', (req, res) => {
   });
 });
 
+//
+// server.get('/profile/image/download', (req, res) => {
+//   res.status(404).end();
+// });
 
 
 // Use default router
