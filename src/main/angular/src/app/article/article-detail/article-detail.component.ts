@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Article} from "../../shared/domain/article";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {GeneralConfirmationModalComponent} from "../../shared/component/general-confirmation-modal/general-confirmation-modal.component";
 import {ArticleService} from "../../shared/service/article.service";
 
@@ -14,7 +14,8 @@ export class ArticleDetailComponent implements OnInit {
 
   constructor(
     protected activatedRoute: ActivatedRoute,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private _router: Router
   ) {
   }
 
@@ -30,7 +31,9 @@ export class ArticleDetailComponent implements OnInit {
 
   onEventConfirmation(confirmed: boolean) {
     if (confirmed) {
-      this.articleService.delete(this.article.id);
+      this.articleService.delete(this.article.id).subscribe(() => {
+        this._router.navigateByUrl('/');
+      });
     }
   }
 

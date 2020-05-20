@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ArticleService} from "../../shared/service/article.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Article} from "../../shared/domain/article";
@@ -8,6 +8,7 @@ import {HttpResponse} from "@angular/common/http";
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {ChangeEvent} from "@ckeditor/ckeditor5-angular";
 import {ArticleType} from "../../shared/enums/article-type.enum";
+import {UserNotificationService} from "../../shared/service/user-notification.service";
 
 @Component({
   selector: 'app-article-update',
@@ -25,7 +26,8 @@ export class ArticleUpdateComponent implements OnInit {
   constructor(
     protected articleService: ArticleService,
     protected activatedRoute: ActivatedRoute,
-    private _router: Router) {
+    private _router: Router,
+    private _userNotificationService: UserNotificationService) {
   }
 
   ngOnInit() {
@@ -44,6 +46,7 @@ export class ArticleUpdateComponent implements OnInit {
       this.title = "Új cikk írása";
     } else {
       this.title = "Cikk módosítása";
+      this.editorForm.controls.type.disable();
     }
   }
 
@@ -64,9 +67,9 @@ export class ArticleUpdateComponent implements OnInit {
   private _initFormGroup() {
     this.editorForm = new FormGroup({
       id: new FormControl(''),
-      title: new FormControl(''),
-      type: new FormControl(''),
-      introduction: new FormControl('')
+      title: new FormControl('', Validators.required),
+      type: new FormControl('', Validators.required),
+      introduction: new FormControl('', Validators.required)
     });
   }
 
@@ -101,7 +104,12 @@ export class ArticleUpdateComponent implements OnInit {
   }
 
   private subscribeToSaveResponse(result: Observable<HttpResponse<Article>>) {
-    result.subscribe(answer => this.onSaveSuccess(answer.body.id), () => this.onSaveError());
+    result.subscribe(answer => this.onSaveSuccess(answer.body.id), (error) =>  {
+      if(error.status == 409) {
+        this._userNotificationService.notifyUser('Ilyen típusú cikk már létezik! Kérlek a meglévőt módosítsd!', true);
+      }
+      this.onSaveError();
+    });
   }
 
   private onSaveSuccess(id: string) {

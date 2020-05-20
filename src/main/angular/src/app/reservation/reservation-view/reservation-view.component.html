@@ -16,6 +16,13 @@
         <label class="form-control-label" for="quantity">Mennyit szeretnél foglalni?</label>
         <input type="number" class="form-control" [formControl]="reservationForm.controls.quantity" id="quantity"
                name="quantity">
+        <div
+          *ngIf="showValidationMessage(reservationForm.controls.quantity)">
+          <small class="form-text text-danger"
+                 *ngIf="reservationForm.controls.quantity.errors.required">
+            Mennyiség megadása kötelező!
+          </small>
+        </div>
       </div>
     </div>
 
@@ -61,10 +68,16 @@
       </div>
     </div>
 
+    <div class="mb-2"
+         *ngIf="showDateValidationErrorMessage">
+      <small class="form-text text-danger">
+        A megadott dátum vagy időintervallum nem érvényes!
+      </small>
+    </div>
+
     <button *jhiHasAnyAuthority="'ROLE_USER'"
             (click)="sendReservation()"
-            class="btn btn-secondary"
-            [disabled]="isReservationDisabled()">
+            class="btn btn-secondary">
       <fa-icon icon="hand-point-up"></fa-icon>
       <span> Foglalás</span>
     </button>
