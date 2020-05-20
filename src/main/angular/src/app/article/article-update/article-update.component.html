@@ -3,6 +3,7 @@
     <div class="col-lg-8">
       <h2 id="article-heading">{{title}}</h2>
       <hr>
+      <app-notification-displayer></app-notification-displayer>
       <form name="editForm" role="form" (ngSubmit)="save()" [formGroup]="editorForm">
 
         <div>
@@ -17,7 +18,7 @@
           <div class="col-lg-6">
             <div class="form-group">
               <label class="form-control-label" for="field_type">Típus</label>
-              <select id="field_type" class="form-control" formControlName="type">
+              <select id="field_type" class="form-control" formControlName="type" >
                 <option *ngFor="let entry of articleTypesMap | keyvalue" [value]="entry.key">{{entry.value}}</option>
               </select>
             </div>
@@ -47,11 +48,8 @@
                 <span> Mentés</span>
               </button>
             </div>
-
           </div>
-
         </div>
-
 
       </form>
     </div>

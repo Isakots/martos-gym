@@ -3,6 +3,7 @@ package hu.isakots.martosgym.service;
 import hu.isakots.martosgym.configuration.properties.MartosGymProperties;
 import hu.isakots.martosgym.domain.Article;
 import hu.isakots.martosgym.domain.ArticleType;
+import hu.isakots.martosgym.exception.ArticleTypeAlreadyExistException;
 import hu.isakots.martosgym.exception.ResourceNotFoundException;
 import hu.isakots.martosgym.repository.ArticleRepository;
 import hu.isakots.martosgym.rest.article.model.ArticleModel;
@@ -11,9 +12,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,16 +46,23 @@ public class ArticleService {
                 .collect(Collectors.toList());
     }
 
-    public ArticleModel getArticle(Long id) throws ResourceNotFoundException {
+    public Article getArticle(Long id) throws ResourceNotFoundException {
         Article article = articleRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Article not found")
         );
-        return modelMapper.map(article, ArticleModel.class);
+        return article;
     }
 
-    public ArticleModel createArticle(ArticleModel article) {
+
+    public ArticleModel createArticle(ArticleModel article) throws ArticleTypeAlreadyExistException {
         if (article.getId() != null) {
             throw new IllegalArgumentException("The provided resource must not have ID");
+        }
+        if (ArticleType.RULES.equals(article.getType()) || ArticleType.ABOUT_US.equals(article.getType())) {
+            Optional<Article> persistedOptionalArticle = articleRepository.findByType(article.getType());
+            if (persistedOptionalArticle.isPresent()) {
+                throw new ArticleTypeAlreadyExistException(MessageFormat.format("Article already exist with type: {0}", article.getType().name()));
+            }
         }
         Article persistedArticle = articleRepository.save(modelMapper.map(article, Article.class));
         mailService.startEmailNotificationAsyncTaskOnNewArticle();

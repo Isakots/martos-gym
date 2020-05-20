@@ -1,9 +1,11 @@
 package hu.isakots.martosgym.rest.article;
 
 import hu.isakots.martosgym.domain.ArticleType;
+import hu.isakots.martosgym.exception.ArticleTypeAlreadyExistException;
 import hu.isakots.martosgym.exception.ResourceNotFoundException;
 import hu.isakots.martosgym.rest.article.model.ArticleModel;
 import hu.isakots.martosgym.service.ArticleService;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -21,9 +23,11 @@ public class ArticleResource {
     private static final Logger LOGGER = LoggerFactory.getLogger(ArticleResource.class.getName());
 
     private final ArticleService articleService;
+    private final ModelMapper modelMapper;
 
-    public ArticleResource(ArticleService articleService) {
+    public ArticleResource(ArticleService articleService, ModelMapper modelMapper) {
         this.articleService = articleService;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping("/articles")
@@ -34,12 +38,12 @@ public class ArticleResource {
     @GetMapping("/articles/{id}")
     public ResponseEntity<ArticleModel> getArticle(@PathVariable Long id) throws ResourceNotFoundException {
         LOGGER.debug("REST request to get Article : {}", id);
-        return ResponseEntity.ok(articleService.getArticle(id));
+        return ResponseEntity.ok(modelMapper.map(articleService.getArticle(id), ArticleModel.class));
     }
 
     @PostMapping("/articles")
     @PreAuthorize("hasAuthority('ROLE_MEMBER')")
-    public ResponseEntity<ArticleModel> createArticle(@RequestBody ArticleModel article) {
+    public ResponseEntity<ArticleModel> createArticle(@RequestBody ArticleModel article) throws ArticleTypeAlreadyExistException {
         LOGGER.debug("REST request to save Article : {}", article);
         return new ResponseEntity<>(articleService.createArticle(article), HttpStatus.CREATED);
     }

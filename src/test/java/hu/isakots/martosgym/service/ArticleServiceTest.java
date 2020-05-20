@@ -4,6 +4,7 @@ import hu.isakots.martosgym.configuration.ModelMapperConfiguration;
 import hu.isakots.martosgym.configuration.properties.MartosGymProperties;
 import hu.isakots.martosgym.domain.Article;
 import hu.isakots.martosgym.domain.ArticleType;
+import hu.isakots.martosgym.exception.ArticleTypeAlreadyExistException;
 import hu.isakots.martosgym.exception.ResourceNotFoundException;
 import hu.isakots.martosgym.repository.ArticleRepository;
 import hu.isakots.martosgym.rest.article.model.ArticleModel;
@@ -34,7 +35,7 @@ public class ArticleServiceTest {
     private static final Long MOCK_ID = 1L;
     private static final String MOCK_TITLE = "MOCK_TITLE";
     private static final String MOCK_INTRO = "MOCK_INTRO";
-    private static final ArticleType MOCK_TYPE = ArticleType.ABOUT_US;
+    private static final ArticleType MOCK_TYPE = ArticleType.NUTRITION;
     private static final String MOCK_CONTENT = "<p>MOCK_CONENT</p>";
     private static final LocalDateTime MOCK_CREATED_DATE = LocalDateTime.now();
 
@@ -90,9 +91,9 @@ public class ArticleServiceTest {
         Article mockArticle = createMockArticle();
         when(articleRepository.findById(eq(MOCK_ID))).thenReturn(Optional.of(mockArticle));
 
-        ArticleModel result = articleService.getArticle(MOCK_ID);
+        Article result = articleService.getArticle(MOCK_ID);
 
-        assertTrue(result.getId().equals(MOCK_ID.toString()));
+        assertEquals(MOCK_ID, result.getId());
         assertEquals(MOCK_TITLE, result.getTitle());
         assertEquals(MOCK_TYPE, result.getType());
         assertEquals(MOCK_INTRO, result.getIntroduction());
@@ -101,13 +102,13 @@ public class ArticleServiceTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void createArticle_whenArticleModelDoesNotHaveId_thenIllegalArgumentExceptionIsThrown() {
+    public void createArticle_whenArticleModelDoesNotHaveId_thenIllegalArgumentExceptionIsThrown() throws ArticleTypeAlreadyExistException {
         ArticleModel mockArticleModel = createArticleModel();
         articleService.createArticle(mockArticleModel);
     }
 
     @Test
-    public void createArticle_whenArticleModelDoesNotHaveId_thenArticleIsSaved() {
+    public void createArticle_whenArticleModelDoesNotHaveId_thenArticleIsSaved() throws ArticleTypeAlreadyExistException {
         ArticleModel mockArticleModel = createArticleModel();
         mockArticleModel.setId(null);
         when(articleRepository.save(any())).thenReturn(createMockArticle());

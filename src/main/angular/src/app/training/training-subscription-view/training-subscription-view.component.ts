@@ -20,9 +20,6 @@ export class TrainingSubscriptionViewComponent implements OnInit {
   ngOnInit(): void {
     this._trainingService.findAll().subscribe(response => {
         this.trainings = response.body;
-      },
-      () => {
-        this._userNotificationService.notifyUser("Edzések betöltése sikertelen!", true);
       });
   }
 
@@ -38,7 +35,5 @@ export class TrainingSubscriptionViewComponent implements OnInit {
       this._userNotificationService.notifyUser("Edzés törlése sikertelen", true);
     }
   }
-
-
 
 }

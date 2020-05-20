@@ -62,6 +62,11 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
+    @ExceptionHandler(ArticleTypeAlreadyExistException.class)
+    public ResponseEntity handleArticleTypeAlreadyExistException(ArticleTypeAlreadyExistException exception) {
+        logException(exception);
+        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+    }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity handleUnexpectedException(Exception exception) {

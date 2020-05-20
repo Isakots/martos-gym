@@ -25,6 +25,8 @@ export class TrainingUpdateComponent implements OnInit {
 
   trainingForm: FormGroup;
 
+  showDateValidationErrorMessage: boolean = false;
+
   constructor(
     protected _activatedRoute: ActivatedRoute,
     private _calendar: NgbCalendar,
@@ -45,6 +47,7 @@ export class TrainingUpdateComponent implements OnInit {
     this._initTitle();
     this._initTraining();
     this._initFormGroupAndControls();
+    this._initDateStruct();
     this.triedToSave = false;
   }
 
@@ -53,21 +56,6 @@ export class TrainingUpdateComponent implements OnInit {
       this.title = "Új edzés kiírása";
     } else {
       this.title = "Edzés módosítása";
-    }
-  }
-
-  private _initFormGroupAndControls() {
-    this.trainingForm = new FormGroup({
-      name: new FormControl(this.training.name, Validators.required),
-      maxParticipants: new FormControl(this.training.maxParticipants, Validators.required),
-      description: new FormControl(this.training.description)
-    });
-    if (this.training.id !== null) {
-      let startDate = new Date(this.training.startDate);
-      this.date = {year: startDate.getFullYear(), month: startDate.getMonth() + 1, day: startDate.getDate()};
-      this.startTime = {hour: startDate.getHours(), minute: startDate.getMinutes(), second: 0};
-      let endDate = new Date(this.training.endDate);
-      this.endTime = {hour: endDate.getHours(), minute: endDate.getMinutes(), second: 0};
     }
   }
 
@@ -86,14 +74,35 @@ export class TrainingUpdateComponent implements OnInit {
     }
   }
 
+  private _initFormGroupAndControls() {
+    this.trainingForm = new FormGroup({
+      name: new FormControl(this.training.name, Validators.required),
+      maxParticipants: new FormControl(this.training.maxParticipants, Validators.required),
+      description: new FormControl(this.training.description)
+    });
+    if (this.training.id !== null) {
+      let startDate = new Date(this.training.startDate);
+      this.date = {year: startDate.getFullYear(), month: startDate.getMonth() + 1, day: startDate.getDate()};
+      this.startTime = {hour: startDate.getHours(), minute: startDate.getMinutes(), second: 0};
+      let endDate = new Date(this.training.endDate);
+      this.endTime = {hour: endDate.getHours(), minute: endDate.getMinutes(), second: 0};
+    }
+  }
+
+  private _initDateStruct() {
+    let currentDate = new Date();
+    this.date = {year: currentDate.getFullYear(), month: currentDate.getMonth() + 1, day: currentDate.getDate()};
+  }
+
   showValidationMessage(formControl: AbstractControl) {
     return (formControl.invalid && (formControl.dirty || formControl.touched)) || (formControl.invalid && this.triedToSave);
   }
 
   save() {
     this.triedToSave = true;
+    this._dateValidation();
     this.trainingForm.updateValueAndValidity();
-    if (this.trainingForm.invalid) {
+    if (this.trainingForm.invalid || this.showDateValidationErrorMessage) {
       return;
     }
 
@@ -117,7 +126,18 @@ export class TrainingUpdateComponent implements OnInit {
     } else {
       this._createTraining(training);
     }
+  }
 
+  private _dateValidation() {
+    let yesterday = new Date();
+    yesterday.setDate(new Date().getDate() - 1);
+    if(new Date(this.date.year, this.date.month - 1, this.date.day).getTime() < yesterday.getTime()) {
+      this.showDateValidationErrorMessage = true;
+    } else if(this.endTime.hour < this.startTime.hour || (this.endTime.hour == this.startTime.hour && this.endTime.minute <= this.startTime.minute)) {
+      this.showDateValidationErrorMessage = true;
+    } else {
+      this.showDateValidationErrorMessage = false;
+    }
   }
 
   private _createTraining(training: TrainingModel) {

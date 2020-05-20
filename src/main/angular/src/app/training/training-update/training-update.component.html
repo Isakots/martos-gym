@@ -89,6 +89,14 @@
         <ngb-timepicker id="training-end-date" [(ngModel)]="endTime" [seconds]="false"
                         [minuteStep]="minuteStep"></ngb-timepicker>
       </div>
+
+    </div>
+
+    <div class="mb-2"
+         *ngIf="showDateValidationErrorMessage">
+      <small class="form-text text-danger">
+        A megadott dátum vagy időintervallum nem érvényes!
+      </small>
     </div>
 
     <button *jhiHasAnyAuthority="'ROLE_MEMBER'"
