@@ -1,5 +1,6 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ModalDismissReasons, NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
+import {ConfirmationType} from "../../constants";
 
 @Component({
   selector: 'app-general-confirmation-modal',
@@ -10,13 +11,28 @@ export class GeneralConfirmationModalComponent implements OnInit {
   protected modalReference: NgbModalRef;
   closeResult: string;
 
+  CONFIRMATION_TYPE_ENUM = ConfirmationType;
+
+  @Input()
+  confirmationType: ConfirmationType = ConfirmationType.DELETION;
+
   @Output()
   public eventConfirmed: EventEmitter<boolean> = new EventEmitter();
+
+  confirmationText: string;
 
   constructor(protected modalService: NgbModal) {
   }
 
   ngOnInit() {
+    switch(this.confirmationType) {
+      case ConfirmationType.DELETION:
+        this.confirmationText = 'Biztos, hogy törölni szeretné?';
+        break;
+      case ConfirmationType.EMAIL:
+        this.confirmationText = 'Biztos, hogy elküldi az e-maileket?';
+        break;
+    }
   }
 
   public open() {

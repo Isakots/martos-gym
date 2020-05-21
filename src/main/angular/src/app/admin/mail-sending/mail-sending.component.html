@@ -46,7 +46,7 @@
       </ckeditor>
     </div>
 
-    <button (click)="sendEmail()"
+    <button (click)="validateFormOnSending()"
       class="btn btn-secondary">
       <fa-icon icon="envelope"></fa-icon>
       <span> Küldés</span>
@@ -54,3 +54,9 @@
 
   </div>
 </div>
+
+
+<app-general-confirmation-modal
+  [confirmationType]='confirmationType'
+  (eventConfirmed)="onEventConfirmation($event)"
+></app-general-confirmation-modal>
