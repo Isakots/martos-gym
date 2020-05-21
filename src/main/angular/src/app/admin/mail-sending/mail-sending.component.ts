@@ -1,16 +1,22 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, ViewChild} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {ChangeEvent} from "@ckeditor/ckeditor5-angular";
 import {SendEmailService} from "../../shared/service/send-email.service";
 import {UserNotificationService} from "../../shared/service/user-notification.service";
+import {GeneralConfirmationModalComponent} from "../../shared/component/general-confirmation-modal/general-confirmation-modal.component";
+import {ConfirmationType} from "../../shared/constants";
 
 @Component({
   selector: 'app-mail-sending',
   templateUrl: './mail-sending.component.html'
 })
 export class MailSendingComponent implements OnInit {
+  @ViewChild(GeneralConfirmationModalComponent) confirmEmailSendingModal: GeneralConfirmationModalComponent;
+
+  readonly confirmationType = ConfirmationType.EMAIL;
+
   triedToSave: boolean = false;
   public ck5editor = ClassicEditor;
   mailForm: FormGroup;
@@ -43,13 +49,20 @@ export class MailSendingComponent implements OnInit {
     this.editorData = editor.getData();
   }
 
-  sendEmail() {
+  openConfirmationModal() {
+    this.confirmEmailSendingModal.open();
+  }
+
+  validateFormOnSending() {
     this.triedToSave = true;
     this.mailForm.updateValueAndValidity();
     if (this.mailForm.invalid) {
       return;
     }
+    this.openConfirmationModal();
+  }
 
+  sendEmail() {
     let emailRequestModel = {
       mailTo: this.mailForm.controls.mailTo.value === 'Mindenki' ? 'ALL' : 'MEMBERS_ONLY',
       topic: this.mailForm.controls.topic.value,
@@ -63,5 +76,11 @@ export class MailSendingComponent implements OnInit {
         this._userNotificationService.notifyUser('Sikertelen emailküldés...', true);
       })
 
+  }
+
+  onEventConfirmation(confirmed: boolean) {
+    if(confirmed) {
+      this.sendEmail();
+    }
   }
 }
