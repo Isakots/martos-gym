@@ -1,6 +1,6 @@
 import {Component, forwardRef, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormBuilder, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {ManagedUser} from "../../../../shared/domain/managed-user";
+import {ManagedUser} from '../../../../shared/domain/managed-user';
 
 @Component({
   selector: 'app-managed-user-control',
@@ -16,20 +16,20 @@ import {ManagedUser} from "../../../../shared/domain/managed-user";
 })
 export class ManagedUserControlComponent implements OnInit, ControlValueAccessor {
 
-  initialization : boolean = true;
+  initialization = true;
 
   public model: ManagedUser;
   public ticketControl: FormControl;
   public roleControl: FormControl;
 
   onChange = (_: ManagedUser) => {
-  };
+  }
   onTouched = () => {
-  };
+  }
 
-  constructor(private _formBuilder: FormBuilder) {
-    this.ticketControl = this._formBuilder.control(false);
-    this.roleControl = this._formBuilder.control('Felhasználó');
+  constructor(private formBuilder: FormBuilder) {
+    this.ticketControl = this.formBuilder.control(false);
+    this.roleControl = this.formBuilder.control('Felhasználó');
   }
 
   ngOnInit() {
@@ -39,8 +39,8 @@ export class ManagedUserControlComponent implements OnInit, ControlValueAccessor
     });
 
     this.roleControl.valueChanges.subscribe((value: string) => {
-      if('Körtag' === value) {
-        this.model.authorities = ['ROLE_USER','ROLE_MEMBER'];
+      if ('Körtag' === value) {
+        this.model.authorities = ['ROLE_USER', 'ROLE_MEMBER'];
       } else {
         this.model.authorities = ['ROLE_USER'];
       }
@@ -58,12 +58,12 @@ export class ManagedUserControlComponent implements OnInit, ControlValueAccessor
 
   writeValue(newValue: ManagedUser): void {
     this.model = newValue;
-    if(this.initialization) {
+    if (this.initialization) {
       this.roleControl.setValue(this.getRole(this.model));
       this.initialization = false;
     }
     this.ticketControl.setValue(newValue.hasTicketForActivePeriod);
-    this.roleControl.setValue(this.getRole(newValue))
+    this.roleControl.setValue(this.getRole(newValue));
   }
 
   public getRole(user: ManagedUser): string {

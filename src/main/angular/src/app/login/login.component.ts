@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {LoginService} from "../shared/service/login.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {JWT_TOKEN_KEY} from "../shared/constants";
-import {StateStorageService} from "../shared/service/state-storage.service";
-import {Router} from "@angular/router";
-import {AccountService} from "../shared/service/account.service";
-import {UserNotificationService} from "../shared/service/user-notification.service";
+import {LoginService} from '../shared/service/login.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {JWT_TOKEN_KEY} from '../shared/constants';
+import {StateStorageService} from '../shared/service/state-storage.service';
+import {Router} from '@angular/router';
+import {AccountService} from '../shared/service/account.service';
+import {UserNotificationService} from '../shared/service/user-notification.service';
 
 @Component({
   selector: 'app-login',
@@ -33,10 +33,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    let loginDTO = this.loginForm.getRawValue();
+    const loginDTO = this.loginForm.getRawValue();
     this.loginService.authenticate(loginDTO).subscribe(
       response => {
-        let tokenStr = response.token;
+        const tokenStr = response.token;
         sessionStorage.setItem(JWT_TOKEN_KEY, tokenStr);
         // this call is necessary to update userIdentity.. TODO refactor
         this.accountService.identity();
@@ -50,6 +50,6 @@ export class LoginComponent implements OnInit {
       },
       () => {
         this.userNotificationService.notifyUser('Bejelentkezés sikertelen!', true);
-      })
+      });
   }
 }

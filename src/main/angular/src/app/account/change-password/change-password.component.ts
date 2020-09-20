@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {matchValidation} from "../../core/validator/match-validator";
-import {AccountService} from "../../shared/service/account.service";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {matchValidation} from '../../core/validator/match-validator';
+import {AccountService} from '../../shared/service/account.service';
 
 @Component({
   selector: 'app-change-password',
@@ -46,7 +46,7 @@ export class ChangePasswordComponent implements OnInit {
     if (this.passwordForm.invalid) {
       return;
     }
-    let passwordDto = {
+    const passwordDto = {
       currentPassword: this.passwordForm.controls.currentPassword.value,
       newPassword: this.passwordForm.controls.newPassword.value
     };
@@ -57,7 +57,7 @@ export class ChangePasswordComponent implements OnInit {
       () => {
         this.error = true;
       }
-    )
+    );
 
   }
 }

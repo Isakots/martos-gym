@@ -4,12 +4,12 @@ import {LOCALE_ID, NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {AuthInterceptor} from "./core/interceptor/auth.interceptor";
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {NavbarComonent} from "./layout/navbar/navbar.component";
-import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import {library} from '@fortawesome/fontawesome-svg-core'
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {AuthInterceptor} from './core/interceptor/auth.interceptor';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NavbarComponent} from './layout/navbar/navbar.component';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {library} from '@fortawesome/fontawesome-svg-core';
 import {
   faArrowLeft,
   faBan,
@@ -20,11 +20,13 @@ import {
   faClipboardList,
   faDrumstickBite,
   faDumbbell,
-  faEdit, faEnvelope,
+  faEdit,
+  faEnvelope,
   faFutbol,
   faHandPointDown,
   faHandPointUp,
-  faLock, faNewspaper,
+  faLock,
+  faNewspaper,
   faPencilAlt,
   faPlus,
   faRunning,
@@ -37,27 +39,27 @@ import {
   faUserPlus,
   faUsers,
   faWrench
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
 import {HomeComponent} from './layout/home/home.component';
 import {AboutUsComponent} from './layout/about-us/about-us.component';
 import {NutritionComponent} from './layout/nutrition/nutrition.component';
 import {GymInfoComponent} from './layout/gym-info/gym-info.component';
-import {AccountModule} from "./account/account.module";
+import {AccountModule} from './account/account.module';
 import {SignUpComponent} from './sign-up/sign-up.component';
-import {ReactiveFormsModule} from "@angular/forms";
-import {AuthorizationGuard} from "./core/guard/authorization-guard.service";
-import {ArticleModule} from "./article/article.module";
-import {TimelineComponent} from "./layout/home/timeline/timeline.component";
-import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
-import {SharedModule} from "./shared/shared.module";
-import {ToolModule} from "./tool/tool.module";
-import {ReservationModule} from "./reservation/reservation.module";
+import {ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {AdminModule} from "./admin/admin.module";
-import {TrainingModule} from "./training/training.module";
-import {AuthExpiredInterceptor} from "./core/interceptor/auth-expired.interceptor";
+import {AdminModule} from './admin/admin.module';
+import {TrainingModule} from './training/training.module';
 import localeHu from '@angular/common/locales/hu';
-import {registerLocaleData} from "@angular/common";
+import {registerLocaleData} from '@angular/common';
+import {AuthorizationGuard} from './core/guard/authorization-guard.service';
+import {ArticleModule} from './article/article.module';
+import {TimelineComponent} from './layout/home/timeline/timeline.component';
+import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
+import {SharedModule} from './shared/shared.module';
+import {ToolModule} from './tool/tool.module';
+import {ReservationModule} from './reservation/reservation.module';
+
 registerLocaleData(localeHu);
 
 // FaIcon imports
@@ -94,7 +96,7 @@ library.add(faEnvelope);
   declarations: [
     AppComponent,
     LoginComponent,
-    NavbarComonent,
+    NavbarComponent,
     HomeComponent,
     AboutUsComponent,
     NutritionComponent,

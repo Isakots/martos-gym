@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from "@angular/core";
-import {Tool} from "../../shared/domain/tool";
-import {ModalDismissReasons, NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
-import {ToolService} from "../../shared/service/tool.service";
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Tool} from '../../shared/domain/tool';
+import {ModalDismissReasons, NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {ToolService} from '../../shared/service/tool.service';
 
 @Component({
   selector: 'app-tool-update-modal',
@@ -73,12 +73,12 @@ export class ToolUpdateModalComponent implements OnInit {
         name: '',
         quantity: null,
         reachable: true
-      }
+      };
     }
   }
 
   private _initTitle() {
-    if(this.tool.id === undefined || this.tool.id === null) {
+    if (this.tool.id === undefined || this.tool.id === null) {
       this.title = 'Eszköz hozzáadása';
     } else {
       this.title = 'Eszköz módosítása';

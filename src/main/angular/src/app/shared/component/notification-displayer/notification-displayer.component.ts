@@ -1,12 +1,12 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {UserNotificationService} from "../../service/user-notification.service";
-import {Subscription} from "rxjs";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {UserNotificationService} from '../../service/user-notification.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-notification-displayer',
   templateUrl: './notification-displayer.component.html'
 })
-export class NotificationDisplayerComponent implements OnInit, OnDestroy{
+export class NotificationDisplayerComponent implements OnInit, OnDestroy {
   notificationText: any = {};
   subscription: Subscription;
 

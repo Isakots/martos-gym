@@ -1,11 +1,11 @@
-import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Reservation} from "../../shared/domain/reservation";
-import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
-import {NgbCalendar, NgbDateStruct, NgbTimeStruct} from "@ng-bootstrap/ng-bootstrap";
-import {Tool} from "../../shared/domain/tool";
-import {ReservationService} from "../../shared/service/reservation.service";
-import {UserNotificationService} from "../../shared/service/user-notification.service";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Reservation} from '../../shared/domain/reservation';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
+import {NgbCalendar, NgbDateStruct, NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
+import {Tool} from '../../shared/domain/tool';
+import {ReservationService} from '../../shared/service/reservation.service';
+import {UserNotificationService} from '../../shared/service/user-notification.service';
 
 @Component({
   selector: 'app-reservation-view',
@@ -14,7 +14,7 @@ import {UserNotificationService} from "../../shared/service/user-notification.se
 })
 export class ReservationViewComponent implements OnInit {
   readonly minuteStep = 30;
-  triedToSave: boolean = false;
+  triedToSave = false;
 
   startTime: NgbTimeStruct = {hour: 8, minute: 0, second: 0};
   endTime: NgbTimeStruct = {hour: 16, minute: 0, second: 0};
@@ -27,7 +27,7 @@ export class ReservationViewComponent implements OnInit {
 
   reservationForm: FormGroup;
 
-  showDateValidationErrorMessage: boolean = false;
+  showDateValidationErrorMessage = false;
 
   constructor(
     protected activatedRoute: ActivatedRoute,
@@ -58,7 +58,7 @@ export class ReservationViewComponent implements OnInit {
   }
 
   private _initDateStructs() {
-    let currentDate = new Date();
+    const currentDate = new Date();
     this.startDate = {year: currentDate.getFullYear(), month: currentDate.getMonth() + 1, day: currentDate.getDate()};
     this.endDate = {year: currentDate.getFullYear(), month: currentDate.getMonth() + 1, day: currentDate.getDate() + 1};
   }
@@ -83,26 +83,28 @@ export class ReservationViewComponent implements OnInit {
       id: null,
       subjectName: this.toolToReserve.name,
       quantity: this.reservationForm.controls.quantity.value,
-      startDate: new Date(this.startDate.year, this.startDate.month - 1, this.startDate.day, this.startTime.hour, this.startTime.minute, this.startTime.second)
-        .toISOString().substring(0, 19),
-      endDate: new Date(this.endDate.year, this.endDate.month - 1, this.endDate.day, this.endTime.hour, this.endTime.minute, this.endTime.second)
-        .toISOString().substring(0, 19),
+      startDate: new Date(
+        this.startDate.year, this.startDate.month - 1, this.startDate.day,
+        this.startTime.hour, this.startTime.minute, this.startTime.second
+      ).toISOString().substring(0, 19),
+      endDate: new Date(
+        this.endDate.year, this.endDate.month - 1, this.endDate.day,
+        this.endTime.hour, this.endTime.minute, this.endTime.second
+      ).toISOString().substring(0, 19),
       returned: null
     }).subscribe(() => {
         this.router.navigate(['/profile/reservations']);
       },
       (error) => {
         if (error.status === 406) {
-          this.userNotificationService.notifyUser("Validációs hiba! Foglalás nem megfelelő. Kérlek ellenőrizd, hogy mindent megfelelően töltöttél-e ki!", true);
+          this.userNotificationService.notifyUser('Validációs hiba! Foglalás nem megfelelő. Kérlek ellenőrizd, hogy mindent megfelelően töltöttél-e ki!', true);
         }
       });
   }
 
   private _dateValidation() {
-    let yesterday = new Date();
+    const yesterday = new Date();
     yesterday.setDate(new Date().getDate() - 1);
-    console.log(yesterday);
-    console.log(new Date(this.startDate.year, this.startDate.month - 1, this.startDate.day));
     if (new Date(this.startDate.year, this.startDate.month - 1, this.startDate.day).getTime() < yesterday.getTime()) {
       this.showDateValidationErrorMessage = true;
     } else if (new Date(this.endDate.year, this.endDate.month - 1, this.endDate.day).getTime() <
@@ -110,10 +112,11 @@ export class ReservationViewComponent implements OnInit {
       this.showDateValidationErrorMessage = true;
     } else if (new Date(this.startDate.year, this.startDate.month - 1, this.startDate.day).getTime() ==
       new Date(this.endDate.year, this.endDate.month - 1, this.endDate.day).getTime() &&
-      (this.endTime.hour < this.startTime.hour || (this.endTime.hour == this.startTime.hour && this.endTime.minute <= this.startTime.minute))) {
+      (this.endTime.hour < this.startTime.hour ||
+        (this.endTime.hour == this.startTime.hour && this.endTime.minute <= this.startTime.minute))) {
       this.showDateValidationErrorMessage = true;
     } else {
-     this.showDateValidationErrorMessage = false;
+      this.showDateValidationErrorMessage = false;
     }
   }
 

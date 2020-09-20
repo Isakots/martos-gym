@@ -1,5 +1,5 @@
-import {Directive, EventEmitter, Input, Output} from "@angular/core";
-import {User} from "../domain/user";
+import {Directive, EventEmitter, Input, Output} from '@angular/core';
+import {User} from '../domain/user';
 
 // unused.. keeping it, it still can be useful
 

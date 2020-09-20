@@ -1,9 +1,9 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {GymPeriod} from "../../../shared/domain/gym-period";
-import {GymPeriodService} from "../../../shared/service/gym-period.service";
-import {UserNotificationService} from "../../../shared/service/user-notification.service";
-import {NgbCalendar, NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
-import {FormControl, Validators} from "@angular/forms";
+import {Component, Input, OnInit} from '@angular/core';
+import {GymPeriod} from '../../../shared/domain/gym-period';
+import {GymPeriodService} from '../../../shared/service/gym-period.service';
+import {UserNotificationService} from '../../../shared/service/user-notification.service';
+import {NgbCalendar, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-gym-period',
@@ -23,8 +23,8 @@ export class GymPeriodComponent implements OnInit {
 
   constructor(
     private calendar: NgbCalendar,
-    private _gymPeriodService: GymPeriodService,
-    private _userNotificationService: UserNotificationService) {
+    private gymPeriodService: GymPeriodService,
+    private userNotificationService: UserNotificationService) {
   }
 
   ngOnInit(): void {
@@ -49,16 +49,16 @@ export class GymPeriodComponent implements OnInit {
   }
 
   closeActivePeriod() {
-    this._gymPeriodService.patch().subscribe(
+    this.gymPeriodService.patch().subscribe(
       response => {
         this.periods = response.body;
         this.activePeriod = null;
-        this._userNotificationService.notifyUser("Időszak lezárása sikeres!", false);
+        this.userNotificationService.notifyUser('Időszak lezárása sikeres!', false);
       },
       () => {
-        this._userNotificationService.notifyUser("Időszak lezárása sikertelen!", true);
+        this.userNotificationService.notifyUser('Időszak lezárása sikertelen!', true);
       }
-    )
+    );
   }
 
   setFormVisible() {
@@ -66,7 +66,7 @@ export class GymPeriodComponent implements OnInit {
   }
 
   saveNewPeriod() {
-    this._gymPeriodService.create({
+    this.gymPeriodService.create({
       id: null,
       name: this.periodNameFormControl.value,
       active: null,
@@ -76,11 +76,11 @@ export class GymPeriodComponent implements OnInit {
       response => {
         this.activePeriod = response.body;
         this.isNewPeriodFormVisible = false;
-        this._userNotificationService.notifyUser("Időszak hozzáadása sikeres!", false);
+        this.userNotificationService.notifyUser('Időszak hozzáadása sikeres!', false);
       },
       () => {
-        this._userNotificationService.notifyUser("Időszak hozzáadása sikertelen!", true);
+        this.userNotificationService.notifyUser('Időszak hozzáadása sikertelen!', true);
       }
-    )
+    );
   }
 }

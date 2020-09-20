@@ -1,9 +1,9 @@
-import {RouterModule, Routes} from "@angular/router";
-import {NgModule} from "@angular/core";
-import {ArticleUpdateComponent} from "./article-update/article-update.component";
-import {ArticleDetailComponent} from "./article-detail/article-detail.component";
-import {ArticleResolve} from "./article.resolver";
-import {AuthorizationGuard} from "../core/guard/authorization-guard.service";
+import {RouterModule, Routes} from '@angular/router';
+import {NgModule} from '@angular/core';
+import {ArticleUpdateComponent} from './article-update/article-update.component';
+import {ArticleDetailComponent} from './article-detail/article-detail.component';
+import {ArticleResolve} from './article.resolver';
+import {AuthorizationGuard} from '../core/guard/authorization-guard.service';
 
 const articleRoutes: Routes = [
   {
@@ -23,7 +23,7 @@ const articleRoutes: Routes = [
           article: ArticleResolve
         },
         data : {
-          authority: "ROLE_MEMBER"
+          authority: 'ROLE_MEMBER'
         },
         canActivate: [AuthorizationGuard]
       },
@@ -34,7 +34,7 @@ const articleRoutes: Routes = [
           article: ArticleResolve
         },
         data : {
-          authority: "ROLE_MEMBER"
+          authority: 'ROLE_MEMBER'
         },
         canActivate: [AuthorizationGuard]
       }

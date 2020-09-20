@@ -1,10 +1,10 @@
-import {Injectable} from "@angular/core";
-import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
-import {Observable, of} from "rxjs";
-import {filter, map} from "rxjs/operators";
-import {HttpResponse} from "@angular/common/http";
-import {Reservation} from "../shared/domain/reservation";
-import {ReservationService} from "../shared/service/reservation.service";
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
+import {Observable, of} from 'rxjs';
+import {filter, map} from 'rxjs/operators';
+import {HttpResponse} from '@angular/common/http';
+import {Reservation} from '../shared/domain/reservation';
+import {ReservationService} from '../shared/service/reservation.service';
 
 @Injectable({providedIn: 'root'})
 export class ReservationResolve implements Resolve<Reservation[]> {

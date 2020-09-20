@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {HttpClient, HttpResponse} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {EnvironmentService} from "./environment.service";
-import {EmailRequestModel} from "../domain/email-request-model";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {EnvironmentService} from './environment.service';
+import {EmailRequestModel} from '../domain/email-request-model';
 
 @Injectable({providedIn: 'root'})
 export class SendEmailService {

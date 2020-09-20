@@ -1,11 +1,11 @@
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {EnvironmentService} from "./environment.service";
-import {JWT_TOKEN_KEY} from "../constants";
-import {LoginResponse} from "../domain/interfaces";
-import {Router} from "@angular/router";
-import {AccountService} from "./account.service";
-import {Observable} from "rxjs";
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {EnvironmentService} from './environment.service';
+import {JWT_TOKEN_KEY} from '../constants';
+import {LoginResponse} from '../domain/interfaces';
+import {Router} from '@angular/router';
+import {AccountService} from './account.service';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +32,7 @@ export class LoginService {
   logout() {
     this.accountService.logOut();
     sessionStorage.removeItem(JWT_TOKEN_KEY);
-    this.router.navigate(['/'])
+    this.router.navigate(['/']);
   }
 
 }

@@ -1,10 +1,10 @@
-import {Injectable} from "@angular/core";
-import {HttpClient, HttpResponse} from "@angular/common/http";
-import {EnvironmentService} from "./environment.service";
-import {Observable, Subject} from "rxjs";
-import {User} from "../domain/user";
-import {UserWithRoles} from "../domain/interfaces";
-import {AccountModel} from "../domain/account-model";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {EnvironmentService} from './environment.service';
+import {Observable, Subject} from 'rxjs';
+import {User} from '../domain/user';
+import {UserWithRoles} from '../domain/interfaces';
+import {AccountModel} from '../domain/account-model';
 
 @Injectable({
   providedIn: 'root'

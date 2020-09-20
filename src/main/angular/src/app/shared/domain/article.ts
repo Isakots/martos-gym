@@ -1,4 +1,4 @@
-import {ArticleType} from "../enums/article-type.enum";
+import {ArticleType} from '../enums/article-type.enum';
 
 export class Article {
   id: string;

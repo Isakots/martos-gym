@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import {LoginService} from "../../shared/service/login.service";
-import {Observable} from "rxjs";
-import {tap} from "rxjs/operators";
+import {Injectable} from '@angular/core';
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {LoginService} from '../../shared/service/login.service';
+import {Observable} from 'rxjs';
+import {tap} from 'rxjs/operators';
 
 /**
  *  JHipster interceptor

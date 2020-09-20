@@ -1,9 +1,9 @@
-import {Injectable} from "@angular/core";
-import {HttpClient, HttpResponse} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {createRequestOption} from "../util/request-util";
-import {EnvironmentService} from "./environment.service";
-import {Tool} from "../domain/tool";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {createRequestOption} from '../util/request-util';
+import {EnvironmentService} from './environment.service';
+import {Tool} from '../domain/tool';
 
 @Injectable({providedIn: 'root'})
 export class ToolService {

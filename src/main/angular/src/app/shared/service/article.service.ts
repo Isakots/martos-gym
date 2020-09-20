@@ -1,9 +1,9 @@
-import {Injectable} from "@angular/core";
-import {Article} from "../domain/article";
-import {HttpClient, HttpResponse} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {createRequestOption} from "../util/request-util";
-import {EnvironmentService} from "./environment.service";
+import {Injectable} from '@angular/core';
+import {Article} from '../domain/article';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {createRequestOption} from '../util/request-util';
+import {EnvironmentService} from './environment.service';
 
 type EntityResponseType = HttpResponse<Article>;
 type EntityArrayResponseType = HttpResponse<Article[]>;

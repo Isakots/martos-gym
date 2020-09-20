@@ -1,4 +1,4 @@
-import {FormGroup} from "@angular/forms";
+import {FormGroup} from '@angular/forms';
 
 export function matchValidation(controlName: string, matchingControlName: string) {
   return (formGroup: FormGroup) => {
@@ -16,5 +16,5 @@ export function matchValidation(controlName: string, matchingControlName: string
     } else {
       matchingControl.setErrors(null);
     }
-  }
+  };
 }

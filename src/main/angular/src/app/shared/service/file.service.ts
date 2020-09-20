@@ -1,7 +1,7 @@
-import {HttpClient, HttpEvent, HttpRequest} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {EnvironmentService} from "./environment.service";
-import {Injectable} from "@angular/core";
+import {HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {EnvironmentService} from './environment.service';
+import {Injectable} from '@angular/core';
 
 
 @Injectable({
