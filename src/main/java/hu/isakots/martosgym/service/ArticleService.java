@@ -58,7 +58,7 @@ public class ArticleService {
         if (article.getId() != null) {
             throw new IllegalArgumentException("The provided resource must not have ID");
         }
-        if (ArticleType.RULES.equals(article.getType()) || ArticleType.ABOUT_US.equals(article.getType())) {
+        if (isArticleUnique(article)) {
             Optional<Article> persistedOptionalArticle = articleRepository.findByType(article.getType());
             if (persistedOptionalArticle.isPresent()) {
                 throw new ArticleTypeAlreadyExistException(MessageFormat.format("Article already exist with type: {0}", article.getType().name()));
@@ -67,6 +67,10 @@ public class ArticleService {
         Article persistedArticle = articleRepository.save(modelMapper.map(article, Article.class));
         mailService.startEmailNotificationAsyncTaskOnNewArticle();
         return modelMapper.map(persistedArticle, ArticleModel.class);
+    }
+
+    private boolean isArticleUnique(ArticleModel article) {
+        return ArticleType.RULES.equals(article.getType()) || ArticleType.ABOUT_US.equals(article.getType()) || ArticleType.GYM.equals(article.getType());
     }
 
     public ArticleModel updateArticle(ArticleModel article) {

@@ -38,7 +38,8 @@ import {
   faUser,
   faUserPlus,
   faUsers,
-  faWrench
+  faWrench,
+  faBookOpen
 } from '@fortawesome/free-solid-svg-icons';
 import {HomeComponent} from './layout/home/home.component';
 import {AboutUsComponent} from './layout/about-us/about-us.component';
@@ -59,6 +60,8 @@ import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 import {SharedModule} from './shared/shared.module';
 import {ToolModule} from './tool/tool.module';
 import {ReservationModule} from './reservation/reservation.module';
+import {RulesComponent} from "./layout/rules/rules.component";
+import {HttpXsrfInterceptor} from "./core/interceptor/http-xsrf.interceptor";
 
 registerLocaleData(localeHu);
 
@@ -91,6 +94,7 @@ library.add(faChevronUp);
 library.add(faRunning);
 library.add(faNewspaper);
 library.add(faEnvelope);
+library.add(faBookOpen);
 
 @NgModule({
   declarations: [
@@ -102,7 +106,8 @@ library.add(faEnvelope);
     NutritionComponent,
     GymInfoComponent,
     SignUpComponent,
-    TimelineComponent
+    TimelineComponent,
+    RulesComponent
   ],
   imports: [
     BrowserModule,

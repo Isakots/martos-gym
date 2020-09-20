@@ -49,6 +49,13 @@
           <span>Rólunk</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="rules" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+           (click)="collapseNavbar()">
+          <fa-icon icon="book-open"></fa-icon>
+          <span>Házirend</span>
+        </a>
+      </li>
       <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
         <a class="nav-link" routerLink="gym-info" (click)="collapseNavbar()">
           <fa-icon icon="dumbbell"></fa-icon>
@@ -67,12 +74,12 @@
           <span>Edzések</span>
         </a>
       </li>
-      <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-        <a class="nav-link" routerLink="tools" (click)="collapseNavbar()">
-          <fa-icon icon="hand-point-up"></fa-icon>
-          <span>Eszközfoglalás</span>
-        </a>
-      </li>
+<!--      <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
+<!--        <a class="nav-link" routerLink="tools" (click)="collapseNavbar()">-->
+<!--          <fa-icon icon="hand-point-up"></fa-icon>-->
+<!--          <span>Eszközfoglalás</span>-->
+<!--        </a>-->
+<!--      </li>-->
       <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active"
           [routerLinkActiveOptions]="{exact: true}">
         <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
