@@ -1,10 +1,9 @@
-import {Injectable} from "@angular/core";
-import {HttpClient, HttpResponse} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {createRequestOption} from "../util/request-util";
-import {EnvironmentService} from "./environment.service";
-import {Reservation} from "../domain/reservation";
-import {TrainingModel} from "../domain/training-model";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {createRequestOption} from '../util/request-util';
+import {EnvironmentService} from './environment.service';
+import {TrainingModel} from '../domain/training-model';
 
 @Injectable({providedIn: 'root'})
 export class TrainingService {
@@ -38,7 +37,10 @@ export class TrainingService {
   }
 
   findAllByUser(userId: number): Observable<HttpResponse<TrainingModel[]>> {
-    return this.http.get<TrainingModel[]>(`${this.environmentService.apiUrl}/user/${userId}${this.RESOURCE_ENDPOINT}`, {observe: 'response'});
+    return this.http.get<TrainingModel[]>(
+      `${this.environmentService.apiUrl}/user/${userId}${this.RESOURCE_ENDPOINT}`,
+      {observe: 'response'}
+      );
   }
 
   findAll(): Observable<HttpResponse<TrainingModel[]>> {

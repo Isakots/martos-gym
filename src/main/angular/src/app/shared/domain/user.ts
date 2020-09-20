@@ -1,4 +1,4 @@
 export interface User {
-  email: string
-  authorities: string[]
+  email: string;
+  authorities: string[];
 }

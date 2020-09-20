@@ -1,11 +1,11 @@
-import {Component, Input, OnInit, ViewChild} from "@angular/core";
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactions from '@fullcalendar/interaction';
 import bootstrapPlugin from '@fullcalendar/bootstrap';
 import listPlugin from '@fullcalendar/list';
-import {FullCalendarComponent} from "@fullcalendar/angular";
-import {Reservation} from "../../shared/domain/reservation";
+import {FullCalendarComponent} from '@fullcalendar/angular';
+import {Reservation} from '../../shared/domain/reservation';
 
 @Component({
   selector: 'app-reservation-calendar-view',
@@ -30,13 +30,13 @@ export class ReservationCalendarViewComponent implements OnInit {
   getEvents() {
     let events = [];
     this.reservations.forEach((reservation) => {
-      let isAllDay: boolean = reservation.startDate.substring(0,10) < reservation.endDate.substring(0,10);
+      const isAllDay: boolean = reservation.startDate.substring(0, 10) < reservation.endDate.substring(0, 10);
       events.push({
-        title: reservation.subjectName + ' ' + reservation.quantity +' db',
+        title: reservation.subjectName + ' ' + reservation.quantity + ' db',
         start: reservation.startDate,
         end: reservation.endDate,
         allDay: isAllDay
-      })
+      });
     });
     return events;
   }

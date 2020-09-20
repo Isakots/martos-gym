@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from "@angular/core";
-import {Tool} from "../../shared/domain/tool";
-import {GeneralConfirmationModalComponent} from "../../shared/component/general-confirmation-modal/general-confirmation-modal.component";
-import {ToolService} from "../../shared/service/tool.service";
-import {ToolUpdateModalComponent} from "../tool-update/tool-update-modal.component";
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Tool} from '../../shared/domain/tool';
+import {GeneralConfirmationModalComponent} from '../../shared/component/general-confirmation-modal/general-confirmation-modal.component';
+import {ToolService} from '../../shared/service/tool.service';
+import {ToolUpdateModalComponent} from '../tool-update/tool-update-modal.component';
 
 @Component({
   selector: 'app-tool-item',

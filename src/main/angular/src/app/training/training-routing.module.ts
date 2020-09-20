@@ -1,9 +1,9 @@
-import {RouterModule, Routes} from "@angular/router";
-import {AuthorizationGuard} from "../core/guard/authorization-guard.service";
-import {NgModule} from "@angular/core";
-import {TrainingResolver} from "./training.resolver";
-import {TrainingSubscriptionViewComponent} from "./training-subscription-view/training-subscription-view.component";
-import {TrainingUpdateComponent} from "./training-update/training-update.component";
+import {RouterModule, Routes} from '@angular/router';
+import {AuthorizationGuard} from '../core/guard/authorization-guard.service';
+import {NgModule} from '@angular/core';
+import {TrainingResolver} from './training.resolver';
+import {TrainingSubscriptionViewComponent} from './training-subscription-view/training-subscription-view.component';
+import {TrainingUpdateComponent} from './training-update/training-update.component';
 
 const trainingRoutes: Routes = [
   {
@@ -18,7 +18,7 @@ const trainingRoutes: Routes = [
         path: 'view',
         component: TrainingSubscriptionViewComponent,
         data: {
-          authority: "ROLE_USER"
+          authority: 'ROLE_USER'
         },
         canActivate: [AuthorizationGuard]
       },
@@ -29,7 +29,7 @@ const trainingRoutes: Routes = [
           training: TrainingResolver
         },
         data: {
-          authority: "ROLE_MEMBER"
+          authority: 'ROLE_MEMBER'
         },
         canActivate: [AuthorizationGuard]
       },
@@ -40,7 +40,7 @@ const trainingRoutes: Routes = [
           training: TrainingResolver
         },
         data: {
-          authority: "ROLE_MEMBER"
+          authority: 'ROLE_MEMBER'
         },
         canActivate: [AuthorizationGuard]
       }

@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AccountService} from "../shared/service/account.service";
-import {Router} from "@angular/router";
-import {matchValidation} from "../core/validator/match-validator";
-import {UserNotificationService} from "../shared/service/user-notification.service";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AccountService} from '../shared/service/account.service';
+import {Router} from '@angular/router';
+import {matchValidation} from '../core/validator/match-validator';
+import {UserNotificationService} from '../shared/service/user-notification.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -15,10 +15,10 @@ export class SignUpComponent implements OnInit {
   registerForm: FormGroup;
 
   constructor(
-    private _formBuilder: FormBuilder,
+    private formBuilder: FormBuilder,
     private accountService: AccountService,
-    private _router: Router,
-    private _userNotificationService: UserNotificationService) {
+    private router: Router,
+    private userNotificationService: UserNotificationService) {
   }
 
   ngOnInit() {
@@ -44,7 +44,7 @@ export class SignUpComponent implements OnInit {
       subOnSubscribedTrainings: [false]
     };
 
-    this.registerForm = this._formBuilder.group(formGroupControlsConfig,
+    this.registerForm = this.formBuilder.group(formGroupControlsConfig,
       {
         validators: [
           matchValidation('password', 'confirmPassword'),
@@ -59,19 +59,21 @@ export class SignUpComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    let subscriptions = [];
-    if( this.registerForm.controls.subOnNewArticles.value) {
+    const subscriptions = [];
+    if (this.registerForm.controls.subOnNewArticles.value) {
       subscriptions.push('ON_NEW_ARTICLES');
     }
-    if( this.registerForm.controls.subOnNewTrainings.value) {
+    if (this.registerForm.controls.subOnNewTrainings.value) {
       subscriptions.push('ON_NEW_TRAININGS');
     }
-    if( this.registerForm.controls.subOnSubscribedTrainings.value) {
+    if (this.registerForm.controls.subOnSubscribedTrainings.value) {
       subscriptions.push('ON_SUBSCRIBED_TRAININGS');
     }
-    let userData = {
+    const userData = {
       firstName: this.registerForm.controls.firstName.value,
       lastName: this.registerForm.controls.lastName.value,
+      password: this.registerForm.controls.password.value,
+      email: this.registerForm.controls.email.value,
       studentStatus: this.registerForm.controls.studentStatus.value,
       institution: this.registerForm.controls.institution.value,
       faculty: this.registerForm.controls.faculty.value,
@@ -81,13 +83,13 @@ export class SignUpComponent implements OnInit {
     };
     this.accountService.registration(userData).subscribe(
       () => {
-        this._userNotificationService.notifyUser("Sikeres regisztráció!", false);
+        this.userNotificationService.notifyUser('Sikeres regisztráció!', false);
         setTimeout(() => {
-          this._router.navigate(['/']);
-        }, 1500)
+          this.router.navigate(['/']);
+        }, 1500);
       },
       () => {
-        this._userNotificationService.notifyUser("Sikertelen regisztráció!", true);
+        this.userNotificationService.notifyUser('Sikertelen regisztráció!', true);
       }
     );
   }

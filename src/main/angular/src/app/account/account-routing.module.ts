@@ -1,9 +1,9 @@
-import {RouterModule, Routes} from "@angular/router";
-import {NgModule} from "@angular/core";
-import {ProfileComponent} from "./profile/profile.component";
-import {ChangePasswordComponent} from "./change-password/change-password.component";
-import {AuthorizationGuard} from "../core/guard/authorization-guard.service";
-import {ProfileResolver} from "./profile/profile.resolver";
+import {RouterModule, Routes} from '@angular/router';
+import {NgModule} from '@angular/core';
+import {ProfileComponent} from './profile/profile.component';
+import {ChangePasswordComponent} from './change-password/change-password.component';
+import {AuthorizationGuard} from '../core/guard/authorization-guard.service';
+import {ProfileResolver} from './profile/profile.resolver';
 
 const accountRoutes: Routes = [
   {
@@ -22,7 +22,7 @@ const accountRoutes: Routes = [
       }
     ],
     data : {
-      authority: "ROLE_USER"
+      authority: 'ROLE_USER'
     },
     canActivate: [AuthorizationGuard]
   }

@@ -1,9 +1,9 @@
-import {Injectable} from "@angular/core";
-import {HttpClient, HttpResponse} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {createRequestOption} from "../util/request-util";
-import {EnvironmentService} from "./environment.service";
-import {Reservation} from "../domain/reservation";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {createRequestOption} from '../util/request-util';
+import {EnvironmentService} from './environment.service';
+import {Reservation} from '../domain/reservation';
 
 @Injectable({providedIn: 'root'})
 export class ReservationService {
@@ -29,11 +29,17 @@ export class ReservationService {
   }
 
   findAllByUser(userId: number): Observable<HttpResponse<Reservation[]>> {
-    return this.http.get<Reservation[]>(`${this.environmentService.apiUrl}/user/${userId}${this.RESOURCE_ENDPOINT}`, {observe: 'response'});
+    return this.http.get<Reservation[]>(
+      `${this.environmentService.apiUrl}/user/${userId}${this.RESOURCE_ENDPOINT}`,
+      {observe: 'response'}
+    );
   }
 
   findAllByToolId(toolId: number): Observable<HttpResponse<Reservation[]>> {
-    return this.http.get<Reservation[]>(`${this.environmentService.apiUrl}/tools/${toolId}${this.RESOURCE_ENDPOINT}`, {observe: 'response'});
+    return this.http.get<Reservation[]>(
+      `${this.environmentService.apiUrl}/tools/${toolId}${this.RESOURCE_ENDPOINT}`,
+      {observe: 'response'}
+    );
   }
 
   findAll(): Observable<HttpResponse<Reservation[]>> {

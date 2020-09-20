@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {HttpClient, HttpResponse} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {EnvironmentService} from "./environment.service";
-import {GymPeriod} from "../domain/gym-period";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {EnvironmentService} from './environment.service';
+import {GymPeriod} from '../domain/gym-period';
 
 @Injectable({providedIn: 'root'})
 export class GymPeriodService {

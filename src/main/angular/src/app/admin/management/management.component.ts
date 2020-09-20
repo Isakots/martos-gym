@@ -1,7 +1,7 @@
-import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
-import {ManagedUser} from "../../shared/domain/managed-user";
-import {GymPeriod} from "../../shared/domain/gym-period";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {ManagedUser} from '../../shared/domain/managed-user';
+import {GymPeriod} from '../../shared/domain/gym-period';
 
 @Component({
   selector: 'app-management',

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {ModalDismissReasons, NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
-import {ConfirmationType} from "../../constants";
+import {ModalDismissReasons, NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {ConfirmationType} from '../../constants';
 
 @Component({
   selector: 'app-general-confirmation-modal',
@@ -25,7 +25,7 @@ export class GeneralConfirmationModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    switch(this.confirmationType) {
+    switch (this.confirmationType) {
       case ConfirmationType.DELETION:
         this.confirmationText = 'Biztos, hogy törölni szeretné?';
         break;

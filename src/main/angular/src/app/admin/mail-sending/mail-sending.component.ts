@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import {ChangeEvent} from "@ckeditor/ckeditor5-angular";
-import {SendEmailService} from "../../shared/service/send-email.service";
-import {UserNotificationService} from "../../shared/service/user-notification.service";
-import {GeneralConfirmationModalComponent} from "../../shared/component/general-confirmation-modal/general-confirmation-modal.component";
-import {ConfirmationType} from "../../shared/constants";
+import {ChangeEvent} from '@ckeditor/ckeditor5-angular';
+import {SendEmailService} from '../../shared/service/send-email.service';
+import {UserNotificationService} from '../../shared/service/user-notification.service';
+import {GeneralConfirmationModalComponent} from '../../shared/component/general-confirmation-modal/general-confirmation-modal.component';
+import {ConfirmationType} from '../../shared/constants';
 
 @Component({
   selector: 'app-mail-sending',
@@ -17,15 +17,15 @@ export class MailSendingComponent implements OnInit {
 
   readonly confirmationType = ConfirmationType.EMAIL;
 
-  triedToSave: boolean = false;
+  triedToSave = false;
   public ck5editor = ClassicEditor;
   mailForm: FormGroup;
   editorData: any;
 
-  constructor(private _activatedRoute: ActivatedRoute,
-              private _formBuilder: FormBuilder,
-              private _sendEmailService: SendEmailService,
-              private _userNotificationService: UserNotificationService) {
+  constructor(private activatedRoute: ActivatedRoute,
+              private formBuilder: FormBuilder,
+              private sendEmailService: SendEmailService,
+              private userNotificationService: UserNotificationService) {
   }
 
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class MailSendingComponent implements OnInit {
       mailTo: ['Mindenki'],
     };
     this.editorData = '<p></p>';
-    this.mailForm = this._formBuilder.group(formGroupControlsConfig);
+    this.mailForm = this.formBuilder.group(formGroupControlsConfig);
   }
 
   showValidationMessage(formControl: AbstractControl) {
@@ -63,23 +63,22 @@ export class MailSendingComponent implements OnInit {
   }
 
   sendEmail() {
-    let emailRequestModel = {
+    const emailRequestModel = {
       mailTo: this.mailForm.controls.mailTo.value === 'Mindenki' ? 'ALL' : 'MEMBERS_ONLY',
       topic: this.mailForm.controls.topic.value,
       content: this.editorData
     };
 
-    this._sendEmailService.send(emailRequestModel).subscribe(() => {
-        this._userNotificationService.notifyUser('Email-ek kiküldése folyamatban...', false);
+    this.sendEmailService.send(emailRequestModel).subscribe(() => {
+        this.userNotificationService.notifyUser('Email-ek kiküldése folyamatban...', false);
       },
       () => {
-        this._userNotificationService.notifyUser('Sikertelen emailküldés...', true);
-      })
-
+        this.userNotificationService.notifyUser('Sikertelen emailküldés...', true);
+      });
   }
 
   onEventConfirmation(confirmed: boolean) {
-    if(confirmed) {
+    if (confirmed) {
       this.sendEmail();
     }
   }

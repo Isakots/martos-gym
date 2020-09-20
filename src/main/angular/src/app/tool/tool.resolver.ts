@@ -1,10 +1,10 @@
-import {Injectable} from "@angular/core";
-import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
-import {Observable, of} from "rxjs";
-import {filter, map} from "rxjs/operators";
-import {HttpResponse} from "@angular/common/http";
-import {ToolService} from "../shared/service/tool.service";
-import {Tool} from "../shared/domain/tool";
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
+import {Observable, of} from 'rxjs';
+import {filter, map} from 'rxjs/operators';
+import {HttpResponse} from '@angular/common/http';
+import {ToolService} from '../shared/service/tool.service';
+import {Tool} from '../shared/domain/tool';
 
 @Injectable({providedIn: 'root'})
 export class ToolResolve implements Resolve<Tool> {

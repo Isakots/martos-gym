@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AccountService} from "../../shared/service/account.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {AccountModel} from "../../shared/domain/account-model";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AccountService} from '../../shared/service/account.service';
+import {ActivatedRoute} from '@angular/router';
+import {AccountModel} from '../../shared/domain/account-model';
 
 @Component({
   selector: 'app-profile',
@@ -10,15 +10,14 @@ import {AccountModel} from "../../shared/domain/account-model";
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  triedToSave: boolean = false;
+  triedToSave = false;
   profileForm: FormGroup;
   success: boolean;
 
   constructor(
     private accountService: AccountService,
     protected activatedRoute: ActivatedRoute,
-    private _formBuilder: FormBuilder,
-    private _router: Router
+    private formBuilder: FormBuilder
   ) {
   }
 
@@ -46,7 +45,7 @@ export class ProfileComponent implements OnInit {
       subOnSubscribedTrainings: [false]
     };
 
-    this.profileForm = this._formBuilder.group(formGroupControlsConfig);
+    this.profileForm = this.formBuilder.group(formGroupControlsConfig);
   }
 
   updateForm(account: AccountModel) {
@@ -72,17 +71,17 @@ export class ProfileComponent implements OnInit {
     if (this.profileForm.invalid) {
       return;
     }
-    let subscriptions = [];
-    if( this.profileForm.controls.subOnNewArticles.value) {
+    const subscriptions = [];
+    if (this.profileForm.controls.subOnNewArticles.value) {
       subscriptions.push('ON_NEW_ARTICLES');
     }
-    if( this.profileForm.controls.subOnNewTrainings.value) {
+    if (this.profileForm.controls.subOnNewTrainings.value) {
       subscriptions.push('ON_NEW_TRAININGS');
     }
-    if( this.profileForm.controls.subOnSubscribedTrainings.value) {
+    if (this.profileForm.controls.subOnSubscribedTrainings.value) {
       subscriptions.push('ON_SUBSCRIBED_TRAININGS');
     }
-    let userData = {
+    const userData = {
       firstName: this.profileForm.controls.firstName.value,
       lastName: this.profileForm.controls.lastName.value,
       studentStatus: this.profileForm.controls.studentStatus.value,
@@ -95,7 +94,7 @@ export class ProfileComponent implements OnInit {
 
     this.accountService.updateProfile(userData).subscribe(
       response => {
-        if (response.status == 200) {
+        if (response.status === 200) {
           this.success = true;
         }
       }
@@ -104,7 +103,7 @@ export class ProfileComponent implements OnInit {
 
   private _customRequiredValidator() {
     // TODO
-    return "";
+    return '';
   }
 
   showValidationMessage(formControl: AbstractControl) {

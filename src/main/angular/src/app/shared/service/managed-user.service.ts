@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {HttpClient, HttpResponse} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {EnvironmentService} from "./environment.service";
-import {ManagedUser} from "../domain/managed-user";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {EnvironmentService} from './environment.service';
+import {ManagedUser} from '../domain/managed-user';
 
 @Injectable({providedIn: 'root'})
 export class ManagedUserService {

@@ -1,7 +1,7 @@
-import {Component, OnInit} from "@angular/core";
-import {TrainingModel} from "../../shared/domain/training-model";
-import {UserNotificationService} from "../../shared/service/user-notification.service";
-import {TrainingService} from "../../shared/service/training.service";
+import {Component, OnInit} from '@angular/core';
+import {TrainingModel} from '../../shared/domain/training-model';
+import {UserNotificationService} from '../../shared/service/user-notification.service';
+import {TrainingService} from '../../shared/service/training.service';
 
 @Component({
   selector: 'app-training-subscription-view',
@@ -12,27 +12,27 @@ export class TrainingSubscriptionViewComponent implements OnInit {
   trainings: TrainingModel[] = [];
 
   constructor(
-    protected _trainingService: TrainingService,
-    private _userNotificationService: UserNotificationService
+    protected trainingService: TrainingService,
+    private userNotificationService: UserNotificationService
   ) {
   }
 
   ngOnInit(): void {
-    this._trainingService.findAll().subscribe(response => {
-        this.trainings = response.body;
-      });
+    this.trainingService.findAll().subscribe(response => {
+      this.trainings = response.body;
+    });
   }
 
   onTrainingDelete(deleted: boolean) {
-    if(deleted) {
-      this._userNotificationService.notifyUser("Edzés sikeresen törölve!", false);
-      this._trainingService.findAll().subscribe(
+    if (deleted) {
+      this.userNotificationService.notifyUser('Edzés sikeresen törölve!', false);
+      this.trainingService.findAll().subscribe(
         response => {
           this.trainings = response.body;
         }
-      )
+      );
     } else {
-      this._userNotificationService.notifyUser("Edzés törlése sikertelen", true);
+      this.userNotificationService.notifyUser('Edzés törlése sikertelen', true);
     }
   }
 

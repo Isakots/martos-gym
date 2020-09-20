@@ -1,8 +1,8 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {ToolService} from "../../shared/service/tool.service";
-import {Tool} from "../../shared/domain/tool";
-import {ToolUpdateModalComponent} from "../tool-update/tool-update-modal.component";
-import {UserNotificationService} from "../../shared/service/user-notification.service";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ToolService} from '../../shared/service/tool.service';
+import {Tool} from '../../shared/domain/tool';
+import {ToolUpdateModalComponent} from '../tool-update/tool-update-modal.component';
+import {UserNotificationService} from '../../shared/service/user-notification.service';
 
 @Component({
   selector: 'app-tool-view',

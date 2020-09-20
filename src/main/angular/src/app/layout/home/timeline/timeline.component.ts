@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {filter, map} from 'rxjs/operators';
 
-import {Article} from "../../../shared/domain/article";
-import {ArticleService} from "../../../shared/service/article.service";
-import {ArticleType} from "../../../shared/enums/article-type.enum";
+import {Article} from '../../../shared/domain/article';
+import {ArticleService} from '../../../shared/service/article.service';
+import {ArticleType} from '../../../shared/enums/article-type.enum';
 
 @Component({
   selector: 'timeline',
@@ -48,6 +48,6 @@ export class TimelineComponent implements OnInit {
   }
 
   protected onError() {
-    console.log('Error occured during getting Articles from server...')
+    console.log('Error occured during getting Articles from server...');
   }
 }
