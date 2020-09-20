@@ -105,10 +105,6 @@
                   <small class="form-text text-danger" *ngIf="registerForm.get('confirmPassword').errors.mustMatch">
                     A két jelszó nem egyezik!
                   </small>
-                  <small class="form-text text-danger"
-                         *ngIf="registerForm.get('confirmPassword').errors.required">
-                    Jelsző megerősítése kötelező!
-                  </small>
                 </div>
               </div>
             </div>
@@ -129,7 +125,7 @@
               <div class="form-group">
                 <label class="form-control-label" for="institution">Oktatási intézmény</label>
                 <input type="text" class="form-control" id="institution" name="institution"
-                       formControlName="institution">
+                       formControlName="institution" maxlength="4">
                 <div
                   *ngIf="showValidationMessage(registerForm.get('institution'))">
                   <small class="form-text text-danger" *ngIf="registerForm.get('institution').errors.required">
@@ -142,7 +138,7 @@
               <div class="form-group">
                 <label class="form-control-label" for="faculty">Kar</label>
                 <input type="text" class="form-control" id="faculty" name="faculty"
-                       formControlName="faculty">
+                       formControlName="faculty" maxlength="4">
                 <div
                   *ngIf="showValidationMessage(registerForm.get('faculty'))">
                   <small class="form-text text-danger"
