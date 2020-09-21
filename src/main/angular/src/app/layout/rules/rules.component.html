@@ -3,9 +3,31 @@
   <div class="col-lg-8 mt-2">
     <h2>
       <span>Házirend</span>
+      <span *ngIf="!contentNotFound">
+        <button
+          *jhiHasAnyAuthority="'ROLE_MEMBER'"
+          type="button"
+          [routerLink]="['/articles', rulesArticle.id, 'edit']"
+          class="btn btn-secondary float-right">
+          <fa-icon icon="pencil-alt"></fa-icon>
+          <span class="d-none d-md-inline"> Módosítás</span>
+        </button>
+      </span>
+      <span *ngIf="contentNotFound">
+        <button
+          *jhiHasAnyAuthority="'ROLE_MEMBER'"
+          class="btn btn-primary float-right"
+          [routerLink]="['/articles/new']">
+          <fa-icon icon="plus"></fa-icon>
+          <span class="d-none d-md-inline"> Létrehozás</span>
+        </button>
+      </span>
     </h2>
     <hr>
-    <p>Felület kidolgozása folyamatban..</p>
+
+    <div *ngIf="contentNotFound">A keresett oldal még nem létezik..</div>
+
+    <div style="text-align: justify" *ngIf="!contentNotFound" [innerHTML]="rulesArticle.content"></div>
 
   </div>
 </div>
