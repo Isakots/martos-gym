@@ -112,10 +112,15 @@
           <div class="row justify-content-md-center">
             <div class="col-lg-6">
               <div class="form-group">
-                <label class="checkbox-container form-control-label" for="studentStatus">Van hallgatói jogviszonyom
-                  <input type="checkbox" formControlName="studentStatus" id="studentStatus" name="studentStatus">
-                  <span class="checkmark"></span>
-                </label>
+                <span>
+                   <label class="checkbox bounce">
+                  <input type="checkbox" formControlName="studentStatus">
+                  <svg viewBox="0 0 21 21">
+                    <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
+                  </svg>
+                   </label>
+                  Van hallgatói jogviszonyom
+                  </span>
               </div>
             </div>
             <div class="col-lg-6"></div>
@@ -152,10 +157,15 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="form-group">
-                <label class="checkbox-container form-control-label" for="collegian">Kollégista vagyok
-                  <input type="checkbox" formControlName="collegian" id="collegian" name="collegian">
-                  <span class="checkmark"></span>
+                <span>
+                <label class="checkbox bounce">
+                  <input type="checkbox" formControlName="collegian">
+                  <svg viewBox="0 0 21 21">
+                    <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
+                  </svg>
                 </label>
+                    Kollégista vagyok
+                  </span>
               </div>
             </div>
             <div *ngIf="isCollegianChecked()" class="col-lg-6">
@@ -171,6 +181,45 @@
                   </small>
                 </div>
               </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-10">
+              <span>
+              <label class="checkbox bounce">
+                <input type="checkbox" formControlName="subOnSubscribedTrainings">
+                <svg viewBox="0 0 21 21">
+                  <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
+                </svg>
+              </label>
+              Értesítő e-mail küldése edzésekről, melyekre feliratkoztam
+                </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-10">
+              <span>
+              <label class="checkbox bounce">
+                <input type="checkbox" formControlName="subOnNewTrainings">
+                <svg viewBox="0 0 21 21">
+                  <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
+                </svg>
+              </label>
+              Értesítő e-mail küldése új frissen kiírt edzésekről
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-10">
+              <span>
+              <label class="checkbox bounce">
+                <input type="checkbox" formControlName="subOnNewArticles">
+                <svg viewBox="0 0 21 21">
+                  <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
+                </svg>
+              </label>
+              Értesítő e-mail küldése új hírfolyam cikkről
+                </span>
             </div>
           </div>
           <app-notification-displayer></app-notification-displayer>
