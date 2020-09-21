@@ -3,6 +3,8 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import {AccountService} from '../../shared/service/account.service';
 import {ActivatedRoute} from '@angular/router';
 import {AccountModel} from '../../shared/domain/account-model';
+import {requiredValidationConditionally} from "../../core/validator/required-validator";
+import {UserNotificationService} from "../../shared/service/user-notification.service";
 
 @Component({
   selector: 'app-profile',
@@ -16,8 +18,9 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
-    protected activatedRoute: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private activatedRoute: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private userNotificationService: UserNotificationService
   ) {
   }
 
@@ -36,7 +39,7 @@ export class ProfileComponent implements OnInit {
       email: [{value: '', disabled: true},
         [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
       studentStatus: [false],
-      institution: ['', [this._customRequiredValidator]],
+      institution: ['', []],
       faculty: [''],
       collegian: [false],
       roomNumber: [''],
@@ -45,7 +48,14 @@ export class ProfileComponent implements OnInit {
       subOnSubscribedTrainings: [false]
     };
 
-    this.profileForm = this.formBuilder.group(formGroupControlsConfig);
+    this.profileForm = this.formBuilder.group(formGroupControlsConfig,
+      {
+        validators: [
+          requiredValidationConditionally('studentStatus','institution'),
+          requiredValidationConditionally('studentStatus','faculty'),
+          requiredValidationConditionally('collegian','roomNumber')
+        ]
+      });
   }
 
   updateForm(account: AccountModel) {
@@ -96,14 +106,10 @@ export class ProfileComponent implements OnInit {
       response => {
         if (response.status === 200) {
           this.success = true;
+          this.userNotificationService.notifyUser("Mentés sikeres!", false);
         }
       }
     );
-  }
-
-  private _customRequiredValidator() {
-    // TODO
-    return '';
   }
 
   showValidationMessage(formControl: AbstractControl) {

@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import static hu.isakots.martosgym.configuration.util.AuthoritiesConstants.ROLE_USER;
+import static hu.isakots.martosgym.service.util.ApplicationUtil.mapSubscriptions;
 
 @Service
 public class AuthService {
@@ -51,6 +52,8 @@ public class AuthService {
         Authority authority = new Authority();
         authority.setName(ROLE_USER);
         user.getAuthorities().add(authority);
+
+        mapSubscriptions(form.getSubscriptions(), user);
 
         accountService.saveAccount(user);
         mailService.sendRegistrationEmail(user);
