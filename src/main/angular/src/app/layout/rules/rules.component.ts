@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import {Article} from "../../shared/domain/article";
-import {ArticleService} from "../../shared/service/article.service";
 import {ArticleType} from "../../shared/enums/article-type.enum";
 import {filter, map} from "rxjs/operators";
-import {HttpResponse} from "@angular/common/http";
+import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
+import {Article} from "../../shared/domain/article";
+import {ArticleService} from "../../shared/service/article.service";
 
 @Component({
-  selector: 'app-gym-info',
-  templateUrl: './gym-info.component.html',
-  styleUrls: ['./gym-info.component.scss']
+  selector: 'app-rules',
+  templateUrl: './rules.component.html',
+  styleUrls: ['./rules.component.scss']
 })
-export class GymInfoComponent implements OnInit {
+export class RulesComponent implements OnInit {
 
   contentNotFound = true;
-  gymInfoArticle: Article;
+  rulesArticle: Article;
 
   constructor(private readonly articleService: ArticleService) { }
 
@@ -23,7 +23,7 @@ export class GymInfoComponent implements OnInit {
 
   loadAll() {
     this.articleService
-      .query({type: ArticleType.GYM})
+      .query({type: ArticleType.RULES})
       .pipe(
         filter((res: HttpResponse<Article[]>) => res.ok),
         map((res: HttpResponse<Article[]>) => res.body)
@@ -35,7 +35,7 @@ export class GymInfoComponent implements OnInit {
             this.contentNotFound = true;
           } else {
             this.contentNotFound = false;
-            this.gymInfoArticle = res[0];
+            this.rulesArticle = res[0];
           }
         },
         () => this.onError()
@@ -43,8 +43,7 @@ export class GymInfoComponent implements OnInit {
   }
 
   private onError() {
-    this.contentNotFound = true;
-    this.gymInfoArticle = null;
+      this.contentNotFound = true;
+      this.rulesArticle = null;
   }
-
 }

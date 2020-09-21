@@ -4,6 +4,7 @@ import {AccountService} from '../shared/service/account.service';
 import {Router} from '@angular/router';
 import {matchValidation} from '../core/validator/match-validator';
 import {UserNotificationService} from '../shared/service/user-notification.service';
+import {requiredValidationConditionally} from '../core/validator/required-validator';
 
 @Component({
   selector: 'app-sign-up',
@@ -33,12 +34,12 @@ export class SignUpComponent implements OnInit {
       email: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
       confirmEmail: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(50)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(50)]],
+      confirmPassword: ['', []], // matching validation only
       studentStatus: [false],
-      institution: ['', [Validators.required, Validators.maxLength(4)]],
-      faculty: ['', [Validators.required, Validators.maxLength(4)]],
+      institution: ['', []],
+      faculty: ['', []],
       collegian: [false],
-      roomNumber: [''],
+      roomNumber: ['', []],
       subOnNewArticles: [false],
       subOnNewTrainings: [false],
       subOnSubscribedTrainings: [false]
@@ -48,7 +49,10 @@ export class SignUpComponent implements OnInit {
       {
         validators: [
           matchValidation('password', 'confirmPassword'),
-          matchValidation('email', 'confirmEmail')
+          matchValidation('email', 'confirmEmail'),
+          requiredValidationConditionally('studentStatus','institution'),
+          requiredValidationConditionally('studentStatus','faculty'),
+          requiredValidationConditionally('collegian','roomNumber')
         ]
       });
   }

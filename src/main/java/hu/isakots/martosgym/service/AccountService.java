@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static hu.isakots.martosgym.configuration.util.AuthoritiesConstants.ROLE_MEMBER;
+import static hu.isakots.martosgym.service.util.ApplicationUtil.mapSubscriptions;
 import static hu.isakots.martosgym.service.util.Constants.ALL;
 import static hu.isakots.martosgym.service.util.Constants.MEMBERS_ONLY;
 
@@ -57,7 +58,7 @@ public class AccountService {
     public User updateUser(AccountModel accountModel) {
         User storedUser = getAuthenticatedUserWithData();
         modelMapper.map(accountModel, storedUser);
-        mapSubscriptions(accountModel, storedUser);
+        mapSubscriptions(accountModel.getSubscriptions(), storedUser);
         return userRepository.save(storedUser);
     }
 
@@ -80,22 +81,6 @@ public class AccountService {
         }
         user.setPassword(passwordEncoder.encode(passwordChangeDto.getNewPassword()));
         userRepository.save(user);
-    }
-
-    private void mapSubscriptions(AccountModel accountModel, User storedUser) {
-        storedUser.setSubscriptions(
-                accountModel.getSubscriptions().stream()
-                        .map(subscriptionName -> {
-                            Subscription subscription = new Subscription();
-                            try {
-                                subscription.setName(SubscriptionType.valueOf(subscriptionName));
-                            } catch (IllegalArgumentException | NullPointerException exception) {
-                                throw new UnsupportedOperationException("Invalid subscriptionType");
-                            }
-                            return subscription;
-                        })
-                        .collect(Collectors.toSet())
-        );
     }
 
     public List<String> extractUserEmails(String mailToCode) {

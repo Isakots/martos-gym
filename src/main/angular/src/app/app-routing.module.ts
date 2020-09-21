@@ -6,6 +6,7 @@ import {AboutUsComponent} from './layout/about-us/about-us.component';
 import {NutritionComponent} from './layout/nutrition/nutrition.component';
 import {GymInfoComponent} from './layout/gym-info/gym-info.component';
 import {SignUpComponent} from './sign-up/sign-up.component';
+import {RulesComponent} from "./layout/rules/rules.component";
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path: 'nutrition',
     component: NutritionComponent
+  },
+  {
+    path: 'rules',
+    component: RulesComponent
   },
   {
     path: 'sign-up',

@@ -1,6 +1,8 @@
 package hu.isakots.martosgym.rest.auth.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SignUpForm implements Serializable {
     private String email;
@@ -12,6 +14,7 @@ public class SignUpForm implements Serializable {
     private String faculty;
     private boolean isCollegian;
     private int roomNumber;
+    private Set<String> subscriptions = new HashSet<>();
 
     public String getEmail() {
         return email;
@@ -83,5 +86,13 @@ public class SignUpForm implements Serializable {
 
     public void setRoomNumber(int roomNumber) {
         this.roomNumber = roomNumber;
+    }
+
+    public Set<String> getSubscriptions() {
+        return subscriptions;
+    }
+
+    public void setSubscriptions(Set<String> subscriptions) {
+        this.subscriptions = subscriptions;
     }
 }

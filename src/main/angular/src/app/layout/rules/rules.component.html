@@ -2,12 +2,12 @@
 
   <div class="col-lg-8 mt-2">
     <h2>
-      <span>Edzőtermünkről..</span>
+      <span>Házirend</span>
       <span *ngIf="!contentNotFound">
         <button
           *jhiHasAnyAuthority="'ROLE_MEMBER'"
           type="button"
-          [routerLink]="['/articles', gymInfoArticle.id, 'edit']"
+          [routerLink]="['/articles', rulesArticle.id, 'edit']"
           class="btn btn-secondary float-right">
           <fa-icon icon="pencil-alt"></fa-icon>
           <span class="d-none d-md-inline"> Módosítás</span>
@@ -27,9 +27,7 @@
 
     <div *ngIf="contentNotFound">A keresett oldal még nem létezik..</div>
 
-    <div *ngIf="!contentNotFound" >
-      <div style="text-align: justify" [innerHTML]="gymInfoArticle.content"></div>
-    </div>
+    <div style="text-align: justify" *ngIf="!contentNotFound" [innerHTML]="rulesArticle.content"></div>
 
   </div>
 </div>
