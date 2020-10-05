@@ -2,6 +2,7 @@ package hu.isakots.martosgym.service;
 
 import hu.isakots.martosgym.configuration.util.SecurityUtils;
 import hu.isakots.martosgym.domain.Authority;
+import hu.isakots.martosgym.domain.GymPeriod;
 import hu.isakots.martosgym.domain.Subscription;
 import hu.isakots.martosgym.domain.User;
 import hu.isakots.martosgym.exception.InvalidPasswordException;
@@ -115,6 +116,10 @@ public class AccountService {
                 .stream()
                 .filter(user -> user.getSubscriptions().contains(new Subscription(SubscriptionType.ON_NEW_ARTICLES)))
                 .collect(Collectors.toList());
+    }
+
+    public List<GymPeriod> getUserGymPeriods() {
+        return getAuthenticatedUserWithData().getTickets();
     }
 
 }

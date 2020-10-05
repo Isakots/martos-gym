@@ -1,5 +1,6 @@
 package hu.isakots.martosgym.rest.account;
 
+import hu.isakots.martosgym.domain.GymPeriod;
 import hu.isakots.martosgym.domain.User;
 import hu.isakots.martosgym.exception.InvalidPasswordException;
 import hu.isakots.martosgym.rest.account.model.AccountModel;
@@ -10,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static hu.isakots.martosgym.rest.util.EndpointConstants.API_CONTEXT;
 
@@ -30,6 +33,12 @@ public class AccountResource {
     public ResponseEntity<AccountModel> getUserInformation() {
         User user = accountService.getAuthenticatedUserWithData();
         return new ResponseEntity<>(modelMapper.map(user, AccountModel.class), HttpStatus.OK);
+    }
+
+    @GetMapping("/user/gym-periods")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
+    public List<GymPeriod> getUserGymPeriods() {
+        return accountService.getUserGymPeriods();
     }
 
     @PutMapping("/profile")

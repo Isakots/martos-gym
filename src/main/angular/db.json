@@ -44,13 +44,15 @@
   "profile": {
     "firstName": "Pu",
     "lastName": "Cook",
-    "email": "example@martoskondi.hu",
     "studentStatus": true,
     "institution": "BME",
     "faculty": "VBK",
     "collegian": true,
     "roomNumber": 5,
-    "subscriptions": ["ON_NEW_ARTICLES"]
+    "subscriptions": [
+      "ON_NEW_ARTICLES",
+      "ON_NEW_TRAININGS"
+    ]
   },
   "tools": [
     {
@@ -346,6 +348,29 @@
       "startDate": "2020-12-12T18:30:00",
       "endDate": "2020-12-12T19:30:00",
       "subscribed": true
+    }
+  ],
+  "user-tickets": [
+    {
+      "id": 2,
+      "name": "2018-19/2 tavasz",
+      "active": false,
+      "startDate": "",
+      "endDate": ""
+    },
+    {
+      "id": 3,
+      "name": "2019-20/1 ősz",
+      "active": false,
+      "startDate": "",
+      "endDate": ""
+    },
+    {
+      "id": 5,
+      "name": "2020-21/1 ősz",
+      "active": false,
+      "startDate": "",
+      "endDate": ""
     }
   ]
 }

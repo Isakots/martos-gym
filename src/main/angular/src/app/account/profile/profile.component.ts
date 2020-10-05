@@ -3,6 +3,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import {AccountService} from '../../shared/service/account.service';
 import {ActivatedRoute} from '@angular/router';
 import {AccountModel} from '../../shared/domain/account-model';
+import {GymPeriod} from '../../shared/domain/gym-period';
 import {requiredValidationConditionally} from "../../core/validator/required-validator";
 import {UserNotificationService} from "../../shared/service/user-notification.service";
 
