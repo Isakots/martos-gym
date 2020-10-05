@@ -161,8 +161,20 @@
           </div>
         </div>
         <div class="row mt-2">
-          <button type="submit" class="btn btn-primary" (click)="save()">Mentés</button>
+          <div class="col-lg-6">
+            <button type="submit" class="btn btn-primary btn-block" (click)="save()">Mentés</button>
+          </div>
         </div>
+
+        <hr>
+
+        <p>Bérleteid: </p>
+        <ul>
+          <li *ngFor="let ticket of tickets">
+            <span>{{ticket.name}}</span>
+          </li>
+        </ul>
+
       </div>
       <div class="col-lg-3">
         <image-view></image-view>

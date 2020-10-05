@@ -19,6 +19,10 @@ export class GymPeriodService {
     return this.http.get<GymPeriod[]>(`${this.resourceUrl}`, {observe: 'response'});
   }
 
+  findUserTickets(): Observable<HttpResponse<GymPeriod[]>> {
+    return this.http.get<GymPeriod[]>(`${this.environmentService.apiUrl}/user${this.RESOURCE_ENDPOINT}`, {observe: 'response'});
+  }
+
   create(period: GymPeriod): Observable<HttpResponse<GymPeriod>> {
     return this.http.post<GymPeriod>(this.resourceUrl, period, {observe: 'response'});
   }
