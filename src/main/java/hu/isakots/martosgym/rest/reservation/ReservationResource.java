@@ -32,13 +32,13 @@ public class ReservationResource {
 
     @GetMapping("/user/{userId}/" + RESERVATION_ENDPOINT)
     @PreAuthorize("hasAuthority('ROLE_MEMBER')")
-    public List<Reservation> getAllReservationsByUser(@PathVariable Long userId) throws ResourceNotFoundException {
+    public List<Reservation> getAllReservationsByUser(@PathVariable String userId) throws ResourceNotFoundException {
         return reservationService.findAllByUser(userId);
     }
 
     @GetMapping("/tools/{toolId}/" + RESERVATION_ENDPOINT)
     @PreAuthorize("hasAuthority('ROLE_USER')")
-    public List<Reservation> getAllReservationsByToolId(@PathVariable Long toolId) throws ResourceNotFoundException {
+    public List<Reservation> getAllReservationsByToolId(@PathVariable String toolId) throws ResourceNotFoundException {
         return reservationService.findAllByTool(toolId);
     }
 
@@ -56,7 +56,7 @@ public class ReservationResource {
 
     @DeleteMapping(RESERVATION_ENDPOINT + "/{id}")
     @PreAuthorize("hasAuthority('ROLE_USER')")
-    public ResponseEntity<Void> deleteReservation(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<Void> deleteReservation(@PathVariable String id) throws ResourceNotFoundException {
         reservationService.deleteReservation(id);
         return ResponseEntity.noContent().build();
     }

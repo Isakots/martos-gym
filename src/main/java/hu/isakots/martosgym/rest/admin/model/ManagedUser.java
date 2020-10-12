@@ -4,18 +4,18 @@ import java.io.Serializable;
 import java.util.Set;
 
 public class ManagedUser implements Serializable {
-    private Long id;
+    private String id;
     private String firstName;
     private String lastName;
     private String email;
     private boolean hasTicketForActivePeriod;
     private Set<String> authorities;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -62,7 +62,10 @@ public class ManagedUser implements Serializable {
     @Override
     public String toString() {
         return "ManagedUser{" +
-                "id=" + id +
+                "id='" + id + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
                 ", hasTicketForActivePeriod=" + hasTicketForActivePeriod +
                 ", authorities=" + authorities +
                 '}';

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ToolRepository extends JpaRepository<Tool, Long> {
+public interface ToolRepository extends JpaRepository<Tool, String> {
 
     Optional<Tool> findByName(String name);
 

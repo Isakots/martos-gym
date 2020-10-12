@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -32,7 +33,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class ArticleServiceTest {
 
-    private static final Long MOCK_ID = 1L;
+    private static final String MOCK_ID = UUID.randomUUID().toString();
     private static final String MOCK_TITLE = "MOCK_TITLE";
     private static final String MOCK_INTRO = "MOCK_INTRO";
     private static final ArticleType MOCK_TYPE = ArticleType.NUTRITION;

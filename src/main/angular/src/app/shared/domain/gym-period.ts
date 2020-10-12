@@ -1,5 +1,5 @@
 export interface GymPeriod {
-  id: number;
+  id: string;
   name: string;
   active: boolean;
   startDate: string;

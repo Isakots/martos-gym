@@ -1,6 +1,7 @@
 package hu.isakots.martosgym.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -15,9 +16,10 @@ import java.util.Set;
 public class Training implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "TRAINING_ID")
-    private Long id;
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    @Column(name = "TRAINING_ID", length = 36)
+    private String id;
 
     @NotNull
     @Column(name = "NAME", length = 63, nullable = false)
@@ -47,11 +49,11 @@ public class Training implements Serializable {
     private Set<User> participants = new HashSet<>();
 
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

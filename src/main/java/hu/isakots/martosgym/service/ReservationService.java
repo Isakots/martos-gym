@@ -38,11 +38,11 @@ public class ReservationService {
         return accountService.getAuthenticatedUserWithData().getReservations();
     }
 
-    public List<Reservation> findAllByUser(Long userId) throws ResourceNotFoundException {
+    public List<Reservation> findAllByUser(String userId) throws ResourceNotFoundException {
         return accountService.findById(userId).getReservations();
     }
 
-    public List<Reservation> findAllByTool(Long toolId) throws ResourceNotFoundException {
+    public List<Reservation> findAllByTool(String toolId) throws ResourceNotFoundException {
         return reservationRepository.findAllBySubjectName(toolService.getTool(toolId).getName())
                 .orElse(Collections.emptyList());
     }
@@ -101,7 +101,7 @@ public class ReservationService {
 
     public Reservation updateReservation(Reservation reservation) throws ResourceNotFoundException {
         LOGGER.debug("REST request to update Reservation : {}", reservation);
-        Long reservationId = reservation.getId();
+        String reservationId = reservation.getId();
         if (reservationId == null) {
             throw new IllegalArgumentException("The provided resource must have an id.");
         }
@@ -115,7 +115,7 @@ public class ReservationService {
         return reservationRepository.save(persistedReservation);
     }
 
-    public void deleteReservation(Long id) throws ResourceNotFoundException {
+    public void deleteReservation(String id) throws ResourceNotFoundException {
         LOGGER.debug("REST request to delete Reservation : {}", id);
 
         Reservation reservation = reservationRepository.findById(id)

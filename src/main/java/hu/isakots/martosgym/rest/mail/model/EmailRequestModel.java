@@ -30,4 +30,13 @@ public class EmailRequestModel implements Serializable {
     public void setContent(String content) {
         this.content = content;
     }
+
+    @Override
+    public String toString() {
+        return "EmailRequestModel{" +
+                "mailTo='" + mailTo + '\'' +
+                ", topic='" + topic + '\'' +
+                ", content='" + content + '\'' +
+                '}';
+    }
 }

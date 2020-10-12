@@ -2,6 +2,7 @@ package hu.isakots.martosgym.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -15,9 +16,10 @@ import java.util.Objects;
 public class Reservation implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "RESERVATION_ID")
-    private Long id;
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    @Column(name = "RESERVATION_ID", length = 36)
+    private String id;
 
     @NotNull
     @Column(name = "SUBJECT_NAME", length = 63, updatable = false, nullable = false)
@@ -45,11 +47,11 @@ public class Reservation implements Serializable {
     private User user;
 
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

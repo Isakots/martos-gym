@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Collections;
+import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -48,7 +49,7 @@ public class EmailNotificationSchedulerServiceTest {
         when(martosGymProperties.getEmailNotificationBeforeTrainingInDays()).thenReturn(MINUS_DAYS);
         Training mockTraining = new Training();
         User mockUser = new User();
-        mockUser.setId(1L);
+        mockUser.setId(UUID.randomUUID().toString());
         mockTraining.setParticipants(Sets.newHashSet(Collections.singletonList(mockUser)));
         when(trainingService.findAllByStartDateIsBefore(any())).thenReturn(Collections.singletonList(mockTraining));
 
@@ -62,7 +63,7 @@ public class EmailNotificationSchedulerServiceTest {
         when(martosGymProperties.getEmailNotificationBeforeTrainingInDays()).thenReturn(MINUS_DAYS);
         Training mockTraining = new Training();
         User mockUser = new User();
-        mockUser.setId(1L);
+        mockUser.setId(UUID.randomUUID().toString());
         mockUser.setSubscriptions(Sets.newHashSet(Collections.singletonList(new Subscription(SubscriptionType.ON_SUBSCRIBED_TRAININGS))));
         mockTraining.setParticipants(Sets.newHashSet(Collections.singletonList(mockUser)));
         when(trainingService.findAllByStartDateIsBefore(any())).thenReturn(Collections.singletonList(mockTraining));

@@ -36,7 +36,7 @@ public class ArticleResource {
     }
 
     @GetMapping("/articles/{id}")
-    public ResponseEntity<ArticleModel> getArticle(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<ArticleModel> getArticle(@PathVariable String id) throws ResourceNotFoundException {
         LOGGER.debug("REST request to get Article : {}", id);
         return ResponseEntity.ok(modelMapper.map(articleService.getArticle(id), ArticleModel.class));
     }
@@ -57,7 +57,7 @@ public class ArticleResource {
 
     @DeleteMapping("/articles/{id}")
     @PreAuthorize("hasAuthority('ROLE_MEMBER')")
-    public ResponseEntity<Void> deleteArticle(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteArticle(@PathVariable String id) {
         LOGGER.debug("REST request to delete Article : {}", id);
         articleService.deleteArticle(id);
         return ResponseEntity.ok().build();

@@ -1,6 +1,7 @@
 package hu.isakots.martosgym.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -13,9 +14,10 @@ import java.util.Objects;
 public class Article {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ARTICLE_ID")
-    private Long id;
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    @Column(name = "ARTICLE_ID", length = 36)
+    private String id;
 
     @NotNull
     @Column(name = "TITLE", length = 63)
@@ -40,11 +42,11 @@ public class Article {
     @JsonIgnore
     private LocalDateTime createdDate = LocalDateTime.now();
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

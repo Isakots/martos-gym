@@ -31,7 +31,7 @@ public class TrainingResource {
 
     @GetMapping(TRAINING_ENDPOINT + "/{trainingId}")
     @PreAuthorize("hasAuthority('ROLE_MEMBER')")
-    public TrainingModel findById(@PathVariable Long trainingId) throws ResourceNotFoundException {
+    public TrainingModel findById(@PathVariable String trainingId) throws ResourceNotFoundException {
         return trainingService.findById(trainingId);
     }
 
@@ -56,7 +56,7 @@ public class TrainingResource {
 
     @DeleteMapping(TRAINING_ENDPOINT + "/{trainingId}")
     @PreAuthorize("hasAuthority('ROLE_MEMBER')")
-    public ResponseEntity<Void> unsubscribeTraining(@PathVariable Long trainingId) throws ResourceNotFoundException {
+    public ResponseEntity<Void> unsubscribeTraining(@PathVariable String trainingId) throws ResourceNotFoundException {
         trainingService.deleteTraining(trainingId);
         return ResponseEntity.ok().build();
     }

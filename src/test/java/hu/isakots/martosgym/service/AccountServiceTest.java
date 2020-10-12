@@ -74,14 +74,14 @@ public class AccountServiceTest {
     @Test
     public void findById_whenFound() throws ResourceNotFoundException {
         when(userRepository.findById(any())).thenReturn(Optional.of(new User()));
-        accountService.findById(1L);
+        accountService.findById(UUID.randomUUID().toString());
         verify(userRepository).findById(any());
     }
 
     @Test(expected = ResourceNotFoundException.class)
     public void findById_whenNotFound() throws ResourceNotFoundException {
         when(userRepository.findById(any())).thenReturn(Optional.empty());
-        accountService.findById(1L);
+        accountService.findById(UUID.randomUUID().toString());
         verify(userRepository).findById(any());
     }
 

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ReservationRepository extends CrudRepository<Reservation, Long> {
+public interface ReservationRepository extends CrudRepository<Reservation, String> {
 
     Optional<List<Reservation>> findAllBySubjectNameIsAndIsReturnedFalse(String subjectName);
 

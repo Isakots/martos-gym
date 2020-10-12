@@ -1,5 +1,7 @@
 package hu.isakots.martosgym.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -10,9 +12,10 @@ import java.time.LocalDate;
 public class GymPeriod implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PERIOD_ID")
-    private Long id;
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    @Column(name = "PERIOD_ID", length = 36)
+    private String id;
 
     @NotNull
     @Column(name = "NAME", nullable = false)
@@ -31,11 +34,11 @@ public class GymPeriod implements Serializable {
     private LocalDate endDate;
 
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface TrainingRepository extends JpaRepository<Training, Long> {
+public interface TrainingRepository extends JpaRepository<Training, String> {
 
     Optional<List<Training>> findAllByStartDateIsBefore(LocalDateTime startDateTimeout);
 

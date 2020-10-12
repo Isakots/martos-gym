@@ -48,7 +48,7 @@ public class AccountService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found."));
     }
 
-    public User findById(Long id) throws ResourceNotFoundException {
+    public User findById(String id) throws ResourceNotFoundException {
         return userRepository.findById(id)
                 .orElseThrow(
                         () -> new ResourceNotFoundException(MessageFormat.format("User not found with id: {0}", id))

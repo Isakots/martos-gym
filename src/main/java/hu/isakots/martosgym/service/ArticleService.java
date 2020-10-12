@@ -46,11 +46,10 @@ public class ArticleService {
                 .collect(Collectors.toList());
     }
 
-    public Article getArticle(Long id) throws ResourceNotFoundException {
-        Article article = articleRepository.findById(id).orElseThrow(
+    public Article getArticle(String id) throws ResourceNotFoundException {
+        return articleRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Article not found")
         );
-        return article;
     }
 
 
@@ -80,7 +79,7 @@ public class ArticleService {
         return modelMapper.map(articleRepository.save(modelMapper.map(article, Article.class)), ArticleModel.class);
     }
 
-    public void deleteArticle(Long id) {
+    public void deleteArticle(String id) {
         articleRepository.deleteById(id);
     }
 }

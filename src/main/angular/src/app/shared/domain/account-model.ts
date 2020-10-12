@@ -1,5 +1,5 @@
 export class AccountModel {
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
   email: string;

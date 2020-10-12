@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface GymPeriodRepository extends JpaRepository<GymPeriod, Long> {
+public interface GymPeriodRepository extends JpaRepository<GymPeriod, String> {
 
     Optional<GymPeriod> findByIsActiveTrue();
 

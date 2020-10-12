@@ -1,5 +1,7 @@
 package hu.isakots.martosgym.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -9,9 +11,10 @@ import javax.validation.constraints.NotNull;
 public class Tool {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "TOOL_ID")
-    private Long id;
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    @Column(name = "TOOL_ID", length = 36)
+    private String id;
 
     @NotNull
     @Column(name = "NAME", length=63, nullable = false)
@@ -25,11 +28,11 @@ public class Tool {
     @Column(name = "IS_REACHABLE")
     private boolean isReachable;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

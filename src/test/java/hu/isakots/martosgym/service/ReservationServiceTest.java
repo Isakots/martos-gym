@@ -19,6 +19,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -29,7 +30,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class ReservationServiceTest {
 
-    private static final Long MOCK_ID = 1L;
+    private static final String MOCK_ID = UUID.randomUUID().toString();
     private static final String MOCK_SUBJECT_NAME = "MOCK_SUBJECT_NAME";
     private static final Long MAX_RESERVATION_DAYS = 7l;
 
@@ -61,9 +62,8 @@ public class ReservationServiceTest {
 
     @Test
     public void findAllByUser() throws ResourceNotFoundException {
-        final Long id = 1L;
         User mockUser = new User();
-        mockUser.setId(id);
+        mockUser.setId(MOCK_ID);
         mockUser.setReservations(Collections.singletonList(new Reservation()));
         when(accountService.getAuthenticatedUserWithData()).thenReturn(mockUser);
 
@@ -80,7 +80,7 @@ public class ReservationServiceTest {
         when(reservationRepository.findAllBySubjectName(eq(subjectName)))
                 .thenReturn(Optional.of(Collections.singletonList(reservation)));
         Tool tool = new Tool();
-        final Long id = 1L;
+        final String id = "1L";
         tool.setId(id);
         tool.setName(subjectName);
         when(toolService.getTool(eq(id))).thenReturn(tool);
@@ -94,7 +94,7 @@ public class ReservationServiceTest {
         String subjectName = "subjectName";
         when(reservationRepository.findAllBySubjectName(eq(subjectName))).thenReturn(Optional.empty());
         Tool tool = new Tool();
-        final Long id = 1L;
+        final String id = "1L";
         tool.setId(id);
         tool.setName(subjectName);
         when(toolService.getTool(eq(id))).thenReturn(tool);
@@ -240,7 +240,7 @@ public class ReservationServiceTest {
     @Test(expected = ResourceNotFoundException.class)
     public void deleteReservation_whenNotFound() throws ResourceNotFoundException {
         when(reservationRepository.findById(any())).thenReturn(Optional.empty());
-        reservationService.deleteReservation(1L);
+        reservationService.deleteReservation(MOCK_ID);
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -248,10 +248,10 @@ public class ReservationServiceTest {
         Reservation reservation = new Reservation();
         User mockUser = new User();
         mockUser.setReservations(Collections.emptyList());
-        mockUser.setId(1L);
+        mockUser.setId(MOCK_ID);
         when(reservationRepository.findById(any())).thenReturn(Optional.of(reservation));
         when(accountService.getAuthenticatedUserWithData()).thenReturn(mockUser);
-        reservationService.deleteReservation(1L);
+        reservationService.deleteReservation(MOCK_ID);
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -260,26 +260,25 @@ public class ReservationServiceTest {
         reservation.setReturned(true);
         User mockUser = new User();
         mockUser.setReservations(Collections.singletonList(reservation));
-        mockUser.setId(1L);
+        mockUser.setId(MOCK_ID);
         when(reservationRepository.findById(any())).thenReturn(Optional.of(reservation));
         when(accountService.getAuthenticatedUserWithData()).thenReturn(mockUser);
-        reservationService.deleteReservation(1L);
+        reservationService.deleteReservation(MOCK_ID);
     }
 
     @Test
     public void deleteReservation_whenAllowedToDelete() throws ResourceNotFoundException {
         Reservation reservation = new Reservation();
-        Long reservationId = 1L;
-        reservation.setId(reservationId);
+        reservation.setId(MOCK_ID);
         reservation.setReturned(false);
         User mockUser = new User();
         mockUser.setReservations(Collections.singletonList(reservation));
-        mockUser.setId(1L);
+        mockUser.setId(MOCK_ID);
         when(reservationRepository.findById(any())).thenReturn(Optional.of(reservation));
         when(accountService.getAuthenticatedUserWithData()).thenReturn(mockUser);
-        reservationService.deleteReservation(1L);
+        reservationService.deleteReservation(MOCK_ID);
 
-        verify(reservationRepository).deleteById(eq(reservationId));
+        verify(reservationRepository).deleteById(eq(MOCK_ID));
     }
 
 }
