@@ -7,5 +7,6 @@ export class TrainingModel {
   startDate: string;
   endDate: string;
   subscribed: boolean;
+  participantNames: string[];
   constructor() {}
 }

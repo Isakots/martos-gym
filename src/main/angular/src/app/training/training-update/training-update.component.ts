@@ -46,8 +46,8 @@ export class TrainingUpdateComponent implements OnInit {
 
     this._initTitle();
     this._initTraining();
-    this._initFormGroupAndControls();
     this._initDateStruct();
+    this._initFormGroupAndControls();
     this.triedToSave = false;
   }
 
@@ -69,7 +69,8 @@ export class TrainingUpdateComponent implements OnInit {
         description: '',
         startDate: null,
         endDate: null,
-        subscribed: null
+        subscribed: null,
+        participantNames: null
       };
     }
   }
@@ -122,7 +123,8 @@ export class TrainingUpdateComponent implements OnInit {
         this.endTime.hour, this.endTime.minute, this.endTime.second
       ).toISOString()).utcOffset(offset).local(true).format('YYYY-MM-DDTHH:mm:ss'),
       actualParticipants: null,
-      subscribed: null
+      subscribed: null,
+      participantNames: null
     };
 
     if (this.training.id !== null) {

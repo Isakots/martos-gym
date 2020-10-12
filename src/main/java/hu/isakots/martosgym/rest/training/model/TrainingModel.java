@@ -2,6 +2,7 @@ package hu.isakots.martosgym.rest.training.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class TrainingModel implements Serializable {
     private String id;
@@ -12,6 +13,7 @@ public class TrainingModel implements Serializable {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private boolean isSubscribed;
+    private List<String> participantNames;
 
     public String getId() {
         return id;
@@ -77,6 +79,14 @@ public class TrainingModel implements Serializable {
         isSubscribed = subscribed;
     }
 
+    public List<String> getParticipantNames() {
+        return participantNames;
+    }
+
+    public void setParticipantNames(List<String> participantNames) {
+        this.participantNames = participantNames;
+    }
+
     @Override
     public String toString() {
         return "TrainingModel{" +
@@ -88,6 +98,7 @@ public class TrainingModel implements Serializable {
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", isSubscribed=" + isSubscribed +
+                ", participantNames=" + participantNames +
                 '}';
     }
 }
