@@ -19,3 +19,5 @@ databaseChangeLog:
       file: db/changelog/v0.0.9_addSubscriptionTable.yaml
   - include:
       file: db/changelog/v0.0.10_fillDatabaseWithTestUsers.yaml
+  - include:
+      file: db/changelog/v0.0.11_change_to_UUID_primary_keys.yaml

@@ -1,5 +1,5 @@
 export class TrainingModel {
-  id: number;
+  id: string;
   name: string;
   maxParticipants: number;
   actualParticipants: number;

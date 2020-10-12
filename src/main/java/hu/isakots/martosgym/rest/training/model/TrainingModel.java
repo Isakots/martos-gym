@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class TrainingModel implements Serializable {
-    private Long id;
+    private String id;
     private String name;
     private int maxParticipants;
     private int actualParticipants;
@@ -13,11 +13,11 @@ public class TrainingModel implements Serializable {
     private LocalDateTime endDate;
     private boolean isSubscribed;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -75,5 +75,19 @@ public class TrainingModel implements Serializable {
 
     public void setSubscribed(boolean subscribed) {
         isSubscribed = subscribed;
+    }
+
+    @Override
+    public String toString() {
+        return "TrainingModel{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", maxParticipants=" + maxParticipants +
+                ", actualParticipants=" + actualParticipants +
+                ", description='" + description + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", isSubscribed=" + isSubscribed +
+                '}';
     }
 }

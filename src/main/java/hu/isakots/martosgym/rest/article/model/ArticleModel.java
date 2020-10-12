@@ -67,7 +67,6 @@ public class ArticleModel {
                 ", title='" + title + '\'' +
                 ", type=" + type +
                 ", introduction='" + introduction + '\'' +
-                ", content='" + content + '\'' +
                 ", createdDate=" + createdDate +
                 '}';
     }

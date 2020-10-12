@@ -25,7 +25,7 @@ public class ToolService {
         return toolRepository.findAll();
     }
 
-    public Tool getTool(Long id) throws ResourceNotFoundException {
+    public Tool getTool(String id) throws ResourceNotFoundException {
         return toolRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException(MessageFormat.format("Tool not found with id: {0}", id))
         );
@@ -48,7 +48,7 @@ public class ToolService {
         return toolRepository.save(tool);
     }
 
-    public void deleteTool(Long id) {
+    public void deleteTool(String id) {
         LOGGER.debug("REST request to delete Tool : {}", id);
         toolRepository.deleteById(id);
     }

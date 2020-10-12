@@ -33,7 +33,7 @@ export class TrainingItemComponent implements OnInit {
     this.detailsViewOpenState = !this.detailsViewOpenState;
   }
 
-  subscribe(trainingId: number, subscription: boolean) {
+  subscribe(trainingId: string, subscription: boolean) {
     if (this.isSubscribeDisabled()) {
       this.userNotificationService.notifyUser('Az edzés már sajnos betelt!', true);
       return;

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ArticleRepository extends PagingAndSortingRepository<Article, Long> {
+public interface ArticleRepository extends PagingAndSortingRepository<Article, String> {
     Optional<Article> findByType(ArticleType type);
 
     Optional<List<Article>> findAllByType(ArticleType type);

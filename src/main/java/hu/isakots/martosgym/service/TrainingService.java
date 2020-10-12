@@ -47,7 +47,7 @@ public class TrainingService {
                 .collect(Collectors.toList());
     }
 
-    public TrainingModel findById(Long trainingId) throws ResourceNotFoundException {
+    public TrainingModel findById(String trainingId) throws ResourceNotFoundException {
         return modelMapper.map(
                 repository.findById(trainingId)
                         .orElseThrow(() -> new ResourceNotFoundException(MessageFormat.format(TRAINING_NOT_FOUND_WITH_ID, trainingId))),
@@ -55,7 +55,7 @@ public class TrainingService {
         );
     }
 
-    Training findTrainingById(Long trainingId) throws ResourceNotFoundException {
+    Training findTrainingById(String trainingId) throws ResourceNotFoundException {
         return repository.findById(trainingId)
                 .orElseThrow(() -> new ResourceNotFoundException(MessageFormat.format(TRAINING_NOT_FOUND_WITH_ID, trainingId))
                 );
@@ -110,7 +110,7 @@ public class TrainingService {
         }
     }
 
-    public void deleteTraining(Long trainingId) throws ResourceNotFoundException {
+    public void deleteTraining(String trainingId) throws ResourceNotFoundException {
         LOGGER.debug("REST request to delete Training : {}", trainingId);
         Training training = findTrainingById(trainingId);
         training.getParticipants().clear();
@@ -118,7 +118,7 @@ public class TrainingService {
         repository.deleteById(trainingId);
     }
 
-    public void subscribeToTraining(Long trainingId, boolean subscription) throws ResourceNotFoundException {
+    public void subscribeToTraining(String trainingId, boolean subscription) throws ResourceNotFoundException {
         User authenticatedUser = accountService.getAuthenticatedUserWithData();
         Training training = findTrainingById(trainingId);
         if (subscription) {

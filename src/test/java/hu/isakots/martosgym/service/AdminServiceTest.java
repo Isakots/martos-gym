@@ -20,6 +20,7 @@ import org.modelmapper.ModelMapper;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Optional;
+import java.util.UUID;
 
 import static hu.isakots.martosgym.configuration.util.AuthoritiesConstants.ROLE_MEMBER;
 import static hu.isakots.martosgym.configuration.util.AuthoritiesConstants.ROLE_USER;
@@ -29,7 +30,7 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class AdminServiceTest {
 
-    private static final Long MOCK_ID = 1L;
+    private static final String MOCK_ID = UUID.randomUUID().toString();
 
     @Spy
     private ModelMapper modelMapper = new ModelMapperConfiguration().getModelMapper();

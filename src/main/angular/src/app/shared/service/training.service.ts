@@ -16,11 +16,11 @@ export class TrainingService {
     this.resourceUrl = environmentService.apiUrl + this.RESOURCE_ENDPOINT;
   }
 
-  subscribe(trainingId: number): Observable<HttpResponse<TrainingModel>> {
+  subscribe(trainingId: string): Observable<HttpResponse<TrainingModel>> {
     return this.http.post<TrainingModel>(`${this.resourceUrl}/${trainingId}/subscribe`, null, {observe: 'response'});
   }
 
-  unsubscribe(trainingId: number): Observable<HttpResponse<TrainingModel>> {
+  unsubscribe(trainingId: string): Observable<HttpResponse<TrainingModel>> {
     return this.http.post<TrainingModel>(`${this.resourceUrl}/${trainingId}/unsubscribe`, null, {observe: 'response'});
   }
 
@@ -32,11 +32,11 @@ export class TrainingService {
     return this.http.put<TrainingModel>(this.resourceUrl, trainingModel, {observe: 'response'});
   }
 
-  find(id: number): Observable<HttpResponse<TrainingModel>> {
+  find(id: string): Observable<HttpResponse<TrainingModel>> {
     return this.http.get<TrainingModel>(`${this.resourceUrl}/${id}`, {observe: 'response'});
   }
 
-  findAllByUser(userId: number): Observable<HttpResponse<TrainingModel[]>> {
+  findAllByUser(userId: string): Observable<HttpResponse<TrainingModel[]>> {
     return this.http.get<TrainingModel[]>(
       `${this.environmentService.apiUrl}/user/${userId}${this.RESOURCE_ENDPOINT}`,
       {observe: 'response'}
@@ -52,7 +52,7 @@ export class TrainingService {
     return this.http.get<TrainingModel[]>(this.resourceUrl, {params: options, observe: 'response'});
   }
 
-  delete(id: number): Observable<HttpResponse<any>> {
+  delete(id: string): Observable<HttpResponse<any>> {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, {observe: 'response'});
   }
 }

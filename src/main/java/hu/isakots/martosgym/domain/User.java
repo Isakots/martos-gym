@@ -1,6 +1,7 @@
 package hu.isakots.martosgym.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,10 +15,10 @@ import java.util.*;
 public class User implements Serializable {
 
     @Id
-    @Column(name = "USER_ID")
-    // FYI: Sequence cannot be created in MySQL.. TODO add UUID generator using Hibernate
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    @Column(name = "USER_ID", length = 36)
+    private String id;
 
     @NotNull
     @Size(max = 64)
@@ -86,11 +87,11 @@ public class User implements Serializable {
     private Set<Subscription> subscriptions = new HashSet<>();
 
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

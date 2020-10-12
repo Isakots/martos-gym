@@ -19,10 +19,7 @@ import org.modelmapper.ModelMapper;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -32,6 +29,9 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TrainingServiceTest {
+
+    private static final String MOCK_ID = UUID.randomUUID().toString();
+    private static final String MOCK_USER_ID = UUID.randomUUID().toString();
 
     @Spy
     private ModelMapper modelMapper = new ModelMapperConfiguration().getModelMapper();
@@ -51,8 +51,7 @@ public class TrainingServiceTest {
     @Test
     public void findAll() {
         Training training = new Training();
-        final Long id = 1L;
-        training.setId(id);
+        training.setId(MOCK_ID);
         final String trainingName = "trainingName";
         training.setName(trainingName);
         final String description = "description";
@@ -65,9 +64,9 @@ public class TrainingServiceTest {
         training.setMaxParticipants(maxParticipants);
 
         User mockUser = new User();
-        mockUser.setId(1L);
+        mockUser.setId(MOCK_USER_ID);
         mockUser.setTrainings(Sets.newHashSet(Collections.singletonList(training)));
-        training.setParticipants(Sets.newHashSet(Arrays.asList(mockUser)));
+        training.setParticipants(Sets.newHashSet(Collections.singletonList(mockUser)));
 
         when(repository.findAll()).thenReturn(Collections.singletonList(training));
         when(accountService.getAuthenticatedUserWithData()).thenReturn(mockUser);
@@ -76,7 +75,7 @@ public class TrainingServiceTest {
 
         assertEquals(1, result.size());
         TrainingModel model = result.get(0);
-        assertEquals(id, model.getId());
+        assertEquals(MOCK_ID, model.getId());
         assertEquals(trainingName, model.getName());
         assertEquals(description, model.getDescription());
         assertEquals(startDate, model.getStartDate());
@@ -89,19 +88,19 @@ public class TrainingServiceTest {
     @Test(expected = ResourceNotFoundException.class)
     public void findById_whenNotFound() throws ResourceNotFoundException {
         when(repository.findById(any())).thenReturn(Optional.empty());
-        service.findById(1L);
+        service.findById(MOCK_ID);
     }
 
     @Test(expected = ResourceNotFoundException.class)
     public void findTrainingById_whenNotFound() throws ResourceNotFoundException {
         when(repository.findById(any())).thenReturn(Optional.empty());
-        service.findTrainingById(1L);
+        service.findTrainingById(MOCK_ID);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void createTraining_whenModelHasId_thenIllegalArgumentExceptionIsThrown() throws TrainingValidationException {
         TrainingModel model = new TrainingModel();
-        model.setId(1L);
+        model.setId(MOCK_ID);
         service.createTraining(model);
     }
 
@@ -145,15 +144,15 @@ public class TrainingServiceTest {
     @Test(expected = TrainingValidationException.class)
     public void modifyTraining_whenMaxParticipantsIsSetBelowActualParticipants_thenTrainingValidationExceptionIsThrown() throws ResourceNotFoundException, TrainingValidationException {
         TrainingModel model = new TrainingModel();
-        model.setId(1L);
+        model.setId(MOCK_ID);
         model.setMaxParticipants(1);
         model.setStartDate(LocalDateTime.now().plus(1L, ChronoUnit.DAYS));
         model.setEndDate(LocalDateTime.now().plus(1L, ChronoUnit.DAYS).plus(1L, ChronoUnit.HOURS));
 
         User participant1 = new User();
-        participant1.setId(1L);
+        participant1.setId(MOCK_USER_ID);
         User participant2 = new User();
-        participant2.setId(2L);
+        participant2.setId(UUID.randomUUID().toString());
         Training persistedTraining = new Training();
         persistedTraining.setParticipants(Sets.newHashSet(Arrays.asList(participant1, participant2)));
         when(repository.findById(any())).thenReturn(Optional.of(persistedTraining));
@@ -163,35 +162,32 @@ public class TrainingServiceTest {
 
     @Test
     public void deleteTraining() throws ResourceNotFoundException {
-        Long id = 1L;
-
         User participant1 = new User();
-        participant1.setId(1L);
+        participant1.setId(MOCK_ID);
         Training persistedTraining = new Training();
         persistedTraining.setParticipants(Sets.newHashSet(Arrays.asList(participant1)));
-        when(repository.findById(eq(id))).thenReturn(Optional.of(persistedTraining));
+        when(repository.findById(eq(MOCK_ID))).thenReturn(Optional.of(persistedTraining));
 
         ArgumentCaptor<Training> trainingArgumentCaptor = ArgumentCaptor.forClass(Training.class);
 
-        service.deleteTraining(id);
+        service.deleteTraining(MOCK_ID);
 
         verify(repository).save(trainingArgumentCaptor.capture());
         assertEquals(0, trainingArgumentCaptor.getValue().getParticipants().size());
-        verify(repository).deleteById(eq(id));
+        verify(repository).deleteById(eq(MOCK_ID));
     }
 
     @Test
     public void subscribeToTraining() throws ResourceNotFoundException {
-        Long id = 1L;
         boolean subscription = true;
 
         User mockUser = new User();
         Training persistedTraining = new Training();
-        when(repository.findById(eq(id))).thenReturn(Optional.of(persistedTraining));
+        when(repository.findById(eq(MOCK_ID))).thenReturn(Optional.of(persistedTraining));
         when(accountService.getAuthenticatedUserWithData()).thenReturn(mockUser);
         ArgumentCaptor<User> userArgumentCaptor = ArgumentCaptor.forClass(User.class);
 
-        service.subscribeToTraining(id, subscription);
+        service.subscribeToTraining(MOCK_ID, subscription);
 
         verify(accountService).saveAccount(userArgumentCaptor.capture());
         assertEquals(1, userArgumentCaptor.getValue().getTrainings().size());
@@ -199,17 +195,16 @@ public class TrainingServiceTest {
 
     @Test
     public void unSubscribeToTraining() throws ResourceNotFoundException {
-        Long id = 1L;
         boolean subscription = false;
 
         Training persistedTraining = new Training();
         User mockUser = new User();
         mockUser.setTrainings(Sets.newHashSet(Collections.singletonList(persistedTraining)));
-        when(repository.findById(eq(id))).thenReturn(Optional.of(persistedTraining));
+        when(repository.findById(eq(MOCK_ID))).thenReturn(Optional.of(persistedTraining));
         when(accountService.getAuthenticatedUserWithData()).thenReturn(mockUser);
         ArgumentCaptor<User> userArgumentCaptor = ArgumentCaptor.forClass(User.class);
 
-        service.subscribeToTraining(id, subscription);
+        service.subscribeToTraining(MOCK_ID, subscription);
 
         verify(accountService).saveAccount(userArgumentCaptor.capture());
         assertEquals(0, userArgumentCaptor.getValue().getTrainings().size());

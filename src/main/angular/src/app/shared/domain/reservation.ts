@@ -1,5 +1,5 @@
 export class Reservation {
-  id: number;
+  id: string;
   subjectName: string;
   quantity: number;
   startDate: string;

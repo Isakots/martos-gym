@@ -31,7 +31,7 @@ public class ToolResource {
 
     @GetMapping(TOOL_ENDPOINT+"/{id}")
     @PreAuthorize("hasAuthority('ROLE_USER')")
-    public Tool getTool(@PathVariable Long id) throws ResourceNotFoundException {
+    public Tool getTool(@PathVariable String id) throws ResourceNotFoundException {
         return toolService.getTool(id);
     }
 
@@ -49,7 +49,7 @@ public class ToolResource {
 
     @DeleteMapping(TOOL_ENDPOINT+"/{id}")
     @PreAuthorize("hasAuthority('ROLE_MEMBER')")
-    public ResponseEntity<Void> deleteTool(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteTool(@PathVariable String id) {
         toolService.deleteTool(id);
         return ResponseEntity.noContent().build();
     }

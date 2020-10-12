@@ -24,14 +24,14 @@ public class SubscriptionController {
 
     @PostMapping(TRAINING_ENDPOINT + "/{trainingId}" + "/subscribe")
     @PreAuthorize("hasAuthority('ROLE_USER')")
-    public ResponseEntity<Void> subscribeTraining(@PathVariable Long trainingId) throws ResourceNotFoundException {
+    public ResponseEntity<Void> subscribeTraining(@PathVariable String trainingId) throws ResourceNotFoundException {
         trainingService.subscribeToTraining(trainingId, true);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping(TRAINING_ENDPOINT + "/{trainingId}" + "/unsubscribe")
     @PreAuthorize("hasAuthority('ROLE_USER')")
-    public ResponseEntity<Void> unsubscribeTraining(@PathVariable Long trainingId) throws ResourceNotFoundException {
+    public ResponseEntity<Void> unsubscribeTraining(@PathVariable String trainingId) throws ResourceNotFoundException {
         trainingService.subscribeToTraining(trainingId, false);
         return ResponseEntity.ok().build();
     }

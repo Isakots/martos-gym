@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: MRTSGYM-11
+      author: csokasi.marcell
+      changes:
+        - sqlFile:
+            encoding: utf8
+            path: db/changelog/v0.0.11_change_to_UUID_primary_keys.sql
