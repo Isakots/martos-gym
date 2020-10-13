@@ -34,11 +34,7 @@
           <span>Résztvevők: </span>
         </h5>
         <ul>
-          <li>Kis Pista</li>
-          <li>Nagy István</li>
-          <li>Tóth János</li>
-          <li>Megedz Elek</li>
-          <li>Edző Jenő</li>
+          <li *ngFor="let participant of training.participantNames">{{participant}}</li>
         </ul>
 
       </div>

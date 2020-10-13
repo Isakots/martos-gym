@@ -42,6 +42,11 @@ public class TrainingService {
                     TrainingModel model = modelMapper.map(training, TrainingModel.class);
                     model.setSubscribed(accountService.getAuthenticatedUserWithData().getTrainings().contains(training));
                     model.setActualParticipants(training.getParticipants().size());
+                    model.setParticipantNames(
+                            training.getParticipants().stream()
+                            .map(user -> user.getLastName() + " "+ user.getFirstName())
+                            .collect(Collectors.toList())
+                    );
                     return model;
                 })
                 .collect(Collectors.toList());

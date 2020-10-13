@@ -26,14 +26,16 @@ export class TrainingSubscriptionViewComponent implements OnInit {
   onTrainingDelete(deleted: boolean) {
     if (deleted) {
       this.userNotificationService.notifyUser('Edzés sikeresen törölve!', false);
-      this.trainingService.findAll().subscribe(
-        response => {
-          this.trainings = response.body;
-        }
-      );
+      this.reloadData();
     } else {
       this.userNotificationService.notifyUser('Edzés törlése sikertelen', true);
     }
+  }
+
+  reloadData() {
+    this.trainingService.findAll().subscribe( response => {
+      this.trainings = response.body;
+    });
   }
 
 }

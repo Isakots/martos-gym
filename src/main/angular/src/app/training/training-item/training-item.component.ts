@@ -20,6 +20,9 @@ export class TrainingItemComponent implements OnInit {
   @Output()
   public trainingDeleted: EventEmitter<boolean> = new EventEmitter();
 
+  @Output()
+  public onSubscription: EventEmitter<void> = new EventEmitter();
+
   constructor(
     private trainingService: TrainingService,
     private userNotificationService: UserNotificationService) {
@@ -41,6 +44,7 @@ export class TrainingItemComponent implements OnInit {
     if (subscription) {
       this.trainingService.subscribe(trainingId).subscribe(() => {
           this.userNotificationService.notifyUser('Sikeresen feliratkoztál az edzésre!', false);
+          this.onSubscription.emit();
         },
         () => {
           this.userNotificationService.notifyUser('Hiba történt feliratkozás közben!', true);
@@ -48,6 +52,7 @@ export class TrainingItemComponent implements OnInit {
     } else {
       this.trainingService.unsubscribe(trainingId).subscribe(() => {
           this.userNotificationService.notifyUser('Sikeresen leiratkoztál az edzésről!', false);
+          this.onSubscription.emit();
         },
         () => {
           this.userNotificationService.notifyUser('Hiba történt leiratkozás közben!', true);

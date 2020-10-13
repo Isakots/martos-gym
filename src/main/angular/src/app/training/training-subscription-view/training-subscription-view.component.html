@@ -22,6 +22,7 @@
       <div *ngFor="let training of trainings">
         <app-training-item
           [training]="training"
+          (onSubscription)="reloadData()"
           (trainingDeleted)="onTrainingDelete($event)">
         </app-training-item>
       </div>
