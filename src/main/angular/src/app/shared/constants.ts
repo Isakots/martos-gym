@@ -1,5 +1,5 @@
 export const JWT_TOKEN_KEY = 'authenticationToken';
 
 export enum ConfirmationType {
-  DELETION, EMAIL
+  DELETION, EMAIL, PERIOD_CLOSE
 }

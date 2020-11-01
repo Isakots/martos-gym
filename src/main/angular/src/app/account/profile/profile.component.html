@@ -169,8 +169,8 @@
         <hr>
 
         <p>Bérleteid: </p>
-        <ul>
-          <li *ngFor="let ticket of tickets">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let ticket of tickets">
             <span>{{ticket.name}}</span>
           </li>
         </ul>

@@ -79,7 +79,7 @@ public class User implements Serializable {
     @JsonIgnore
     private Set<Training> trainings = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "USER_SUBSCRIPTIONS",
             joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")},
@@ -230,9 +230,6 @@ public class User implements Serializable {
                 ", roomNumber=" + roomNumber +
                 ", imagePath='" + imagePath + '\'' +
                 ", authorities=" + authorities +
-                ", reservations=" + reservations +
-                ", tickets=" + tickets +
-                ", trainings=" + trainings +
                 '}';
     }
 

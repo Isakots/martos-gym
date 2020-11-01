@@ -36,10 +36,10 @@ export class SignUpComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(50)]],
       confirmPassword: ['', []], // matching validation only
       studentStatus: [false],
-      institution: ['', []],
-      faculty: ['', []],
+      institution: [null, []],
+      faculty: [null, []],
       collegian: [false],
-      roomNumber: ['', []],
+      roomNumber: [null, []],
       subOnNewArticles: [false],
       subOnNewTrainings: [false],
       subOnSubscribedTrainings: [false]
@@ -83,7 +83,7 @@ export class SignUpComponent implements OnInit {
       faculty: this.registerForm.controls.faculty.value,
       collegian: this.registerForm.controls.collegian.value,
       roomNumber: this.registerForm.controls.roomNumber.value,
-      subscriptions: subscriptions
+      subscriptions: subscriptions === [] ? null : subscriptions
     };
     this.accountService.registration(userData).subscribe(
       () => {

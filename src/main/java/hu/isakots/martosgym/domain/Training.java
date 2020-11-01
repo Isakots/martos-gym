@@ -108,13 +108,12 @@ public class Training implements Serializable {
     @Override
     public String toString() {
         return "Training{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", maxParticipants=" + maxParticipants +
                 ", description='" + description + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
-                ", user=" + participants +
                 '}';
     }
 

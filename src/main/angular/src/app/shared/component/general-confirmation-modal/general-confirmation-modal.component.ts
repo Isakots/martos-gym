@@ -32,6 +32,9 @@ export class GeneralConfirmationModalComponent implements OnInit {
       case ConfirmationType.EMAIL:
         this.confirmationText = 'Biztos, hogy elküldi az e-maileket?';
         break;
+      case ConfirmationType.PERIOD_CLOSE:
+        this.confirmationText = 'Biztos, hogy lezárod az időszakot? Az időszak újranyitására nincs lehetőség!';
+        break;
     }
   }
 

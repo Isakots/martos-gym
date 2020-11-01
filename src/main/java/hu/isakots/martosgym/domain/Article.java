@@ -29,12 +29,12 @@ public class Article {
     private ArticleType type;
 
     @NotNull
-    @Column(name = "INTRODUCTION", length = 511)
+    @Column(name = "INTRODUCTION", length = 1024)
     private String introduction;
 
     @Lob
     @NotNull
-    @Column(name = "CONTENT", columnDefinition = "CLOB", nullable = false, length = 4095)
+    @Column(name = "CONTENT", columnDefinition = "CLOB", nullable = false, length = 65535)
     private String content;
 
     @CreatedDate

@@ -36,6 +36,10 @@ public class AdminService {
         return gymPeriodRepository.findAll();
     }
 
+    public List<GymPeriod> getUserGymPeriods() {
+        return accountService.getAuthenticatedUserWithData().getTickets();
+    }
+
     public GymPeriod createGymPeriod(GymPeriod period) {
         gymPeriodRepository.findByIsActiveTrue().ifPresent(
                 gymPeriod -> {

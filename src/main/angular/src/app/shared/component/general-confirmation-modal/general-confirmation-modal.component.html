@@ -23,6 +23,11 @@
           <fa-icon icon="envelope"></fa-icon>&nbsp;<span>Küldés</span>
         </button>
       </div>
+      <div *ngSwitchCase="CONFIRMATION_TYPE_ENUM.PERIOD_CLOSE">
+        <button class="btn btn-danger" (click)="confirmEvent(true)">
+          <fa-icon icon="times"></fa-icon>&nbsp;<span>Lezárás</span>
+        </button>
+      </div>
     </div>
   </div>
 </ng-template>

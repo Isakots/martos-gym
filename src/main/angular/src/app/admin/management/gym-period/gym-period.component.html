@@ -4,7 +4,7 @@
   <button *jhiHasAnyAuthority="'ROLE_MEMBER'"
           class="btn btn-secondary"
           [disabled]="!isActivePeriodExist()"
-          (click)="closeActivePeriod()">
+          (click)="openConfirmationModal()">
     <fa-icon icon="trash-alt"></fa-icon>
     <span class="d-md-inline"> Időszak lezárása</span>
   </button>
@@ -22,11 +22,14 @@
   <div *ngIf="isNewPeriodFormVisible" class="gym-period-form">
     <h4>Új időszak hozzáadása</h4>
     <br>
-    <div class="col-lg-4">
-      <div class="form-group">
-        <label class="form-control-label" for="periodName">Időszak neve</label>
-        <input type="text" class="form-control" id="periodName" name="periodName"
-               [formControl]="periodNameFormControl">
+
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="form-group">
+          <label class="form-control-label" for="periodName">Időszak neve</label>
+          <input type="text" class="form-control" id="periodName" name="periodName"
+                 [formControl]="periodNameFormControl">
+        </div>
       </div>
     </div>
 
@@ -62,15 +65,16 @@
       </div>
     </div>
 
-    <div class="col-lg-4">
-    <button *jhiHasAnyAuthority="'ROLE_MEMBER'"
-            class="btn btn-secondary"
-            (click)="saveNewPeriod()">
-      <fa-icon icon="save"></fa-icon>
-      <span class="d-md-inline"> Mentés</span>
-    </button>
+    <div class="row mt-4">
+      <div class="col-lg-4">
+        <button *jhiHasAnyAuthority="'ROLE_MEMBER'"
+                class="btn btn-secondary btn-block"
+                (click)="saveNewPeriod()">
+          <fa-icon icon="save"></fa-icon>
+          <span class="d-md-inline"> Mentés</span>
+        </button>
+      </div>
     </div>
-
   </div>
 
   <p>Jelenlegi aktív időszak:
@@ -85,3 +89,8 @@
   </ul>
 
 </div>
+
+<app-general-confirmation-modal
+  (eventConfirmed)="onEventConfirmation($event)"
+  [confirmationType]="confirmationType"
+></app-general-confirmation-modal>

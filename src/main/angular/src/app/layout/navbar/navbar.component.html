@@ -62,12 +62,12 @@
           <span>Edzőterem</span>
         </a>
       </li>
-      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-        <a class="nav-link" routerLink="nutrition" (click)="collapseNavbar()">
-          <fa-icon icon="drumstick-bite"></fa-icon>
-          <span>Táplálkozás</span>
-        </a>
-      </li>
+<!--      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
+<!--        <a class="nav-link" routerLink="nutrition" (click)="collapseNavbar()">-->
+<!--          <fa-icon icon="drumstick-bite"></fa-icon>-->
+<!--          <span>Táplálkozás</span>-->
+<!--        </a>-->
+<!--      </li>-->
       <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
         <a class="nav-link" routerLink="trainings" (click)="collapseNavbar()">
           <fa-icon icon="running"></fa-icon>

@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: MRTSGYM-12
+      author: csokasi.marcell
+      changes:
+        - sqlFile:
+            encoding: utf8
+            path: db/changelog/v0.0.12_increasing_article_content_length.sql

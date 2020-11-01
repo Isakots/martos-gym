@@ -95,7 +95,7 @@ public class TrainingService {
         validateTrainingModel(trainingModel);
         Training training = findTrainingById(trainingModel.getId());
         validateParticipantCount(training, trainingModel);
-        training = modelMapper.map(trainingModel, Training.class);
+        modelMapper.map(trainingModel, training);
 
         return modelMapper.map(repository.save(training), TrainingModel.class);
     }

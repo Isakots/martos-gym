@@ -1,9 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {GymPeriod} from '../../../shared/domain/gym-period';
 import {GymPeriodService} from '../../../shared/service/gym-period.service';
 import {UserNotificationService} from '../../../shared/service/user-notification.service';
 import {NgbCalendar, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {FormControl, Validators} from '@angular/forms';
+import {GeneralConfirmationModalComponent} from "../../../shared/component/general-confirmation-modal/general-confirmation-modal.component";
+import {ConfirmationType} from "../../../shared/constants";
 
 @Component({
   selector: 'app-gym-period',
@@ -11,6 +13,10 @@ import {FormControl, Validators} from '@angular/forms';
   styleUrls: ['./gym-period.component.scss']
 })
 export class GymPeriodComponent implements OnInit {
+  @ViewChild(GeneralConfirmationModalComponent) confirmCloseActivePeriodModal: GeneralConfirmationModalComponent;
+
+  readonly confirmationType = ConfirmationType.PERIOD_CLOSE;
+
   startDate: NgbDateStruct;
   endDate: NgbDateStruct;
   isNewPeriodFormVisible = false;
@@ -82,5 +88,15 @@ export class GymPeriodComponent implements OnInit {
         this.userNotificationService.notifyUser('Időszak hozzáadása sikertelen!', true);
       }
     );
+  }
+
+  openConfirmationModal() {
+    this.confirmCloseActivePeriodModal.open();
+  }
+
+  onEventConfirmation(confirmed: boolean) {
+    if (confirmed) {
+      this.closeActivePeriod();
+    }
   }
 }

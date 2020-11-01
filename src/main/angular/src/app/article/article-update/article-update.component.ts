@@ -67,8 +67,8 @@ export class ArticleUpdateComponent implements OnInit {
   private _initFormGroup() {
     this.editorForm = new FormGroup({
       id: new FormControl(''),
-      title: new FormControl('', Validators.required),
-      type: new FormControl('Hírfolyam', Validators.required),
+      title: new FormControl('', [Validators.required]),
+      type: new FormControl('NEWS', Validators.required),
       introduction: new FormControl('', Validators.required)
     });
   }
@@ -107,6 +107,7 @@ export class ArticleUpdateComponent implements OnInit {
     result.subscribe(answer => this.onSaveSuccess(answer.body.id), (error) => {
       if (error.status == 409) {
         this.userNotificationService.notifyUser('Ilyen típusú cikk már létezik! Kérlek a meglévőt módosítsd!', true);
+        window.scroll(0,0);
       }
       this.onSaveError();
     });

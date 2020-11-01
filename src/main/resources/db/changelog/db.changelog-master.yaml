@@ -21,3 +21,5 @@ databaseChangeLog:
       file: db/changelog/v0.0.10_fillDatabaseWithTestUsers.yaml
   - include:
       file: db/changelog/v0.0.11_change_to_UUID_primary_keys.yaml
+  - include:
+      file: db/changelog/v0.0.12_increasing_article_content_length.yaml

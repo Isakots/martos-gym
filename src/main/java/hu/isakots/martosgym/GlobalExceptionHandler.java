@@ -78,7 +78,7 @@ public class GlobalExceptionHandler {
         if(exception instanceof ReservationValidationException) {
             LOGGER.warn("Validation exception occured with message: {}", exception.getMessage());
         }
-        LOGGER.error("Exception occured with cause: ", exception);
+        LOGGER.error("Exception occurred with message: {}", exception.getMessage());
     }
 
 }

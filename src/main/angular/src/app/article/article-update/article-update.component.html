@@ -10,7 +10,7 @@
           <div class="col-lg-6">
             <div class="form-group">
               <label class="form-control-label" for="field_title">Cím</label>
-              <input type="text" class="form-control" name="title" id="field_title"
+              <input type="text" class="form-control" name="title" id="field_title" maxlength="63"
                      formControlName="title"/>
             </div>
           </div>
@@ -29,7 +29,7 @@
             <div class="form-group">
               <label class="form-control-label" for="field_introduction">Bevezető</label>
               <textarea class="form-control" name="type" id="field_introduction"
-                        formControlName="introduction" rows="3"></textarea>
+                        formControlName="introduction" rows="3" maxlength="1024"></textarea>
             </div>
 
             <div class="form-group">

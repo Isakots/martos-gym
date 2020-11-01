@@ -6,7 +6,7 @@ import {ManagedUserResolver} from './managed-user.resolver';
 import {GymPeriodResolver} from './gym-period.resolver';
 import {MailSendingComponent} from './mail-sending/mail-sending.component';
 
-const toolRoutes: Routes = [
+const adminRoutes: Routes = [
   {
     path: 'admin',
     children: [
@@ -36,7 +36,7 @@ const toolRoutes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forChild(toolRoutes)
+    RouterModule.forChild(adminRoutes)
   ],
   exports: [
     RouterModule
