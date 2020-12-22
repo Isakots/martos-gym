@@ -1,4 +1,28 @@
 {
+    "HEADER": {
+        "ADMINISTRATION": "Administration",
+        "USER_MANAGEMENT": "User management",
+        "WRITE_NEW_ARTICLE": "New article",
+        "NEW_TRAINING": "New training",
+        "SEND_EMAIL": "Send email",
+
+        "ABOUT_US": "About Us",
+        "RULES": "Rules",
+        "GYM": "Gym",
+        "NUTRITION": "Nutrition",
+        "TRAININGS": "Trainings",
+
+        "PROFILE": "Profile",
+        "CHANGE_PASSWORD": "Change password",
+        "LOGIN": "Login",
+        "LOGOUT": "Logout",
+        "SIGNUP": "Sign Up",
+
+        "LANGUAGE": "Language",
+        "LANG_HU": "Magyar",
+        "LANG_EN": "English"
+    },
+
     "HOME": {
         "WELCOME": "Welcome!"
     }

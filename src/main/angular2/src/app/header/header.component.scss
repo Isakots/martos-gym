@@ -1,0 +1,54 @@
+@import "variables";
+
+.navbar {
+    padding: 0.2rem 1rem;
+    z-index: 100;
+    background-color: $primary-background-color;
+
+    &-title {
+        color: $primary-color;
+
+        &:hover {
+            color: $primary-color-light;
+        }
+
+    }
+
+    &-brand img {
+        height: 3rem;
+    }
+
+    ul.navbar-nav {
+        .nav-item {
+            margin-left: 0.5em;
+        }
+    }
+
+    a.nav-link {
+        font-weight: 400;
+        color: $primary-color;
+
+        &:hover {
+            color: $primary-color-light;
+        }
+    }
+
+    a > span {
+        margin-left: 5px;
+    }
+
+    .dropdown {
+        cursor: pointer;
+
+        &-menu {
+            background-color: $primary-background-color;
+            left: unset;
+            right: 0;
+        }
+
+        &-item {
+            color: $primary-color;
+        }
+
+    }
+}

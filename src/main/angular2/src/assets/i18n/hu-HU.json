@@ -1,4 +1,28 @@
 {
+    "HEADER": {
+        "ADMINISTRATION": "Adminisztráció",
+        "USER_MANAGEMENT": "Felhasználók menedzselése",
+        "WRITE_NEW_ARTICLE": "Új cikk írása",
+        "NEW_TRAINING": "Új edzés kiírása",
+        "SEND_EMAIL": "Köremail küldése",
+
+        "ABOUT_US": "Rólunk",
+        "RULES": "Házirend",
+        "GYM": "Edzőterem",
+        "NUTRITION": "Táplálkozás",
+        "TRAININGS": "Edzések",
+
+        "PROFILE": "Profil",
+        "CHANGE_PASSWORD": "Jelszóváltoztatás",
+        "LOGIN": "Bejelentkezés",
+        "LOGOUT": "Kijelentkezés",
+        "SIGNUP": "Regisztráció",
+
+        "LANGUAGE": "Nyelv",
+        "LANG_HU": "Magyar",
+        "LANG_EN": "English"
+    },
+
     "HOME": {
         "WELCOME": "Sziasztok!"
     }
