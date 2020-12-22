@@ -9,19 +9,19 @@ import {
     faBookOpen,
     faDrumstickBite,
     faDumbbell,
+    faEnvelope,
+    faFlag,
     faListUl,
+    faLock,
+    faNewspaper,
     faPlus,
     faRunning,
-    faUsers,
-    faNewspaper,
-    faEnvelope,
-    faUserPlus,
     faSignInAlt,
     faSignOutAlt,
     faUser,
-    faWrench,
-    faLock,
-    faFlag
+    faUserPlus,
+    faUsers,
+    faWrench
 } from '@fortawesome/free-solid-svg-icons';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';

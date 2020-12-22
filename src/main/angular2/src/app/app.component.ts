@@ -6,7 +6,7 @@ import { AccountService } from './core/services/account.service';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
     constructor(private readonly accountService: AccountService) {
     }
 
