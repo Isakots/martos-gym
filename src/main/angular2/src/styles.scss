@@ -25,3 +25,17 @@ body {
     margin: 0;
     padding: 0;
 }
+
+.centered {
+    width: 100%;
+
+    @include margin-side(12px, auto);
+
+    @include desktop {
+        width: 67%;
+    }
+}
+
+h2,h4,h6 {
+    @include margin-side(12px, 12px);
+}

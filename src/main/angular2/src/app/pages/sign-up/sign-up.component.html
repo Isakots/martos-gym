@@ -1,124 +1,121 @@
-<div class="row justify-content-center m-2">
-
-    <div class="col-lg-8 mt-2">
-        <h2>{{ 'SIGN_UP.PAGE_TITLE' | translate }}</h2>
-        <hr>
-
-        <div class="mt-3">
-            <div [formGroup]="registerForm">
-                <div class="row justify-content-md-center">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="form-control-label"
-                                   for="lastName">{{ 'CONTROL_NAMES.LASTNAME' | translate }}</label>
-                            <input type="text" class="form-control" id="lastName" name="lastName"
-                                   formControlName="lastName">
-                            <div
-                                *ngIf="showValidationMessage(registerForm.get('lastName'))">
-                                <small class="form-text text-danger"
-                                       *ngIf="registerForm.get('lastName').errors.required">
-                                    {{ 'ERROR_MESSAGE.REQUIRED' | translate }}
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="form-control-label"
-                                   for="firstName">{{ 'CONTROL_NAMES.FIRSTNAME' | translate }}</label>
-                            <input type="text" class="form-control" id="firstName" name="firstName"
-                                   formControlName="firstName">
-                            <div
-                                *ngIf="showValidationMessage(registerForm.get('firstName'))">
-                                <small class="form-text text-danger"
-                                       *ngIf="registerForm.get('firstName').errors.required">
-                                    {{ 'ERROR_MESSAGE.REQUIRED' | translate }}
-                                </small>
-                            </div>
+<div class="container-fluid">
+    <div class="row">
+        <div [formGroup]="registerForm" class="centered">
+            <h2>{{ 'SIGN_UP.PAGE_TITLE' | translate }}</h2>
+            <hr>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               for="lastName">{{ 'CONTROL_NAMES.LASTNAME' | translate }}</label>
+                        <input type="text" class="form-control" id="lastName" name="lastName"
+                               formControlName="lastName">
+                        <div
+                            *ngIf="showValidationMessage(registerForm.get('lastName'))">
+                            <small class="form-text text-danger"
+                                   *ngIf="registerForm.get('lastName').errors.required">
+                                {{ 'ERROR_MESSAGE.REQUIRED' | translate }}
+                            </small>
                         </div>
                     </div>
                 </div>
-                <div class="row justify-content-md-center">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="form-control-label"
-                                   for="email">{{ 'CONTROL_NAMES.EMAIL' | translate }}</label>
-                            <input type="email" class="form-control" id="email" name="email"
-                                   formControlName="email">
-                            <div
-                                *ngIf="showValidationMessage(registerForm.get('email'))">
-                                <small class="form-text text-danger"
-                                       *ngIf="registerForm.get('email').errors.required">
-                                    {{ 'ERROR_MESSAGE.REQUIRED' | translate }}
-                                </small>
-                                <small class="form-text text-danger"
-                                       *ngIf="registerForm.get('email').errors.invalid">
-                                    Helytelen e-mail cím!
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="form-control-label"
-                                   for="confirmEmail">{{ 'CONTROL_NAMES.CONFIRM_EMAIL' | translate }}</label>
-                            <input type="email" class="form-control" id="confirmEmail" name="confirmEmail"
-                                   formControlName="confirmEmail">
-                            <div
-                                *ngIf="showValidationMessage(registerForm.get('confirmEmail'))">
-                                <small class="form-text text-danger"
-                                       *ngIf="registerForm.get('confirmEmail').errors.required">
-                                    {{ 'ERROR_MESSAGE.REQUIRED' | translate }}
-                                </small>
-                                <small class="form-text text-danger"
-                                       *ngIf="registerForm.get('confirmEmail').errors.mustMatch">
-                                    Az e-mail címek nem egyeznek!
-                                </small>
-                            </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               for="firstName">{{ 'CONTROL_NAMES.FIRSTNAME' | translate }}</label>
+                        <input type="text" class="form-control" id="firstName" name="firstName"
+                               formControlName="firstName">
+                        <div
+                            *ngIf="showValidationMessage(registerForm.get('firstName'))">
+                            <small class="form-text text-danger"
+                                   *ngIf="registerForm.get('firstName').errors.required">
+                                {{ 'ERROR_MESSAGE.REQUIRED' | translate }}
+                            </small>
                         </div>
                     </div>
                 </div>
-                <div class="row justify-content-md-center">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="form-control-label"
-                                   for="password">{{ 'CONTROL_NAMES.PASSWORD' | translate }}</label>
-                            <input type="password" class="form-control" id="password" name="password"
-                                   formControlName="password" maxlength="50">
-                            <div
-                                *ngIf="showValidationMessage(registerForm.get('password'))">
-                                <small class="form-text text-danger"
-                                       *ngIf="registerForm.get('password').errors.required">
-                                    {{ 'ERROR_MESSAGE.REQUIRED' | translate }}
-                                </small>
-                                <small class="form-text text-danger"
-                                       *ngIf="registerForm.get('password').errors.minlength">
-                                    {{ 'ERROR_MESSAGE.PASSWORD_MIN_LENGTH' | translate }}
-                                </small>
-                            </div>
-                            <!--                <jhi-password-strength-bar-->
-                            <!--                  [passwordToCheck]="registerForm.get('password').value"></jhi-password-strength-bar>-->
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="form-control-label"
-                                   for="confirmPassword">{{ 'CONTROL_NAMES.CONFIRM_PASSWORD' | translate }}</label>
-                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
-                                   formControlName="confirmPassword" maxlength="50">
-                            <div
-                                *ngIf="showValidationMessage(registerForm.get('confirmPassword'))">
-                                <small class="form-text text-danger"
-                                       *ngIf="registerForm.get('confirmPassword').errors.mustMatch">
-                                    {{ 'ERROR_MESSAGE.PASSWORD_NO_MATCH' | translate }}
-                                </small>
-                            </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               for="email">{{ 'CONTROL_NAMES.EMAIL' | translate }}</label>
+                        <input type="email" class="form-control" id="email" name="email"
+                               formControlName="email">
+                        <div
+                            *ngIf="showValidationMessage(registerForm.get('email'))">
+                            <small class="form-text text-danger"
+                                   *ngIf="registerForm.get('email').errors.required">
+                                {{ 'ERROR_MESSAGE.REQUIRED' | translate }}
+                            </small>
+                            <small class="form-text text-danger"
+                                   *ngIf="registerForm.get('email').errors.invalid">
+                                Helytelen e-mail cím!
+                            </small>
                         </div>
                     </div>
                 </div>
-                <div class="row justify-content-md-center">
-                    <div class="col-lg-6">
-                        <div class="form-group">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               for="confirmEmail">{{ 'CONTROL_NAMES.CONFIRM_EMAIL' | translate }}</label>
+                        <input type="email" class="form-control" id="confirmEmail" name="confirmEmail"
+                               formControlName="confirmEmail">
+                        <div
+                            *ngIf="showValidationMessage(registerForm.get('confirmEmail'))">
+                            <small class="form-text text-danger"
+                                   *ngIf="registerForm.get('confirmEmail').errors.required">
+                                {{ 'ERROR_MESSAGE.REQUIRED' | translate }}
+                            </small>
+                            <small class="form-text text-danger"
+                                   *ngIf="registerForm.get('confirmEmail').errors.mustMatch">
+                                Az e-mail címek nem egyeznek!
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               for="password">{{ 'CONTROL_NAMES.PASSWORD' | translate }}</label>
+                        <input type="password" class="form-control" id="password" name="password"
+                               formControlName="password" maxlength="50">
+                        <div
+                            *ngIf="showValidationMessage(registerForm.get('password'))">
+                            <small class="form-text text-danger"
+                                   *ngIf="registerForm.get('password').errors.required">
+                                {{ 'ERROR_MESSAGE.REQUIRED' | translate }}
+                            </small>
+                            <small class="form-text text-danger"
+                                   *ngIf="registerForm.get('password').errors.minlength">
+                                {{ 'ERROR_MESSAGE.PASSWORD_MIN_LENGTH' | translate }}
+                            </small>
+                        </div>
+                        <!--                <jhi-password-strength-bar-->
+                        <!--                  [passwordToCheck]="registerForm.get('password').value"></jhi-password-strength-bar>-->
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               for="confirmPassword">{{ 'CONTROL_NAMES.CONFIRM_PASSWORD' | translate }}</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                               formControlName="confirmPassword" maxlength="50">
+                        <div
+                            *ngIf="showValidationMessage(registerForm.get('confirmPassword'))">
+                            <small class="form-text text-danger"
+                                   *ngIf="registerForm.get('confirmPassword').errors.mustMatch">
+                                {{ 'ERROR_MESSAGE.PASSWORD_NO_MATCH' | translate }}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
                 <span>
                    <label class="checkbox bounce">
                   <input type="checkbox" formControlName="studentStatus">
@@ -128,45 +125,45 @@
                    </label>
                     {{ 'CONTROL_NAMES.STUDENT_STATUS' | translate }}
                   </span>
-                        </div>
                     </div>
-                    <div class="col-lg-6"></div>
                 </div>
-                <div *ngIf="isStudentStateChecked()" class=" row justify-content-md-center">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="form-control-label"
-                                   for="institution">{{ 'CONTROL_NAMES.INSTITUTION' | translate }}</label>
-                            <input type="text" class="form-control" id="institution" name="institution"
-                                   formControlName="institution" maxlength="4">
-                            <div
-                                *ngIf="showValidationMessage(registerForm.get('institution'))">
-                                <small class="form-text text-danger"
-                                       *ngIf="registerForm.get('institution').errors.required">
-                                    {{ 'ERROR_MESSAGE.REQUIRED' | translate }}
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="form-control-label"
-                                   for="faculty">{{ 'CONTROL_NAMES.FACULTY' | translate }}</label>
-                            <input type="text" class="form-control" id="faculty" name="faculty"
-                                   formControlName="faculty" maxlength="4">
-                            <div
-                                *ngIf="showValidationMessage(registerForm.get('faculty'))">
-                                <small class="form-text text-danger"
-                                       *ngIf="registerForm.get('faculty').errors.required">
-                                    {{ 'ERROR_MESSAGE.REQUIRED' | translate }}
-                                </small>
-                            </div>
+                <div class="col-lg-6"></div>
+            </div>
+            <div *ngIf="isStudentStateChecked()" class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               for="institution">{{ 'CONTROL_NAMES.INSTITUTION' | translate }}</label>
+                        <input type="text" class="form-control" id="institution" name="institution"
+                               formControlName="institution" maxlength="4">
+                        <div
+                            *ngIf="showValidationMessage(registerForm.get('institution'))">
+                            <small class="form-text text-danger"
+                                   *ngIf="registerForm.get('institution').errors.required">
+                                {{ 'ERROR_MESSAGE.REQUIRED' | translate }}
+                            </small>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               for="faculty">{{ 'CONTROL_NAMES.FACULTY' | translate }}</label>
+                        <input type="text" class="form-control" id="faculty" name="faculty"
+                               formControlName="faculty" maxlength="4">
+                        <div
+                            *ngIf="showValidationMessage(registerForm.get('faculty'))">
+                            <small class="form-text text-danger"
+                                   *ngIf="registerForm.get('faculty').errors.required">
+                                {{ 'ERROR_MESSAGE.REQUIRED' | translate }}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
                 <span>
                 <label class="checkbox bounce">
                   <input type="checkbox" formControlName="collegian">
@@ -176,26 +173,26 @@
                 </label>
                     {{ 'CONTROL_NAMES.IS_COLLEGIAN' | translate }}
                   </span>
-                        </div>
                     </div>
-                    <div *ngIf="isCollegianChecked()" class="col-lg-6">
-                        <div class="form-group">
-                            <label class="form-control-label"
-                                   for="roomNumber">{{ 'CONTROL_NAMES.ROOM_NUMBER' | translate }}</label>
-                            <input type="number" class="form-control" id="roomNumber" name="roomNumber"
-                                   formControlName="roomNumber">
-                            <div
-                                *ngIf="showValidationMessage(registerForm.get('roomNumber'))">
-                                <small class="form-text text-danger"
-                                       *ngIf="registerForm.get('roomNumber').errors.required">
-                                    {{ 'ERROR_MESSAGE.REQUIRED' | translate }}
-                                </small>
-                            </div>
+                </div>
+                <div *ngIf="isCollegianChecked()" class="col-lg-6">
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               for="roomNumber">{{ 'CONTROL_NAMES.ROOM_NUMBER' | translate }}</label>
+                        <input type="number" class="form-control" id="roomNumber" name="roomNumber"
+                               formControlName="roomNumber">
+                        <div
+                            *ngIf="showValidationMessage(registerForm.get('roomNumber'))">
+                            <small class="form-text text-danger"
+                                   *ngIf="registerForm.get('roomNumber').errors.required">
+                                {{ 'ERROR_MESSAGE.REQUIRED' | translate }}
+                            </small>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-10">
+            </div>
+            <div class="row">
+                <div class="col-lg-10">
               <span>
               <label class="checkbox bounce">
                 <input type="checkbox" formControlName="subOnSubscribedTrainings">
@@ -205,10 +202,10 @@
               </label>
                   {{ 'CONTROL_NAMES.NOTIFICATION_ON_SUBSCRIBED_TRAINING' | translate }}
                 </span>
-                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-10">
+            </div>
+            <div class="row">
+                <div class="col-lg-10">
               <span>
               <label class="checkbox bounce">
                 <input type="checkbox" formControlName="subOnNewTrainings">
@@ -218,10 +215,10 @@
               </label>
                   {{ 'CONTROL_NAMES.NOTIFICATION_ON_NEW_TRAINING' | translate }}
               </span>
-                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-10">
+            </div>
+            <div class="row">
+                <div class="col-lg-10">
               <span>
               <label class="checkbox bounce">
                 <input type="checkbox" formControlName="subOnNewArticles">
@@ -231,14 +228,13 @@
               </label>
                   {{ 'CONTROL_NAMES.NOTIFICATION_ON_NEW_ARTICLE' | translate }}
                 </span>
-                    </div>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col-lg-12">
-                        <button type="submit" class="btn btn-main" (click)="submitRegistration()">
-                            {{ 'SIGN_UP.SUBMIT' | translate }}
-                        </button>
-                    </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <button type="submit" class="btn btn-main" (click)="submitRegistration()">
+                        {{ 'SIGN_UP.SUBMIT' | translate }}
+                    </button>
                 </div>
             </div>
         </div>
