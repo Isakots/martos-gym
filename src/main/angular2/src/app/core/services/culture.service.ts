@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class CultureService {
 
     constructor(private readonly translate: TranslateService) {
-        this.setLanguage(); // todo lang selector
+        this.setLanguage();
     }
 
     setLanguage(): void {

@@ -18,9 +18,9 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <node.version>v8.11.0</node.version>
+        <node.version>v14.15.0</node.version>
         <modelmapper.version>2.3.6</modelmapper.version>
-        <node.home>C:\node-v8.11.0\nodejs</node.home>
+        <node.home>/home/csokasimarcell/.nvm/versions/node/v14.15.0</node.home>
     </properties>
 
     <dependencies>
@@ -150,7 +150,7 @@
                         <id>npm config</id>
                         <phase>process-classes</phase>
                         <configuration>
-                            <workingDirectory>${project.basedir}/src/main/angular</workingDirectory>
+                            <workingDirectory>${project.basedir}/src/main/angular2</workingDirectory>
                             <executable>${npm.executable}</executable>
                             <environmentVariables>
                                 <PATH>${npm.dir}${path.separator}${env.PATH}</PATH>
@@ -171,7 +171,7 @@
                         <id>npm install</id>
                         <phase>process-classes</phase>
                         <configuration>
-                            <workingDirectory>${project.basedir}/src/main/angular</workingDirectory>
+                            <workingDirectory>${project.basedir}/src/main/angular2</workingDirectory>
                             <executable>${npm.executable}</executable>
                             <environmentVariables>
                                 <PATH>${npm.dir}${path.separator}${env.PATH}</PATH>
@@ -190,7 +190,7 @@
                         <id>npm build</id>
                         <phase>process-classes</phase>
                         <configuration>
-                            <workingDirectory>${project.basedir}/src/main/angular</workingDirectory>
+                            <workingDirectory>${project.basedir}/src/main/angular2</workingDirectory>
                             <executable>${npm.executable}</executable>
                             <environmentVariables>
                                 <PATH>${npm.dir}${path.separator}${env.PATH}</PATH>
@@ -214,7 +214,7 @@
                 <configuration>
                     <webResources>
                         <resource>
-                            <directory>src/main/angular/dist</directory>
+                            <directory>src/main/angular2/dist</directory>
                             <targetPath>WEB-INF/classes/static</targetPath>
                         </resource>
                     </webResources>

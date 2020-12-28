@@ -276,7 +276,7 @@
             }
           }
         ],
-        "@typescript-eslint/unbound-method": "error",
+        "@typescript-eslint/unbound-method": "warn",
         "@typescript-eslint/unified-signatures": "error",
         "arrow-body-style": [
           "error",
@@ -358,7 +358,7 @@
         "no-empty": "error",
         "no-empty-function": "off",
         "no-extra-bind": "error",
-        "no-extra-parens": "error",
+        "no-extra-parens": "off",
         "no-extra-semi": "error",
         "no-implied-eval": "off",
         "no-multiple-empty-lines": [
@@ -368,7 +368,7 @@
           }
         ],
         "no-new-func": "error",
-        "no-null/no-null": "error",
+        "no-null/no-null": "warn",
         "no-plusplus": "off",
         "no-redeclare": "error",
         "no-restricted-syntax": [

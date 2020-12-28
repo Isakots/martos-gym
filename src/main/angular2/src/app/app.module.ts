@@ -3,6 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import localeEnglish from '@angular/common/locales/en';
 import localeHungarian from '@angular/common/locales/hu';
 import { LOCALE_ID, NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
@@ -29,6 +30,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CultureService } from './core/services/culture.service';
 import { HeaderComponent } from './header/header.component';
+import { LoginComponent } from './pages/login/login.component';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { SharedModule } from './shared/shared.module';
 
 registerLocaleData(localeHungarian, 'hu-HU');
@@ -43,7 +46,9 @@ export const createTranslateLoader: (http: HttpClient) => TranslateHttpLoader = 
 @NgModule({
     declarations: [
         AppComponent,
-        HeaderComponent
+        HeaderComponent,
+        SignUpComponent,
+        LoginComponent
     ],
     imports: [
         BrowserModule,
@@ -57,7 +62,8 @@ export const createTranslateLoader: (http: HttpClient) => TranslateHttpLoader = 
         }),
         HttpClientModule,
         SharedModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        ReactiveFormsModule
     ],
     providers: [
         {

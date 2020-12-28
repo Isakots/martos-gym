@@ -6,8 +6,8 @@ import { AccountService } from '../../core/services/account.service';
 })
 export class HasRoleDirective {
   @Input() set appHasRole(role: string) {
-    this.accountService.getAuthenticationState().subscribe(() => {
-      if (this.accountService.hasRole(role)) {
+    this.accountService.getAuthenticationStateObs().subscribe(() => {
+      if (this.accountService.hasRole(role) || (!this.accountService.isAuthenticated() && 'ROLE_ANONYMOUS' === role)) {
         this.viewContainer.createEmbeddedView(this.template);
       } else {
         this.viewContainer.clear();

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { AccountService } from '../core/services/account.service';
 
 @Component({
     selector: 'app-header',
@@ -9,7 +10,8 @@ import { TranslateService } from '@ngx-translate/core';
 export class HeaderComponent {
     isNavbarCollapsed = true;
 
-    constructor(private readonly translate: TranslateService) {
+    constructor(private readonly translate: TranslateService,
+                private readonly accountService: AccountService) {
     }
 
     collapseNavbar(): void {
@@ -22,5 +24,9 @@ export class HeaderComponent {
 
     setLanguage(lang: string): void {
         this.translate.use(lang);
+    }
+
+    logout(): void {
+        this.accountService.logout();
     }
 }

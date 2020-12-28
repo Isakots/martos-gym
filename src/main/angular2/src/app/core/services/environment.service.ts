@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class EnvironmentService {
 
-  readonly contextRoot: string;
-  readonly apiUrl: string;
+    readonly contextRoot: string;
+    readonly apiUrl: string;
 
-  constructor() {
-    this.contextRoot = document.baseURI;
-    this.apiUrl = `${this.contextRoot}api`;
-  }
+    constructor() {
+        this.contextRoot = document.baseURI;
+        this.apiUrl = `${this.contextRoot}api`;
+    }
 
 }

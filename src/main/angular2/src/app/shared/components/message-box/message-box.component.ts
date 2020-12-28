@@ -9,7 +9,7 @@ import { UserNotificationService } from '../../../core/services/user-notificatio
 })
 export class MessageBoxComponent implements OnInit, OnDestroy {
     notificationText: any = undefined;
-    subscription: Subscription;
+    subscription!: Subscription;
 
     constructor(private readonly userNotificationService: UserNotificationService) {
     }

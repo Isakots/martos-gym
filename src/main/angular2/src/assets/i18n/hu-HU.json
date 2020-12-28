@@ -23,7 +23,50 @@
         "LANG_EN": "English"
     },
 
-    "HOME": {
-        "WELCOME": "Sziasztok!"
+    "SIGN_UP": {
+        "PAGE_TITLE": "Regisztráció",
+        "SUBMIT": "Regisztráció",
+        "SUCCESSFUL_REGISTRATION": "Sikeres regisztráció",
+        "UNSUCCESSFUL_REGISTRATION": "Sikertelen regisztráció"
+    },
+
+    "SIGN_IN": {
+        "PAGE_TITLE": "Bejelentkezés",
+        "SUBMIT": "Bejelentkezés"
+    },
+
+    "CONTROL_NAMES": {
+        "LASTNAME": "Vezetéknév",
+        "FIRSTNAME": "Keresztnév",
+        "EMAIL": "E-mail cím",
+        "CONFIRM_EMAIL": "E-mail cím megerősítése",
+        "PASSWORD": "Jelszó",
+        "CONFIRM_PASSWORD": "Jelszó megerősítése",
+        "STUDENT_STATUS": "Van hallgatói jogviszonyom",
+        "INSTITUTION": "Oktatási intézmény",
+        "FACULTY": "Kar",
+        "IS_COLLEGIAN": "Kollégista vagyok",
+        "ROOM_NUMBER": "Szobaszám",
+
+        "NOTIFICATION_ON_NEW_ARTICLE": "Értesítő e-mail küldése új hírfolyam cikkről",
+        "NOTIFICATION_ON_NEW_TRAINING": "Értesítő e-mail küldése frissen kiírt edzésekről",
+        "NOTIFICATION_ON_SUBSCRIBED_TRAINING": "Értesítő e-mail küldése edzésekről, melyekre feliratkoztam"
+
+    },
+
+    "CONFIRMATION_MODAL": {
+        "TITLE": "Megerősítés",
+        "CONFIRM_EMAIL_TEXT": "Biztos, hogy elküldi az e-maileket?",
+        "CONFIRM_DELETION_TEXT": "Biztos, hogy törölni szeretné?",
+        "CANCEL": "Mégse",
+        "CONFIRM_DELETION": "Törlés",
+        "CONFIRM_EMAIL": "Küldés"
+    },
+
+    "ERROR_MESSAGE": {
+        "REQUIRED": "Mező kitöltése kötelező!",
+        "WRONG_EMAIL": "Helytelen e-mail cím!",
+        "PASSWORD_MIN_LENGTH": "A jelszónak legalább 8 karakterből kell állnia!",
+        "PASSWORD_NO_MATCH": "A két jelszó nem egyezik!"
     }
 }

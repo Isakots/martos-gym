@@ -23,7 +23,50 @@
         "LANG_EN": "English"
     },
 
-    "HOME": {
-        "WELCOME": "Welcome!"
+    "SIGN_UP": {
+        "PAGE_TITLE": "Signup",
+        "SUBMIT": "Signup",
+        "SUCCESSFUL_REGISTRATION": "Successful registration!",
+        "UNSUCCESSFUL_REGISTRATION": "Registration failed!"
+    },
+
+    "SIGN_IN": {
+        "PAGE_TITLE": "Login",
+        "SUBMIT": "Login"
+    },
+
+    "CONTROL_NAMES": {
+        "LASTNAME": "Lastname",
+        "FIRSTNAME": "Firstname",
+        "EMAIL": "E-mail",
+        "CONFIRM_EMAIL": "E-mail confirmation",
+        "PASSWORD": "Password",
+        "CONFIRM_PASSWORD": "Password confirmation",
+        "STUDENT_STATUS": "Student status",
+        "INSTITUTION": "Institution",
+        "FACULTY": "Faculty",
+        "IS_COLLEGIAN": "Living in student hostel",
+        "ROOM_NUMBER": "Room number",
+
+        "NOTIFICATION_ON_NEW_ARTICLE": "E-mail notification on new articles",
+        "NOTIFICATION_ON_NEW_TRAINING": "E-mail notification on new trainings",
+        "NOTIFICATION_ON_SUBSCRIBED_TRAINING": "E-mail notification on subscribed trainings"
+
+    },
+
+    "CONFIRMATION_MODAL": {
+        "TITLE": "Confirmation",
+        "CONFIRM_EMAIL_TEXT": "Are you sure?",
+        "CONFIRM_DELETION_TEXT": "Are you sure?",
+        "CANCEL": "Cancel",
+        "CONFIRM_DELETION": "Delete",
+        "CONFIRM_EMAIL": "Send"
+    },
+
+    "ERROR_MESSAGE": {
+        "REQUIRED": "Field is required!",
+        "WRONG_EMAIL": "Incorrect email address!",
+        "PASSWORD_MIN_LENGTH": "Password must have at least 8 characters!",
+        "PASSWORD_NO_MATCH": "Passwords must match!"
     }
 }

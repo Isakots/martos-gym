@@ -48,6 +48,10 @@
 
         &-item {
             color: $primary-color;
+
+            &:active {
+                background-color: $background-color !important;
+            }
         }
 
     }

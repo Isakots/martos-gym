@@ -4,12 +4,12 @@ import { Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { AccountModel } from '../../shared/interfaces';
+import { ACCESS_TOKEN_KEY } from '../../shared/constants';
+import { AccountModel, LoginResponse } from '../../shared/interfaces';
 import { EnvironmentService } from './environment.service';
 
 @Injectable({providedIn: 'root'})
 export class AccountService {
-    private readonly ACCESS_TOKEN_KEY = 'accessToken';
     private readonly authenticationState = new BehaviorSubject<string | undefined>(undefined);
 
     constructor(private readonly http: HttpClient,
@@ -17,17 +17,21 @@ export class AccountService {
                 private readonly environmentService: EnvironmentService) {
     }
 
-    getAuthenticationState(): Observable<string> {
+    getAuthenticationState(): string {
+        return this.authenticationState.getValue() as string;
+    }
+
+    getAuthenticationStateObs(): Observable<string | undefined> {
         return this.authenticationState.asObservable();
     }
 
     login(loginDto: { username: string; password: string }): Observable<any> {
         // eslint-disable-next-line id-blacklist
-        return this.http.post<{ string: string }>(`${this.environmentService.apiUrl}/login`, loginDto)
+        return this.http.post<LoginResponse>(`${this.environmentService.apiUrl}/login`, loginDto)
             .pipe(
                 tap(response => {
-                    const token = response.accessToken;
-                    localStorage.setItem(this.ACCESS_TOKEN_KEY, JSON.stringify(response));
+                    const token = response.token;
+                    localStorage.setItem(ACCESS_TOKEN_KEY, JSON.stringify(response));
                     this.authenticationState.next(token);
                 })
             );
@@ -36,19 +40,19 @@ export class AccountService {
     logout(): void {
         this.authenticationState.next(undefined);
         localStorage.clear();
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
     }
 
     autoLogin(): void {
-        const tokenJSON = localStorage.getItem(this.ACCESS_TOKEN_KEY);
-        const token = !!tokenJSON ? JSON.parse(tokenJSON).accessToken : undefined;
+        const tokenJSON = localStorage.getItem(ACCESS_TOKEN_KEY);
+        const token = !!tokenJSON ? JSON.parse(tokenJSON).token : undefined;
         this.authenticationState.next(token);
     }
 
     // todo autologout (on expired jwt token)
 
     isAuthenticated(): boolean {
-        return undefined !== this.authenticationState.getValue();
+        return !!this.authenticationState.getValue();
     }
 
     hasRole(role: string): boolean {
@@ -56,8 +60,12 @@ export class AccountService {
             return false;
         } else {
             const decodedAccount = this.getDecodedAccount();
-            return decodedAccount.roles.includes(role);
+            return decodedAccount.authorities.includes(role);
         }
+    }
+
+    signup(signupForm: any): Observable<any> {
+        return this.http.post(`${this.environmentService.apiUrl}/register`, signupForm);
     }
 
     private getDecodedAccount(): AccountModel {

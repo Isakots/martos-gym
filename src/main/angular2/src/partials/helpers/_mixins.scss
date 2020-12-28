@@ -1,0 +1,89 @@
+@import "variables";
+
+/// Media query for big desktop
+
+@mixin big-desktop {
+    @media (min-width: #{$big-desktop-width}) {
+        @content;
+    }
+}
+
+// **************************************************************************************************************** //
+
+/// Media query for tablet
+
+@mixin tablet {
+    @media (min-width: #{$small-tablet-width}) {
+        @content;
+    }
+}
+
+// **************************************************************************************************************** //
+
+/// Media query for middle tablet
+
+@mixin middle-tablet {
+    @media (min-width: #{$middle-tablet-width}) {
+        @content;
+    }
+}
+
+// **************************************************************************************************************** //
+
+/// Media query for big tablet
+
+@mixin big-tablet {
+    @media (min-width: #{$middle-tablet-width}) and (max-width: #{$big-tablet-width}) {
+        @content;
+    }
+}
+
+// **************************************************************************************************************** //
+
+/// Media query for laptop
+
+@mixin laptop {
+    @media (min-width: #{$big-tablet-width}) and (max-height: #{$laptop-height}) {
+        @content;
+    }
+}
+
+// **************************************************************************************************************** //
+
+/// Media query for desktop
+
+@mixin desktop {
+    @media (min-width: #{$big-tablet-width}) {
+        @content;
+    }
+}
+
+// **************************************************************************************************************** //
+
+/// Media query for small desktop
+
+@mixin small-desktop {
+    @media (min-width: #{$big-tablet-width}) and (max-width: #{$desktop-width}) {
+        @content;
+    }
+}
+
+// **************************************************************************************************************** //
+
+/// Media query for mobile landscape orientation
+
+@mixin landscape {
+    @media (max-width: $small-tablet-width) and (orientation: landscape) {
+        @content;
+    }
+}
+
+// **************************************************************************************************************** //
+
+// Media query for bigger mobile
+
+@mixin bigger-mobile {
+    @media (min-width: #{$bigger-mobile-width}) {
+        @content;
+    }
+}

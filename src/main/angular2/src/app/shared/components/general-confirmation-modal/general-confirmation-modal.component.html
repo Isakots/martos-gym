@@ -10,17 +10,17 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-dark" data-dismiss="modal" (click)="confirmEvent(false)">
-      <fa-icon icon="ban"></fa-icon>&nbsp;<span>Mégse</span>
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span>{{ 'CONFIRMATION_MODAL.CANCEL' | translate }}</span>
     </button>
     <div [ngSwitch]="confirmationType">
       <div *ngSwitchCase="CONFIRMATION_TYPE_ENUM.DELETION">
         <button class="btn btn-danger" (click)="confirmEvent(true)">
-          <fa-icon icon="times"></fa-icon>&nbsp;<span>Megerősít</span>
+          <fa-icon icon="times"></fa-icon>&nbsp;<span>{{ 'CONFIRMATION_MODAL.CONFIRM_DELETION' | translate }}</span>
         </button>
       </div>
       <div *ngSwitchCase="CONFIRMATION_TYPE_ENUM.EMAIL">
         <button class="btn btn-secondary" (click)="confirmEvent(true)">
-          <fa-icon icon="envelope"></fa-icon>&nbsp;<span>Küldés</span>
+          <fa-icon icon="envelope"></fa-icon>&nbsp;<span>{{ 'CONFIRMATION_MODAL.CONFIRM_EMAIL' | translate }}</span>
         </button>
       </div>
     </div>

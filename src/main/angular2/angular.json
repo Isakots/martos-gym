@@ -39,7 +39,8 @@
                         ],
                         "stylePreprocessorOptions": {
                             "includePaths": [
-                                "src/partials/helpers"
+                                "src/partials/helpers",
+                                "src/partials/components"
                             ]
                         }
                     },

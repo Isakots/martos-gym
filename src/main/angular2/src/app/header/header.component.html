@@ -11,7 +11,7 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
+            <li class="nav-item" *appHasRole="'ROLE_MEMBER'">
                 <div class="dropdown">
                     <a class="nav-link dropdown-toggle" id="adminMenuButton" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">
@@ -20,25 +20,24 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="adminMenuButton">
                         <a class="dropdown-item" [routerLink]="['admin', 'management']" (click)="collapseNavbar()">
-                            <fa-icon icon="users" fixedWidth="true"></fa-icon>
+                            <fa-icon icon="users"></fa-icon>
                             <span>{{ 'HEADER.USER_MANAGEMENT' | translate }}</span>
                         </a>
                         <a class="dropdown-item" [routerLink]="['articles', 'new']" (click)="collapseNavbar()">
-                            <fa-icon icon="newspaper" fixedWidth="true"></fa-icon>
+                            <fa-icon icon="newspaper"></fa-icon>
                             <span>{{ 'HEADER.WRITE_NEW_ARTICLE' | translate }}</span>
                         </a>
                         <a class="dropdown-item" [routerLink]="['trainings', 'new']" (click)="collapseNavbar()">
-                            <fa-icon icon="running" fixedWidth="true"></fa-icon>
+                            <fa-icon icon="running"></fa-icon>
                             <span>{{ 'HEADER.NEW_TRAINING' | translate }}</span>
                         </a>
                         <a class="dropdown-item" [routerLink]="['admin', 'mail-sending']" (click)="collapseNavbar()">
-                            <fa-icon icon="envelope" fixedWidth="true"></fa-icon>
+                            <fa-icon icon="envelope"></fa-icon>
                             <span>{{ 'HEADER.SEND_EMAIL' | translate }}</span>
                         </a>
                     </div>
                 </div>
             </li>
-
 
             <li class="nav-item">
                 <a class="nav-link" routerLink="about-us" routerLinkActive="active"
@@ -66,7 +65,7 @@
                     <span>{{ 'HEADER.NUTRITION' | translate }}</span>
                 </a>
             </li>
-            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <li *appHasRole="'ROLE_USER'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="trainings" (click)="collapseNavbar()">
                     <fa-icon icon="running"></fa-icon>
                     <span>{{ 'HEADER.TRAININGS' | translate }}</span>
@@ -99,24 +98,24 @@
                         <span>{{ 'HEADER.PROFILE' | translate }}</span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="accountMenuButton">
-                        <a class="dropdown-item" [routerLink]="['admin', 'management']" (click)="collapseNavbar()">
-                            <fa-icon icon="wrench" fixedWidth="true"></fa-icon>
+                        <a *appHasRole="'ROLE_USER'" class="dropdown-item" [routerLink]="['profile']" (click)="collapseNavbar()">
+                            <fa-icon icon="wrench"></fa-icon>
                             <span>{{ 'HEADER.PROFILE' | translate }}</span>
                         </a>
-                        <a class="dropdown-item" [routerLink]="['articles', 'new']" (click)="collapseNavbar()">
-                            <fa-icon icon="lock" fixedWidth="true"></fa-icon>
+                        <a *appHasRole="'ROLE_USER'" class="dropdown-item" [routerLink]="['change-password']" (click)="collapseNavbar()">
+                            <fa-icon icon="lock"></fa-icon>
                             <span>{{ 'HEADER.CHANGE_PASSWORD' | translate }}</span>
                         </a>
-                        <a class="dropdown-item" [routerLink]="['trainings', 'new']" (click)="collapseNavbar()">
-                            <fa-icon icon="sign-in-alt" fixedWidth="true"></fa-icon>
+                        <a *appHasRole="'ROLE_ANONYMOUS'" class="dropdown-item" [routerLink]="['login']" (click)="collapseNavbar()">
+                            <fa-icon icon="sign-in-alt"></fa-icon>
                             <span>{{ 'HEADER.LOGIN' | translate }}</span>
                         </a>
-                        <a class="dropdown-item" [routerLink]="['admin', 'mail-sending']" (click)="collapseNavbar()">
-                            <fa-icon icon="sign-out-alt" fixedWidth="true"></fa-icon>
+                        <a *appHasRole="'ROLE_USER'" class="dropdown-item" (click)="logout()">
+                            <fa-icon icon="sign-out-alt"></fa-icon>
                             <span>{{ 'HEADER.LOGOUT' | translate }}</span>
                         </a>
-                        <a class="dropdown-item" [routerLink]="['admin', 'mail-sending']" (click)="collapseNavbar()">
-                            <fa-icon icon="user-plus" fixedWidth="true"></fa-icon>
+                        <a *appHasRole="'ROLE_ANONYMOUS'"  class="dropdown-item" [routerLink]="['sign-up']" (click)="collapseNavbar()">
+                            <fa-icon icon="user-plus"></fa-icon>
                             <span>{{ 'HEADER.SIGNUP' | translate }}</span>
                         </a>
                     </div>

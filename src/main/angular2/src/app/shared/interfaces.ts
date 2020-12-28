@@ -1,4 +1,8 @@
 export interface AccountModel {
     id: string;
-    roles: Array<string>;
+    authorities: Array<string>;
+}
+
+export interface LoginResponse {
+    token: string;
 }

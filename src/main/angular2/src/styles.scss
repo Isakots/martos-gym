@@ -4,6 +4,9 @@
 
 @import "mixins", "variables";
 
+@import "buttons";
+@import "checkboxes";
+
 html, body {
     position: relative;
     width: 100%;
@@ -15,6 +18,7 @@ html, body {
 
 body {
     background-color: $background-color;
+    font-family: Verdana, sans-serif;
 }
 
 .container-fluid, .row {
