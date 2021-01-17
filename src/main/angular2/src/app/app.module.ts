@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
+    faArrowLeft,
     faBookOpen,
     faDrumstickBite,
     faDumbbell,
@@ -15,22 +16,31 @@ import {
     faListUl,
     faLock,
     faNewspaper,
+    faPencilAlt,
     faPlus,
     faRunning,
+    faSave,
     faSignInAlt,
     faSignOutAlt,
+    faTimes,
     faUser,
     faUserPlus,
     faUsers,
-    faWrench
+    faWrench,
+    faBan
 } from '@fortawesome/free-solid-svg-icons';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ArticleModule } from './article/article.module';
 import { CultureService } from './core/services/culture.service';
 import { HeaderComponent } from './header/header.component';
+import { HomeComponent } from './pages/home/home.component';
+import { TimelineComponent } from './pages/home/timeline/timeline.component';
 import { LoginComponent } from './pages/login/login.component';
+import { NutritionComponent } from './pages/nutrition/nutrition.component';
+import { RulesComponent } from './pages/rules/rules.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { SharedModule } from './shared/shared.module';
 
@@ -48,7 +58,11 @@ export const createTranslateLoader: (http: HttpClient) => TranslateHttpLoader = 
         AppComponent,
         HeaderComponent,
         SignUpComponent,
-        LoginComponent
+        LoginComponent,
+        NutritionComponent,
+        RulesComponent,
+        TimelineComponent,
+        HomeComponent
     ],
     imports: [
         BrowserModule,
@@ -63,7 +77,8 @@ export const createTranslateLoader: (http: HttpClient) => TranslateHttpLoader = 
         HttpClientModule,
         SharedModule,
         FontAwesomeModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        ArticleModule
     ],
     providers: [
         {
@@ -93,7 +108,12 @@ export class AppModule {
             faPlus,
             faRunning,
             faUser,
-            faNewspaper
+            faNewspaper,
+            faSave,
+            faPencilAlt,
+            faTimes,
+            faArrowLeft,
+            faBan
         );
     }
 }

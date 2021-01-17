@@ -59,12 +59,12 @@
                     <span>{{ 'HEADER.GYM' | translate }}</span>
                 </a>
             </li>
-            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link" routerLink="nutrition" (click)="collapseNavbar()">
-                    <fa-icon icon="drumstick-bite"></fa-icon>
-                    <span>{{ 'HEADER.NUTRITION' | translate }}</span>
-                </a>
-            </li>
+<!--            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
+<!--                <a class="nav-link" routerLink="nutrition" (click)="collapseNavbar()">-->
+<!--                    <fa-icon icon="drumstick-bite"></fa-icon>-->
+<!--                    <span>{{ 'HEADER.NUTRITION' | translate }}</span>-->
+<!--                </a>-->
+<!--            </li>-->
             <li *appHasRole="'ROLE_USER'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="trainings" (click)="collapseNavbar()">
                     <fa-icon icon="running"></fa-icon>

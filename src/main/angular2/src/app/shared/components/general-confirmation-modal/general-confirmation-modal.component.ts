@@ -10,7 +10,7 @@ import { ConfirmationType } from '../../constants';
 export class GeneralConfirmationModalComponent implements OnInit {
     @Input() confirmationType: ConfirmationType = ConfirmationType.DELETION;
     @Output() readonly eventConfirmed: EventEmitter<boolean> = new EventEmitter();
-    @ViewChild('confirmationView') private readonly confirmationView!: TemplateRef<any>;
+    @ViewChild('confirmationView', {static: true}) private readonly confirmationView!: TemplateRef<any>;
 
     readonly CONFIRMATION_TYPE_ENUM = ConfirmationType;
     closeResult!: string;

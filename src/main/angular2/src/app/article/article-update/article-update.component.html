@@ -1,0 +1,58 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="centered">
+            <h2 id="article-heading">{{ title }}</h2>
+            <hr>
+            <form name="editForm" role="form" (ngSubmit)="save()" [formGroup]="editorForm">
+
+                <div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_title">{{ 'CONTROL_NAMES.TITLE' | translate }}</label>
+                            <input type="text" class="form-control" name="title" id="field_title"
+                                   formControlName="title"/>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_type">{{ 'CONTROL_NAMES.TYPE' | translate }}</label>
+                            <select id="field_type" class="form-control" formControlName="type">
+                                <option>Option1</option>
+                                <option>Option2</option>
+                                <option>Option3</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_introduction">{{ 'CONTROL_NAMES.INTRODUCTION' | translate }}</label>
+                            <textarea class="form-control" name="type" id="field_introduction"
+                                      formControlName="introduction" rows="4"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label">{{ 'CONTROL_NAMES.CONTENT' | translate }}</label>
+                            <!--              <ckeditor [(ngModel)]="editorData"-->
+                            <!--                        [ngModelOptions]="{standalone: true}"-->
+                            <!--                        [editor]="ck5editor"-->
+                            <!--                        (change)="onChange($event)">-->
+                            <!--              </ckeditor>-->
+                        </div>
+
+                        <div>
+                            <button type="submit" id="save-entity" [disabled]="editorForm.invalid || isSaving"
+                                    class="btn btn-secondary">
+                                <fa-icon icon="save"></fa-icon>
+                                <span> {{ 'BUTTONS.SAVE' | translate }}</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

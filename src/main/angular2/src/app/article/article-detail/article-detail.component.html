@@ -1,0 +1,48 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="centered">
+            <div *ngIf="article">
+                <h2 id="page-heading">
+                    <span>{{article.title}}</span>
+                    <button
+                        *appHasRole="'ROLE_MEMBER'"
+                        class="btn btn-danger float-right"
+                        (click)="openConfirmationModal()">
+                        <fa-icon icon="times"></fa-icon>
+                        <span class="d-none d-md-inline"> {{ 'BUTTONS.DELETE' | translate }}</span>
+                    </button>
+                    <button
+                        *appHasRole="'ROLE_MEMBER'"
+                        type="button"
+                        [routerLink]="['/articles', article.id, 'edit']"
+                        class="btn btn-secondary float-right">
+                        <fa-icon icon="pencil-alt"></fa-icon>
+                        <span class="d-none d-md-inline"> {{ 'BUTTONS.EDIT' | translate }}</span>
+                    </button>
+                    <button
+                        *appHasRole="'ROLE_MEMBER'"
+                        class="btn btn-primary float-right"
+                        [routerLink]="['/articles/new']">
+                        <fa-icon icon="plus"></fa-icon>
+                        <span class="d-none d-md-inline"> {{ 'BUTTONS.CREATE' | translate }}</span>
+                    </button>
+                </h2>
+                <hr>
+
+                <div [innerHTML]="article.content"></div>
+
+                <button type="submit"
+                        [routerLink]="['/']"
+                        class="btn btn-dark">
+                    <fa-icon icon="arrow-left"></fa-icon>
+                    <span> {{ 'BUTTONS.BACK' | translate }}</span>
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-general-confirmation-modal
+    (eventConfirmed)="onEventConfirmation($event)"
+></app-general-confirmation-modal>

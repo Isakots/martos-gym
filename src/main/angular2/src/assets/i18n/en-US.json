@@ -35,6 +35,11 @@
         "SUBMIT": "Login"
     },
 
+    "ARTICLES": {
+        "UPDATE_TITLE": "Edit article",
+        "SAVE_TITLE": "New article"
+    },
+
     "CONTROL_NAMES": {
         "LASTNAME": "Lastname",
         "FIRSTNAME": "Firstname",
@@ -67,6 +72,19 @@
         "REQUIRED": "Field is required!",
         "WRONG_EMAIL": "Incorrect email address!",
         "PASSWORD_MIN_LENGTH": "Password must have at least 8 characters!",
-        "PASSWORD_NO_MATCH": "Passwords must match!"
+        "PASSWORD_NO_MATCH": "Passwords must match!",
+        "ARTICLES_NOT_FOUND": "Loading articles has failed.."
+    },
+
+    "BUTTONS": {
+        "CREATE": "Create",
+        "EDIT": "Edit",
+        "DELETE": "Delete",
+        "BACK": "Back",
+        "SAVE": "Save"
+    },
+
+    "RULES": {
+        "PAGE_TITLE": "Gym rules"
     }
 }

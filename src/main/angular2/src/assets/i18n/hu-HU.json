@@ -35,6 +35,11 @@
         "SUBMIT": "Bejelentkezés"
     },
 
+    "ARTICLES": {
+        "UPDATE_TITLE": "Cikk módosítása",
+        "SAVE_TITLE": "Új cikk írása"
+    },
+
     "CONTROL_NAMES": {
         "LASTNAME": "Vezetéknév",
         "FIRSTNAME": "Keresztnév",
@@ -50,8 +55,12 @@
 
         "NOTIFICATION_ON_NEW_ARTICLE": "Értesítő e-mail küldése új hírfolyam cikkről",
         "NOTIFICATION_ON_NEW_TRAINING": "Értesítő e-mail küldése frissen kiírt edzésekről",
-        "NOTIFICATION_ON_SUBSCRIBED_TRAINING": "Értesítő e-mail küldése edzésekről, melyekre feliratkoztam"
+        "NOTIFICATION_ON_SUBSCRIBED_TRAINING": "Értesítő e-mail küldése edzésekről, melyekre feliratkoztam",
 
+        "TITLE": "Cím",
+        "INTRODUCTION": "Bevezető",
+        "TYPE": "Típus",
+        "CONTENT": "Tartalom"
     },
 
     "CONFIRMATION_MODAL": {
@@ -67,6 +76,19 @@
         "REQUIRED": "Mező kitöltése kötelező!",
         "WRONG_EMAIL": "Helytelen e-mail cím!",
         "PASSWORD_MIN_LENGTH": "A jelszónak legalább 8 karakterből kell állnia!",
-        "PASSWORD_NO_MATCH": "A két jelszó nem egyezik!"
+        "PASSWORD_NO_MATCH": "A két jelszó nem egyezik!",
+        "ARTICLES_NOT_FOUND": "Cikkek betöltése sikertelen.."
+    },
+
+    "BUTTONS": {
+        "CREATE": "Létrehozás",
+        "EDIT": "Módosítás",
+        "DELETE": "Törlés",
+        "BACK": "Vissza",
+        "SAVE": "Mentés"
+    },
+
+    "RULES": {
+        "PAGE_TITLE": "Házirend"
     }
 }

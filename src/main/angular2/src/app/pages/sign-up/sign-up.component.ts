@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AccountService } from '../../core/services/account.service';
@@ -13,7 +13,7 @@ import { requiredValidationConditionally } from '../../core/validator/required-v
 })
 export class SignUpComponent implements OnInit {
     isFormSubmitted = false;
-    registerForm: any;
+    registerForm!: FormGroup;
 
     constructor(private readonly formBuilder: FormBuilder,
                 private readonly accountService: AccountService,

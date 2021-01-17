@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from '../../core/services/account.service';
 import { StateStorageService } from '../../core/services/state-storage.service';
@@ -10,7 +10,7 @@ import { UserNotificationService } from '../../core/services/user-notification.s
     templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
-    loginForm: any;
+    loginForm!: FormGroup;
 
     constructor(private readonly formBuilder: FormBuilder,
                 private readonly stateStorageService: StateStorageService,

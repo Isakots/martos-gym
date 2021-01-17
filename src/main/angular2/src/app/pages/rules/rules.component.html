@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="centered">
+            <h2>
+                <span>{{ 'RULES.PAGE_TITLE' | translate }}</span>
+
+                <span *ngIf="!contentNotFound">
+                    <button
+                        *appHasRole="'ROLE_MEMBER'"
+                        type="button"
+                        [routerLink]="['/articles', article.id, 'edit']"
+                        class="btn btn-secondary float-right">
+                      <fa-icon icon="pencil-alt"></fa-icon>
+                      <span class="d-none d-md-inline"> {{ 'BUTTONS.EDIT' | translate }}</span>
+                    </button>
+                </span>
+
+                <span *ngIf="contentNotFound">
+                    <button
+                        *appHasRole="'ROLE_MEMBER'"
+                        class="btn btn-primary float-right"
+                        [routerLink]="['/articles/new']">
+                      <fa-icon icon="plus"></fa-icon>
+                      <span class="d-none d-md-inline"> {{ 'BUTTONS.CREATE' | translate }}</span>
+                    </button>
+              </span>
+
+            </h2>
+
+            <hr>
+
+            <div *ngIf="contentNotFound">A keresett oldal még nem létezik..</div>
+
+            <div style="text-align: justify" *ngIf="!contentNotFound" [innerHTML]="article.content"></div>
+        </div>
+    </div>
+</div>
+
