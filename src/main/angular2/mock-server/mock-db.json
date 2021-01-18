@@ -40,5 +40,19 @@
             "content": "<p>undefinedasas</p>",
             "createdDate": "2020-02-23T20:23:51"
         }
-    ]
+    ],
+    "profile": {
+        "firstName": "Test",
+        "lastName": "User",
+        "email": "test.user@email.com",
+        "studentStatus": true,
+        "institution": "BME",
+        "faculty": "VBK",
+        "collegian": true,
+        "roomNumber": 5,
+        "subscriptions": [
+            "ON_NEW_ARTICLES",
+            "ON_NEW_TRAININGS"
+        ]
+    }
 }

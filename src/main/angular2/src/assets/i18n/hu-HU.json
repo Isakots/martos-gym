@@ -37,7 +37,12 @@
 
     "ARTICLES": {
         "UPDATE_TITLE": "Cikk módosítása",
-        "SAVE_TITLE": "Új cikk írása"
+        "SAVE_TITLE": "Új cikk írása",
+
+        "TITLE": "Cím",
+        "TYPE": "Típus",
+        "INTRODUCTION": "Bevezető",
+        "CONTENT": "Tartalom"
     },
 
     "CONTROL_NAMES": {
@@ -55,12 +60,7 @@
 
         "NOTIFICATION_ON_NEW_ARTICLE": "Értesítő e-mail küldése új hírfolyam cikkről",
         "NOTIFICATION_ON_NEW_TRAINING": "Értesítő e-mail küldése frissen kiírt edzésekről",
-        "NOTIFICATION_ON_SUBSCRIBED_TRAINING": "Értesítő e-mail küldése edzésekről, melyekre feliratkoztam",
-
-        "TITLE": "Cím",
-        "INTRODUCTION": "Bevezető",
-        "TYPE": "Típus",
-        "CONTENT": "Tartalom"
+        "NOTIFICATION_ON_SUBSCRIBED_TRAINING": "Értesítő e-mail küldése edzésekről, melyekre feliratkoztam"
     },
 
     "CONFIRMATION_MODAL": {
@@ -90,5 +90,21 @@
 
     "RULES": {
         "PAGE_TITLE": "Házirend"
+    },
+
+    "CHANGE_PASSWORD" : {
+        "PAGE_TITLE": "Jelszóváltoztatás",
+        "SUCCESSFUL_CHANGE": "Sikeres jelszócsere!",
+        "FAILED_CHANGE": "Jelszóváltoztatás sikertelen!",
+
+        "CONTROL_NAMES": {
+            "OLD_PASSWORD": "Jelenlegi jelszó",
+            "NEW_PASSWORD": "Új jelszó",
+            "CONFIRM_NEW_PASSWORD": "Új jelszó megerősítése"
+        }
+    },
+
+    "PROFILE": {
+        "PAGE_TITLE": "Profil"
     }
 }

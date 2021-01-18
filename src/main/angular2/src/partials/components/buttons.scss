@@ -7,7 +7,6 @@
     &:hover {
         background-color: $primary-color-light;
     }
-
     &:focus {
         background-color: $primary-color-light;
     }
@@ -17,16 +16,12 @@
 }
 
 .btn-main {
-    margin-top: 30px;
+    margin-top: 16px;
     background-color: $primary-color;
     color: white;
     height: 48px;
     width: 100%;
     border-radius: 30px;
-
-    &:hover {
-        color: black;
-    }
 
     @include desktop {
         width: 180px;

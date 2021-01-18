@@ -1,6 +1,6 @@
 import { ArticleType } from './constants';
 
-export interface AccountModel {
+export interface UserWithRoles {
     id: string;
     authorities: Array<string>;
 }
@@ -16,4 +16,17 @@ export interface Article {
     introduction: string;
     content: string;
     createdDate: string;
+}
+
+export interface AccountModel {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    studentStatus: boolean;
+    institution: string;
+    faculty: string;
+    collegian: boolean;
+    roomNumber: number;
+    subscriptions: Array<string>;
 }

@@ -43,6 +43,7 @@ import { NutritionComponent } from './pages/nutrition/nutrition.component';
 import { RulesComponent } from './pages/rules/rules.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { SharedModule } from './shared/shared.module';
+import { AccountModule } from './account/account.module';
 
 registerLocaleData(localeHungarian, 'hu-HU');
 registerLocaleData(localeEnglish, 'en-US');
@@ -78,7 +79,8 @@ export const createTranslateLoader: (http: HttpClient) => TranslateHttpLoader = 
         SharedModule,
         FontAwesomeModule,
         ReactiveFormsModule,
-        ArticleModule
+        ArticleModule,
+        AccountModule
     ],
     providers: [
         {

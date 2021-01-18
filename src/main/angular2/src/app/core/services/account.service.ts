@@ -5,7 +5,7 @@ import jwtDecode from 'jwt-decode';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ACCESS_TOKEN_KEY } from '../../shared/constants';
-import { AccountModel, LoginResponse } from '../../shared/interfaces';
+import { UserWithRoles, LoginResponse } from '../../shared/interfaces';
 import { EnvironmentService } from './environment.service';
 
 @Injectable({providedIn: 'root'})
@@ -68,7 +68,7 @@ export class AccountService {
         return this.http.post(`${this.environmentService.apiUrl}/register`, signupForm);
     }
 
-    private getDecodedAccount(): AccountModel {
+    private getDecodedAccount(): UserWithRoles {
         return jwtDecode(this.authenticationState.getValue() as string);
     }
 

@@ -18,7 +18,10 @@ import { ArticleUpdateComponent } from './article-update/article-update.componen
         SharedModule,
         TranslateModule
     ],
-    declarations: [ArticleDetailComponent, ArticleUpdateComponent]
+    declarations: [
+        ArticleDetailComponent,
+        ArticleUpdateComponent
+    ]
 })
 export class ArticleModule {
 }

@@ -78,6 +78,7 @@ export class ArticleUpdateComponent implements OnInit {
             this.translate.get('ARTICLES.UPDATE_TITLE').subscribe(translation => this.title = translation);
             this.editorForm.controls.type.disable();
         }
+        // todo subscribe on lang change
     }
 
     private createFromForm(): Article {

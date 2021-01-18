@@ -37,7 +37,12 @@
 
     "ARTICLES": {
         "UPDATE_TITLE": "Edit article",
-        "SAVE_TITLE": "New article"
+        "SAVE_TITLE": "New article",
+
+        "TITLE": "Title",
+        "TYPE": "Type",
+        "INTRODUCTION": "Introduction",
+        "CONTENT": "Content"
     },
 
     "CONTROL_NAMES": {
@@ -56,7 +61,6 @@
         "NOTIFICATION_ON_NEW_ARTICLE": "E-mail notification on new articles",
         "NOTIFICATION_ON_NEW_TRAINING": "E-mail notification on new trainings",
         "NOTIFICATION_ON_SUBSCRIBED_TRAINING": "E-mail notification on subscribed trainings"
-
     },
 
     "CONFIRMATION_MODAL": {
@@ -86,5 +90,21 @@
 
     "RULES": {
         "PAGE_TITLE": "Gym rules"
+    },
+
+    "CHANGE_PASSWORD" : {
+        "PAGE_TITLE": "Change password",
+        "SUCCESSFUL_CHANGE": "Password is changed successfully!",
+        "FAILED_CHANGE": "Changing password has failed!",
+
+        "CONTROL_NAMES": {
+            "OLD_PASSWORD": "Actual password",
+            "NEW_PASSWORD": "New password",
+            "CONFIRM_NEW_PASSWORD": "Confirm new password"
+        }
+    },
+
+    "PROFILE": {
+        "PAGE_TITLE": "Profile"
     }
 }

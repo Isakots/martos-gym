@@ -1,0 +1,190 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="centered">
+            <h2>{{ 'PROFILE.PAGE_TITLE' | translate }}</h2>
+            <hr>
+            <div class="row">
+                <div class="col-lg-9 pl-0">
+
+                    <div [formGroup]="profileForm">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label"
+                                           for="lastName">{{ 'CONTROL_NAMES.LASTNAME' | translate }}</label>
+                                    <input type="text" class="form-control" id="lastName" name="lastName"
+                                           formControlName="lastName">
+                                    <div
+                                        *ngIf="showValidationMessage(profileForm.get('lastName'))">
+                                        <small class="form-text text-danger"
+                                               *ngIf="profileForm.get('lastName').errors.required">
+                                            {{ 'ERROR_MESSAGE.REQUIRED' | translate }}
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label"
+                                           for="firstName">{{ 'CONTROL_NAMES.FIRSTNAME' | translate }}</label>
+                                    <input type="text" class="form-control" id="firstName" name="firstName"
+                                           formControlName="firstName">
+                                    <div
+                                        *ngIf="showValidationMessage(profileForm.get('firstName'))">
+                                        <small class="form-text text-danger"
+                                               *ngIf="profileForm.get('firstName').errors.required">
+                                            {{ 'ERROR_MESSAGE.REQUIRED' | translate }}
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="email">{{ 'CONTROL_NAMES.EMAIL' | translate }}</label>
+                                    <input type="email" class="form-control" id="email" name="email"
+                                           formControlName="email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <span>
+                                       <label class="checkbox bounce">
+                                      <input type="checkbox" formControlName="studentStatus">
+                                      <svg viewBox="0 0 21 21">
+                                        <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
+                                      </svg>
+                                       </label>
+                                        {{ 'CONTROL_NAMES.STUDENT_STATUS' | translate }}
+                                      </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="isStudentStateChecked()" class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="institution">{{ 'CONTROL_NAMES.INSTITUTION' | translate }}</label>
+                                    <input type="text" class="form-control" id="institution" name="institution"
+                                           formControlName="institution" maxlength="5">
+                                    <div
+                                        *ngIf="showValidationMessage(profileForm.get('institution'))">
+                                        <small class="form-text text-danger"
+                                               *ngIf="profileForm.get('institution').errors.required">
+                                            {{ 'ERROR_MESSAGE.REQUIRED' | translate }}
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="faculty">{{ 'CONTROL_NAMES.FACULTY' | translate }}</label>
+                                    <input type="text" class="form-control" id="faculty" name="faculty"
+                                           formControlName="faculty" maxlength="5">
+                                    <div
+                                        *ngIf="showValidationMessage(profileForm.get('faculty'))">
+                                        <small class="form-text text-danger"
+                                               *ngIf="profileForm.get('faculty').errors.required">
+                                            {{ 'ERROR_MESSAGE.REQUIRED' | translate }}
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <span>
+                                    <label class="checkbox bounce">
+                                      <input type="checkbox" formControlName="collegian">
+                                      <svg viewBox="0 0 21 21">
+                                        <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
+                                      </svg>
+                                    </label>
+                                        {{ 'CONTROL_NAMES.IS_COLLEGIAN' | translate }}
+                                      </span>
+                                </div>
+                            </div>
+                            <div *ngIf="isCollegianChecked()" class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="roomNumber">{{ 'CONTROL_NAMES.ROOM_NUMBER' | translate }}</label>
+                                    <input type="number" class="form-control" id="roomNumber" name="roomNumber"
+                                           formControlName="roomNumber">
+                                    <div
+                                        *ngIf="showValidationMessage(profileForm.get('roomNumber'))">
+                                        <small class="form-text text-danger"
+                                               *ngIf="profileForm.get('roomNumber').errors.required">
+                                            {{ 'ERROR_MESSAGE.REQUIRED' | translate }}
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                              <span>
+                              <label class="checkbox bounce">
+                                <input type="checkbox" formControlName="subOnSubscribedTrainings">
+                                <svg viewBox="0 0 21 21">
+                                  <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
+                                </svg>
+                              </label>
+                                  {{ 'CONTROL_NAMES.NOTIFICATION_ON_SUBSCRIBED_TRAINING' | translate }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                              <span>
+                              <label class="checkbox bounce">
+                                <input type="checkbox" formControlName="subOnNewTrainings">
+                                <svg viewBox="0 0 21 21">
+                                  <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
+                                </svg>
+                              </label>
+                                  {{ 'CONTROL_NAMES.NOTIFICATION_ON_NEW_TRAINING' | translate }}
+                              </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                              <span>
+                              <label class="checkbox bounce">
+                                <input type="checkbox" formControlName="subOnNewArticles">
+                                <svg viewBox="0 0 21 21">
+                                  <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
+                                </svg>
+                              </label>
+                                  {{ 'CONTROL_NAMES.NOTIFICATION_ON_NEW_ARTICLE' | translate }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button type="submit" class="btn btn-primary btn-main" (click)="save()">
+                                {{ 'BUTTONS.SAVE' | translate }}
+                            </button>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <p>Bérleteid: </p>
+                    <ul>
+                        <li *ngFor="let ticket of tickets">
+                            <span>{{ticket.name}}</span>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="col-lg-3">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -29,6 +29,14 @@ server.post('/api/register', (req, res) => {
     res.status(200).end();
 });
 
+server.post('/profile/change-password', (req, res) => {
+    if(req.body.currentPassword == '123') {
+        res.status(400).end();
+    } else {
+        res.status(200).end();
+    }
+});
+
 server.use('/api', router);
 
 server.listen(JSON_SERVER_PORT, () => {
